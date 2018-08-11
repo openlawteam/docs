@@ -1,0 +1,16 @@
+{
+  "name": "openlaw-docz-vuepress",
+  "version": "0.1.0",
+  "description": "openlaw documentation",
+  "private": true,
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "OpenLaw Team <opensource@openlaw.io>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "vuepress": "^0.14.1"
+  }
+}
