@@ -9,6 +9,7 @@ module.exports = {
       '/',
       '/markup-language/',
     ],
+    logo: '/ol-logo-black.svg',
     repo: 'mroth/docz-vuepress',
     editLinks: true,
   },
