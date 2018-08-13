@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "files.associations": {
+        ".prettierignore": "ignore",
+    },
+    // dont spellcheck emoji shortcodes in *.md
+    "spellright.ignoreRegExpsByClass": {
+        "markdown": ["/:\\w+:/g"]
+    },
+}
