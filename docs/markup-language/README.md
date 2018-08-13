@@ -3,6 +3,7 @@
 The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document (what we call a "template"). Templates can be grouped together into "deals," making it possible for parties to create and manage entire transactions on a blockchain.
 
 ## Variables
+
 To identify a variable in an OpenLaw template, all that is required is to surround text with a set of double brackets. For example, consider the following basic contractual language from a mutual non-disclosure agreement (NDA):
 
 ```
@@ -24,9 +25,11 @@ If, however, the name of the variable is not descriptive, you can vary the text 
 For a Text variable, you can also define a default value by including a string as a parameter when defining the variable. For example, `[[Company Name: Text("ABC, Inc.")]]`. The value of the variable will be "ABC, Inc." if no other input is provided.
 
 ### Specialized Variable Types
+
 In addition to Text variables, OpenLaw supports several specialized variable types, including "Date," "DateTime," "Number," "EthAddress," "Address," and "Period" types. These variables provide additional functionality, and over time, we intend to extend our markup language to incorporate other types.
 
 #### Number
+
 The Number type indicates that a variable should be an integer or decimal number. You may choose to rely on this type if you need to perform basic calculations (described further below). To create a Number variable just include "`: Number`" after a variable name: "`[[Variable: Number]]`."
 
 After a Number variable has been defined, you can also display the input for that variable as a rounded number with the ability to specify the precision. For example, "`[[Variable | rounding(2)]]`."
@@ -40,20 +43,25 @@ Rounding is a formatting tool to display the Number variable and does not redefi
 Similar to a Text variable, you can also define a default value for a Number variable by including an integer or decimal number as a parameter when defining the variable. For example, `[[Num: Number(10)]]`. The value of the variable will be "10" if no other input is provided.
 
 #### Date
+
 The Date type is a basic specialized variable. This type transforms an input in an easy-to-use date picker. To create a Date variable, simply add "`: Date`" after a variable name. In other words, "`[[Variable: Date]]`."
 
 #### DateTime
+
 OpenLaw has created a variation of the Date type, called "DateTime." The DateTime type allows a user to set not only a specified date, but also a specified time. To create a DateTime variable, add the words "`: DateTime`" after the variable name: "`[[Variable: DateTime]]`." The DateTime type is useful when triggering or calling an Ethereum smart contract (described further below).
 
 #### Period
+
 The Period type allows a user to set a specific time period in `seconds`, `minutes`, `hours`, `days`, `weeks`, `months`, and `years` (e.g., `30 seconds`, `1 minute`, `5 hours`, `7 days`, `2 weeks`, `6 months`, `1 year`). The Period variable also accepts mix time units for the input (e.g., `2 minutes 30 seconds`, `1 week 3 days`). To create a Period variable, add the words "`: Period`" after the variable name: "`[[Variable: Period]]`."
 
 As described further below, you can use the Period type together with the Date and DateTime types to calculate past and future dates and times.
 
 #### Ethereum Address
+
 The Ethereum Address type indicates a variable that should be an Ethereum address. This type becomes particularly relevant if you are using OpenLaw to send ether or tokens to a specific Ethereum Address. The syntax for this type is "`: EthAddress`." In the context of a variable it would be "`[[Variable: EthAddress]]`."
 
 #### Address
+
 The Address type is a more advanced specialized variable. This type transforms an input in an address box where you can search for a relevant address using Google Map's API. Creating an Address type is fairly straightforward, simply add "`: Address`" after a variable name. In other words, "`[[Variable: Address]]`."
 
 Once an address is set you can access different aspects of the address, including the street number, street name, city, state, zip code, and country. Below is an example of how you would reference these elements:
@@ -85,24 +93,31 @@ When creating a variable name, you cannot use any special characters, such as "`
 ## Formatting
 
 ### Bold
+
 To bold text simply add "`**`" before and after the relevant language. For example, "`**This Agreement**`" will bold the relevant text. You can also bold variables, "`**[[Variable]]**`."
 
 ### Italic
+
 Italicizing text works in much the same way. If you would like to italicize text, you can simply add "`*`" before and after the relevant language. For example, "PartyA agrees to deliver to PartyB 10 widgets; `*provided however,*` that PartyB will not be required to deliver widgets to Party B ...."
 
 ### Bold and Italic
+
 You can also bold and italicize text. For this type of formatting, simply surround the relevant text with "`***`," in other words "`***[[Variable Name]]***`."
 
 ### Uppercase
+
 We also recognize that in some instances a variable will need to be displayed in all caps, particularly in the context of titles and signature blocks. To accommodate this requirement, you can designate instances when a variable should appear in uppercase by adding the following text after a variable name "`| Uppercase`." In other words, "`[[Variable Name | Uppercase]]`."
 
 ### Centered
+
 To center text such as titles and headings, add "`\centered`" before the relevant text. You can also apply other formatting to the centered language. For example, "`\centered**Agreement Title**`" will center and bold the relevant text.
 
 ### Page Break
+
 If you would like to add a page break, such as separating an exhibit from the main body of the agreement, you can simply add "`\pagebreak`" where the break should be.
 
 ## Sections and Sub-sections
+
 Organizing an agreement into sections and subsections is straightforward. Currently, we offer four section levels, which can be invoked using the following syntax.
 
 ```
@@ -125,9 +140,11 @@ For instance, the following marked-up text would output as in the following vide
 <iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ## Conditionals and Decision Branches
+
 You can markup an agreement with "conditionals" to embed advanced logic into an agreement, helping you create more dynamic and customizable legal agreements.
 
 ### Basic Conditionals
+
 Currently, conditionals create binary "yes" or "no" questions in our form generation application. When a user enters "yes," the conditional will output text, variables, smart contract calls, and/or trigger another conditional. The basic construct of a conditional is as follows:
 
 ```
@@ -138,6 +155,7 @@ Text to include in an agreement if a user selects 'yes'}}
 Note there are strict requirements that you must follow when creating a conditional. First, you must start a conditional with "`{{`" and end the conditional with "`}}`." Second, you must name the conditional and include language in quotes that serves as a prompt for the user.
 
 ### Nested Conditionals
+
 Conditionals also can be grouped to create a decision tree. In other words:
 
 ```
@@ -160,6 +178,7 @@ The text above generates the following "decision tree" in our form generation ap
 <iframe width="630" height="394" src="https://www.useloom.com/embed/dd9b4a7e13244c3bbd2c7385737c6369" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ### Advanced Uses of Conditionals
+
 We understand that oftentimes agreements are complex, and if you include a provision in one part of the agreement, it may impact other provisions. To accommodate this fact, if you create a conditional, you can trigger the inclusion of additional text elsewhere if that conditional is set to "yes" (or true) or "no" (not true).
 
 For example, extending the previous example, if we wanted to modify the signature block of an agreement depending on whether or not the agreement is between a legal entity or an individual you can easily do so by simply referencing the name of the conditional.
@@ -177,6 +196,7 @@ Below shows how this can dynamically change the text:
 <iframe width="630" height="394" src="https://www.useloom.com/embed/614467945305465aa29840ea282aad3e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ## Reasoning with Conditionals
+
 OpenLaw's markup language can handle boolean expressions, outlined below:
 
 ```
@@ -251,6 +271,7 @@ Using "groupings" and the tags "`<% %>`," it is possible to hide variables and c
 :::
 
 ## Calculations and Aliasing
+
 Using the OpenLaw Markup language, you can also perform basic calculations. Using this functionality, you can output dynamically generated values from other inputs, which can be automatically included in the text of an agreement.
 
 ```
@@ -262,6 +283,7 @@ Creating an alias: @
 ```
 
 ### Example
+
 To perform a calculation, you must first create an alias by including an "`@`" before the name of a variable. Once setup, the alias can perform any calculation, including a calculation that is dependent on another variable set to a Number type. For example, as shown below, we can set a variable for a monthly payment and automatically calculate an annual payment.
 
 ```
@@ -365,9 +387,11 @@ See the note above about the spacing in the above video.
 :::
 
 #### Hidden Variables
+
 You can also hide a variable if needed to perform basic calculations. To hide a variable, just add a "`#`" before the variable name: "`[[#Variable]]`." Each hidden variable is displayed to an end user, but is not displayed within the text of the template or agreement.
 
 ### Calculating Date and Time Periods
+
 You can also use aliases together with Period type variables and Date and DateTime type variables to calculate past and future dates and times.
 
 ```
@@ -408,6 +432,7 @@ Constants can also be used with aliases and Date and DateTime type variables to 
 ```
 
 ### Advanced Uses of Conditionals with Calculations and Aliasing
+
 The features of conditionals with boolean expressions can be combined with calculations and aliasing to help you create even more dynamic and customizable legal agreements where the assignment of a variable may depend on different calculations and other variables within the agreement. As shown in the example below taken from our [Federal Employment Tax Demo](https://www.youtube.com/watch?v=HPbgR4gG_4E), you can use all these concepts together to create advanced logic decision trees that resemble "if else" or "switch case" statements in common programming languages.
 
 ```
@@ -432,9 +457,11 @@ The amount of federal income tax that must be withheld from the Employee's weekl
 ```
 
 ## Identity and Signatures
+
 OpenLaw also provides tools that enable you to electronically sign an agreement and store those electronic signatures on the Ethereum blockchain. If you intend to build a template to leverage this functionalility, you will need to include a specialized "identity" variable in the text of the template. The identity variable indicates that a party should sign the agreement and will enable you to send an email to the signatory for signature.
 
 ### Basic Identity
+
 To create an "identity" for signature, all you need to do is add "`: Identity`" after a variable name: "`[[Signatory Email: Identity]]`."
 
 ```
@@ -458,6 +485,7 @@ Once a user indicates that the template is ready for signature, OpenLaw will gen
 <iframe width="630" height="394" src="https://www.useloom.com/embed/7041f79616a74974bf8fd73f3a0a231c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ### Embedding Signatures
+
 You can also embed a signature into the document by adding "`| Signature`" at the end of an identity variable. For example, extending the above example:
 
 ```
@@ -479,6 +507,7 @@ Title: [[PartyB Signatory Title]]}}
 By deploying this option, the final executed version of an agreement (and the word version) will be embedded with an electronic signature from each signatory. In other words, "/s/" plus the name of the signatory associated with the OpenLaw account.
 
 ## Groupings
+
 For complex agreements with multiple variables and conditionals, you can create "groupings" to organize a template's variables and conditionals. The variables and conditionals will appear below a header and in the order in which they are listed. The basic syntax of a grouping is as follows:
 
 ```
@@ -590,6 +619,7 @@ Address:
 ```
 
 ## Smart Contracts
+
 Using OpenLaw, you can embed and execute smart contract code running on the Ethereum blockchain. In order to do so, you need to create a smart contract call, which can be embedded in a template and executed when all of the relevant parties sign the agreement. An example smart contract call is included below.
 
 As outlined below, the smart contract contains a function "makePayment." The smart contract calls the smart contract found at the following Ethereum address [0xe532d1d1147ab40d0a245283f4457c733b5e3d41](https://rinkeby.etherscan.io/address/0xe532d1d1147ab40d0a245283f4457c733b5e3d41), (currently on the Rinkeby testnet) which facilitates the payment of ether at fixed intervals. The function accepts several arguments, including "Recipient Addresss", and "Payment in Wei" (wei, is the smallest unit of ether, the native currency of the Ethereum network), along with "Payment Start Date" and "Payment End Date." As part of the call, you can set how often OpenLaw sends the smart contract a message to execute its "makePayment" function within the period defined by the "Payment Start Date" and "Payment End Date." The frequency can be set in `seconds`, `minutes`, `hours`, `days`, `weeks`, `months`, and `years` (e.g., `30 seconds`, `1 minute`, `5 hours`, `7 days`, `2 weeks`, `6 months`, `1 year`). You can also mix time units when setting the frequency (e.g., `2 minutes 30 seconds`, `1 week 3 days`).
@@ -703,6 +733,7 @@ and then separately called:
 :::
 
 ## Deals
+
 Using OpenLaw, you can link together multiple templates into what we call a "deal." A deal is simply a collection of templates. To create a deal, you neeed to call a template. You can do so using the following syntax:
 
 ```
@@ -712,6 +743,7 @@ Using OpenLaw, you can link together multiple templates into what we call a "dea
 When you create a deal and call one or more templates, you'll have the opportunity to collect relevant information on an opening screen, which can be prepopulated in multiple templates at the same time.
 
 ### Basic Deal
+
 To illustrate, assume that you create two highly simplified templates:
 
 **Consulting Agreement**
@@ -809,6 +841,7 @@ The above will generate an opening page of common variables shared by these temp
 :::
 
 ### Advanced Deals Using Conditionals
+
 Deals can also be set up to handle conditionals present in multiple agreements. Assume for the sake of illustration that the two agreements were modified to include a conditional outlining that the consultant will be paid in ether.
 
 **Consulting Agreement**
@@ -898,6 +931,7 @@ On the opening page of the deal, the user will be presented with the conditional
 <iframe width="630" height="394" src="https://www.useloom.com/embed/ba6d97095a22497cadc8c6a85e1742f9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ## Other Tags
+
 In order to draft readable markup language, the markup language contains several additional tags, which allows users to add comments and hide variables from the underlying text. The syntax for these tags can be found below:
 
 ```

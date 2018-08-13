@@ -1,12 +1,12 @@
 # Introduction
 
-Welcome to OpenLaw's documentation.  Here you'll learn more about OpenLaw, our markup language, and how our first application works.  If you have any questions email us at [hello@openlaw.io](mailto:hello@openlaw.io).
+Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, our markup language, and how our first application works. If you have any questions email us at [hello@openlaw.io](mailto:hello@openlaw.io).
 
 ## Overview of OpenLaw
 
 ### Contracts Are Changing
 
-It is now possible to model all or parts of legal agreements using code (smart contracts), decreasing the cost and friction of creating, securing, and generating binding legal agreements. 
+It is now possible to model all or parts of legal agreements using code (smart contracts), decreasing the cost and friction of creating, securing, and generating binding legal agreements.
 
 ### No Comprehensive Tool
 
@@ -15,4 +15,3 @@ Lawyers lack basic tools to build these dynamic, “smart” contracts in a way 
 ### Open Law Protocol
 
 OpenLaw is building a technology stack to help power next generation "smart" legal agreements.
-

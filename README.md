@@ -1,6 +1,6 @@
 # OpenLaw Docs
 
-Test version built with VuePress! 
+Test version built with VuePress!
 
 ## Editing
 
@@ -12,8 +12,8 @@ All docs are found in the [`/docs`](/docs) directory.
 
 Uses standard [CommonMark] markdown spec formatting, with default VuePress [Markdown Extensions].
 
-[CommonMark]: https://spec.commonmark.org/current/
-[Markdown Extensions]: https://vuepress.vuejs.org/guide/markdown.html
+[commonmark]: https://spec.commonmark.org/current/
+[markdown extensions]: https://vuepress.vuejs.org/guide/markdown.html
 
 ## Deployment
 
