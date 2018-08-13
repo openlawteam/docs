@@ -6,11 +6,13 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "format": "prettier --write '**/*.{js,md}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "OpenLaw Team <opensource@openlaw.io>",
   "license": "UNLICENSED",
   "devDependencies": {
+    "prettier": "^1.14.2",
     "vuepress": "^0.14.1"
   }
 }
