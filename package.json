@@ -1,7 +1,7 @@
 {
-  "name": "openlaw-docz-vuepress",
+  "name": "openlaw-docs",
   "version": "0.1.0",
-  "description": "openlaw documentation",
+  "description": "OpenLaw Documentation",
   "private": true,
   "scripts": {
     "docs:dev": "vuepress dev docs",

@@ -11,7 +11,7 @@ module.exports = {
       // add new top level sections here...
     ],
     logo: "/ol-logo-black.svg",
-    repo: "mroth/docz-vuepress",
+    repo: "openlawteam/docs",
     docsDir: "docs",
     editLinks: true,
     // custom text for edit link. Defaults to "Edit this page"
