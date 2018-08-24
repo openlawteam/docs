@@ -7,7 +7,7 @@ The OpenLaw protocol relies on a markup language to transform natural language a
 To identify a variable in an OpenLaw template, all that is required is to surround text with a set of double brackets. For example, consider the following basic contractual language from a mutual non-disclosure agreement (NDA):
 
 ```
-This Mutual Nondisclosure Agreement (this "Agreement") is made as of May 17, 2017, by and between ABC, Inc. (the "Company"), and John Smith ("Counterparty"). Each party has disclosed and/or may further disclose its Confidential Information (as defined below) to the other in connection with the Relationship (as defined below) pursuant to the terms and conditions of this Agreement. As used herein, the term "Discloser" shall refer to the Company whenever the context refers to the Company's Confidential Information being disclosed to Counterparty, which is referred to as "Recipient" in that context. Conversely, the term "Discloser" shall refer to Counterparty whenever the context refers to Counterparty's Confidential Information being disclosed to the Company, which is referred to as "Recipient" in that context. 
+This Mutual Nondisclosure Agreement (this "Agreement") is made as of May 17, 2017, by and between ABC, Inc. (the "Company"), and John Smith ("Counterparty"). Each party has disclosed and/or may further disclose its Confidential Information (as defined below) to the other in connection with the Relationship (as defined below) pursuant to the terms and conditions of this Agreement. As used herein, the term "Discloser" shall refer to the Company whenever the context refers to the Company's Confidential Information being disclosed to Counterparty, which is referred to as "Recipient" in that context. Conversely, the term "Discloser" shall refer to Counterparty whenever the context refers to Counterparty's Confidential Information being disclosed to the Company, which is referred to as "Recipient" in that context.
 ```
 
 Any of the words in this text can be transformed into a variable. If we chose to identify the parties to the agreement as variables we could, for example, replace "ABC, Inc." with `[[Company Name]]`, "John Smith" with `[[Counterparty]]`, and "May 17, 2017" with `[[Effective Date: Date]]`.
@@ -22,7 +22,7 @@ Once identified, the variable can be transformed into a form element in our cont
 
 If, however, the name of the variable is not descriptive, you can vary the text that appears in the automatically generated form by including a string after the variable name. For example, `[[Company Name "What is the name of the company?"]]` or `[[Company Name "What is the name of the counterparty?"]]`.
 
-For a Text variable, you can also define a default value by including a string as a parameter when defining the variable. For example, `[[Company Name: Text("ABC, Inc.")]]`. The value of the variable will be "ABC, Inc." if no other input is provided. 
+For a Text variable, you can also define a default value by including a string as a parameter when defining the variable. For example, `[[Company Name: Text("ABC, Inc.")]]`. The value of the variable will be "ABC, Inc." if no other input is provided.
 
 ### Other Input Variable Types
 
@@ -30,7 +30,7 @@ In addition to Text variables, OpenLaw supports several other input variable typ
 
 #### Number
 
-The Number type indicates that a variable should be an integer or decimal number.  You may choose to rely on this type if you need to perform [basic calculations](#calculations-and-aliasing). To create a Number variable just include `: Number` after a variable name: `[[Variable: Number]]`.
+The Number type indicates that a variable should be an integer or decimal number. You may choose to rely on this type if you need to perform [basic calculations](#calculations-and-aliasing). To create a Number variable just include `: Number` after a variable name: `[[Variable: Number]]`.
 
 After a Number variable has been defined, you can also display the input for that variable as a rounded number with the ability to specify the precision. For example, `[[Variable | rounding(2)]]`.
 
@@ -48,7 +48,7 @@ You can define a default value for a Date variable by including a date as a para
 
 #### DateTime
 
-OpenLaw has created a variation of the Date type, called DateTime. The DateTime type allows a user to set not only a specified date, but also a specified time.  To create a DateTime variable, add the words `: DateTime` after the variable name: `[[Variable: DateTime]]`. The DateTime type is useful when [triggering or calling an Ethereum smart contract](#smart-contracts).
+OpenLaw has created a variation of the Date type, called DateTime. The DateTime type allows a user to set not only a specified date, but also a specified time. To create a DateTime variable, add the words `: DateTime` after the variable name: `[[Variable: DateTime]]`. The DateTime type is useful when [triggering or calling an Ethereum smart contract](#smart-contracts).
 
 Similar to a Date variable, you can also define a default value for DateTime variable by including a date and time as a parameter (in the "YYYY-MM-DD hh:mm:ss" format) when defining the variable. For example, `[[Effective Time: DateTime("2018-08-01 13:45:00")]]`. The value of the variable will result in a date and time of "August 1, 2018 13:45:00" if no other input is provided.
 
@@ -60,13 +60,13 @@ As described further below, you can use the Period type together with the Date a
 
 #### Ethereum Address
 
-The Ethereum Address type indicates a variable that should be an Ethereum address.  This type becomes particularly relevant if you are using OpenLaw to send ether or tokens to a specific Ethereum Address.  The syntax for this type is `: EthAddress`. In the context of a variable it would be `[[Variable: EthAddress]]`.
+The Ethereum Address type indicates a variable that should be an Ethereum address. This type becomes particularly relevant if you are using OpenLaw to send ether or tokens to a specific Ethereum Address. The syntax for this type is `: EthAddress`. In the context of a variable it would be `[[Variable: EthAddress]]`.
 
 #### Address
 
 The Address type is a more advanced input variable. This type transforms an input in an address box where you can search for a relevant address using Google Map's API. Creating an Address type is fairly straightforward, simply add `: Address` after a variable name. In other words, `[[Variable: Address]]`.
 
-Once an address is set you can access different aspects of the address, including the street number, street name, city, state, zip code, and country.  Below is an example of how you would reference these elements:
+Once an address is set you can access different aspects of the address, including the street number, street name, city, state, zip code, and country. Below is an example of how you would reference these elements:
 
 ```
 [[#Company Address: Address]][[Company Address.streetNumber]] [[Company Address.streetName]]
@@ -98,19 +98,20 @@ no type indicator or `: Text` - indicates that a variable is text
 `: YesNo "<user prompt>"` - generates binary question with radio button inputs
 
 ::: warning
-When creating an input variable name, you cannot use any special characters, such as `!#.,_@`.  If you attempt to do so, the parser will pop an error.
+When creating an input variable name, you cannot use any special characters, such as `!#.,_@`. If you attempt to do so, the parser will pop an error.
 :::
 
 ## Specialized Types
 
-In addition to the input variable types explained above, you can also define certain specialized types. These metatypes further enhance the dynamism of a legal template. 
+In addition to the input variable types explained above, you can also define certain specialized types. These metatypes further enhance the dynamism of a legal template.
 
 ### Validation
 
 You can use a Validation type to add a constraint on a variable or a dependency between variables to make sure that the input values make sense. In other words, a Validation type can be used to make sure some rules apply to a certain expression.
 
 A Validation type takes two parameters:
-- condition: The expression to evaluate, which needs to be of a YesNo type. 
+
+- condition: The expression to evaluate, which needs to be of a YesNo type.
 - errorMessage: The message that should be displayed if the condition evaluates to No (false). The errorMessage is also an expression of type Text and can include other variables.
 
 For example:
@@ -126,7 +127,7 @@ For example:
 ```
 
 ::: tip
-If the condition cannot be resolved yet (because an input is missing), a validation error will not be triggered. 
+If the condition cannot be resolved yet (because an input is missing), a validation error will not be triggered.
 :::
 
 ### Collection
@@ -137,7 +138,7 @@ A Collection needs a type parameter which specifies what kind of elements it has
 
 #### for each block
 
-If you have a Collection, you can iterate on each element by using a `for each` block. For example: 
+If you have a Collection, you can iterate on each element by using a `for each` block. For example:
 
 ```
 [[Employees: Collection<Text>]]
@@ -150,9 +151,11 @@ If you have a Collection, you can iterate on each element by using a `for each` 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/2d621464a29a4628be52348e6331b0cf" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
+
 - The element variable (`Employee` in the example above) needs to be a new variable name. You cannot use an already existing variable name.
 - Be aware that if you define a new variable in the `for each` block, that variable will be used for all iterations. A new variable will not be generated for each iteration.
 - If you need more than one value in your `for each` block, you will need to use a [Structure](#structure) type.
+
 :::
 
 ### Choice
@@ -244,7 +247,7 @@ If you would like to add a page break, such as separating an exhibit from the ma
 
 ## Sections and Subsections
 
-Organizing an agreement into sections and subsections is straightforward.  Currently, we offer four section levels, which can be invoked using the following syntax:
+Organizing an agreement into sections and subsections is straightforward. Currently, we offer four section levels, which can be invoked using the following syntax:
 
 `^` - First Level
 
@@ -287,10 +290,10 @@ Conditionals also can be grouped to create a decision tree. In other words:
 
 ```
 {{ Name of Conditional "Question to Prompt User" =>
-	Text to include in an agreement if a user selects 'yes' 
-	{{Sub-Conditional-1 "Text of Sub-Question 1" => Text}} 
-	{{Sub-Conditional-2 "Text of Sub-Question 2" => Text}} 
-	{{Sub-Conditional-3 "Text of Sub-Question 3" => Text}} 
+	Text to include in an agreement if a user selects 'yes'
+	{{Sub-Conditional-1 "Text of Sub-Question 1" => Text}}
+	{{Sub-Conditional-2 "Text of Sub-Question 2" => Text}}
+	{{Sub-Conditional-3 "Text of Sub-Question 3" => Text}}
 }}
 ```
 
@@ -306,7 +309,7 @@ The text above generates the following "decision tree" in our form generation ap
 
 ### Advanced Uses of Conditionals
 
-We understand that oftentimes agreements are complex, and if you include a provision in one part of the agreement, it may impact other provisions. To accommodate this fact, if you create a conditional, you can trigger the inclusion of additional text elsewhere if that conditional is set to "yes" (true) or "no" (not true). 
+We understand that oftentimes agreements are complex, and if you include a provision in one part of the agreement, it may impact other provisions. To accommodate this fact, if you create a conditional, you can trigger the inclusion of additional text elsewhere if that conditional is set to "yes" (true) or "no" (not true).
 
 For example, extending the previous example, if we wanted to modify the signature block of an agreement depending on whether or not the agreement is between a legal entity or an individual you can easily do so by simply referencing the name of the conditional.
 
@@ -316,10 +319,9 @@ For example, extending the previous example, if we wanted to modify the signatur
 _______________________
 {{PartyAEntity => By: [[PartyA Signatory First Name]] [[PartyA Signatory Last Name]]
 Title: [[PartyA Signatory Title]]}}
-
 ```
 
-Below shows how this can dynamically change the text: 
+Below shows how this can dynamically change the text:
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/614467945305465aa29840ea282aad3e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
@@ -381,11 +383,11 @@ Likewise, in many instances, you may only want to modify the language of an agre
 
 ^^*Notice of Material Change*. If there is any material change to either party's insurance, that party shall promptly notify the other party.}}
 
-{{(Total Fees Due Under an Agreement>20000&&ProProvider) => ^**Insurance**. 
+{{(Total Fees Due Under an Agreement>20000&&ProProvider) => ^**Insurance**.
 
 ^^*Insurance Requirement*. [[PartyB]] shall maintain the insurance necessary to cover its obligations and responsibilities under this agreement, or any amount required by Law, whichever is less.
 
-^^*Proof of Insurance*. At [[PartyA]]'s request, [[PartyB]] will provide [[PartyA]] with certificates or other acceptable proof of its insurance, describing the coverage of its insurance, and notice of any material change to its insurance. 
+^^*Proof of Insurance*. At [[PartyA]]'s request, [[PartyB]] will provide [[PartyA]] with certificates or other acceptable proof of its insurance, describing the coverage of its insurance, and notice of any material change to its insurance.
 
 ^^*Additional Insurance*. [[PartyB]] may require [[PartyA]] to obtain a reasonable amount of additional insurance, by providing [[PartyB]] with good reason for the additional insurance, and requirements for the additional insurance.
 
@@ -457,14 +459,14 @@ To perform a calculation, you must first create an alias by including an `@` bef
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
-When using aliases and variables to perform calculations, the alias must be defined *before* being used in the template. The following will result in an error:
+When using aliases and variables to perform calculations, the alias must be defined _before_ being used in the template. The following will result in an error:
 
 ```
 [[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
 [[@Annual Payment = Monthly Payment * 12]]
 ```
 
-In addition, a variable must be defined *before* being used in an alias expression. The following will also result in an error:
+In addition, a variable must be defined _before_ being used in an alias expression. The following will also result in an error:
 
 ```
 [[@Annual Payment = Monthly Payment * 12]]
@@ -499,7 +501,7 @@ The same logic can be applied to extend the insurance example outlined above:
 [[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
 
 {{Annual Payment > 20000 =>
-    {{Insurance "Do you want to include an insurance provision?" => 
+    {{Insurance "Do you want to include an insurance provision?" =>
         {{Neutral "Do you wan the provision to be Neutral?" =>}}
         {{ProProvider "Do you want the provision to be Pro-Provider?" =>}}
     }}
@@ -517,7 +519,7 @@ The same logic can be applied to extend the insurance example outlined above:
 
 ^^*Insurance Requirement*. [[PartyB]] shall maintain the insurance necessary to cover its obligations and responsibilities under this agreement, or any amount required by Law, whichever is less.
 
-^^*Proof of Insurance*. At [[PartyA]]'s request, [[PartyB]] will provide [[PartyA]] with certificates or other acceptable proof of its insurance, describing the coverage of its insurance, and notice of any material change to its insurance. 
+^^*Proof of Insurance*. At [[PartyA]]'s request, [[PartyB]] will provide [[PartyA]] with certificates or other acceptable proof of its insurance, describing the coverage of its insurance, and notice of any material change to its insurance.
 
 ^^*Additional Insurance*. [[PartyB]] may require [[PartyA]] to obtain a reasonable amount of additional insurance, by providing [[PartyB]] with good reason for the additional insurance, and requirements for the additional insurance.
 
@@ -600,14 +602,13 @@ The amount of federal income tax that must be withheld from the Employee's weekl
         {{Weekly Wages Subject to Federal Withholdings > 9687 => [[@Amount of Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 9687) * 0.37 + 2898.10]]}}
     }}
 }}
-    
+
 The amount of federal income tax that must be withheld from the Employee's weekly wages is **$[[Amount of Income Tax Withheld]]**.
 ```
 
 ## Identity and Signatures
 
 OpenLaw also provides tools that enable you to electronically sign an agreement and store those electronic signatures on the Ethereum blockchain. If you intend to build a template to leverage this functionality, you will need to include a specialized "identity" variable in the text of the template. The identity variable indicates that a party should sign the agreement and will enable you to send an email to the signatory for signature.
-
 
 ### Basic Identity
 
@@ -675,7 +676,7 @@ For complex agreements with multiple variables and conditionals, you can create 
 Do not place two variables names on the same line. The second variable will not render.
 :::
 
-For example, you could organize information from both of the parties using groupings. 
+For example, you could organize information from both of the parties using groupings.
 
 ```
 <%
@@ -800,9 +801,9 @@ This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective Dat
 
 **NOW, THEREFORE**, in consideration of the premises and the mutual covenants set forth herein and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the parties hereto covenant and agree as follows:
 
-^ [[Party A]] agrees to pay [[Party B]] [[Payment in Ether: Number]] ether, every minute, starting on [[Payment Start Date: DateTime]] and ending on [[Payment End Date: DateTime]] for programming services.  
+^ [[Party A]] agrees to pay [[Party B]] [[Payment in Ether: Number]] ether, every minute, starting on [[Payment Start Date: DateTime]] and ending on [[Payment End Date: DateTime]] for programming services.
 
-^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient Ethereum Address: EthAddress]], using the Ethereum smart contract found at "0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference herein.  
+^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient Ethereum Address: EthAddress]], using the Ethereum smart contract found at "0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference herein.
 
 [[Pay Vendor]]
 
@@ -829,7 +830,7 @@ The solidity code for the smart contract found at [0xe532d1d1147ab40d0a245283f44
 pragma solidity ^0.4.10;
 
 contract salary {
-    
+
     address owner;
 
     modifier ownerOnly {
@@ -875,22 +876,21 @@ and then separately called:
 
 - The interface for the smart contract is needed for the smart contract application binary interface ("ABI") and can be generated from the solidity compiler. The ABI is basically how you call functions in a smart contract and get data back.
 
-
 ::: warning
+
 - The smart contract will not be executed unless there are one or more identities (or signatories set for the agreement).
 - If the template does not set the appropriate arguments or if the values of those arguments do not align with the underlying smart contract, the smart contract will not execute.
-:::
+  :::
 
 ## Deals
 
-Using OpenLaw, you can link together multiple templates into what we call a "deal."  A deal is simply a collection of templates. To create a deal, you need to call a template. You can do so using the following syntax:
+Using OpenLaw, you can link together multiple templates into what we call a "deal." A deal is simply a collection of templates. To create a deal, you need to call a template. You can do so using the following syntax:
 
 ```
 [[Variable Name: Template("Template Name")]]
 ```
 
 When you create a deal and call one or more templates, you'll have the opportunity to collect relevant information on an opening screen, which can be prepopulated in multiple templates at the same time.
-
 
 ### Basic Deal
 
@@ -901,9 +901,9 @@ To illustrate, assume that you create two highly simplified templates:
 ```
 This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]] by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
 
-^ **Engagement of Services**. Client may issue Project Assignments to Consultant in the form attached to this Agreement as Exhibit A ("Project Assignment"). Subject to the terms of this Agreement, Consultant will render the services set forth in Project Assignment(s) accepted by Consultant (the "Services") by the completion dates set forth therein.  
+^ **Engagement of Services**. Client may issue Project Assignments to Consultant in the form attached to this Agreement as Exhibit A ("Project Assignment"). Subject to the terms of this Agreement, Consultant will render the services set forth in Project Assignment(s) accepted by Consultant (the "Services") by the completion dates set forth therein.
 
-^**Compensation**.  Client will pay Consultant the fee set forth in each Project Assignment for Services rendered pursuant to this Agreement as Consultant’s sole compensation for such Services.  
+^**Compensation**.  Client will pay Consultant the fee set forth in each Project Assignment for Services rendered pursuant to this Agreement as Consultant’s sole compensation for such Services.
 
 
 **CLIENT**
@@ -984,9 +984,10 @@ The above will generate an opening page of common variables shared by these temp
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
+
 - The opening page of a deal will not render properly unless you set one or more variables in a grouping.
 - Any variable included in a grouping, which is not found in an underlying template will not render.
-:::
+  :::
 
 ### Advanced Deals Using Conditionals
 
@@ -997,7 +998,7 @@ Deals can also be set up to handle conditionals present in multiple agreements. 
 ```
 This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]] by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
 
-^ **Engagement of Services**. Client may issue Project Assignments to Consultant in the form attached to this Agreement as Exhibit A ("Project Assignment"). Subject to the terms of this Agreement, Consultant will render the services set forth in Project Assignment(s) accepted by Consultant (the "Services") by the completion dates set forth therein.  
+^ **Engagement of Services**. Client may issue Project Assignments to Consultant in the form attached to this Agreement as Exhibit A ("Project Assignment"). Subject to the terms of this Agreement, Consultant will render the services set forth in Project Assignment(s) accepted by Consultant (the "Services") by the completion dates set forth therein.
 
 ^**Compensation**.  Client will pay Consultant the fee set forth in each Project Assignment for Services rendered pursuant to this Agreement as Consultant’s sole compensation for such Services.  {{Payment in Ether "Will you pay the consultant in ether?" => Payment shall be made in ether.}}
 
@@ -1107,7 +1108,7 @@ Here is a basic example of using a Collection (of a Structure type) in a deal:
 [[Employees: Collection<Employee Info>]]
 
 # Employment Agreement for each individual Employee
-{{#for each Employee: Employees => 
+{{#for each Employee: Employees =>
 	[[_: Template(
 		name: "Employment Agreement";
 		parameters:
@@ -1145,7 +1146,7 @@ Let's step through what is going on with the Collection in this example.
 - For each element in the Collection (an individual `Employee`), we want to generate an `Employment Agreement` template. We set the template name as `_` because it does not need to be defined and we can make the variable name anonymous.
 
 ```
-{{#for each Employee: Employees => 
+{{#for each Employee: Employees =>
 	[[_: Template(
 		name: "Employment Agreement";
 ```
@@ -1180,4 +1181,3 @@ In order to draft readable markup language, the markup language contains several
 `#` - add a comment
 
 `<% ... %>` - opening and closing tags for code blocks (e.g., use with "groupings," smart contract calls, and to hide variables and conditionals)
-
