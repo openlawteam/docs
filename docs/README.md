@@ -12,6 +12,6 @@ It is now possible to model all or parts of legal agreements using code (smart c
 
 Lawyers lack basic tools to build these dynamic, “smart” contracts in a way that is enforceable and understandable to a legal professional.
 
-### Open Law Protocol
+### OpenLaw Protocol
 
 OpenLaw is building a technology stack to help power next generation "smart" legal agreements.
