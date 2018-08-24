@@ -18,7 +18,7 @@ This Mutual Nondisclosure Agreement (this "Agreement") is made as of [[Effective
 
 Once identified, the variable can be transformed into a form element in our contract generation application, which is accessible through OpenLaw's contract creation application's "Draft View." As you'll note in the above, by default, the name of the variable is pre-populated as the form's value to prompt a user seeking to generate a contract.
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/a1c20c3aa1494e22aa36e12cef947fe3" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/a1c20c3aa1494e22aa36e12cef947fe3" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 If, however, the name of the variable is not descriptive, you can vary the text that appears in the automatically generated form by including a string after the variable name. For example, `[[Company Name "What is the name of the company?"]]` or `[[Company Name "What is the name of the counterparty?"]]`.
 
@@ -147,7 +147,7 @@ If you have a Collection, you can iterate on each element by using a `for each` 
 }}
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/2d621464a29a4628be52348e6331b0cf" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/2d621464a29a4628be52348e6331b0cf" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
 - The element variable (`Employee` in the example above) needs to be a new variable name. You cannot use an already existing variable name.
@@ -166,7 +166,7 @@ Here is an example of the syntax to define and use a Choice type:
 [[Country of Origin: Country]] //type usage
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/b86302f4f934443ebb6701fea05a5268" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/b86302f4f934443ebb6701fea05a5268" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ### Structure
 
@@ -188,7 +188,7 @@ City: [[Employee.Address.city]] //field access of a complex type
 Ethereum address: [[Employee.Ethereum address]] //field access
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/5a714a36989a467dbbd7beaebf6d8752" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5a714a36989a467dbbd7beaebf6d8752" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 A Structure type can also be used with a [Collection](#collection) as shown in the example below. This combination allows you to more efficiently incorporate and organize information entered by the parties into your agreement.
 
@@ -210,7 +210,7 @@ A Structure type can also be used with a [Collection](#collection) as shown in t
 }}
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/3404c3dc744243988482560a3923837e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/3404c3dc744243988482560a3923837e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
 When defining any of these three metatypes of Collection, Choice, or Structure, the name cannot be the same as any variable or specialized type (e.g, Text, Number, Address, Choice, etc.) or an already existing variable name.
@@ -264,7 +264,7 @@ For instance, the following marked-up text would output as in the following vide
 ^^ **Authority**. The Company has the full right, power, and authority to enter into this Agreement and each agreement, document, and instrument to be executed and delivered by the Company pursuant to this Agreement and to carry out the transactions contemplated hereby and thereby. No waiver or consent of any person is required in connection with the execution, delivery, and performance by the Company of this Agreement and each agreement, document, and instrument to be executed and delivered by the Company pursuant to this Agreement.
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ## Conditionals and Decision Branches
 
@@ -302,7 +302,7 @@ This Mutual Nondisclosure Agreement (this "Agreement") is made as of [[Effective
 
 The text above generates the following "decision tree" in our form generation application:
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/dd9b4a7e13244c3bbd2c7385737c6369" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/dd9b4a7e13244c3bbd2c7385737c6369" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ### Advanced Uses of Conditionals
 
@@ -321,7 +321,7 @@ Title: [[PartyA Signatory Title]]}}
 
 Below shows how this can dynamically change the text: 
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/614467945305465aa29840ea282aad3e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/614467945305465aa29840ea282aad3e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ## Reasoning with Conditionals
 
@@ -359,7 +359,7 @@ When conditionals are combined with the above boolean expressions, the expressiv
 ^^*Notice of Material Change*. If there is any material change to either party's insurance, that party shall promptly notify the other party.}}
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/7bdab586eb004349b6736c07b7e28484" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7bdab586eb004349b6736c07b7e28484" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 Likewise, in many instances, you may only want to modify the language of an agreement if one or more factual situations are present. Using boolean expressions and conditionals, you'll be able to do so.
 
@@ -396,7 +396,7 @@ Likewise, in many instances, you may only want to modify the language of an agre
 ^^No Contribution from [[PartyA]]. Any insurance carried by [[PartyA]] will not be subject to contribution.}}
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: tip
 Using "groupings" and the tags `<% %>`, it is possible to hide variables and conditionals. By doing so, the spacing shown in the above video can be removed. We discuss these advanced features of the markup language [below](#groupings).
@@ -418,7 +418,7 @@ You can also combine conditionals and the `=` operator with a [Choice type](#cho
 }}
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/c952fcf870684fd68694e7de44a31009" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/c952fcf870684fd68694e7de44a31009" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ## Calculations and Aliasing
 
@@ -454,7 +454,7 @@ To perform a calculation, you must first create an alias by including an `@` bef
 [[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
 When using aliases and variables to perform calculations, the alias must be defined *before* being used in the template. The following will result in an error:
@@ -528,7 +528,7 @@ The same logic can be applied to extend the insurance example outlined above:
 }}
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/b297b61c9f884e5eb01b4ee247e6d239" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/b297b61c9f884e5eb01b4ee247e6d239" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: tip
 See the note above about the spacing in the above video.
@@ -570,7 +570,7 @@ Past Time: [[Past Time]]
 Future Time: [[Future Time]]
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/79aef047b243475c9d83cec01b13edfb" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/79aef047b243475c9d83cec01b13edfb" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 Constants can also be used with aliases and Date and DateTime type variables to calculate future dates and times:
 
@@ -631,7 +631,7 @@ Title: [[PartyB Signatory Title]]}}
 
 Once a user indicates that the template is ready for signature, OpenLaw will generate a window, where a user can input the signatories' emails and send out the agreement for signature.
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/7041f79616a74974bf8fd73f3a0a231c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7041f79616a74974bf8fd73f3a0a231c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ### Embedding Signatures
 
@@ -719,7 +719,7 @@ Address:
 [[Vendor Address.city]], [[Vendor Address.state]] [[Vendor Address.zipCode]]
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/ddd995d833f242bda2f644c1c9e99771" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/ddd995d833f242bda2f644c1c9e99771" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 You can also include references to conditionals in a grouping. An example of this functionality is shown below.
 
@@ -821,7 +821,7 @@ _________________________
 
 Once the agreement is signed, the smart contract will execute as shown in the video below. OpenLaw sends the smart contract a message to trigger its execution and pass along the relevant values.
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/20f8fc1a2dfe4616a0fd08f0f87267b7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/20f8fc1a2dfe4616a0fd08f0f87267b7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 The solidity code for the smart contract found at [0xe532d1d1147ab40d0a245283f4457c733b5e3d41](https://rinkeby.etherscan.io/address/0xe532d1d1147ab40d0a245283f4457c733b5e3d41) is as follows:
 
@@ -981,7 +981,7 @@ You can combine these two documents into a deal by simply creating the following
 
 The above will generate an opening page of common variables shared by these templates. Once these variables are filled in, both agreements can be executed as shown in the below video:
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
 - The opening page of a deal will not render properly unless you set one or more variables in a grouping.
@@ -1076,7 +1076,7 @@ _______________________
 
 On the opening page of the deal, the user will be presented with the conditional. Depending on the answer, the user will be prompted with an additional variable and the text of the underlying agreements will be modified.
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/ba6d97095a22497cadc8c6a85e1742f9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/ba6d97095a22497cadc8c6a85e1742f9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ### Using Collections and Paths in a Deal
 
@@ -1171,12 +1171,13 @@ parameters:
 path: "agreements" / (Employee.First name + " " + Employee.Last name)
 ```
 
-<iframe width="630" height="394" src="https://www.useloom.com/embed/f55c822761e249d0ae7437fe23854590" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/f55c822761e249d0ae7437fe23854590" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ## Other Tags
 
 In order to draft readable markup language, the markup language contains several additional tags, which allows users to add comments and hide variables from the underlying text. The syntax for these tags can be found below:
 
 `#` - add a comment
+
 `<% ... %>` - opening and closing tags for code blocks (e.g., use with "groupings," smart contract calls, and to hide variables and conditionals)
 
