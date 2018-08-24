@@ -16,5 +16,8 @@ module.exports = {
     editLinks: true,
     // custom text for edit link. Defaults to "Edit this page"
     editLinkText: "Help us improve this page"
+  },
+  markdown: {
+    lineNumbers: true
   }
 };
