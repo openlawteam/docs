@@ -7,13 +7,33 @@ The OpenLaw protocol relies on a markup language to transform natural language a
 To identify a variable in an OpenLaw template, all that is required is to surround text with a set of double brackets. For example, consider the following basic contractual language from a mutual non-disclosure agreement (NDA):
 
 ```
-This Mutual Nondisclosure Agreement (this "Agreement") is made as of May 17, 2017, by and between ABC, Inc. (the "Company"), and John Smith ("Counterparty"). Each party has disclosed and/or may further disclose its Confidential Information (as defined below) to the other in connection with the Relationship (as defined below) pursuant to the terms and conditions of this Agreement. As used herein, the term "Discloser" shall refer to the Company whenever the context refers to the Company's Confidential Information being disclosed to Counterparty, which is referred to as "Recipient" in that context. Conversely, the term "Discloser" shall refer to Counterparty whenever the context refers to Counterparty's Confidential Information being disclosed to the Company, which is referred to as "Recipient" in that context.
+This Mutual Nondisclosure Agreement (this "Agreement") is made as of May 17,
+2017, by and between ABC, Inc. (the "Company"), and John Smith ("Counterparty").
+Each party has disclosed and/or may further disclose its Confidential
+Information (as defined below) to the other in connection with the Relationship
+(as defined below) pursuant to the terms and conditions of this Agreement. As
+used herein, the term "Discloser" shall refer to the Company whenever the
+context refers to the Company's Confidential Information being disclosed to
+Counterparty, which is referred to as "Recipient" in that context. Conversely,
+the term "Discloser" shall refer to Counterparty whenever the context refers to
+Counterparty's Confidential Information being disclosed to the Company, which is
+referred to as "Recipient" in that context.
 ```
 
 Any of the words in this text can be transformed into a variable. If we chose to identify the parties to the agreement as variables we could, for example, replace "ABC, Inc." with `[[Company Name]]`, "John Smith" with `[[Counterparty]]`, and "May 17, 2017" with `[[Effective Date: Date]]`.
 
 ```
-This Mutual Nondisclosure Agreement (this "Agreement") is made as of [[Effective Date: Date]], by and between [[Company Name]] (the "Company"), and [[Counterparty Name]] ("Counterparty"). Each party has disclosed and/or may further disclose its Confidential Information (as defined below) to the other in connection with the Relationship (as defined below) pursuant to the terms and conditions of this Agreement. As used herein, the term "Discloser" shall refer to the Company whenever the context refers to the Company's Confidential Information being disclosed to Counterparty, which is referred to as "Recipient" in that context. Conversely, the term "Discloser" shall refer to Counterparty whenever the context refers to Counterparty's Confidential Information being disclosed to the Company, which is referred to as "Recipient" in that context.
+This Mutual Nondisclosure Agreement (this "Agreement") is made as of [[Effective
+Date: Date]], by and between [[Company Name]] (the "Company"), and
+[[Counterparty Name]] ("Counterparty"). Each party has disclosed and/or may
+further disclose its Confidential Information (as defined below) to the other in
+connection with the Relationship (as defined below) pursuant to the terms and
+conditions of this Agreement. As used herein, the term "Discloser" shall refer
+to the Company whenever the context refers to the Company's Confidential
+Information being disclosed to Counterparty, which is referred to as "Recipient"
+in that context. Conversely, the term "Discloser" shall refer to Counterparty
+whenever the context refers to Counterparty's Confidential Information being
+disclosed to the Company, which is referred to as "Recipient" in that context.
 ```
 
 Once identified, the variable can be transformed into a form element in our contract generation application, which is accessible through OpenLaw's contract creation application's "Draft View." As you'll note in the above, by default, the name of the variable is pre-populated as the form's value to prompt a user seeking to generate a contract.
@@ -262,9 +282,24 @@ For instance, the following marked-up text would output as in the following vide
 ```
 ^ The Company represents and warrants that:
 
-^^ **Organization**. The Company is a corporation duly organized, validly existing, and in good standing under the laws of the [[State of Incorporation]], has corporate power to carry on its business as it is now being conducted, and is qualified to do business in every jurisdiction in which the character and location of the assets owned by it or the nature of the business transacted by it requires qualification or in which failure to so qualify would have a material adverse impact on it. No proceeding is pending, or to the knowledge of the Company, threatened, involving the Company, in which it is alleged that the nature of its business makes qualification necessary in any additional jurisdiction.
+^^ **Organization**. The Company is a corporation duly organized, validly
+existing, and in good standing under the laws of the [[State of Incorporation]],
+has corporate power to carry on its business as it is now being conducted, and
+is qualified to do business in every jurisdiction in which the character and
+location of the assets owned by it or the nature of the business transacted by
+it requires qualification or in which failure to so qualify would have a
+material adverse impact on it. No proceeding is pending, or to the knowledge of
+the Company, threatened, involving the Company, in which it is alleged that the
+nature of its business makes qualification necessary in any additional
+jurisdiction.
 
-^^ **Authority**. The Company has the full right, power, and authority to enter into this Agreement and each agreement, document, and instrument to be executed and delivered by the Company pursuant to this Agreement and to carry out the transactions contemplated hereby and thereby. No waiver or consent of any person is required in connection with the execution, delivery, and performance by the Company of this Agreement and each agreement, document, and instrument to be executed and delivered by the Company pursuant to this Agreement.
+^^ **Authority**. The Company has the full right, power, and authority to enter
+into this Agreement and each agreement, document, and instrument to be executed
+and delivered by the Company pursuant to this Agreement and to carry out the
+transactions contemplated hereby and thereby. No waiver or consent of any person
+is required in connection with the execution, delivery, and performance by the
+Company of this Agreement and each agreement, document, and instrument to be
+executed and delivered by the Company pursuant to this Agreement.
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -348,17 +383,24 @@ OpenLaw's markup language can handle boolean expressions, outlined below:
 When conditionals are combined with the above boolean expressions, the expressive power of the OpenLaw markup language comes into focus. For example, imagine that you wanted to include an additional provision in an agreement--let's say a requirement that the parties obtain insurance--if the total value of the agreement exceeded a certain dollar threshold, you could easily do so as demonstrated below.
 
 ```
-[[PartyA]] shall pay [[PartyB]] fee of $[[Total Fees Due Under an Agreement: Number]].
+[[PartyA]] shall pay [[PartyB]] fee of $[[Total Fees Due Under an Agreement:
+Number]].
 
 ....
 
 {{Total Fees Due Under an Agreement>20000 => ^**Insurance**.
 
-^^*Mutual Insurance*. Each party shall maintain the types of insurance customary and appropriate for such agreements, in the amount necessary to cover its obligations and responsibilities under this agreement or required by Law, whichever is less.
+^^*Mutual Insurance*. Each party shall maintain the types of insurance customary
+and appropriate for such agreements, in the amount necessary to cover its
+obligations and responsibilities under this agreement or required by Law,
+whichever is less.
 
-^^*Proof of Insurance*. On the other party's request, each party shall deliver to the other party a certificate or other proof of its insurance, describing the amount and coverage of its insurance.
+^^*Proof of Insurance*. On the other party's request, each party shall deliver
+to the other party a certificate or other proof of its insurance, describing the
+amount and coverage of its insurance.
 
-^^*Notice of Material Change*. If there is any material change to either party's insurance, that party shall promptly notify the other party.}}
+^^*Notice of Material Change*. If there is any material change to either party's
+insurance, that party shall promptly notify the other party.}}
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7bdab586eb004349b6736c07b7e28484" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -366,36 +408,58 @@ When conditionals are combined with the above boolean expressions, the expressiv
 Likewise, in many instances, you may only want to modify the language of an agreement if one or more factual situations are present. Using boolean expressions and conditionals, you'll be able to do so.
 
 ```
-[[PartyA]] shall pay [[PartyB]] a fee of $[[Total Fees Due Under an Agreement: Number]].
+[[PartyA]] shall pay [[PartyB]] a fee of $[[Total Fees Due Under an Agreement:
+Number]].
 
-{{Total Fees Due Under an Agreement>20000 =>
-    {{Insurance "Do you want to include an insurance provision?" =>
-	    {{Neutral "Do you want the provision to be Neutral?" =>}}
-	    {{ProProvider "Do you want the provision to be Pro-Provider?" =>}}
+{{Total Fees Due Under an Agreement>20000 => {{Insurance "Do you want to include
+    an insurance provision?" => {{Neutral "Do you want the provision to be
+    Neutral?" =>}} {{ProProvider "Do you want the provision to be Pro-Provider?"
+    =>}}
     }}
 }}
 
 {{(Total Fees Due Under an Agreement>20000&&Neutral) => ^**Insurance**.
 
-^^*Mutual Insurance*. Each party shall maintain the types of insurance customary and appropriate for such agreements, in the amount necessary to cover its obligations and responsibilities under this agreement or required by Law, whichever is less.
+^^*Mutual Insurance*. Each party shall maintain the types of insurance customary
+and appropriate for such agreements, in the amount necessary to cover its
+obligations and responsibilities under this agreement or required by Law,
+whichever is less.
 
-^^*Proof of Insurance*. On the other party's request, each party shall deliver to the other party a certificate or other proof of its insurance, describing the amount and coverage of its insurance.
+^^*Proof of Insurance*. On the other party's request, each party shall deliver
+to the other party a certificate or other proof of its insurance, describing the
+amount and coverage of its insurance.
 
-^^*Notice of Material Change*. If there is any material change to either party's insurance, that party shall promptly notify the other party.}}
+^^*Notice of Material Change*. If there is any material change to either party's
+insurance, that party shall promptly notify the other party.}}
 
 {{(Total Fees Due Under an Agreement>20000&&ProProvider) => ^**Insurance**.
 
-^^*Insurance Requirement*. [[PartyB]] shall maintain the insurance necessary to cover its obligations and responsibilities under this agreement, or any amount required by Law, whichever is less.
+^^*Insurance Requirement*. [[PartyB]] shall maintain the insurance necessary to
+cover its obligations and responsibilities under this agreement, or any amount
+required by Law, whichever is less.
 
-^^*Proof of Insurance*. At [[PartyA]]'s request, [[PartyB]] will provide [[PartyA]] with certificates or other acceptable proof of its insurance, describing the coverage of its insurance, and notice of any material change to its insurance.
+^^*Proof of Insurance*. At [[PartyA]]'s request, [[PartyB]] will provide
+[[PartyA]] with certificates or other acceptable proof of its insurance,
+describing the coverage of its insurance, and notice of any material change to
+its insurance.
 
-^^*Additional Insurance*. [[PartyB]] may require [[PartyA]] to obtain a reasonable amount of additional insurance, by providing [[PartyB]] with good reason for the additional insurance, and requirements for the additional insurance.
+^^*Additional Insurance*. [[PartyB]] may require [[PartyA]] to obtain a
+reasonable amount of additional insurance, by providing [[PartyB]] with good
+reason for the additional insurance, and requirements for the additional
+insurance.
 
-^^*Additional Insured*. [[PartyA]] Added to [[PartyB]]'s Policy [[PartyB]] shall, within [[Number of Days: Number]] Business Days' of the Effective Date, have its insurer add [[PartyA]] as an additional insured to its policy.
+^^*Additional Insured*. [[PartyA]] Added to [[PartyB]]'s Policy [[PartyB]]
+shall, within [[Number of Days: Number]] Business Days' of the Effective Date,
+have its insurer add [[PartyA]] as an additional insured to its policy.
 
-^^*Certificate of Insurance*. [[PartyB]] shall have its insurer send a certificate to [[PartyA]], proving [[PartyA]] has been added to [[PartyB]]'s policy, and confirming that the insurer will give [[PartyB]] [[Number of Business Days: Number]] Business Days written notice before any proposed cancelation, modification, or reduction in coverage of [[PartyB]]'s policy.
+^^*Certificate of Insurance*. [[PartyB]] shall have its insurer send a
+certificate to [[PartyA]], proving [[PartyA]] has been added to [[PartyB]]'s
+policy, and confirming that the insurer will give [[PartyB]] [[Number of
+Business Days: Number]] Business Days written notice before any proposed
+cancelation, modification, or reduction in coverage of [[PartyB]]'s policy.
 
-^^No Contribution from [[PartyA]]. Any insurance carried by [[PartyA]] will not be subject to contribution.}}
+^^No Contribution from [[PartyA]]. Any insurance carried by [[PartyA]] will not
+be subject to contribution.}}
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -481,51 +545,66 @@ The same logic can be applied to extend the insurance example outlined above:
 ```
 <%
 
-==Parties==
-[[PartyA]]
-[[PartyB]]
+==Parties== [[PartyA]] [[PartyB]]
 
-==Payment==
-[[Monthly Payment: Number]]
-[[@Annual Payment = Monthly Payment * 12]]
+==Payment== [[Monthly Payment: Number]] [[@Annual Payment = Monthly Payment *
+12]]
 
-==Insurance Provision==
-[[Insurance]]
-[[Neutral]]
-[[ProProvider]]
-[[Number of Days: Number]]
-[[Number of Business Days: Number]]
+==Insurance Provision== [[Insurance]] [[Neutral]] [[ProProvider]] [[Number of
+Days: Number]] [[Number of Business Days: Number]]
 
 %>
 
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual
+Payment]] annually, payable within thirty (30) days of invoice.
 
-{{Annual Payment > 20000 =>
-    {{Insurance "Do you want to include an insurance provision?" =>
-        {{Neutral "Do you wan the provision to be Neutral?" =>}}
-        {{ProProvider "Do you want the provision to be Pro-Provider?" =>}}
+{{Annual Payment > 20000 => {{Insurance "Do you want to include an insurance
+    provision?" => {{Neutral "Do you wan the provision to be Neutral?" =>}}
+    {{ProProvider "Do you want the provision to be Pro-Provider?" =>}}
     }}
 }}
 
 {{(Annual Payment > 20000 && Neutral) => ^**Insurance**.
 
-^^*Mutual Insurance*. Each party shall maintain the types of insurance customary and appropriate for such agreements, in the amount necessary to cover its obligations and responsibilities under this agreement or required by Law, whichever is less.^^*Proof of Insurance*. On the other party's request, each party shall deliver to the other party a certificate or other proof of its insurance, describing the amount and coverage of its insurance.
+^^*Mutual Insurance*. Each party shall maintain the types of insurance customary
+and appropriate for such agreements, in the amount necessary to cover its
+obligations and responsibilities under this agreement or required by Law,
+whichever is less.^^*Proof of Insurance*. On the other party's request, each
+party shall deliver to the other party a certificate or other proof of its
+insurance, describing the amount and coverage of its insurance.
 
-^^*Notice of Material Change*. If there is any material change to either party's insurance, that party shall promptly notify the other party.
+^^*Notice of Material Change*. If there is any material change to either party's
+insurance, that party shall promptly notify the other party.
 
 }}
 
 {{(Annual Payment > 20000 && ProProvider) => ^**Insurance**.
 
-^^*Insurance Requirement*. [[PartyB]] shall maintain the insurance necessary to cover its obligations and responsibilities under this agreement, or any amount required by Law, whichever is less.
+^^*Insurance Requirement*. [[PartyB]] shall maintain the insurance necessary to
+cover its obligations and responsibilities under this agreement, or any amount
+required by Law, whichever is less.
 
-^^*Proof of Insurance*. At [[PartyA]]'s request, [[PartyB]] will provide [[PartyA]] with certificates or other acceptable proof of its insurance, describing the coverage of its insurance, and notice of any material change to its insurance.
+^^*Proof of Insurance*. At [[PartyA]]'s request, [[PartyB]] will provide
+[[PartyA]] with certificates or other acceptable proof of its insurance,
+describing the coverage of its insurance, and notice of any material change to
+its insurance.
 
-^^*Additional Insurance*. [[PartyB]] may require [[PartyA]] to obtain a reasonable amount of additional insurance, by providing [[PartyB]] with good reason for the additional insurance, and requirements for the additional insurance.
+^^*Additional Insurance*. [[PartyB]] may require [[PartyA]] to obtain a
+reasonable amount of additional insurance, by providing [[PartyB]] with good
+reason for the additional insurance, and requirements for the additional
+insurance.
 
-^^*Additional Insured*. [[PartyA]] Added to [[PartyB]]'s Policy [[PartyB]] shall, within [[Number of Days]] Business Days' of the Effective Date, have its insurer add [[PartyA]] as an additional insured to its policy.^^*Certificate of Insurance*. [[PartyB]] shall have its insurer send a certificate to [[PartyA]], proving [[PartyA]] has been added to [[PartyB]]'s policy, and confirming that the insurer will give [[PartyB]] [[Number of Business Days]] Business Days written notice before any proposed cancelation, modification, or reduction in coverage of [[PartyB]]'s policy.
+^^*Additional Insured*. [[PartyA]] Added to [[PartyB]]'s Policy [[PartyB]]
+shall, within [[Number of Days]] Business Days' of the Effective Date, have its
+insurer add [[PartyA]] as an additional insured to its policy.^^*Certificate of
+Insurance*. [[PartyB]] shall have its insurer send a certificate to [[PartyA]],
+proving [[PartyA]] has been added to [[PartyB]]'s policy, and confirming that
+the insurer will give [[PartyB]] [[Number of Business Days]] Business Days
+written notice before any proposed cancelation, modification, or reduction in
+coverage of [[PartyB]]'s policy.
 
-^^No Contribution from [[PartyA]]. Any insurance carried by [[PartyA]] will not be subject to contribution.
+^^No Contribution from [[PartyA]]. Any insurance carried by [[PartyA]] will not
+be subject to contribution.
 
 }}
 ```
@@ -899,11 +978,18 @@ To illustrate, assume that you create two highly simplified templates:
 **Consulting Agreement**
 
 ```
-This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]] by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
+This Consulting Agreement (the "Agreement") is made as of [[Effective Date:
+Date]] by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
 
-^ **Engagement of Services**. Client may issue Project Assignments to Consultant in the form attached to this Agreement as Exhibit A ("Project Assignment"). Subject to the terms of this Agreement, Consultant will render the services set forth in Project Assignment(s) accepted by Consultant (the "Services") by the completion dates set forth therein.
+^ **Engagement of Services**. Client may issue Project Assignments to Consultant
+in the form attached to this Agreement as Exhibit A ("Project Assignment").
+Subject to the terms of this Agreement, Consultant will render the services set
+forth in Project Assignment(s) accepted by Consultant (the "Services") by the
+completion dates set forth therein.
 
-^**Compensation**.  Client will pay Consultant the fee set forth in each Project Assignment for Services rendered pursuant to this Agreement as Consultant’s sole compensation for such Services.
+^**Compensation**.  Client will pay Consultant the fee set forth in each Project
+Assignment for Services rendered pursuant to this Agreement as Consultant’s sole
+compensation for such Services.
 
 
 **CLIENT**
@@ -925,16 +1011,23 @@ _______________________
 **Project Assignment [[Project Assignment Number]] Under Consulting Agreement**
 Dated: [[Effective Date: Date]]
 
-This Project Assignment ("Project Assignment"), adopts and incorporates by reference the terms and conditions of the Consulting Agreement (the "Agreement"), entered into on [[Effective Date: Date]], [[Party A]] ("Client") and [[Party B]] ("Consultant").  Services performed under this Project Assignment will be conducted in accordance with and be subject to the terms and conditions of this Project Assignment, the Agreement.  Capitalized terms used but not defined in this Project Assignment shall have the meanings set out in the Agreement.
+This Project Assignment ("Project Assignment"), adopts and incorporates by
+reference the terms and conditions of the Consulting Agreement (the
+"Agreement"), entered into on [[Effective Date: Date]], [[Party A]] ("Client")
+and [[Party B]] ("Consultant").  Services performed under this Project
+Assignment will be conducted in accordance with and be subject to the terms and
+conditions of this Project Assignment, the Agreement.  Capitalized terms used
+but not defined in this Project Assignment shall have the meanings set out in
+the Agreement.
 
-**Project:**
-[[Describe Project]]
+**Project:** [[Describe Project]]
 
-**Schedule Of Work:**
-[[Describe Schedule of Work]]
+**Schedule Of Work:** [[Describe Schedule of Work]]
 
-**Fees:**
-For services provided, Client shall pay Consultant [[Describe Fees]] upon completion of the Project.  Fees shall not be paid until the work performed pursuant to this Project Assignment has been approved by the Client, which will not be unreasonably withheld.
+**Fees:** For services provided, Client shall pay Consultant [[Describe Fees]]
+upon completion of the Project.  Fees shall not be paid until the work performed
+pursuant to this Project Assignment has been approved by the Client, which will
+not be unreasonably withheld.
 
 
 **CLIENT**
@@ -996,11 +1089,19 @@ Deals can also be set up to handle conditionals present in multiple agreements. 
 **Consulting Agreement**
 
 ```
-This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]] by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
+This Consulting Agreement (the "Agreement") is made as of [[Effective Date:
+Date]] by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
 
-^ **Engagement of Services**. Client may issue Project Assignments to Consultant in the form attached to this Agreement as Exhibit A ("Project Assignment"). Subject to the terms of this Agreement, Consultant will render the services set forth in Project Assignment(s) accepted by Consultant (the "Services") by the completion dates set forth therein.
+^ **Engagement of Services**. Client may issue Project Assignments to Consultant
+in the form attached to this Agreement as Exhibit A ("Project Assignment").
+Subject to the terms of this Agreement, Consultant will render the services set
+forth in Project Assignment(s) accepted by Consultant (the "Services") by the
+completion dates set forth therein.
 
-^**Compensation**.  Client will pay Consultant the fee set forth in each Project Assignment for Services rendered pursuant to this Agreement as Consultant’s sole compensation for such Services.  {{Payment in Ether "Will you pay the consultant in ether?" => Payment shall be made in ether.}}
+^**Compensation**.  Client will pay Consultant the fee set forth in each Project
+Assignment for Services rendered pursuant to this Agreement as Consultant’s sole
+compensation for such Services.  {{Payment in Ether "Will you pay the consultant
+in ether?" => Payment shall be made in ether.}}
 
 
 **CLIENT**
@@ -1022,16 +1123,25 @@ _______________________
 **Project Assignment [[Project Assignment Number]] Under Consulting Agreement**
 Dated: [[Effective Date: Date]]
 
-This Project Assignment ("Project Assignment"), adopts and incorporates by reference the terms and conditions of the Consulting Agreement (the "Agreement"), entered into on [[Effective Date: Date]], [[Party A]] ("Client") and [[Party B]] ("Consultant").  Services performed under this Project Assignment will be conducted in accordance with and be subject to the terms and conditions of this Project Assignment, the Agreement.  Capitalized terms used but not defined in this Project Assignment shall have the meanings set out in the Agreement.
+This Project Assignment ("Project Assignment"), adopts and incorporates by
+reference the terms and conditions of the Consulting Agreement (the
+"Agreement"), entered into on [[Effective Date: Date]], [[Party A]] ("Client")
+and [[Party B]] ("Consultant").  Services performed under this Project
+Assignment will be conducted in accordance with and be subject to the terms and
+conditions of this Project Assignment, the Agreement.  Capitalized terms used
+but not defined in this Project Assignment shall have the meanings set out in
+the Agreement.
 
-**Project:**
-[[Describe Project]]
+**Project:** [[Describe Project]]
 
-**Schedule Of Work:**
-[[Describe Schedule of Work]]
+**Schedule Of Work:** [[Describe Schedule of Work]]
 
-**Fees:**
-For services provided, Client shall pay Consultant [[Describe Fees]] upon completion of the Project.  Fees shall not be paid until the work performed pursuant to this Project Assignment has been approved by the Client, which will not be unreasonably withheld.  {{Payment in Ether "Will you pay the consultant in ether?" => Payment shall be made in ether to the Consultant Ethereum address found at [[Recipient Address]]}}.
+**Fees:** For services provided, Client shall pay Consultant [[Describe Fees]]
+upon completion of the Project.  Fees shall not be paid until the work performed
+pursuant to this Project Assignment has been approved by the Client, which will
+not be unreasonably withheld.  {{Payment in Ether "Will you pay the consultant
+in ether?" => Payment shall be made in ether to the Consultant Ethereum address
+found at [[Recipient Address]]}}.
 
 **CLIENT**
 
