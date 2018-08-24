@@ -82,12 +82,19 @@ The YesNo type is typically used together with "conditional" logic embedded into
 **Summary of Input Variable Types**
 
 no type indicator or `: Text` - indicates that a variable is text
+
 `: Address` - generates an address
+
 `: Date` - generates date picker
+
 `: DateTime` - generates date picker with date and time
+
 `: EthAddress` - indicates that a variable is an Ethereum address
+
 `: Number` - indicates that a variable is a number
+
 `: Period` - indicates that a variable is a time period
+
 `: YesNo "<user prompt>"` - generates binary question with radio button inputs
 
 ::: warning
@@ -239,10 +246,13 @@ If you would like to add a page break, such as separating an exhibit from the ma
 
 Organizing an agreement into sections and subsections is straightforward.  Currently, we offer four section levels, which can be invoked using the following syntax:
 
-`^` First Level
-`^^` Second Level
-`^^^` Third Level
-`^^^^` Fourth Level
+`^` - First Level
+
+`^^` - Second Level
+
+`^^^` - Third Level
+
+`^^^^` - Fourth Level
 
 For instance, the following marked-up text would output as in the following video.
 
@@ -317,14 +327,21 @@ Below shows how this can dynamically change the text:
 
 OpenLaw's markup language can handle boolean expressions, outlined below:
 
-And: `&&`
-Or: `||`
-Not: `!`
-Equal: `=`
-Greater Than: `>`
-Less Than: `<`
-Greater Than or Equal: `>=`
-Less Than or Equal: `<=`
+`&&` - And
+
+`||` - Or
+
+`!` - Not
+
+`=` - Equal
+
+`>` - Greater Than
+
+`<` - Less Than
+
+`>=` - Greater Than or Equal
+
+`<=` - Less Than or Equal
 
 When conditionals are combined with the above boolean expressions, the expressive power of the OpenLaw markup language comes into focus. For example, imagine that you wanted to include an additional provision in an agreement--let's say a requirement that the parties obtain insurance--if the total value of the agreement exceeded a certain dollar threshold, you could easily do so as demonstrated below.
 
@@ -407,11 +424,15 @@ You can also combine conditionals and the `=` operator with a [Choice type](#cho
 
 Using the OpenLaw Markup language, you can also perform basic calculations. Using this functionality, you can output dynamically generated values from other inputs, which can be automatically included in the text of an agreement.
 
-Multiplication: `*`
-Addition: `+`
-Subtraction: `-`
-Division: `/`
-Creating an alias: `@`
+`*` - Multiplication
+
+`+` - Addition
+
+`-` - Subtraction
+
+`/` - Division
+
+`@` - Creating an alias
 
 **Example**
 
