@@ -89,8 +89,10 @@ The Address type is a more advanced input variable. This type transforms an inpu
 Once an address is set you can access different aspects of the address, including the street number, street name, city, state, zip code, and country. Below is an example of how you would reference these elements:
 
 ```
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company Address.streetName]]
-[[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]] [[Company Address.country]]
+[[#Company Address: Address]][[Company Address.streetNumber]] [[Company 
+Address.streetName]]
+[[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]] 
+[[Company Address.country]]
 ```
 
 Each address is also associated with a unique string identifier. Continuing the example above, this can be referenced with `[[Company Address.placeId]]`.
