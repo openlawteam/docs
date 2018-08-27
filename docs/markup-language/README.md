@@ -171,11 +171,9 @@ If you have a Collection, you can iterate on each element by using a `for each` 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/2d621464a29a4628be52348e6331b0cf" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
-
 - The element variable (`Employee` in the example above) needs to be a new variable name. You cannot use an already existing variable name.
 - Be aware that if you define a new variable in the `for each` block, that variable will be used for all iterations. A new variable will not be generated for each iteration.
 - If you need more than one value in your `for each` block, you will need to use a [Structure](#structure) type.
-
 :::
 
 ### Choice
@@ -335,7 +333,18 @@ Conditionals also can be grouped to create a decision tree. In other words:
 To see this in action, consider the following standard language found at the beginning of a standard mutual NDA:
 
 ```
-This Mutual Nondisclosure Agreement (this "Agreement") is made as of [[Effective Date: Date]], by and  between [[PartyA]] ("[[PartyA Abbreviation]]"){{PartyAEntity "Is the first party a legal entity?" => {{PartyACorporation "A Corporation?" =>, a [[PartyAStateOfIncorporation]] corporation, }}{{PartyALLC "An LLC?" =>a [[PartyAStateOfIncorporation]] limited liability company, }}{{PartyAPBC "A Public Benefit Corporation?" =>, a [[PartyAStateOfIncorporation]] public benefit corporation,}}}} and [[PartyB]]{{PartyBEntity "Is the counterparty a legal entity?"=>{{PartyBCorporation "A Corporation?"=>, a [[PartyBStateOfIncorporation]] corporation }}{{PartyBLLC "An LLC?" =>, a [[PartyBStateOfIncorporation]] limited liability company}}{{PartyBPBC "A Public Benefit Corporation?" =>, a [[PartyBStateOfIncorporation]] public benefit corporation}}}}("Counterparty").
+This Mutual Nondisclosure Agreement (this "Agreement") is made as of [[Effective 
+Date: Date]], by and  between [[PartyA]] ("[[PartyA Abbreviation]]")
+{{PartyAEntity "Is the first party a legal entity?" => {{PartyACorporation 
+"A Corporation?" =>, a [[PartyAStateOfIncorporation]] corporation, }}{{PartyALLC 
+"An LLC?" =>a [[PartyAStateOfIncorporation]] limited liability company, }}
+{{PartyAPBC "A Public Benefit Corporation?" =>, a [[PartyAStateOfIncorporation]] 
+public benefit corporation,}}}} and [[PartyB]]{{PartyBEntity "Is the 
+counterparty a legal entity?"=>{{PartyBCorporation "A Corporation?"=>, a 
+[[PartyBStateOfIncorporation]] corporation }}{{PartyBLLC "An LLC?" =>, a 
+[[PartyBStateOfIncorporation]] limited liability company}}{{PartyBPBC "A Public 
+Benefit Corporation?" =>, a [[PartyBStateOfIncorporation]] public benefit 
+corporation}}}}("Counterparty").
 ```
 
 The text above generates the following "decision tree" in our form generation application:
@@ -411,10 +420,10 @@ Likewise, in many instances, you may only want to modify the language of an agre
 [[PartyA]] shall pay [[PartyB]] a fee of $[[Total Fees Due Under an Agreement:
 Number]].
 
-{{Total Fees Due Under an Agreement>20000 => {{Insurance "Do you want to include
-    an insurance provision?" => {{Neutral "Do you want the provision to be
-    Neutral?" =>}} {{ProProvider "Do you want the provision to be Pro-Provider?"
-    =>}}
+{{Total Fees Due Under an Agreement>20000 =>
+    {{Insurance "Do you want to include an insurance provision?" =>
+        {{Neutral "Do you want the provision to be Neutral?" =>}}
+        {{ProProvider "Do you want the provision to be Pro-Provider?" =>}}
     }}
 }}
 
@@ -517,7 +526,8 @@ To perform a calculation, you must first create an alias by including an `@` bef
 
 %>
 
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual 
+Payment]] annually, payable within thirty (30) days of invoice.
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -526,7 +536,8 @@ To perform a calculation, you must first create an alias by including an `@` bef
 When using aliases and variables to perform calculations, the alias must be defined _before_ being used in the template. The following will result in an error:
 
 ```
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or 
+$[[Annual Payment]] annually, payable within thirty (30) days of invoice.
 [[@Annual Payment = Monthly Payment * 12]]
 ```
 
@@ -534,7 +545,8 @@ In addition, a variable must be defined _before_ being used in an alias expressi
 
 ```
 [[@Annual Payment = Monthly Payment * 12]]
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or 
+$[[Annual Payment]] annually, payable within thirty (30) days of invoice.
 ```
 
 As in the correct example above, using "groupings" and the tags `<% %>` to define aliases and variables will make it easier to correctly perform calculations. We discuss these advanced features of the markup language [below](#groupings).
@@ -545,22 +557,30 @@ The same logic can be applied to extend the insurance example outlined above:
 ```
 <%
 
-==Parties== [[PartyA]] [[PartyB]]
+==Parties==
+[[PartyA]]
+[[PartyB]]
 
-==Payment== [[Monthly Payment: Number]] [[@Annual Payment = Monthly Payment *
-12]]
+==Payment==
+[[Monthly Payment: Number]]
+[[@Annual Payment = Monthly Payment * 12]]
 
-==Insurance Provision== [[Insurance]] [[Neutral]] [[ProProvider]] [[Number of
-Days: Number]] [[Number of Business Days: Number]]
+==Insurance Provision==
+[[Insurance]]
+[[Neutral]]
+[[ProProvider]]
+[[Number of Days: Number]]
+[[Number of Business Days: Number]]
 
 %>
 
 [[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual
 Payment]] annually, payable within thirty (30) days of invoice.
 
-{{Annual Payment > 20000 => {{Insurance "Do you want to include an insurance
-    provision?" => {{Neutral "Do you wan the provision to be Neutral?" =>}}
-    {{ProProvider "Do you want the provision to be Pro-Provider?" =>}}
+{{Annual Payment > 20000 =>
+    {{Insurance "Do you want to include an insurance provision?" =>
+        {{Neutral "Do you wan the provision to be Neutral?" =>}}
+        {{ProProvider "Do you want the provision to be Pro-Provider?" =>}}
     }}
 }}
 
@@ -667,22 +687,48 @@ The features of conditionals with boolean expressions can be combined with calcu
 ```
 ^**Federal Income Tax Withholding (using the Percentage method).**
 
-The amount of federal income tax that must be withheld from the Employee's weekly wages is based on the Weekly Wages Subject to Income Tax Withholdings and the Employee's filing status. The Employee is electing to withhold at the {{Single Status "Employee's Filing status: 'Single'?" => Single rate}}{{Married Status "'Married'?" => Married rate}}{{Married Filing Separate Status "'Married, but withhold at higher Single rate'?" => Married, but higher Single rate}}.
+The amount of federal income tax that must be withheld from the Employee's 
+weekly wages is based on the Weekly Wages Subject to Income Tax Withholdings and 
+the Employee's filing status. The Employee is electing to withhold at the 
+{{Single Status "Employee's Filing status: 'Single'?" => Single rate}}{{Married 
+Status "'Married'?" => Married rate}}{{Married Filing Separate Status "'Married, 
+but withhold at higher Single rate'?" => Married, but higher Single rate}}.
 
 {{Single Status || Married Filing Separate Status || !Married Status =>
     {{
-        {{Weekly Wages Subject to Federal Withholdings <= 71 => [[@Amount of Income Tax Withheld = 0]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 71) && (Weekly Wages Subject to Federal Withholdings <= 254) => [[@Amount of Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 71) * 0.10]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 254) && (Weekly Wages Subject to Federal Withholdings <= 815) => [[@Amount of Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 254) * 0.12 + 18.30]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 815) && (Weekly Wages Subject to Federal Withholdings <= 1658) => [[@Amount of Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 815) * 0.22 + 85.62]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 1658) && (Weekly Wages Subject to Federal Withholdings <= 3100) => [[@Amount of Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 1658) * 0.24 + 271.08]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 3100) && (Weekly Wages Subject to Federal Withholdings <= 3917) => [[@Amount of Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 3100) * 0.32 + 617.16]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 3917) && (Weekly Wages Subject to Federal Withholdings <= 9687) => [[@Amount of Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 3917) * 0.35 + 878.60]]}}
-        {{Weekly Wages Subject to Federal Withholdings > 9687 => [[@Amount of Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 9687) * 0.37 + 2898.10]]}}
+        {{Weekly Wages Subject to Federal Withholdings <= 71 => [[@Amount of 
+        Income Tax Withheld = 0]]}}
+        {{(Weekly Wages Subject to Federal Withholdings > 71) && (Weekly Wages 
+        Subject to Federal Withholdings <= 254) => [[@Amount of Income Tax 
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 71) * 0.10]]}}
+        {{(Weekly Wages Subject to Federal Withholdings > 254) && (Weekly Wages 
+        Subject to Federal Withholdings <= 815) => [[@Amount of Income Tax 
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 254) * 0.12 + 
+        18.30]]}}
+        {{(Weekly Wages Subject to Federal Withholdings > 815) && (Weekly Wages 
+        Subject to Federal Withholdings <= 1658) => [[@Amount of Income Tax 
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 815) * 0.22 + 
+        85.62]]}}
+        {{(Weekly Wages Subject to Federal Withholdings > 1658) && (Weekly Wages 
+        Subject to Federal Withholdings <= 3100) => [[@Amount of Income Tax 
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 1658) * 0.24 
+        + 271.08]]}}
+        {{(Weekly Wages Subject to Federal Withholdings > 3100) && (Weekly Wages 
+        Subject to Federal Withholdings <= 3917) => [[@Amount of Income Tax 
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 3100) * 0.32 
+        + 617.16]]}}
+        {{(Weekly Wages Subject to Federal Withholdings > 3917) && (Weekly Wages 
+        Subject to Federal Withholdings <= 9687) => [[@Amount of Income Tax 
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 3917) * 0.35 
+        + 878.60]]}}
+        {{Weekly Wages Subject to Federal Withholdings > 9687 => [[@Amount of 
+        Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 
+        9687) * 0.37 + 2898.10]]}}
     }}
 }}
 
-The amount of federal income tax that must be withheld from the Employee's weekly wages is **$[[Amount of Income Tax Withheld]]**.
+The amount of federal income tax that must be withheld from the Employee's 
+weekly wages is **$[[Amount of Income Tax Withheld]]**.
 ```
 
 ## Identity and Signatures
@@ -786,7 +832,8 @@ ___________________________
 [[Company Signatory First Name]] [[Company Signatory Last Name]]
 Title:  [[Company Signatory Title]]
 Address:
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company Address.streetName]]
+[[#Company Address: Address]][[Company Address.streetNumber]] [[Company 
+Address.streetName]]
 [[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]]
 
 [[Vendor Name | Uppercase]]
@@ -795,7 +842,8 @@ ___________________________
 [[Vendor Signatory First Name]] [[Vendor Signatory Last Name]]
 Title:  [[Vendor Signatory Title]]
 Address:
-[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor Address.streetName]]
+[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor 
+Address.streetName]]
 [[Vendor Address.city]], [[Vendor Address.state]] [[Vendor Address.zipCode]]
 ```
 
@@ -833,7 +881,8 @@ ___________________________
 [[Company Signatory First Name]] [[Company Signatory Last Name]]
 Title:  [[Company Signatory Title]]
 Address:
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company Address.streetName]]
+[[#Company Address: Address]][[Company Address.streetNumber]] [[Company 
+Address.streetName]]
 [[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]]
 
 {{VendorEntity "Is the vendor a legal entity?" => [[Vendor Name | Uppercase]]}}
@@ -843,7 +892,8 @@ ___________________________
 {{VendorEntity => [[Vendor Signatory First Name]] [[Vendor Signatory Last Name]]
 Title:  [[Vendor Signatory Title]]}}{{!VendorEntity => [[Vendor Name]]}}
 Address:
-[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor Address.streetName]]
+[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor 
+Address.streetName]]
 [[Vendor Address.city]], [[Vendor Address.state]] [[Vendor Address.zipCode]]
 ```
 
@@ -863,7 +913,9 @@ The smart contract can be called as part of a simple or complex agreement. For t
 
 [[Pay Vendor:EthereumCall(
 contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
-interface:[{"name":"makePayment", "type":"function","inputs": [{"name":"RecipientAddress", "type":"address"},{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
+interface:[{"name":"makePayment", "type":"function","inputs": 
+[{"name":"RecipientAddress", "type":"address"},
+{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
 function:"makePayment";
 arguments:Recipient Ethereum Address,Payment in Wei;
 startDate:Payment Start Date;
@@ -872,17 +924,26 @@ repeatEvery:"1 minute")]]
 
 %>
 
-This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective Date: Date]].
+This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective 
+Date: Date]].
 
 **WHEREAS**, [[Party B]] seeks [[Party A]]'s programming services; and
 
 **WHEREAS**, [[Party A]] seeks to be paid in ether;
 
-**NOW, THEREFORE**, in consideration of the premises and the mutual covenants set forth herein and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the parties hereto covenant and agree as follows:
+**NOW, THEREFORE**, in consideration of the premises and the mutual covenants 
+set forth herein and for other good and valuable consideration, the receipt and 
+sufficiency of which are hereby acknowledged, the parties hereto covenant and 
+agree as follows:
 
-^ [[Party A]] agrees to pay [[Party B]] [[Payment in Ether: Number]] ether, every minute, starting on [[Payment Start Date: DateTime]] and ending on [[Payment End Date: DateTime]] for programming services.
+^ [[Party A]] agrees to pay [[Party B]] [[Payment in Ether: Number]] ether, 
+every minute, starting on [[Payment Start Date: DateTime]] and ending on 
+[[Payment End Date: DateTime]] for programming services.
 
-^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient Ethereum Address: EthAddress]], using the Ethereum smart contract found at "0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference herein.
+^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient 
+Ethereum Address: EthAddress]], using the Ethereum smart contract found at 
+"0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference 
+herein.
 
 [[Pay Vendor]]
 
@@ -939,7 +1000,9 @@ There are several things to note in the example agreement above.
 
 [[Pay Vendor:EthereumCall(
 contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
-interface:[{"name":"makePayment", "type":"function","inputs": [{"name":"RecipientAddress", "type":"address"},{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
+interface:[{"name":"makePayment", "type":"function","inputs": 
+[{"name":"RecipientAddress", "type":"address"},
+{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
 function:"makePayment";
 arguments:Recipient Ethereum Address,Payment in Wei;
 startDate:Payment Start Date;
@@ -956,10 +1019,9 @@ and then separately called:
 - The interface for the smart contract is needed for the smart contract application binary interface ("ABI") and can be generated from the solidity compiler. The ABI is basically how you call functions in a smart contract and get data back.
 
 ::: warning
-
 - The smart contract will not be executed unless there are one or more identities (or signatories set for the agreement).
 - If the template does not set the appropriate arguments or if the values of those arguments do not align with the underlying smart contract, the smart contract will not execute.
-  :::
+:::
 
 ## Deals
 
@@ -1077,10 +1139,9 @@ The above will generate an opening page of common variables shared by these temp
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
-
 - The opening page of a deal will not render properly unless you set one or more variables in a grouping.
 - Any variable included in a grouping, which is not found in an underlying template will not render.
-  :::
+:::
 
 ### Advanced Deals Using Conditionals
 
