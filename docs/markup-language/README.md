@@ -173,9 +173,11 @@ If you have a Collection, you can iterate on each element by using a `for each` 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/2d621464a29a4628be52348e6331b0cf" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
+
 - The element variable (`Employee` in the example above) needs to be a new variable name. You cannot use an already existing variable name.
 - Be aware that if you define a new variable in the `for each` block, that variable will be used for all iterations. A new variable will not be generated for each iteration.
 - If you need more than one value in your `for each` block, you will need to use a [Structure](#structure) type.
+
 :::
 
 ### Choice
@@ -1021,8 +1023,10 @@ and then separately called:
 - The interface for the smart contract is needed for the smart contract application binary interface ("ABI") and can be generated from the solidity compiler. The ABI is basically how you call functions in a smart contract and get data back.
 
 ::: warning
+
 - The smart contract will not be executed unless there are one or more identities (or signatories set for the agreement).
 - If the template does not set the appropriate arguments or if the values of those arguments do not align with the underlying smart contract, the smart contract will not execute.
+
 :::
 
 ## Deals
@@ -1141,8 +1145,10 @@ The above will generate an opening page of common variables shared by these temp
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
+
 - The opening page of a deal will not render properly unless you set one or more variables in a grouping.
 - Any variable included in a grouping, which is not found in an underlying template will not render.
+
 :::
 
 ### Advanced Deals Using Conditionals
