@@ -89,9 +89,9 @@ The Address type is a more advanced input variable. This type transforms an inpu
 Once an address is set you can access different aspects of the address, including the street number, street name, city, state, zip code, and country. Below is an example of how you would reference these elements:
 
 ```
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company 
+[[#Company Address: Address]][[Company Address.streetNumber]] [[Company
 Address.streetName]]
-[[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]] 
+[[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]]
 [[Company Address.country]]
 ```
 
@@ -337,17 +337,17 @@ Conditionals also can be grouped to create a decision tree. In other words:
 To see this in action, consider the following standard language found at the beginning of a standard mutual NDA:
 
 ```
-This Mutual Nondisclosure Agreement (this "Agreement") is made as of [[Effective 
+This Mutual Nondisclosure Agreement (this "Agreement") is made as of [[Effective
 Date: Date]], by and  between [[PartyA]] ("[[PartyA Abbreviation]]")
-{{PartyAEntity "Is the first party a legal entity?" => {{PartyACorporation 
-"A Corporation?" =>, a [[PartyAStateOfIncorporation]] corporation, }}{{PartyALLC 
+{{PartyAEntity "Is the first party a legal entity?" => {{PartyACorporation
+"A Corporation?" =>, a [[PartyAStateOfIncorporation]] corporation, }}{{PartyALLC
 "An LLC?" =>a [[PartyAStateOfIncorporation]] limited liability company, }}
-{{PartyAPBC "A Public Benefit Corporation?" =>, a [[PartyAStateOfIncorporation]] 
-public benefit corporation,}}}} and [[PartyB]]{{PartyBEntity "Is the 
-counterparty a legal entity?"=>{{PartyBCorporation "A Corporation?"=>, a 
-[[PartyBStateOfIncorporation]] corporation }}{{PartyBLLC "An LLC?" =>, a 
-[[PartyBStateOfIncorporation]] limited liability company}}{{PartyBPBC "A Public 
-Benefit Corporation?" =>, a [[PartyBStateOfIncorporation]] public benefit 
+{{PartyAPBC "A Public Benefit Corporation?" =>, a [[PartyAStateOfIncorporation]]
+public benefit corporation,}}}} and [[PartyB]]{{PartyBEntity "Is the
+counterparty a legal entity?"=>{{PartyBCorporation "A Corporation?"=>, a
+[[PartyBStateOfIncorporation]] corporation }}{{PartyBLLC "An LLC?" =>, a
+[[PartyBStateOfIncorporation]] limited liability company}}{{PartyBPBC "A Public
+Benefit Corporation?" =>, a [[PartyBStateOfIncorporation]] public benefit
 corporation}}}}("Counterparty").
 ```
 
@@ -530,7 +530,7 @@ To perform a calculation, you must first create an alias by including an `@` bef
 
 %>
 
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual 
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual
 Payment]] annually, payable within thirty (30) days of invoice.
 ```
 
@@ -540,7 +540,7 @@ Payment]] annually, payable within thirty (30) days of invoice.
 When using aliases and variables to perform calculations, the alias must be defined _before_ being used in the template. The following will result in an error:
 
 ```
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or 
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or
 $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
 [[@Annual Payment = Monthly Payment * 12]]
 ```
@@ -549,7 +549,7 @@ In addition, a variable must be defined _before_ being used in an alias expressi
 
 ```
 [[@Annual Payment = Monthly Payment * 12]]
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or 
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment: Number]] monthly, or
 $[[Annual Payment]] annually, payable within thirty (30) days of invoice.
 ```
 
@@ -691,47 +691,47 @@ The features of conditionals with boolean expressions can be combined with calcu
 ```
 ^**Federal Income Tax Withholding (using the Percentage method).**
 
-The amount of federal income tax that must be withheld from the Employee's 
-weekly wages is based on the Weekly Wages Subject to Income Tax Withholdings and 
-the Employee's filing status. The Employee is electing to withhold at the 
-{{Single Status "Employee's Filing status: 'Single'?" => Single rate}}{{Married 
-Status "'Married'?" => Married rate}}{{Married Filing Separate Status "'Married, 
+The amount of federal income tax that must be withheld from the Employee's
+weekly wages is based on the Weekly Wages Subject to Income Tax Withholdings and
+the Employee's filing status. The Employee is electing to withhold at the
+{{Single Status "Employee's Filing status: 'Single'?" => Single rate}}{{Married
+Status "'Married'?" => Married rate}}{{Married Filing Separate Status "'Married,
 but withhold at higher Single rate'?" => Married, but higher Single rate}}.
 
 {{Single Status || Married Filing Separate Status || !Married Status =>
     {{
-        {{Weekly Wages Subject to Federal Withholdings <= 71 => [[@Amount of 
+        {{Weekly Wages Subject to Federal Withholdings <= 71 => [[@Amount of
         Income Tax Withheld = 0]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 71) && (Weekly Wages 
-        Subject to Federal Withholdings <= 254) => [[@Amount of Income Tax 
+        {{(Weekly Wages Subject to Federal Withholdings > 71) && (Weekly Wages
+        Subject to Federal Withholdings <= 254) => [[@Amount of Income Tax
         Withheld = (Weekly Wages Subject to Federal Withholdings - 71) * 0.10]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 254) && (Weekly Wages 
-        Subject to Federal Withholdings <= 815) => [[@Amount of Income Tax 
-        Withheld = (Weekly Wages Subject to Federal Withholdings - 254) * 0.12 + 
+        {{(Weekly Wages Subject to Federal Withholdings > 254) && (Weekly Wages
+        Subject to Federal Withholdings <= 815) => [[@Amount of Income Tax
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 254) * 0.12 +
         18.30]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 815) && (Weekly Wages 
-        Subject to Federal Withholdings <= 1658) => [[@Amount of Income Tax 
-        Withheld = (Weekly Wages Subject to Federal Withholdings - 815) * 0.22 + 
+        {{(Weekly Wages Subject to Federal Withholdings > 815) && (Weekly Wages
+        Subject to Federal Withholdings <= 1658) => [[@Amount of Income Tax
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 815) * 0.22 +
         85.62]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 1658) && (Weekly Wages 
-        Subject to Federal Withholdings <= 3100) => [[@Amount of Income Tax 
-        Withheld = (Weekly Wages Subject to Federal Withholdings - 1658) * 0.24 
+        {{(Weekly Wages Subject to Federal Withholdings > 1658) && (Weekly Wages
+        Subject to Federal Withholdings <= 3100) => [[@Amount of Income Tax
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 1658) * 0.24
         + 271.08]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 3100) && (Weekly Wages 
-        Subject to Federal Withholdings <= 3917) => [[@Amount of Income Tax 
-        Withheld = (Weekly Wages Subject to Federal Withholdings - 3100) * 0.32 
+        {{(Weekly Wages Subject to Federal Withholdings > 3100) && (Weekly Wages
+        Subject to Federal Withholdings <= 3917) => [[@Amount of Income Tax
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 3100) * 0.32
         + 617.16]]}}
-        {{(Weekly Wages Subject to Federal Withholdings > 3917) && (Weekly Wages 
-        Subject to Federal Withholdings <= 9687) => [[@Amount of Income Tax 
-        Withheld = (Weekly Wages Subject to Federal Withholdings - 3917) * 0.35 
+        {{(Weekly Wages Subject to Federal Withholdings > 3917) && (Weekly Wages
+        Subject to Federal Withholdings <= 9687) => [[@Amount of Income Tax
+        Withheld = (Weekly Wages Subject to Federal Withholdings - 3917) * 0.35
         + 878.60]]}}
-        {{Weekly Wages Subject to Federal Withholdings > 9687 => [[@Amount of 
-        Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings - 
+        {{Weekly Wages Subject to Federal Withholdings > 9687 => [[@Amount of
+        Income Tax Withheld = (Weekly Wages Subject to Federal Withholdings -
         9687) * 0.37 + 2898.10]]}}
     }}
 }}
 
-The amount of federal income tax that must be withheld from the Employee's 
+The amount of federal income tax that must be withheld from the Employee's
 weekly wages is **$[[Amount of Income Tax Withheld]]**.
 ```
 
@@ -836,7 +836,7 @@ ___________________________
 [[Company Signatory First Name]] [[Company Signatory Last Name]]
 Title:  [[Company Signatory Title]]
 Address:
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company 
+[[#Company Address: Address]][[Company Address.streetNumber]] [[Company
 Address.streetName]]
 [[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]]
 
@@ -846,7 +846,7 @@ ___________________________
 [[Vendor Signatory First Name]] [[Vendor Signatory Last Name]]
 Title:  [[Vendor Signatory Title]]
 Address:
-[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor 
+[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor
 Address.streetName]]
 [[Vendor Address.city]], [[Vendor Address.state]] [[Vendor Address.zipCode]]
 ```
@@ -885,7 +885,7 @@ ___________________________
 [[Company Signatory First Name]] [[Company Signatory Last Name]]
 Title:  [[Company Signatory Title]]
 Address:
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company 
+[[#Company Address: Address]][[Company Address.streetNumber]] [[Company
 Address.streetName]]
 [[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]]
 
@@ -896,7 +896,7 @@ ___________________________
 {{VendorEntity => [[Vendor Signatory First Name]] [[Vendor Signatory Last Name]]
 Title:  [[Vendor Signatory Title]]}}{{!VendorEntity => [[Vendor Name]]}}
 Address:
-[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor 
+[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor
 Address.streetName]]
 [[Vendor Address.city]], [[Vendor Address.state]] [[Vendor Address.zipCode]]
 ```
@@ -917,7 +917,7 @@ The smart contract can be called as part of a simple or complex agreement. For t
 
 [[Pay Vendor:EthereumCall(
 contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
-interface:[{"name":"makePayment", "type":"function","inputs": 
+interface:[{"name":"makePayment", "type":"function","inputs":
 [{"name":"RecipientAddress", "type":"address"},
 {"type":"uint","name":"PaymentInWei"}],"outputs": []}];
 function:"makePayment";
@@ -928,25 +928,25 @@ repeatEvery:"1 minute")]]
 
 %>
 
-This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective 
+This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective
 Date: Date]].
 
 **WHEREAS**, [[Party B]] seeks [[Party A]]'s programming services; and
 
 **WHEREAS**, [[Party A]] seeks to be paid in ether;
 
-**NOW, THEREFORE**, in consideration of the premises and the mutual covenants 
-set forth herein and for other good and valuable consideration, the receipt and 
-sufficiency of which are hereby acknowledged, the parties hereto covenant and 
+**NOW, THEREFORE**, in consideration of the premises and the mutual covenants
+set forth herein and for other good and valuable consideration, the receipt and
+sufficiency of which are hereby acknowledged, the parties hereto covenant and
 agree as follows:
 
-^ [[Party A]] agrees to pay [[Party B]] [[Payment in Ether: Number]] ether, 
-every minute, starting on [[Payment Start Date: DateTime]] and ending on 
+^ [[Party A]] agrees to pay [[Party B]] [[Payment in Ether: Number]] ether,
+every minute, starting on [[Payment Start Date: DateTime]] and ending on
 [[Payment End Date: DateTime]] for programming services.
 
-^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient 
-Ethereum Address: EthAddress]], using the Ethereum smart contract found at 
-"0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference 
+^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient
+Ethereum Address: EthAddress]], using the Ethereum smart contract found at
+"0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference
 herein.
 
 [[Pay Vendor]]
@@ -1004,7 +1004,7 @@ There are several things to note in the example agreement above.
 
 [[Pay Vendor:EthereumCall(
 contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
-interface:[{"name":"makePayment", "type":"function","inputs": 
+interface:[{"name":"makePayment", "type":"function","inputs":
 [{"name":"RecipientAddress", "type":"address"},
 {"type":"uint","name":"PaymentInWei"}],"outputs": []}];
 function:"makePayment";
