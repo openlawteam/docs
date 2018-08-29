@@ -70,7 +70,7 @@ You can define a default value for a Date variable by including a date as a para
 
 OpenLaw has created a variation of the Date type, called DateTime. The DateTime type allows a user to set not only a specified date, but also a specified time. To create a DateTime variable, add the words `: DateTime` after the variable name: `[[Variable: DateTime]]`. The DateTime type is useful when [triggering or calling an Ethereum smart contract](#smart-contracts).
 
-Similar to a Date variable, you can also define a default value for DateTime variable by including a date and time as a parameter (in the "YYYY-MM-DD hh:mm:ss" format) when defining the variable. For example, `[[Effective Time: DateTime("2018-08-01 13:45:00")]]`. The value of the variable will result in a date and time of "August 1, 2018 13:45:00" if no other input is provided.
+Similar to a Date variable, you can also define a default value for DateTime variable by including a date and time as a parameter (in the `YYYY-MM-DD hh:mm:ss` format) when defining the variable. For example, `[[Effective Time: DateTime("2018-08-01 13:45:00")]]`. The value of the variable will result in a date and time of "August 1, 2018 13:45:00" if no other input is provided.
 
 #### Period
 
@@ -1033,7 +1033,7 @@ Using OpenLaw, you can link together multiple templates into what we call a "dea
 [[Variable Name: Template("Template Name")]]
 ```
 
-When you create a deal and call one or more templates, you'll have the opportunity to collect relevant information on an opening screen, which can be prepopulated in multiple templates at the same time.
+When you create a deal and call one or more templates, you'll have the opportunity to collect relevant information on an opening screen, which can be pre-populated in multiple templates at the same time.
 
 ### Basic Deal
 
