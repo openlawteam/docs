@@ -2,8 +2,6 @@
 
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/cabc653c901b0e3737a5fc8ebf19ae2f4c76d4c83a8fef02c85c4d965d4bc323.svg?columns=all)](https://waffle.io/openlawteam/docs)
 
-Test version built with VuePress!
-
 ## Editing
 
 ### File structure
