@@ -1,0 +1,8 @@
+language: node_js
+install:
+  - npm ci
+script:
+  - npm test
+cache:
+  directories:
+    - "$HOME/.npm"
