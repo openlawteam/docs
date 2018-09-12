@@ -7,10 +7,12 @@ module.exports = {
     // ],
     sidebar: [
       "/",
-      "/markup-language/"
+      "/markup-language/",
+      "/openlaw-object/",
+      "/api-client/"
       // add new top level sections here...
     ],
-    logo: "/ol-logo-black.svg",
+    logo: "/ol-logo-color.svg",
     repo: "openlawteam/docs",
     docsDir: "docs",
     editLinks: true,
