@@ -1,5 +1,3 @@
-# REST API
-
 <!--
 Notes:
 APIClient - REST Client interface in Javascript
@@ -19,6 +17,8 @@ But if u look how it works with Openlaw.scala u don't need to use it
 Openlaw.scala -> having the code locally, in javascript form for example, and working the the language and talking to the contract directly
 APIClient -> the interface to the instance
 -->
+
+# REST API
 
 ## APIClient
 
@@ -53,9 +53,7 @@ Returns `Promise<string>` - a promise which resolves with a string representatio
 Example
 
 ```
-{
 
-}
 ```
 
 ### uploadDraft
@@ -89,9 +87,7 @@ Returns `Promise<string>` - a promise which resolves with a string representatio
 Example
 
 ```
-{
 
-}
 ```
 
 ### uploadContractToGoogle
@@ -113,21 +109,17 @@ GET /driveAuthPage/:id
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
 
-Returns `string` - the ID of the contract uploaded to Google Drive.
+Returns `string` - the URL of the Google Drive API to redirect to.
 
 Example
 
 ```
-{
 
-}
 ```
 
 ### sendDraft
@@ -151,9 +143,7 @@ POST /send/draft
 Example
 
 ```
-{
 
-}
 ```
 
 ### stopContract
@@ -173,9 +163,7 @@ GET /contract/stop/:id
 Example
 
 ```
-{
 
-}
 ```
 
 ### resumeContract
@@ -195,9 +183,7 @@ GET /contract/resume/:id
 Example
 
 ```
-{
 
-}
 ```
 
 ### sendContract
@@ -221,9 +207,7 @@ POST /send/contract
 Example
 
 ```
-{
 
-}
 ```
 
 ### saveTemplate
@@ -246,9 +230,7 @@ POST /upload/template/:title
 Example
 
 ```
-{
 
-}
 ```
 
 ### getTemplateVersions
@@ -265,14 +247,12 @@ GET /templates/version
 | ---- | ---- | ----------- |
 | `title` | `string` | **Required.** The title of the template. |
 | `pageSize` | `number` | **Required.** The number of versions to display on page. |
-| `page` | `number` | **Required.** Which page to display. |
+| `page` | `number` | **Required.** Which group of versions to display. Each group consists of `pageSize` versions. |
 
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -282,9 +262,9 @@ Returns `Promise<Array<Template>>` - a promise which resolves with an array of [
 Example
 
 ```
-{
+[
 
-}
+]
 ```
 
 ### getDraftVersions
@@ -301,14 +281,12 @@ GET /drafts/version
 | ---- | ---- | ----------- |
 | `draftId` | `string` | **Required.** The ID of the draft. |
 | `pageSize` | `number` | **Required.** The number of versions to display on page. |
-| `page` | `number` | **Required.** Which page to display. |
+| `page` | `number` | **Required.** Which group of versions to display. Each group consists of `pageSize` versions. |
 
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -318,9 +296,9 @@ Returns `Promise<Array<Template>>` - a promise which resolves with an array of [
 Example
 
 ```
-{
+[
 
-}
+]
 ```
 
 ### getTemplate
@@ -340,9 +318,7 @@ GET /template/raw/:title
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -375,9 +351,7 @@ GET /template/raw/:title/:version
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -387,9 +361,7 @@ Returns `Promise<string>` - a promise which resolves with a string representatio
 Example
 
 ```
-{
 
-}
 ```
 
 ### getDraftVersion
@@ -410,9 +382,7 @@ GET /draft/raw/:draftId/:version
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -444,9 +414,7 @@ GET /contract/raw/:contractId
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -474,15 +442,13 @@ GET /users/search
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `keyword` | `string` | **Required.** The search term to filter displayed users. |
-| `page` | `number` | **Required.** Which page to display. |
+| `page` | `number` | **Required.** Which group of users to display. Each group consists of `pageSize` users. |
 | `pageSize` | `number` | **Required.** The number of users to display on page. |
 
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -492,9 +458,9 @@ Returns an array of users.
 Example
 
 ```
-{
+[
 
-}
+]
 ```
 
 ### deleteUser
@@ -514,14 +480,12 @@ GET /users/delete
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
 
-Returns TBD.
+Returns object indicating whether deleted user was current user or another user (deleted by an `Admin` user).
 
 Example
 
@@ -548,9 +512,7 @@ GET /users/toadmin
 Example
 
 ```
-{
 
-}
 ```
 
 ### toRestricted
@@ -570,9 +532,7 @@ GET /users/torestricted
 Example
 
 ```
-{
 
-}
 ```
 
 ### toStandardUser
@@ -592,9 +552,7 @@ GET /users/touser
 Example
 
 ```
-{
 
-}
 ```
 
 ### templateSearch
@@ -610,15 +568,13 @@ GET /templates/search
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `keyword` | `string` | **Required.** The search term to filter displayed templates. |
-| `page` | `number` | **Required.** Which page to display. |
+| `page` | `number` | **Required.** Which group of templates to display. Each group consists of `pageSize` templates. |
 | `pageSize` | `number` | **Required.** The number of templates to display on page. |
 
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -628,9 +584,9 @@ Returns an array of templates.
 Example
 
 ```
-{
+[
 
-}
+]
 ```
 
 ### searchDeletedTemplates
@@ -646,15 +602,13 @@ GET /templates/searchDeleted
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `keyword` | `string` | **Required.** The search term to filter displayed deleted templates. |
-| `page` | `number` | **Required.** Which page to display. |
+| `page` | `number` | **Required.** Which group of deleted templates to display. Each group consists of `pageSize` deleted templates. |
 | `pageSize` | `number` | **Required.** The number of deleted templates to display on page. |
 
 Example
 
 ```
-{
 
-}
 ```
 
 **Response**
@@ -664,9 +618,9 @@ Returns an array of templates.
 Example
 
 ```
-{
+[
 
-}
+]
 ```
 
 ### deleteTemplate
@@ -686,9 +640,7 @@ GET /templates/delete
 Example
 
 ```
-{
 
-}
 ```
 
 ### restoreTemplate
@@ -708,9 +660,7 @@ GET /templates/restore
 Example
 
 ```
-{
 
-}
 ```
 
 ### renameTemplate
@@ -731,9 +681,7 @@ GET /templates/rename
 Example
 
 ```
-{
 
-}
 ```
 
 ### changeContractAlias
@@ -754,9 +702,7 @@ GET /contract/alias/:contractId
 Example
 
 ```
-{
 
-}
 ```
 
 ### changeDraftAlias
@@ -777,9 +723,7 @@ GET /draft/alias/:draftId
 Example
 
 ```
-{
 
-}
 ```
 
 ### searchContracts
@@ -795,9 +739,88 @@ GET /contracts/search
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `keyword` | `string` | **Required.** The search term to filter displayed contracts. |
-| `page` | `number` | **Required.** Which page to display. |
+| `page` | `number` | **Required.** Which group of contracts to display. Each group consists of `pageSize` contracts. |
 | `pageSize` | `number` | **Required.** The number of contracts to display on page. |
-| `sortBy` | `string` | **Required.**  |
+| `sortBy` | `string` | **Required.** The way in which returned contracts are to be sorted: `creationdate`, `privatename`, or `title` |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns an array of contracts.
+
+Example
+
+```
+[
+
+]
+```
+
+### searchDrafts
+
+List drafts based on search term.
+
+```
+GET /drafts/search
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `keyword` | `string` | **Required.** The search term to filter displayed drafts. |
+| `page` | `number` | **Required.** Which group of drafts to display. Each group consists of `pageSize` drafts. |
+| `pageSize` | `number` | **Required.** The number of drafts to display on page. |
+| `sortBy` | `string` | **Required.** The way in which returned drafts are to be sorted: `creationdate`, `privatename`, or `title` |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns an array of contracts.
+
+Example
+
+```
+[
+
+]
+```
+
+### searchAddress
+
+Method used as part of `AddressVariable` and `GoogleAddressService` to autosuggest addresses based on input.
+
+```
+GET /address/search
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `term` | `string` | **Required.** The input term to filter returned addresses. |
+| `latitude` | `number` | **Required.** The latitude of the address. |
+| `longitude` | `number` | **Required.** The longitude of the address. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns an object containing an `address` and `placeId` which corresponds to the `address`.
 
 Example
 
@@ -807,9 +830,61 @@ Example
 }
 ```
 
+### getUserDetails
+
+Method used as part of `IdentityVariable` to get information about a user.
+
+```
+GET /user/details
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `email` | `string` | **Required.** The email of the user. |
+
+Example
+
+```
+
+```
+
 **Response**
 
-Returns an array of contracts.
+Returns an object containing information about a user, including `id`, `name`, `email`, and `identifiers`.
+
+Example
+
+```
+{
+
+}
+```
+
+### getAddressDetails
+
+Method used as part of `AddressVariable` to get details about a selected address.
+
+```
+GET /address/details
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `placeId` | `string` | **Required.** The ID of the address (generated by `GoogleAddressService`). |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns an object containing information about an address, including `streetNumber`, `streetName`, `city`, `state`, `zipCode`, and `country`.
 
 Example
 
