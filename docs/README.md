@@ -1,6 +1,6 @@
-# Introduction
+# Overview
 
-Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, our markup language, and how our first application works. If you have any questions email us at [hello@openlaw.io](mailto:hello@openlaw.io).
+Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our markup language, our JavaScript API, and how our application works in general. If you have any questions, email us at [hello@openlaw.io](mailto:hello@openlaw.io).
 
 ## Overview of OpenLaw
 
