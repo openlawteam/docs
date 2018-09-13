@@ -59,7 +59,7 @@ Example
 
 **Response**
 
-Returns `Promise<string>` - a promise which resolves with a string representation of the template.
+Returns `Promise<string>` - a promise which resolves with a string representation of the template contents.
 
 Example
 
@@ -281,7 +281,7 @@ Example
 
 **Response**
 
-Returns `Promise<string>` - a promise which resolves with a string representation of the uploaded draft.
+Returns `Promise<string>` - a promise which resolves with the ID of the uploaded draft.
 
 Example
 
@@ -464,7 +464,7 @@ Example
 
 **Response**
 
-Returns `Promise<string>` - a promise which resolves with a string representation of the uploaded contract.
+Returns `Promise<string>` - a promise which resolves with the ID of the uploaded contract.
 
 Example
 
@@ -648,7 +648,7 @@ Example
 
 **Response**
 
-Returns `string` - the URL of the Google Drive API to redirect to.
+Returns `string` - the URL of the Google Drive API for redirecting.
 
 Example
 
