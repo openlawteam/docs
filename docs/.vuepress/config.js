@@ -8,8 +8,8 @@ module.exports = {
     sidebar: [
       "/",
       "/markup-language/",
-      "/openlaw-object/",
-      "/api-client/"
+      "/api-client/",
+      "/openlaw-object/"
       // add new top level sections here...
     ],
     logo: "/ol-logo-color.svg",
