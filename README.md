@@ -43,4 +43,15 @@ installed, you should automatically get:
 
 ## Deployment
 
-Handled automatically via Netlify. :tada:
+### Hosting
+
+Deployment is handled automatically via Netlify CI. :tada:
+
+### Full-text Search Indexing
+
+Search is handled via Algolia DocSearch, configuration changes must be made via
+PR to the [config file] (format [documentation]). Index is updated once every
+24 hrs.
+
+[config file]: https://github.com/algolia/docsearch-configs/blob/master/configs/openlaw.json
+[documentation]: https://community.algolia.com/docsearch/config-file.html

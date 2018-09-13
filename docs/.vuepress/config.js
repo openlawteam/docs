@@ -12,7 +12,11 @@ module.exports = {
       "/openlaw-object/"
       // add new top level sections here...
     ],
-    logo: "/ol-logo-color.svg",
+    algolia: {
+      apiKey: "68c3c0d36676a3acce1cd3c7087bc7c9",
+      indexName: "openlaw"
+    },
+    logo: "/ol-logo-black.svg",
     repo: "openlawteam/docs",
     docsDir: "docs",
     editLinks: true,
