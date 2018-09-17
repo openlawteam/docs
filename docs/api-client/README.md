@@ -690,30 +690,6 @@ Example
 }
 ```
 
-### getStripeAccounts
-
-List Stripe accounts of current user.
-
-```
-GET /user/getStripeAccounts
-```
-
-**Parameters**
-
-None
-
-**Response**
-
-Returns an object containing information about the curernt user's Stripe accounts, including `accountId` and `displayName`.
-
-Example
-
-```
-{
-
-}
-```
-
 ### searchUsers
 
 List users based on search term.
