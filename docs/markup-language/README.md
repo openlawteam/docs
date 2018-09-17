@@ -737,11 +737,11 @@ weekly wages is **$[[Amount of Income Tax Withheld]]**.
 
 ## Identity and Signatures
 
-OpenLaw also provides tools that enable you to electronically sign an agreement and store those electronic signatures on the Ethereum blockchain. If you intend to build a template to leverage this functionality, you will need to include a specialized "identity" variable in the text of the template. The identity variable indicates that a party should sign the agreement and will enable you to send an email to the signatory for signature.
+OpenLaw also provides tools that enable you to electronically sign an agreement and store those electronic signatures on the Ethereum blockchain. If you intend to build a template to leverage this functionality, you will need to include a specialized Identity variable in the text of the template. The Identity variable indicates that a party should sign the agreement and will enable you to send an email notification to the party to review and sign the agreement.
 
 ### Basic Identity
 
-To create an "identity" for signature, all you need to do is add `: Identity` after a variable name: `[[Signatory Email: Identity]]`.
+To create an Identity variable for signature, all you need to do is add `: Identity` after a variable name: `[[Signatory Email: Identity]]`.
 
 ```
 **[[PartyA | Uppercase]]**
@@ -765,7 +765,7 @@ Once a user indicates that the template is ready for signature, OpenLaw will gen
 
 ### Embedding Signatures
 
-You can also embed a signature into the document by adding `| Signature` at the end of an identity variable. For example, extending the above example:
+You can also embed a signature into the document by adding `| Signature` at the end of an Identity variable. For example, extending the above example:
 
 ```
 **[[PartyA | Uppercase]]**
@@ -1024,7 +1024,7 @@ and then separately called:
 
 ::: warning
 
-- The smart contract will not be executed unless there are one or more identities (or signatories set for the agreement).
+- The smart contract will not be executed unless there are one or more [Identities (or signatories set for the agreement)](#identity-and-signatures).
 - If the template does not set the appropriate arguments or if the values of those arguments do not align with the underlying smart contract, the smart contract will not execute.
 
 :::
