@@ -1,6 +1,6 @@
 # Overview
 
-Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our markup language, our JavaScript API, and how our application works in general. If you have any questions, email us at [hello@openlaw.io](mailto:hello@openlaw.io).
+Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our markup language, our protocol which includes JavaScript APIs for convenient integration, and how our application works in general. If you have any questions, email us at [hello@openlaw.io](mailto:hello@openlaw.io).
 
 ## Overview of OpenLaw
 
@@ -14,4 +14,4 @@ Lawyers lack basic tools to build these dynamic, “smart” contracts in a way 
 
 ### OpenLaw Protocol
 
-OpenLaw is building a technology stack to help power next generation "smart" legal agreements.
+OpenLaw is building a technology stack to help power next generation "smart" legal agreements. The OpenLaw protocol documentation is intended to provide a resource for developers to build around our open source language and integration APIs.
