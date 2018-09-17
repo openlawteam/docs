@@ -84,7 +84,7 @@ The Ethereum Address type indicates a variable that should be an Ethereum addres
 
 #### Address
 
-The Address type is a more advanced input variable. This type transforms an input in an address box where you can search for a relevant address using Google Map's API. Creating an Address type is fairly straightforward, simply add `: Address` after a variable name. In other words, `[[Variable: Address]]`.
+The Address type is a more advanced input variable. This type transforms an input in an address box where you can search for a relevant address using the Google Maps API. Creating an Address type is fairly straightforward, simply add `: Address` after a variable name. In other words, `[[Variable: Address]]`.
 
 Once an address is set you can access different aspects of the address, including the street number, street name, city, state, zip code, and country. Below is an example of how you would reference these elements:
 
