@@ -8,7 +8,7 @@ The `Openlaw` object defined in Openlaw.scala compiles to JavaScript and is an i
 
 TODO.
 
-```
+```scala
 compileTemplate(
   text: String
 ): js.Dictionary[Any]
@@ -40,7 +40,7 @@ Example
 
 TODO.
 
-```
+```scala
 execute(
   compiledTemplate: CompiledTemplate,
   jsTemplates: js.Dictionary[CompiledTemplate],
@@ -76,7 +76,7 @@ Example
 
 TODO.
 
-```
+```scala
 executeForReview(
   compiledTemplate: CompiledTemplate,
   names: js.Dictionary[String],
@@ -114,7 +114,7 @@ Example
 
 TODO.
 
-```
+```scala
 resumeExecution(
   executionResult: TemplateExecutionResult,
   jsTemplates: js.Dictionary[CompiledTemplate]
@@ -148,7 +148,7 @@ Example
 
 TODO.
 
-```
+```scala
 validationErrors(
   result: ValidationResult
 ): js.Array[String]
@@ -182,7 +182,7 @@ Example
 
 TODO.
 
-```
+```scala
 validateContract(
   executionResult: TemplateExecutionResult
 ): ValidationResult
@@ -214,7 +214,7 @@ Example
 
 TODO.
 
-```
+```scala
 hasMissingInputs(
   result: ValidationResult
 ): Boolean
@@ -246,7 +246,7 @@ Example
 
 TODO.
 
-```
+```scala
 getMissingInputs(
   result: ValidationResult
 ): js.Array[String]
@@ -280,7 +280,7 @@ Example
 
 TODO.
 
-```
+```scala
 getInitialParameters(
   executionResult: TemplateExecutionResult
 ): js.Array[js.Dictionary[String]]
@@ -314,7 +314,7 @@ Example
 
 TODO.
 
-```
+```scala
 getTemplateName(
   templateDefinition: TemplateDefinition
 ): String
@@ -346,7 +346,7 @@ Example
 
 TODO.
 
-```
+```scala
 renderForReview(
   agreement: StructuredAgreement,
   jsOverriddenParagraphs: js.Dictionary[String]
@@ -380,7 +380,7 @@ Example
 
 TODO.
 
-```
+```scala
 renderForPreview(
   agreement: StructuredAgreement,
   hiddenVariables: js.Array[String],
@@ -416,7 +416,7 @@ Example
 
 TODO.
 
-```
+```scala
 parseMarkdown(
   str: String
 ): String
@@ -448,7 +448,7 @@ Example
 
 TODO.
 
-```
+```scala
 renderParagraphForEdit(
   agreement: StructuredAgreement,
   index: Int
@@ -482,7 +482,7 @@ Example
 
 TODO.
 
-```
+```scala
 getTypes: js.Array[String]
 ```
 
@@ -506,7 +506,7 @@ Example
 
 TODO.
 
-```
+```scala
 getExecutedVariables(
   executionResult: TemplateExecutionResult,
   jsDefinedValues: js.Dictionary[Any]
@@ -542,7 +542,7 @@ Example
 
 TODO.
 
-```
+```scala
 getVariables(
   executionResult: TemplateExecutionResult,
   jsDefinedValues: js.Dictionary[Any]
@@ -578,7 +578,7 @@ Example
 
 TODO.
 
-```
+```scala
 getAllConditionalVariableNames(
   executionResult: TemplateExecutionResult
 ): js.Array[String]
@@ -612,7 +612,7 @@ Example
 
 TODO.
 
-```
+```scala
 getAgreements(
   executionResult: TemplateExecutionResult
 ): js.Array[js.Dictionary[Any]]
@@ -646,7 +646,7 @@ Example
 
 TODO.
 
-```
+```scala
 getSections(
   document: TemplateExecutionResult
 ): js.Array[String]
@@ -680,7 +680,7 @@ Example
 
 TODO.
 
-```
+```scala
 getVariableSections(
   document: TemplateExecutionResult
 ): js.Dictionary[js.Array[String]]
@@ -712,7 +712,7 @@ Example
 
 TODO.
 
-```
+```scala
 isDeal(
   template: CompiledTemplate
 ): Boolean
@@ -746,7 +746,7 @@ Example
 
 TODO.
 
-```
+```scala
 showInForm(
   variable: VariableDefinition,
   executionResult: TemplateExecutionResult
@@ -780,7 +780,7 @@ Example
 
 TODO.
 
-```
+```scala
 getType(
   variable: VariableDefinition
 ): String
@@ -812,7 +812,7 @@ Example
 
 TODO.
 
-```
+```scala
 getDescription(
   variable: VariableDefinition
 ): String
@@ -844,7 +844,7 @@ Example
 
 TODO.
 
-```
+```scala
 getName(
   variable: VariableDefinition
 ): String
@@ -876,7 +876,7 @@ Example
 
 TODO.
 
-```
+```scala
 getCleanName(
   variable: VariableDefinition
 ): String
@@ -908,7 +908,7 @@ Example
 
 TODO.
 
-```
+```scala
 checkValidity(
   variable: VariableDefinition,
   optValue: js.UndefOr[String],
@@ -944,7 +944,7 @@ Example
 
 TODO.
 
-```
+```scala
 isHidden(
   variableDefinition: VariableDefinition
 ): Boolean
@@ -978,7 +978,7 @@ Example
 
 TODO.
 
-```
+```scala
 createAddress(
   address: js.Dictionary[String]
 ): String
@@ -1010,7 +1010,7 @@ Example
 
 TODO.
 
-```
+```scala
 getAddress(
   json: String
 ): Address
@@ -1042,7 +1042,7 @@ Example
 
 TODO.
 
-```
+```scala
 getFormattedAddress(
   address: Address
 ): String
@@ -1076,7 +1076,7 @@ Example
 
 TODO.
 
-```
+```scala
 isChoiceType(
   variable: VariableDefinition,
   executionResult: TemplateExecutionResult
@@ -1110,7 +1110,7 @@ Example
 
 TODO.
 
-```
+```scala
 getChoiceValues(
   variable: VariableDefinition,
   executionResult: TemplateExecutionResult
@@ -1148,7 +1148,7 @@ Example
 
 TODO.
 
-```
+```scala
 getCollectionSize(
   variable: VariableDefinition,
   value: String,
@@ -1184,7 +1184,7 @@ Example
 
 TODO.
 
-```
+```scala
 createVariableFromCollection(
   variable: VariableDefinition,
   index: Int,
@@ -1220,7 +1220,7 @@ Example
 
 TODO.
 
-```
+```scala
 addElementToCollection(
   variable: VariableDefinition,
   value: String,
@@ -1256,7 +1256,7 @@ Example
 
 TODO.
 
-```
+```scala
 setElementToCollection(
   optValue: js.UndefOr[String],
   index: Int,
@@ -1296,7 +1296,7 @@ Example
 
 TODO.
 
-```
+```scala
 removeElementFromCollection(
   index: Int,
   variable: VariableDefinition,
@@ -1334,7 +1334,7 @@ Example
 
 TODO.
 
-```
+```scala
 getCollectionElementValue(
   variable: VariableDefinition,
   executionResult: TemplateExecutionResult,
@@ -1372,7 +1372,7 @@ Example
 
 TODO.
 
-```
+```scala
 getCollectionValue(
   variable: VariableDefinition,
   executionResult: TemplateExecutionResult,
@@ -1410,7 +1410,7 @@ Example
 
 TODO.
 
-```
+```scala
 noIdentity(
   result: ValidationResult
 ): Boolean
@@ -1442,7 +1442,7 @@ Example
 
 TODO.
 
-```
+```scala
 missingIdentities(
   result: ValidationResult
 ): Boolean
@@ -1474,7 +1474,7 @@ Example
 
 TODO.
 
-```
+```scala
 missingAllIdentities(
   result: ValidationResult
 ): Boolean
@@ -1506,7 +1506,7 @@ Example
 
 TODO.
 
-```
+```scala
 getIdentityEmail(
   identity: Identity
 ): String
@@ -1538,7 +1538,7 @@ Example
 
 TODO.
 
-```
+```scala
 getIdentityId(
   identity: Identity
 ): String
@@ -1570,7 +1570,7 @@ Example
 
 TODO.
 
-```
+```scala
 createIdentityInternalValue(
   userId: js.UndefOr[String],
   email: String
@@ -1604,7 +1604,7 @@ Example
 
 TODO.
 
-```
+```scala
 createIdentity(
   userId: js.UndefOr[String],
   email: String
@@ -1638,7 +1638,7 @@ Example
 
 TODO.
 
-```
+```scala
 getIdentityId(
   identity: js.UndefOr[Identity]
 ): js.UndefOr[String]
@@ -1670,7 +1670,7 @@ Example
 
 TODO.
 
-```
+```scala
 getIdentities(
   validationResult: ValidationResult,
   executionResult: TemplateExecutionResult
@@ -1708,7 +1708,7 @@ Example
 
 TODO.
 
-```
+```scala
 isStructuredType(
   variable: VariableDefinition,
   executionResult: TemplateExecutionResult
@@ -1742,7 +1742,7 @@ Example
 
 TODO.
 
-```
+```scala
 getStructureFieldDefinitions(
   variable: VariableDefinition,
   executionResult: TemplateExecutionResult
@@ -1778,7 +1778,7 @@ Example
 
 TODO.
 
-```
+```scala
 getStructureFieldValue(
   variable: VariableDefinition,
   field: VariableDefinition,
@@ -1816,7 +1816,7 @@ Example
 
 TODO.
 
-```
+```scala
 setStructureFieldValue(
   variable: VariableDefinition,
   fieldName: String,
