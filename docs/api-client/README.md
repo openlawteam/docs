@@ -893,7 +893,7 @@ Example
 
 A template object contains information about a specific template.
 
-```
+```js
 {
   id: string,
   name: string,
