@@ -1,6 +1,8 @@
 # Openlaw Object
 
-The Openlaw object defined in Openlaw.scala compiles to JavaScript and is an interface in the OpenLaw protocol to interact directly with a contract and its contents. The object methods are categorized below.
+The `Openlaw` object defined in Openlaw.scala compiles to JavaScript and is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types. The object methods are categorized below.
+
+## Template / Contract
 
 ### compileTemplate
 
@@ -142,38 +144,6 @@ Example
 
 ```
 
-### createAddress
-
-TODO.
-
-```
-createAddress(
-  address: js.Dictionary[String]
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `address` | `js.Dictionary[String]` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
 ### validationErrors
 
 TODO.
@@ -233,386 +203,6 @@ Example
 **Response**
 
 Returns `ValidationResult` - TODO.
-
-Example
-
-```
-
-```
-
-### showInForm
-
-TODO.
-
-```
-showInForm(
-  variable: VariableDefinition,
-  executionResult: TemplateExecutionResult
-): Boolean
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
-
-### isChoiceType
-
-TODO.
-
-```
-isChoiceType(
-  variable: VariableDefinition,
-  executionResult: TemplateExecutionResult
-): Boolean
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
-
-### isStructuredType
-
-TODO.
-
-```
-isStructuredType(
-  variable: VariableDefinition,
-  executionResult: TemplateExecutionResult
-): Boolean
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
-
-### getChoiceValues
-
-TODO.
-
-```
-getChoiceValues(
-  variable: VariableDefinition,
-  executionResult: TemplateExecutionResult
-): js.Array[String]
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `js.Array[String]` - TODO.
-
-Example
-
-```
-[
-
-]
-```
-
-### getStructureFieldDefinitions
-
-TODO.
-
-```
-getStructureFieldDefinitions(
-  variable: VariableDefinition,
-  executionResult: TemplateExecutionResult
-): js.Array[VariableDefinition]
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `js.Array[VariableDefinition]` - TODO.
-
-Example
-
-```
-[
-
-]
-```
-
-### getStructureFieldValue
-
-TODO.
-
-```
-getStructureFieldValue(
-  variable: VariableDefinition,
-  field: VariableDefinition,
-  structureValue: js.UndefOr[String],
-  executionResult: TemplateExecutionResult
-): js.UndefOr[String]
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `field` | `VariableDefinition` | **Required.** TODO. |
-| `structureValue` | `js.UndefOr[String]` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `js.UndefOr[String]` - TODO.
-
-Example
-
-```
-
-```
-
-### setStructureFieldValue
-
-TODO.
-
-```
-setStructureFieldValue(
-  variable: VariableDefinition,
-  fieldName: String,
-  fieldValue: js.UndefOr[String],
-  structureValue: js.UndefOr[String],
-  executionResult: TemplateExecutionResult
-): js.UndefOr[String]
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `fieldName` | `String` | **Required.** TODO. |
-| `fieldValue` | `js.UndefOr[String]` | **Required.** TODO. |
-| `structureValue` | `js.UndefOr[String]` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `js.UndefOr[String]` - TODO.
-
-Example
-
-```
-
-```
-
-### getAddress
-
-TODO.
-
-```
-getAddress(
-  json: String
-): Address
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `json` | `String` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Address` - TODO.
-
-Example
-
-```
-
-```
-
-### getFormattedAddress
-
-TODO.
-
-```
-getFormattedAddress(
-  address: Address
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `address` | `Address` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### noIdentity
-
-TODO.
-
-```
-noIdentity(
-  result: ValidationResult
-): Boolean
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `result` | `ValidationResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
-
-### missingIdentities
-
-TODO.
-
-```
-missingIdentities(
-  result: ValidationResult
-): Boolean
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `result` | `ValidationResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Boolean` - TODO.
 
 Example
 
@@ -686,38 +276,6 @@ Example
 ]
 ```
 
-### missingAllIdentities
-
-TODO.
-
-```
-missingAllIdentities(
-  result: ValidationResult
-): Boolean
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `result` | `ValidationResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
-
 ### getInitialParameters
 
 TODO.
@@ -752,102 +310,6 @@ Example
 ]
 ```
 
-### getType
-
-TODO.
-
-```
-getType(
-  variable: VariableDefinition
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### getDescription
-
-TODO.
-
-```
-getDescription(
-  variable: VariableDefinition
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### getName
-
-TODO.
-
-```
-getName(
-  variable: VariableDefinition
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
 ### getTemplateName
 
 TODO.
@@ -863,38 +325,6 @@ getTemplateName(
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `templateDefinition` | `TemplateDefinition` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### getCleanName
-
-TODO.
-
-```
-getCleanName(
-  variable: VariableDefinition
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
 
 Example
 
@@ -1041,42 +471,6 @@ Example
 **Response**
 
 Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### checkValidity
-
-TODO.
-
-```
-checkValidity(
-  variable: VariableDefinition,
-  optValue: js.UndefOr[String],
-  executionResult: TemplateExecutionResult
-): Any
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `optValue` | `js.UndefOr[String]` | TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Any` - TODO.
 
 Example
 
@@ -1248,206 +642,6 @@ Example
 ]
 ```
 
-### getIdentityEmail
-
-TODO.
-
-```
-getIdentityEmail(
-  identity: Identity
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `identity` | `Identity` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### getIdentityId
-
-TODO.
-
-```
-getIdentityId(
-  identity: Identity
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `identity` | `Identity` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### createIdentityInternalValue
-
-TODO.
-
-```
-createIdentityInternalValue(
-  userId: js.UndefOr[String],
-  email: String
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `userId` | `js.UndefOr[String]` | **Required.** TODO. |
-| `email` | `String` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### createIdentity
-
-TODO.
-
-```
-createIdentity(
-  userId: js.UndefOr[String],
-  email: String
-): Identity
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `userId` | `js.UndefOr[String]` | **Required.** TODO. |
-| `email` | `String` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Identity` - TODO.
-
-Example
-
-```
-
-```
-
-### getIdentityId
-
-TODO.
-
-```
-getIdentityId(
-  identity: js.UndefOr[Identity]
-): js.UndefOr[String]
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `identity` | `js.UndefOr[Identity]` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `js.UndefOr[String]` - TODO.
-
-Example
-
-```
-
-```
-
-### getIdentities
-
-TODO.
-
-```
-getIdentities(
-  validationResult: ValidationResult,
-  executionResult: TemplateExecutionResult
-): js.Array[VariableDefinition]
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `validationResult` | `ValidationResult` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `js.Array[VariableDefinition]` - TODO.
-
-Example
-
-```
-[
-
-]
-```
-
 ### getSections
 
 TODO.
@@ -1546,6 +740,206 @@ Example
 
 ```
 
+## Individual Variable
+
+### showInForm
+
+TODO.
+
+```
+showInForm(
+  variable: VariableDefinition,
+  executionResult: TemplateExecutionResult
+): Boolean
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Boolean` - TODO.
+
+Example
+
+```
+
+```
+
+### getType
+
+TODO.
+
+```
+getType(
+  variable: VariableDefinition
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+### getDescription
+
+TODO.
+
+```
+getDescription(
+  variable: VariableDefinition
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+### getName
+
+TODO.
+
+```
+getName(
+  variable: VariableDefinition
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+### getCleanName
+
+TODO.
+
+```
+getCleanName(
+  variable: VariableDefinition
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+### checkValidity
+
+TODO.
+
+```
+checkValidity(
+  variable: VariableDefinition,
+  optValue: js.UndefOr[String],
+  executionResult: TemplateExecutionResult
+): Any
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `optValue` | `js.UndefOr[String]` | TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Any` - TODO.
+
+Example
+
+```
+
+```
+
 ### isHidden
 
 TODO.
@@ -1577,6 +971,178 @@ Example
 ```
 
 ```
+
+## Address
+
+### createAddress
+
+TODO.
+
+```
+createAddress(
+  address: js.Dictionary[String]
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `address` | `js.Dictionary[String]` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+### getAddress
+
+TODO.
+
+```
+getAddress(
+  json: String
+): Address
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `json` | `String` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Address` - TODO.
+
+Example
+
+```
+
+```
+
+### getFormattedAddress
+
+TODO.
+
+```
+getFormattedAddress(
+  address: Address
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `address` | `Address` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+## Choice
+
+### isChoiceType
+
+TODO.
+
+```
+isChoiceType(
+  variable: VariableDefinition,
+  executionResult: TemplateExecutionResult
+): Boolean
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Boolean` - TODO.
+
+Example
+
+```
+
+```
+
+### getChoiceValues
+
+TODO.
+
+```
+getChoiceValues(
+  variable: VariableDefinition,
+  executionResult: TemplateExecutionResult
+): js.Array[String]
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `js.Array[String]` - TODO.
+
+Example
+
+```
+[
+
+]
+```
+
+## Collection
 
 ### getCollectionSize
 
@@ -1837,4 +1403,455 @@ Example
 ```
 
 ```
+
+## Identity
+
+### noIdentity
+
+TODO.
+
+```
+noIdentity(
+  result: ValidationResult
+): Boolean
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `result` | `ValidationResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Boolean` - TODO.
+
+Example
+
+```
+
+```
+
+### missingIdentities
+
+TODO.
+
+```
+missingIdentities(
+  result: ValidationResult
+): Boolean
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `result` | `ValidationResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Boolean` - TODO.
+
+Example
+
+```
+
+```
+
+### missingAllIdentities
+
+TODO.
+
+```
+missingAllIdentities(
+  result: ValidationResult
+): Boolean
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `result` | `ValidationResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Boolean` - TODO.
+
+Example
+
+```
+
+```
+
+### getIdentityEmail
+
+TODO.
+
+```
+getIdentityEmail(
+  identity: Identity
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `identity` | `Identity` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+### getIdentityId
+
+TODO.
+
+```
+getIdentityId(
+  identity: Identity
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `identity` | `Identity` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+### createIdentityInternalValue
+
+TODO.
+
+```
+createIdentityInternalValue(
+  userId: js.UndefOr[String],
+  email: String
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `userId` | `js.UndefOr[String]` | **Required.** TODO. |
+| `email` | `String` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `String` - TODO.
+
+Example
+
+```
+
+```
+
+### createIdentity
+
+TODO.
+
+```
+createIdentity(
+  userId: js.UndefOr[String],
+  email: String
+): Identity
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `userId` | `js.UndefOr[String]` | **Required.** TODO. |
+| `email` | `String` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Identity` - TODO.
+
+Example
+
+```
+
+```
+
+### getIdentityId
+
+TODO.
+
+```
+getIdentityId(
+  identity: js.UndefOr[Identity]
+): js.UndefOr[String]
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `identity` | `js.UndefOr[Identity]` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `js.UndefOr[String]` - TODO.
+
+Example
+
+```
+
+```
+
+### getIdentities
+
+TODO.
+
+```
+getIdentities(
+  validationResult: ValidationResult,
+  executionResult: TemplateExecutionResult
+): js.Array[VariableDefinition]
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `validationResult` | `ValidationResult` | **Required.** TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `js.Array[VariableDefinition]` - TODO.
+
+Example
+
+```
+[
+
+]
+```
+
+## Structure
+
+### isStructuredType
+
+TODO.
+
+```
+isStructuredType(
+  variable: VariableDefinition,
+  executionResult: TemplateExecutionResult
+): Boolean
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `Boolean` - TODO.
+
+Example
+
+```
+
+```
+
+### getStructureFieldDefinitions
+
+TODO.
+
+```
+getStructureFieldDefinitions(
+  variable: VariableDefinition,
+  executionResult: TemplateExecutionResult
+): js.Array[VariableDefinition]
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `js.Array[VariableDefinition]` - TODO.
+
+Example
+
+```
+[
+
+]
+```
+
+### getStructureFieldValue
+
+TODO.
+
+```
+getStructureFieldValue(
+  variable: VariableDefinition,
+  field: VariableDefinition,
+  structureValue: js.UndefOr[String],
+  executionResult: TemplateExecutionResult
+): js.UndefOr[String]
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `field` | `VariableDefinition` | **Required.** TODO. |
+| `structureValue` | `js.UndefOr[String]` | **Required.** TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `js.UndefOr[String]` - TODO.
+
+Example
+
+```
+
+```
+
+### setStructureFieldValue
+
+TODO.
+
+```
+setStructureFieldValue(
+  variable: VariableDefinition,
+  fieldName: String,
+  fieldValue: js.UndefOr[String],
+  structureValue: js.UndefOr[String],
+  executionResult: TemplateExecutionResult
+): js.UndefOr[String]
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `fieldName` | `String` | **Required.** TODO. |
+| `fieldValue` | `js.UndefOr[String]` | **Required.** TODO. |
+| `structureValue` | `js.UndefOr[String]` | **Required.** TODO. |
+| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+
+Example
+
+```
+
+```
+
+**Response**
+
+Returns `js.UndefOr[String]` - TODO.
+
+Example
+
+```
+
+```
+
+## Shared Types
+
 
