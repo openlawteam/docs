@@ -662,7 +662,7 @@ Openlaw.getVariables(executionResult.executionResult, {});
 
 **Response**
 
-Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which include information about a variable, including `defaultValue` and `name`.
+Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which includes information about a variable, including `defaultValue` and `name`.
 
 ### getExecutedVariables
 
@@ -700,7 +700,7 @@ Openlaw.getExecutedVariables(executionResult.executionResult, definedValues);
 
 **Response**
 
-Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which include information about a variable, including `defaultValue` and `name`. For a template linked to a [deal](/markup-language/#deals) template, the array will include only those variables that have not been provided an input value.
+Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which includes information about a variable, including `defaultValue` and `name`. For a template linked to a [deal](/markup-language/#deals) template, the array will include only those variables that have not been provided an input value.
 
 ### getAllConditionalVariableNames
 
@@ -896,7 +896,7 @@ Example
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-const variable = allVariables[0];
+const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.showInForm(variable, executionResult.executionResult);
 ```
 
@@ -1090,7 +1090,7 @@ Example (for [Identity variable](/markup-language/#identity-and-signatures))
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-const variable = allVariables[0];
+const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.checkValidity(variable, "openlawuser@gmail.com", executionResult.executionResult);
 ```
 
@@ -1120,7 +1120,7 @@ Example
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-const variable = allVariables[0];
+const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.isHidden(variable);
 ```
 
@@ -1164,7 +1164,7 @@ Openlaw.createAddress(address);
 
 **Response**
 
-Returns the created address as a string.
+Returns the created address as a string in JSON format.
 
 Example
 
@@ -1186,7 +1186,7 @@ getAddress(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `json` | `String` | **Required.** The string address returned from the [`createAddress` method](#createaddress). |
+| `json` | `String` | **Required.** The string address in JSON format returned from the [`createAddress` method](#createaddress). |
 
 Example
 
@@ -1260,7 +1260,7 @@ Example
 
 ### isChoiceType
 
-Check if variable is a [Choice variable](/markup-language/#choice).
+Check if variable is a [Choice type](/markup-language/#choice).
 
 ```scala
 isChoiceType(
@@ -1282,17 +1282,17 @@ Example
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-const variable = allVariables[0];
+const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.isChoiceType(variable, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `true` if variable is a [Choice variable](/markup-language/#choice).
+Returns `true` if variable is a [Choice type](/markup-language/#choice).
 
 ### getChoiceValues
 
-List option values for a [Choice variable](/markup-language/#choice).
+List option values for a [Choice type](/markup-language/#choice).
 
 ```scala
 getChoiceValues(
@@ -1314,13 +1314,13 @@ Example
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-const variable = allVariables[0];
+const variable = allVariables[0]; // first variable in template is a Choice type
 Openlaw.getChoiceValues(variable, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns an array of option values for the [Choice variable](/markup-language/#choice) as strings.
+Returns an array of option values for the [Choice type](/markup-language/#choice) as strings.
 
 Example
 
@@ -1340,7 +1340,7 @@ Example
 
 ### getCollectionSize
 
-TODO.
+Get size of a [Collection type](/markup-language/#collection).
 
 ```scala
 getCollectionSize(
@@ -1354,29 +1354,28 @@ getCollectionSize(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `value` | `String` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Collection type
+const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":3}';
+Openlaw.getCollectionSize(variable, value, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `Int` - TODO.
-
-Example
-
-```
-
-```
+Returns number of items in a [Collection type](/markup-language/#collection) as an integer.
 
 ### createVariableFromCollection
 
-TODO.
+Method used in connection with a [Collection type](/markup-language/#collection) to create a variable for each new element in a Collection.
 
 ```scala
 createVariableFromCollection(
@@ -1390,29 +1389,27 @@ createVariableFromCollection(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `index` | `Int` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `index` | `Int` | **Required.** The index number of the new element in the Collection. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Collection type
+Openlaw.createVariableFromCollection(variable, 1, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `VariableDefinition` - TODO.
-
-Example
-
-```
-
-```
+Returns a [`VariableDefinition` object](#variabledefinition) for each element in the [Collection type](/markup-language/#collection). Each object includes information about the variable, including name and variable type.
 
 ### addElementToCollection
 
-TODO.
+Add an element to a [Collection type](/markup-language/#collection).
 
 ```scala
 addElementToCollection(
@@ -1426,29 +1423,34 @@ addElementToCollection(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `value` | `String` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the new element is added) in JSON format. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Collection type
+const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":3}';
+Openlaw.addElementToCollection(variable, value, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns a string of the current values and size of the [Collection type](/markup-language/#collection) (including the new element added) in JSON format.
 
 Example
 
-```
-
+```js
+'{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":4}'
 ```
 
 ### setElementToCollection
 
-TODO.
+Set a value for an added element to a [Collection type](/markup-language/#collection).
 
 ```scala
 setElementToCollection(
@@ -1464,31 +1466,36 @@ setElementToCollection(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `optValue` | `js.UndefOr[String]` | TODO. |
-| `index` | `Int` | **Required.** TODO. |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `collectionValue` | `String` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `optValue` | `String` | **Required.** The value for the added element as a string. |
+| `index` | `Int` | **Required.** The index number of the new element in the Collection. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `collectionValue` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the value is set for the added element) in JSON format. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Collection type
+const collectionValue = '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":4}';
+Openlaw.setElementToCollection("Soccer", 3, variable, collectionValue, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns a string of the current values and size of the [Collection type](/markup-language/#collection) (including the value set for the added element) in JSON format.
 
 Example
 
-```
-
+```js
+'{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}'
 ```
 
 ### removeElementFromCollection
 
-TODO.
+Remove an element from a [Collection type](/markup-language/#collection).
 
 ```scala
 removeElementFromCollection(
@@ -1503,30 +1510,35 @@ removeElementFromCollection(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `index` | `Int` | **Required.** TODO. |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-| `value` | `String` | **Required.** TODO. |
+| `index` | `Int` | **Required.** The index number of the element to be removed from the Collection. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the element is removed) in JSON format. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Collection type
+const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
+Openlaw.removeElementFromCollection(3, variable, executionResult.executionResult, value);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns a string of the current values and size of the [Collection type](/markup-language/#collection) (after the element is removed) in JSON format.
 
 Example
 
-```
-
+```js
+'{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":3}'
 ```
 
 ### getCollectionElementValue
 
-TODO.
+Get the value of an element in a [Collection type](/markup-language/#collection).
 
 ```scala
 getCollectionElementValue(
@@ -1541,30 +1553,35 @@ getCollectionElementValue(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-| `value` | `String` | **Required.** TODO. |
-| `index` | `Int` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. |
+| `index` | `Int` | **Required.** The index number of the element to be checked in the Collection. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Collection type
+const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
+Openlaw.getCollectionElementValue(variable, executionResult.executionResult, value, 2);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns the value of an element in a [Collection type](/markup-language/#collection) as a string.
 
 Example
 
-```
-
+```js
+"Baseball"
 ```
 
 ### getCollectionValue
 
-TODO.
+Get the current values and size of a [Collection type](/markup-language/#collection).
 
 ```scala
 getCollectionValue(
@@ -1578,24 +1595,29 @@ getCollectionValue(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-| `value` | `String` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. The value will be an empty string if the Collection does not have a set value for its first element. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Collection type
+const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
+Openlaw.getCollectionValue(variable, executionResult.executionResult, value);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns a string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format.
 
 Example
 
-```
-
+```js
+'{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}'
 ```
 
 ## Identity
