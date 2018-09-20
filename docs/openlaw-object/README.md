@@ -2,7 +2,7 @@
 
 The `Openlaw` object defined in Openlaw.scala compiles to JavaScript and is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types. The object methods are categorized below.
 
-## Template / Contract
+## Template
 
 ### compileTemplate
 
@@ -616,7 +616,8 @@ Example
 [
   "Collection",
   "Address",
-  "Choice", "Date",
+  "Choice",
+  "Date",
   "DateTime",
   "EthAddress",
   "EthereumCall",
@@ -873,7 +874,7 @@ Returns `true` if template is a [deal](/markup-language/#deals) template.
 
 ### showInForm
 
-TODO.
+Check if variable is shown in the input form in draft mode.
 
 ```scala
 showInForm(
@@ -886,28 +887,26 @@ showInForm(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0];
+Openlaw.showInForm(variable, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
+Returns `true` if variable is of type that should be displayed in the input form in draft mode (e.g., [input variables](/markup-language/#variables) like Text, Number, Date, Address, etc.).
 
 ### getType
 
-TODO.
+Get variable type.
 
 ```scala
 getType(
@@ -919,59 +918,35 @@ getType(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+allVariables.forEach(variable => {
+  Openlaw.getType(variable));
+});
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns variable type as a string.
 
 Example
 
-```
-
-```
-
-### getDescription
-
-TODO.
-
-```scala
-getDescription(
-  variable: VariableDefinition
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
+```js
+"Text"
+"Date"
+"YesNo"
+"Number"
 ```
 
 ### getName
 
-TODO.
+Get name of a variable.
 
 ```scala
 getName(
@@ -983,27 +958,75 @@ getName(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+allVariables.forEach(variable => {
+  Openlaw.getName(variable));
+});
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns name of variable as a string.
 
 Example
 
+```js
+"Company Name"
+"Effective Date"
+"No Services"
+"Number of Shares"
 ```
 
+### getDescription
+
+Get description of a variable.
+
+```scala
+getDescription(
+  variable: VariableDefinition
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+
+Example
+
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+allVariables.forEach(variable => {
+  Openlaw.getDescription(variable));
+});
+```
+
+**Response**
+
+Returns description of variable as a string. The default description is the variable name. You can also modify the description that appears in the form as described in our [markup language documentation](/markup-language/#variables).
+
+Example
+
+```js
+"Company Name"
+"Effective Date"
+"Do you want to limit the advisor's services?"
+"Number of Shares"
 ```
 
 ### getCleanName
 
-TODO.
+Get variable name that has any spaces replaced with a `-`. This can be useful to use the variable name as part of a CSS class name.
 
 ```scala
 getCleanName(
@@ -1015,27 +1038,35 @@ getCleanName(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+allVariables.forEach(variable => {
+  Openlaw.getCleanName(variable));
+});
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns name of variable as a string and replaces any spaces with a `-`.
 
 Example
 
-```
-
+```js
+"Company-Name"
+"Effective-Date"
+"No-Services"
+"Number-of-Shares"
 ```
 
 ### checkValidity
 
-TODO.
+Check validity of a variable. For example, this method can be used with the [Identity](/markup-language/#identity-and-signatures) type variable to check if a valid email address has been entered.
 
 ```scala
 checkValidity(
@@ -1049,29 +1080,27 @@ checkValidity(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `optValue` | `js.UndefOr[String]` | TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `optValue` | `String` | **Required.** The value of the variable input as a string. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
 
-Example
+Example (for [Identity](/markup-language/#identity-and-signatures) variable)
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0];
+Openlaw.checkValidity(variable, "openlawuser@gmail.com", executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `Any` - TODO.
-
-Example
-
-```
-
-```
+For checking validity of [Identity](/markup-language/#identity-and-signatures) variable, if input is valid, returns an object containing information about the input, including `email`, `identityProvider`, and `identifier`.
 
 ### isHidden
 
-TODO.
+Check if variable is hidden. A [hidden variable](/markup-language/#hidden-variables) is displayed to an end user, but is not displayed within the text of the agreement.
 
 ```scala
 isHidden(
@@ -1083,23 +1112,21 @@ isHidden(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variableDefinition` | `VariableDefinition` | **Required.** TODO. |
+| `variableDefinition` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0];
+Openlaw.isHidden(variable);
 ```
 
 **Response**
 
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
+Returns `true` if variable is a [hidden variable](/markup-language/#hidden-variables).
 
 ## Address
 
