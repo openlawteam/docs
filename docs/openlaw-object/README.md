@@ -56,7 +56,7 @@ execute(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate`](#compiletemplate) method. |
+| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate). |
 | `jsTemplates` | `Object` | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
 | `jsParams` | `Object` | **Required.** The parameters of the template to be executed. |
 
@@ -107,7 +107,7 @@ executeForReview(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate`](#compiletemplate) method. |
+| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate). |
 | `names` | `Object` | **Required.** The ID and name of each signatory as a key/value pair. |
 | `jsTemplates` | `Object` | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
 | `jsParams` | `Object` | **Required.** The parameters of the template to be executed for review. |
@@ -148,7 +148,7 @@ Example
 
 ### resumeExecution
 
-Resume execution (load and run) of a compiled template when the initial execution by the [`execute`](#execute) or [`executeForReview`](#executeforreview) methods returns an object indicating that a template was missing (e.g., `{..., missingTemplate: true, missingTemplateName: "Employee Offer Letter", errorMessage: "the template Employee Offer Letter was not loaded"}`).
+Resume execution (load and run) of a compiled template when the initial execution by the [`execute` method](#execute) or [`executeForReview` method](#executeforreview) returns an object indicating that a template was missing (e.g., `{..., missingTemplate: true, missingTemplateName: "Employee Offer Letter", errorMessage: "the template Employee Offer Letter was not loaded"}`).
 
 ```scala
 resumeExecution(
@@ -161,7 +161,7 @@ resumeExecution(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 | `jsTemplates` | `Object` | **Required.** An object containing the compiled template to be executed that was missing from the initial execution. |
 
 Example
@@ -190,7 +190,7 @@ Example
 
 ### getInitialParameters
 
-List the initial parameters with default values in an executed template returned from the [`execute`](#execute) or [`executeForReview`](#executeforreview) methods.
+List the initial parameters with default values in an executed template returned from the [`execute` method](#execute) or [`executeForReview` method](#executeforreview).
 
 ```scala
 getInitialParameters(
@@ -202,7 +202,7 @@ getInitialParameters(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
@@ -233,7 +233,7 @@ Example
 
 ### validateContract
 
-Validate an executed template returned from the [`execute`](#execute) or [`executeForReview`](#executeforreview) methods.
+Validate an executed template returned from the [`execute` method](#execute) or [`executeForReview` method](#executeforreview).
 
 ```scala
 validateContract(
@@ -245,7 +245,7 @@ validateContract(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
@@ -261,7 +261,7 @@ Returns a [`ValidationResult` object](#validationresult) containing information 
 
 ### validationErrors
 
-List any errors resulting from validating a contract by the [`validateContract`](#validatecontract) method.
+List any errors resulting from validating a contract by the [`validateContract` method](#validatecontract).
 
 ```scala
 validationErrors(
@@ -273,7 +273,7 @@ validationErrors(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract`](#validatecontract) method. |
+| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
@@ -290,7 +290,7 @@ Returns an array of validation errors as strings. An empty array `[]` will be re
 
 ### hasMissingInputs
 
-Check if a contract has any missing variable inputs after it has been validated by the [`validateContract`](#validatecontract) method.
+Check if a contract has any missing variable inputs after it has been validated by the [`validateContract` method](#validatecontract).
 
 ```scala
 hasMissingInputs(
@@ -302,7 +302,7 @@ hasMissingInputs(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract`](#validatecontract) method. |
+| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
@@ -319,7 +319,7 @@ Returns `true` if validated contract has any missing variable inputs.
 
 ### getMissingInputs
 
-List any missing variable inputs of a contract after it has been validated by the [`validateContract`](#validatecontract) method.
+List any missing variable inputs of a contract after it has been validated by the [`validateContract` method](#validatecontract).
 
 ```scala
 getMissingInputs(
@@ -331,7 +331,7 @@ getMissingInputs(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract`](#validatecontract) method. |
+| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
@@ -404,7 +404,7 @@ getAgreements(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
@@ -649,7 +649,7 @@ getVariables(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 | `jsDefinedValues` | `Object` | **Required.** An empty object in order to retrieve all variables. |
 
 Example
@@ -679,7 +679,7 @@ getExecutedVariables(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 | `jsDefinedValues` | `Object` | **Required.** The variable inputs for a template linked to a [deal](/markup-language/#deals) template. The object will be empty for templates that are not part of a deal. |
 
 Example
@@ -716,7 +716,7 @@ getAllConditionalVariableNames(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
@@ -756,7 +756,7 @@ getSections(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
@@ -795,7 +795,7 @@ getVariableSections(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
@@ -857,12 +857,12 @@ isDeal(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `template` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate`](#compiletemplate) method. |
+| `template` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate). |
 
 Example
 
 ```js
-const compiledTemplate = Openlaw.compileTemplate("<%\n==Effective Date==\n[[Effective Date: Date]]\n\n==Company Name and Address==\n[[Company Name]]\n[[Company Address:Address]]\n[[Corporation:YesNo \"Is the company a corporation?\"]]\n[[LLC:YesNo \"An LLC?\"]]\n...");
+const compiledTemplate = Openlaw.compileTemplate('<%\n==Effective Date==\n[[Effective Date: Date]]\n\n==Company Name and Address==\n[[Company Name]]\n[[Company Address:Address]]\n[[Corporation:YesNo \"Is the company a corporation?\"]]\n[[LLC:YesNo \"An LLC?\"]]\n...[[Employee Offer Letter: Template(\"Employee Offer Letter\")]]...');
 Openlaw.isDeal(compiledTemplate.compiledTemplate);
 ```
 
@@ -888,7 +888,7 @@ showInForm(
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
@@ -1082,7 +1082,7 @@ checkValidity(
 | ---- | ---- | ----------- |
 | `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
 | `optValue` | `String` | **Required.** The value of the variable input as a string. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example (for [Identity variable](/markup-language/#identity-and-signatures))
 
@@ -1186,7 +1186,7 @@ getAddress(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `json` | `String` | **Required.** The string address returned from the [`createAddress`](#createaddress) method. |
+| `json` | `String` | **Required.** The string address returned from the [`createAddress` method](#createaddress). |
 
 Example
 
@@ -1228,7 +1228,7 @@ getFormattedAddress(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `address` | `Address` | **Required.** The address object returned from the [`getAddress`](#getaddress) method. |
+| `address` | `Address` | **Required.** The address object returned from the [`getAddress` method](#getaddress). |
 
 Example
 
@@ -2070,7 +2070,7 @@ A `StructuredAgreement` object contains information about a rendered agreement.
 
 ### TemplateExecutionResult
 
-A `TemplateExecutionResult` object is part of the return object from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods and contains information about the executed template.
+A `TemplateExecutionResult` object is part of the return object from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview) and contains information about the executed template.
 
 ```js
 {
