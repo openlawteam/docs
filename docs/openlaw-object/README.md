@@ -1260,7 +1260,7 @@ Example
 
 ### isChoiceType
 
-TODO.
+Check if variable is a [Choice variable](/markup-language/#choice).
 
 ```scala
 isChoiceType(
@@ -1273,28 +1273,26 @@ isChoiceType(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0];
+Openlaw.isChoiceType(variable, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
+Returns `true` if variable is a [Choice variable](/markup-language/#choice).
 
 ### getChoiceValues
 
-TODO.
+List option values for a [Choice variable](/markup-language/#choice).
 
 ```scala
 getChoiceValues(
@@ -1307,24 +1305,34 @@ getChoiceValues(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0];
+Openlaw.getChoiceValues(variable, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `js.Array[String]` - TODO.
+Returns an array of option values for the [Choice variable](/markup-language/#choice) as strings.
 
 Example
 
-```
+```js
 [
-
+  "Brazil",
+  "Canada",
+  "India",
+  "Israel",
+  "Switzerland",
+  "Thailand",
+  "USA"
 ]
 ```
 
