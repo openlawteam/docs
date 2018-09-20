@@ -870,7 +870,7 @@ Openlaw.isDeal(compiledTemplate.compiledTemplate);
 
 Returns `true` if template is a [deal](/markup-language/#deals) template.
 
-## Individual Variable
+## Variable
 
 ### showInForm
 
@@ -1066,7 +1066,7 @@ Example
 
 ### checkValidity
 
-Check validity of a variable. For example, this method can be used with the [Identity](/markup-language/#identity-and-signatures) type variable to check if a valid email address has been entered.
+Check validity of a variable. For example, this method can be used with the [Identity variable](/markup-language/#identity-and-signatures) to check if a valid email address has been entered.
 
 ```scala
 checkValidity(
@@ -1084,7 +1084,7 @@ checkValidity(
 | `optValue` | `String` | **Required.** The value of the variable input as a string. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
 
-Example (for [Identity](/markup-language/#identity-and-signatures) variable)
+Example (for [Identity variable](/markup-language/#identity-and-signatures))
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
@@ -1096,7 +1096,7 @@ Openlaw.checkValidity(variable, "openlawuser@gmail.com", executionResult.executi
 
 **Response**
 
-For checking validity of [Identity](/markup-language/#identity-and-signatures) variable, if input is valid, returns an object containing information about the input, including `email`, `identityProvider`, and `identifier`.
+For checking validity of [Identity variable](/markup-language/#identity-and-signatures), if input is valid, returns an object containing information about the input, including `email`, `identityProvider`, and `identifier`.
 
 ### isHidden
 
@@ -1132,7 +1132,7 @@ Returns `true` if variable is a [hidden variable](/markup-language/#hidden-varia
 
 ### createAddress
 
-TODO.
+Method used in connection with an [Address variable](/markup-language/#address) to generate an address using the Google Maps API.
 
 ```scala
 createAddress(
@@ -1144,27 +1144,37 @@ createAddress(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `address` | `js.Dictionary[String]` | **Required.** TODO. |
+| `address` | `Object` | **Required.** Information about an autosuggested address selected from the address box created by an [Address variable](/markup-language/#address). |
 
 Example
 
-```
-
+```js
+const address = {
+  address: "123 Main St, Flushing, NY 11354, USA",
+  city: "Queens",
+  country: "United States",
+  placeId: "ChIJWbGLkg9gwokR76ZxzYbdnpM",
+  state: "New York",
+  streetName: "Main Street",
+  streetNumber: "123",
+  zipCode: "11354"
+};
+Openlaw.createAddress(address);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns the created address as a string.
 
 Example
 
-```
-
+```js
+'{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}'
 ```
 
 ### getAddress
 
-TODO.
+Method used in connection with an [Address variable](/markup-language/#address) to get a created address.
 
 ```scala
 getAddress(
@@ -1176,27 +1186,37 @@ getAddress(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `json` | `String` | **Required.** TODO. |
+| `json` | `String` | **Required.** The string address returned from the [`createAddress`](#createaddress) method. |
 
 Example
 
-```
-
+```js
+const json = '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}';
+Openlaw.getAddress(json);
 ```
 
 **Response**
 
-Returns `Address` - TODO.
+Returns an address object.
 
 Example
 
-```
-
+```js
+{
+  city: "Queens",
+  country: "United States",
+  formattedAddress: "123 Main St, Flushing, NY 11354, USA",
+  placeId: "ChIJWbGLkg9gwokR76ZxzYbdnpM",
+  state: "New York",
+  streetName: "Main Street",
+  streetNumber: "123",
+  zipCode: "11354"
+}
 ```
 
 ### getFormattedAddress
 
-TODO.
+Method used in connection with an [Address variable](/markup-language/#address) to get a formatted address.
 
 ```scala
 getFormattedAddress(
@@ -1208,22 +1228,32 @@ getFormattedAddress(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `address` | `Address` | **Required.** TODO. |
+| `address` | `Address` | **Required.** The address object returned from the [`getAddress`](#getaddress) method. |
 
 Example
 
-```
-
+```js
+const address = {
+  city: "Queens",
+  country: "United States",
+  formattedAddress: "123 Main St, Flushing, NY 11354, USA",
+  placeId: "ChIJWbGLkg9gwokR76ZxzYbdnpM",
+  state: "New York",
+  streetName: "Main Street",
+  streetNumber: "123",
+  zipCode: "11354"
+};
+Openlaw.getFormattedAddress(address);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns formatted address as a string.
 
 Example
 
-```
-
+```js
+"123 Main St, Flushing, NY 11354, USA"
 ```
 
 ## Choice
