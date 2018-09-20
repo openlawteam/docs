@@ -526,7 +526,7 @@ Example
 
 ### parseMarkdown
 
-TODO.
+Parse selected paragraph text to edit (in draft mode) to HTML.
 
 ```scala
 parseMarkdown(
@@ -538,27 +538,28 @@ parseMarkdown(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `str` | `String` | **Required.** TODO. |
+| `str` | `String` | **Required.** The text of the selected paragraph to edit. |
 
 Example
 
-```
-
+```js
+const currentParagraph = 'This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:';
+Openlaw.parseMarkdown(currentParagraph);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns selected paragraph text parsed to HTML.
 
 Example
 
-```
-
+```html
+<p class='no-section'>This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:</p>
 ```
 
 ### renderParagraphForEdit
 
-TODO.
+Render paragraph of agreement for editing.
 
 ```scala
 renderParagraphForEdit(
@@ -571,28 +572,31 @@ renderParagraphForEdit(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `agreement` | `StructuredAgreement` | **Required.** TODO. |
-| `index` | `Int` | **Required.** TODO. |
+| `agreement` | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered. |
+| `index` | `Int` | **Required.** The index number of the paragraph to be rendered for edit. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const agreements = Openlaw.getAgreements(executionResult.executionResult);
+Openlaw.renderParagraphForEdit(agreements[0].agreement, 1);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns the HTML contents of the paragraph to be rendered for edit as a string.
 
 Example
 
-```
-
+```html
+<p class='no-section'>This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:</p>
 ```
 
 ### getTypes
 
-TODO.
+Get all [markup language](/markup-language/) variable types for use in markdown editor.
 
 ```scala
 getTypes: js.Array[String]
@@ -604,55 +608,34 @@ None
 
 **Response**
 
-Returns `js.Array[String]` - TODO.
+Returns array of [markup language](/markup-language/) variable types as strings.
 
 Example
 
-```
+```js
 [
-
-]
-```
-
-### getExecutedVariables
-
-TODO.
-
-```scala
-getExecutedVariables(
-  executionResult: TemplateExecutionResult,
-  jsDefinedValues: js.Dictionary[Any]
-): js.Array[VariableDefinition]
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-| `jsDefinedValues` | `js.Dictionary[Any]` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `js.Array[VariableDefinition]` - TODO.
-
-Example
-
-```
-[
-
+  "Collection",
+  "Address",
+  "Choice", "Date",
+  "DateTime",
+  "EthAddress",
+  "EthereumCall",
+  "StripeCall",
+  "Identity",
+  "Number",
+  "Period",
+  "SmartContractMetadata",
+  "Structure",
+  "Template",
+  "Text",
+  "Validation",
+  "YesNo"
 ]
 ```
 
 ### getVariables
 
-TODO.
+List all variables in a template.
 
 ```scala
 getVariables(
@@ -665,30 +648,62 @@ getVariables(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
-| `jsDefinedValues` | `js.Dictionary[Any]` | **Required.** TODO. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `jsDefinedValues` | `Object` | **Required.** An empty object in order to retrieve all variables. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+Openlaw.getVariables(executionResult.executionResult, {});
 ```
 
 **Response**
 
-Returns `js.Array[VariableDefinition]` - TODO.
+Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which include information about a variable, including `defaultValue` and `name`.
+
+### getExecutedVariables
+
+List all executed variables in a template.
+
+```scala
+getExecutedVariables(
+  executionResult: TemplateExecutionResult,
+  jsDefinedValues: js.Dictionary[Any]
+): js.Array[VariableDefinition]
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
+| `jsDefinedValues` | `Object` | **Required.** The variable inputs for a template linked to a [deal](/markup-language/#deals) template. The object will be empty for templates that are not part of a deal. |
 
 Example
 
 ```
-[
-
-]
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const definedValues = {
+  Company Address: "{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}",
+  Company Name: "ABC, Inc.",
+  Corporation: "true",
+  Effective Date: "1537426800000",
+  LLC: "false",
+  PBC: "false"
+};
+Openlaw.getExecutedVariables(executionResult.executionResult, definedValues);
 ```
+
+**Response**
+
+Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which include information about a variable, including `defaultValue` and `name`. For a template linked to a [deal](/markup-language/#deals) template, the array will include only those variables that have not been provided an input value.
 
 ### getAllConditionalVariableNames
 
-TODO.
+List all conditional variables in a template, including [YesNo type variables](/markup-language/#yesno) and [conditionals](/markup-language/#conditionals-and-decision-branches).
 
 ```scala
 getAllConditionalVariableNames(
@@ -700,29 +715,35 @@ getAllConditionalVariableNames(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+Openlaw.getAllConditionalVariableNames(executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `js.Array[String]` - TODO.
+Returns an array of the names of conditional variables in a template as strings.
 
 Example
 
-```
+```js
 [
-
+  "Corporation",
+  "LLC",
+  "PBC",
+  "Open Source Software",
+  "VoiceImageLikeness"
 ]
 ```
 
 ### getSections
 
-TODO.
+List header names of [groupings](/markup-language/#groupings) in a template, which are used to organize a template's variables and conditionals.
 
 ```scala
 getSections(
@@ -734,29 +755,34 @@ getSections(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `document` | `TemplateExecutionResult` | **Required.** TODO. |
+| `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const document = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+Openlaw.getSections(document.executionResult);
 ```
 
 **Response**
 
-Returns `js.Array[String]` - TODO.
+Returns an array of header names of [groupings](/markup-language/#groupings) in a template as strings.
 
 Example
 
-```
+```js
 [
-
+  "Effective Date",
+  "Company Information",
+  "Employee Information",
+  "Other"
 ]
 ```
 
 ### getVariableSections
 
-TODO.
+List a template's variables and conditionals that are organized under header names of [groupings](/markup-language/#groupings) in a template.
 
 ```scala
 getVariableSections(
@@ -768,27 +794,57 @@ getVariableSections(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `document` | `TemplateExecutionResult` | **Required.** TODO. |
+| `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute`](#execute) and [`executeForReview`](#executeforreview) methods. |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const document = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+Openlaw.getVariableSections(document.executionResult);
 ```
 
 **Response**
 
-Returns `js.Dictionary[js.Array[String]]` - TODO.
+Returns an object containing the header names of [groupings](/markup-language/#groupings) in a template and arrays of variable names associated with each grouping as strings.
 
 Example
 
-```
-
+```js
+{
+  Company Information: [
+    "Company Name",
+    "Company Address",
+    "Company Signatory First Name",
+    "Company Signatory Last Name",
+    "Company Signatory Position"
+  ],
+  Effective Date: ["Effective Date"],
+  Employee Information: [
+    "Employee First Name",
+    "Employee Last Name",
+    "Employee Address",
+    "Employee Position",
+    "Position of Supervisor",
+    "Payment Start Date",
+    "Payment End Date",
+    "Salary in Ether",
+    "Recipient Address",
+    "Employee Responsibilities",
+    "Days of Vacation"
+  ],
+  Other: [
+    "Additional Agreements",
+    "Confidentiality Agreement",
+    "Dispute Resolution",
+    "Governing Law"
+  ]
+}
 ```
 
 ### isDeal
 
-TODO.
+Check if template is a [deal](/markup-language/#deals) template.
 
 ```scala
 isDeal(
@@ -800,23 +856,18 @@ isDeal(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `template` | `CompiledTemplate` | **Required.** TODO. |
+| `template` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate`](#compiletemplate) method. |
 
 Example
 
-```
-
+```js
+const compiledTemplate = Openlaw.compileTemplate("<%\n==Effective Date==\n[[Effective Date: Date]]\n\n==Company Name and Address==\n[[Company Name]]\n[[Company Address:Address]]\n[[Corporation:YesNo \"Is the company a corporation?\"]]\n[[LLC:YesNo \"An LLC?\"]]\n...");
+Openlaw.isDeal(compiledTemplate.compiledTemplate);
 ```
 
 **Response**
 
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
+Returns `true` if template is a [deal](/markup-language/#deals) template.
 
 ## Individual Variable
 
@@ -1998,11 +2049,26 @@ A `TemplateExecutionResult` object is part of the return object from the [`execu
 
 A `ValidationResult` object contains information about a compiled and executed template.
 
-```scala
+```js
 {
-  identities: Seq[VariableDefinition],
-  missingInputs: Seq[VariableName],
-  missingIdentities: Seq[VariableName],
-  validationExpressionErrors: Seq[String]
+  identities: Object,
+  missingInputs: Object,
+  missingIdentities: Object,
+  validationExpressionErrors: Object
+}
+```
+
+### VariableDefinition
+
+A `VariableDefinition` object contains information about a variable in a compiled and executed template.
+
+```js
+{
+  defaultValue: Object,
+  description: Object,
+  formatter: Object,
+  isHidden: Boolean,
+  name: Object,
+  variableTypeDefinition: Object
 }
 ```
