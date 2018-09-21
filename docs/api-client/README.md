@@ -1167,24 +1167,31 @@ GET /address/details
 Example
 
 ```
-
+GET /address/details?placeId=ChIJWbGLkg9gwokR76ZxzYbdnpM
 ```
 
 **Response**
 
-Returns an object containing information about an address, including `streetNumber`, `streetName`, `city`, `state`, `zipCode`, and `country`.
+Returns a JSON object containing information about the selected address.
 
 Example
 
-```
+```json
 {
-
+  "city": "Queens",
+  "placeId": "ChIJWbGLkg9gwokR76ZxzYbdnpM",
+  "state": "New York",
+  "zipCode": "11354",
+  "country": "United States",
+  "streetName": "Main Street",
+  "streetNumber": "123",
+  "address": "123 Main St, Flushing, NY 11354, USA"
 }
 ```
 
 ### searchAddress
 
-Method used as part of `AddressVariable` and the Google Maps API to autosuggest addresses based on input. An [Address variable](/markup-language/#address) generates an address using the Google Maps API.
+Method used as part of `AddressVariable` and the Google Maps API to autosuggest addresses based on user input. An [Address variable](/markup-language/#address) generates an address using the Google Maps API.
 
 ```
 GET /address/search
@@ -1195,25 +1202,44 @@ GET /address/search
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `term` | `string` | **Required.** The input term to filter returned addresses. |
-| `latitude` | `number` | **Required.** The latitude of the address. |
-| `longitude` | `number` | **Required.** The longitude of the address. |
+| `latitude` | `number` | **Required.** The latitude of the address is equal to `0` for the search. |
+| `longitude` | `number` | **Required.** The longitude of the address is equal to `0` for the search. |
 
 Example
 
 ```
-
+GET /address/search?latitude=0&longitude=0&term=123%20main%20street%2C%20new
 ```
 
 **Response**
 
-Returns an object containing an `address` and `placeId` which corresponds to the `address`.
+Returns an array of JSON objects containing autosuggested addresses based on the input term.
 
 Example
 
-```
-{
-
-}
+```json
+[
+  {
+    "address": "123 Main Street, Flushing, NY, USA",
+    "placeId": "ChIJWbGLkg9gwokR76ZxzYbdnpM"
+  },
+  {
+    "address": "123 Main Street, Buffalo, New York, USA",
+    "placeId": "ChIJkbYDwjYS04kRbyo3qzJ5v1M"
+  },
+  {
+    "address": "123 Main Street, Newport Beach, CA, USA",
+    "placeId": "EicxMjMgTWFpbiBTdHJlZXQsIE5ld3BvcnQgQmVhY2gsIENBLCBVU0EiMBIuChQKEgmTNYZsa-DcgBFFgpqM_iEQqhB7KhQKEgkXmkNua-DcgBFREQIR69IaTQ"
+  },
+  {
+    "address": "123 Main Street, White Plains, New York, USA",
+    "placeId": "ChIJf1oGTTaUwokRBm9myfcYp8g"
+  },
+  {
+    "address": "123 Main Street, Poughkeepsie, New York, USA",
+    "placeId": "ChIJ2fY6onU-3YkRO5AdRXV4nRQ"
+  }
+]
 ```
 
 ## Community Activity
@@ -1236,17 +1262,48 @@ GET /recentActivity
 Example
 
 ```
-
+GET /recentActivity?page=1&pageSize=5
 ```
 
 **Response**
 
-Returns an array of community activity events.
+Returns a JSON object containing the total number of community activity events and data for each retrieved event.
 
 Example
 
-```
-[
-
-]
+```json
+{
+  "nbHits": 100,
+  "data": [
+    {
+      "EventType": "UserCreated",
+      "user": "John Doe",
+      "timestamp": "2018-09-21T15:20:02.102772"
+    },
+    {
+      "EventType": "TemplateUpdated",
+      "creator": "openlawuser+1",
+      "timestamp": "2018-09-21T12:15:26.31683",
+      "title": "Sample Agreement"
+    },
+    {
+      "EventType": "TemplateUpdated",
+      "creator": "openlawuser+1",
+      "timestamp": "2018-09-21T10:58:59.412818",
+      "title": "Advisor Agreement"
+    },
+    {
+      "EventType": "TemplateCreated",
+      "creator": "openlawuser+1",
+      "timestamp": "2018-09-21T09:45:40.854215",
+      "title": "Loan Agreement"
+    },
+    {
+      "EventType": "TemplateCreated",
+      "creator": "openlawuser+1",
+      "timestamp": "2018-09-21T07:18:11.321141",
+      "title": "Employee Stock Award"
+    }
+  ]
+}
 ```
