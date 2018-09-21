@@ -349,7 +349,7 @@ POST /upload/draft
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `params` | `Object` | **Required.** The draft object to be uploaded. |
+| `params` | `Object` | **Required.** The object containing information about the draft to be uploaded. |
 
 Example `params` payload
 
@@ -374,7 +374,7 @@ Example `params` payload
 
 **Response**
 
-Returns a promise which resolves with the ID of the uploaded draft.
+Returns a promise which resolves with the string ID of the uploaded draft.
 
 Example
 
@@ -656,24 +656,47 @@ POST /upload/contract
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `params` | `Object` | **Required.** The contract object to be uploaded. |
+| `params` | `Object` | **Required.** The object containing information about the contract to be uploaded. |
 
-Example
+Example `params` payload
 
-```
+```json
 {
-
+  "templateId":"d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
+  "title":"Advisor Agreement",
+  "text":"This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  "creator":"8f26427b-0853-469b-a4f1-132190b7373e",
+  "parameters":{
+    "Company Name":"ABC, Inc.",
+    "Effective Date":"1537426800000",
+    "Number of Shares":"1000",
+    "Years Vesting":"4",
+    "Unit of Vesting":"250",
+    "Company Signatory Email":"{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
+    "Advisor Name":"John Smith",
+    "Company Signatory":"Mary Davis",
+    "Advisor Email":"{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}",
+    "Time of Vesting":"Yearly",
+    "No Services":"false",
+    "Advisor Address":"{\"placeId\":\"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB\",\"streetName\":\"Main Street\",\"streetNumber\":\"987\",\"city\":\"Brooklyn\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11201\",\"formattedAddress\":\"987 Main St, Brooklyn, NY 11201, USA\"}",
+    "Company Address":"{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"
+  },
+  "overriddenParagraphs":{},
+  "agreements":{},
+  "readonlyEmails":[],
+  "editEmails":[],
+  "draftId":"8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
 }
 ```
 
 **Response**
 
-Returns `Promise<string>` - a promise which resolves with the ID of the uploaded contract.
+Returns a promise which resolves with the string ID of the uploaded contract.
 
 Example
 
 ```
-
+"8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
 ```
 
 ### getContract
@@ -693,24 +716,42 @@ GET /contract/raw/:contractId
 Example
 
 ```
-
+GET /contract/raw/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a
 ```
 
 **Response**
 
-Returns `Promise<Object>` - a promise which resolves with a contract object.
+Returns a promise which resolves with a JSON object containing information about the retrieved contract, including its contents.
 
 Example
 
-```
+```json
 {
-
+  "parameters": {
+    "Company Name": "ABC, Inc.",
+    "Effective Date": "1537426800000",
+    "Number of Shares": "1000",
+    "Years Vesting": "4",
+    "Unit of Vesting": "250",
+    "Company Signatory Email": "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
+    "Advisor Name": "John Smith",
+    "Company Signatory": "Mary Davis",
+    "Advisor Email": "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}",
+    "Time of Vesting": "Yearly",
+    "No Services": "false",
+    "Advisor Address": "{\"placeId\":\"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB\",\"streetName\":\"Main Street\",\"streetNumber\":\"987\",\"city\":\"Brooklyn\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11201\",\"formattedAddress\":\"987 Main St, Brooklyn, NY 11201, USA\"}",
+    "Company Address": "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"
+  },
+  "paragraphs": {},
+  "content": "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  "signatures": {},
+  "templates": {}
 }
 ```
 
 ### searchContracts
 
-List contracts based on search term.
+List contracts based on search by title, alias (private name), and signatories.
 
 ```
 GET /contracts/search
@@ -720,7 +761,7 @@ GET /contracts/search
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter displayed contracts. |
+| `keyword` | `string` | **Required.** The search term to filter retrieved contracts. |
 | `page` | `number` | **Required.** Which group of contracts to display. Each group consists of `pageSize` contracts. |
 | `pageSize` | `number` | **Required.** The number of contracts to display on page. |
 | `sortBy` | `string` | **Required.** The way in which returned contracts are to be sorted: `creationdate`, `privatename`, or `title` |
@@ -728,19 +769,73 @@ GET /contracts/search
 Example
 
 ```
-
+GET /contracts/search?keyword=advisor&page=1&pageSize=10&sortBy=creationdate
 ```
 
 **Response**
 
-Returns an array of contracts.
+Returns a JSON object containing the number of search hits and data for the retrieved contracts.
 
 Example
 
-```
-[
+```json
+{
+  "nbHits": 3,
+  "data": [
+    {
+      "id": "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a",
+      "title": "Advisor Agreement",
+      "creator": "openlawuser+1",
+      "creationDate": 1537540029000,
+      "privateName": "Advisor Agreement",
+      "signatories": [
+        "openlawuser+1",
+        "openlawuser+2"
+      ],
+      "signaturesDone": [
 
-]
+      ],
+      "executionState": "created",
+      "hasPendingActions": true,
+      "hasExecutions": false
+    },
+    {
+      "id": "2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e",
+      "title": "Advisor Agreement",
+      "creator": "openlawuser+1",
+      "creationDate": 1537391343000,
+      "privateName": "Advisor Agreement",
+      "signatories": [
+        "openlawuser+1",
+        "openlawuser+2"
+      ],
+      "signaturesDone": [
+        "8f26427b-0853-469b-a4f1-132190b7373e"
+      ],
+      "executionState": "created",
+      "hasPendingActions": true,
+      "hasExecutions": false
+    },
+    {
+      "id": "84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7",
+      "title": "Advisor Agreement",
+      "creator": "openlawuser+2",
+      "creationDate": 1537305436000,
+      "privateName": "Advisor Agreement",
+      "signatories": [
+        "openlawuser+1",
+        "openlawuser+2"
+      ],
+      "signaturesDone": [
+        "38e0eb6b-0d52-4fd8-a77d-19686fd3843a",
+        "8f26427b-0853-469b-a4f1-132190b7373e"
+      ],
+      "executionState": "running",
+      "hasPendingActions": false,
+      "hasExecutions": false
+    }
+  ]
+}
 ```
 
 ### sendContract
@@ -761,15 +856,15 @@ POST /send/contract
 | `editEmails` | `Array<string>` | An array of users' emails who will have access to edit the contract.
 | `id` | `string` | **Required.** The ID of the contract to be sent.
 
-Example
+Example form data
 
 ```
-
+editEmails=openlawuser%2B3%40gmail.com&id=8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a&readonlyEmails=openlawuser%2B4%40gmail.com
 ```
 
 ### changeContractAlias
 
-Change private name of contract.
+Change alias (private name) of contract.
 
 ```
 GET /contract/alias/:contractId
@@ -779,18 +874,22 @@ GET /contract/alias/:contractId
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `contractId` | `string` | **Required.** The ID of the contract to be given a new private name. |
-| `newName` | `string` | **Required.** The new private name of the contract. |
+| `contractId` | `string` | **Required.** The ID of the contract to be given a new alias. |
+| `newName` | `string` | **Required.** The new alias of the contract. |
 
 Example
 
 ```
-
+GET /contract/alias/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a?contractId=8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a&newName=Advisor%20Agreement%20Final%20Copy
 ```
+
+**Response**
+
+Returns `"name changed"` if alias was successfully changed.
 
 ### stopContract
 
-Stop smart contract transactions that are pending for an executed contract.
+Stop smart contract transactions that are pending for a signed contract.
 
 ```
 GET /contract/stop/:id
@@ -805,12 +904,16 @@ GET /contract/stop/:id
 Example
 
 ```
-
+GET /contract/stop/1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b
 ```
+
+**Response**
+
+Returns `"contract stopped"` if smart contract transactions were successfully stopped.
 
 ### resumeContract
 
-Resume scheduled execution of smart contract transactions that were stopped for an executed contract.
+Resume scheduled execution of smart contract transactions that were stopped for a signed contract.
 
 ```
 GET /contract/resume/:id
@@ -825,8 +928,12 @@ GET /contract/resume/:id
 Example
 
 ```
-
+GET /contract/resume/1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b
 ```
+
+**Response**
+
+Returns `"contract resumed"` if smart contract transactions were successfully resumed.
 
 ## User
 
