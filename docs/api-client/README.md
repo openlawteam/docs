@@ -939,7 +939,7 @@ Returns `"contract resumed"` if smart contract transactions were successfully re
 
 ### getUserDetails
 
-Method used as part of `IdentityVariable` to get information about a user. An [Identity variable](/markup-language/#identity-and-signatures) allows a party to electronically sign an agreement and store that electronic signature (along with the cryptographic hash of the contract) on the blockchain.
+Method used as part of `IdentityVariable` to get information about a contract signatory. An [Identity variable](/markup-language/#identity-and-signatures) allows a party to electronically sign an agreement and store that electronic signature (along with the cryptographic hash of the contract) on the blockchain.
 
 ```
 GET /user/details
@@ -954,24 +954,32 @@ GET /user/details
 Example
 
 ```
-
+GET /user/details?email=openlawuser%2B1%40gmail.com
 ```
 
 **Response**
 
-Returns an object containing information about a user, including `id`, `name`, `email`, and `identifiers`.
+Returns a JSON object containing information about a contract signatory.
 
 Example
 
-```
+```json
 {
-
+  "id": "8f26427b-0853-469b-a4f1-132190b7373e",
+  "name": "openlawuser+1",
+  "email": "openlawuser+1@gmail.com",
+  "identifiers": [
+    {
+      "provider": "openlaw",
+      "id": "openlawuser+1@gmail.com"
+    }
+  ]
 }
 ```
 
 ### searchUsers
 
-List users based on search term.
+List users based on search by name and email.
 
 ```
 GET /users/search
@@ -981,26 +989,40 @@ GET /users/search
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter displayed users. |
+| `keyword` | `string` | **Required.** The search term to filter retrieved users. |
 | `page` | `number` | **Required.** Which group of users to display. Each group consists of `pageSize` users. |
 | `pageSize` | `number` | **Required.** The number of users to display on page. |
 
 Example
 
 ```
-
+GET /users/search?keyword=john&page=1&pageSize=25
 ```
 
 **Response**
 
-Returns an array of users.
+Returns a JSON object containing the number of search hits and data for the retrieved users.
 
 Example
 
-```
-[
-
-]
+```json
+{
+  "nbHits": 2,
+  "data": [
+    {
+      "id": "1ca57c56-e08c-48cc-8727-d516d6a8363c",
+      "email": "openlawuser+5@gmail.com",
+      "name": "John Doe",
+      "role": "user"
+    },
+    {
+      "id": "f0bf888a-1f45-4277-a6d0-a71bb95095ed",
+      "email": "openlawuser+6@gmail.com",
+      "name": "John Smith",
+      "role": "user"
+    }
+  ]
+}
 ```
 
 ### toAdminUser
@@ -1020,7 +1042,17 @@ GET /users/toadmin
 Example
 
 ```
+GET /users/toadmin?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
+```
 
+**Response**
+
+Returns confirmation that the user role was changed if successful.
+
+Example
+
+```
+"f0bf888a-1f45-4277-a6d0-a71bb95095ed is now admin!"
 ```
 
 ### toRestricted
@@ -1040,7 +1072,17 @@ GET /users/torestricted
 Example
 
 ```
+GET /users/torestricted?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
+```
 
+**Response**
+
+Returns confirmation that the user role was changed if successful.
+
+Example
+
+```
+"f0bf888a-1f45-4277-a6d0-a71bb95095ed is now restricted user again!"
 ```
 
 ### toStandardUser
@@ -1060,7 +1102,17 @@ GET /users/touser
 Example
 
 ```
+GET /users/touser?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
+```
 
+**Response**
+
+Returns confirmation that the user role was changed if successful.
+
+Example
+
+```
+"f0bf888a-1f45-4277-a6d0-a71bb95095ed is now user again!"
 ```
 
 ### deleteUser
@@ -1080,18 +1132,19 @@ GET /users/delete
 Example
 
 ```
-
+GET /users/delete?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
 
 **Response**
 
-Returns object indicating whether deleted user was current user or another user (deleted by an `Admin` user).
+Returns JSON object containing the user ID and a page reload value which would be `true` if deleted user was current user and `false` if user was deleted by an `Admin` user.
 
 Example
 
-```
+```json
 {
-
+  "userId": "f0bf888a-1f45-4277-a6d0-a71bb95095ed",
+  "reload": false
 }
 ```
 
