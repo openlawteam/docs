@@ -887,7 +887,7 @@ showInForm(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
@@ -918,7 +918,7 @@ getType(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
@@ -958,7 +958,7 @@ getName(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
@@ -998,7 +998,7 @@ getDescription(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
@@ -1038,7 +1038,7 @@ getCleanName(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
@@ -1080,7 +1080,7 @@ checkValidity(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `optValue` | `String` | **Required.** The value of the variable input as a string. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
@@ -1091,7 +1091,8 @@ Example (for [Identity variable](/markup-language/#identity-and-signatures))
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
-Openlaw.checkValidity(variable, "openlawuser@gmail.com", executionResult.executionResult);
+const identityValue = '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
+Openlaw.checkValidity(variable, identityValue, executionResult.executionResult);
 ```
 
 **Response**
@@ -1112,7 +1113,7 @@ isHidden(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variableDefinition` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variableDefinition` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
@@ -1273,7 +1274,7 @@ isChoiceType(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
@@ -1305,7 +1306,7 @@ getChoiceValues(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
@@ -1354,7 +1355,7 @@ getCollectionSize(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
@@ -1389,7 +1390,7 @@ createVariableFromCollection(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `index` | `Int` | **Required.** The index number of the new element in the Collection. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
@@ -1423,7 +1424,7 @@ addElementToCollection(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the new element is added) in JSON format. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
@@ -1468,7 +1469,7 @@ setElementToCollection(
 | ---- | ---- | ----------- |
 | `optValue` | `String` | **Required.** The value for the added element as a string. |
 | `index` | `Int` | **Required.** The index number of the new element in the Collection. |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `collectionValue` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the value is set for the added element) in JSON format. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
@@ -1511,7 +1512,7 @@ removeElementFromCollection(
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `index` | `Int` | **Required.** The index number of the element to be removed from the Collection. |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 | `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the element is removed) in JSON format. |
 
@@ -1553,7 +1554,7 @@ getCollectionElementValue(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 | `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. |
 | `index` | `Int` | **Required.** The index number of the element to be checked in the Collection. |
@@ -1595,7 +1596,7 @@ getCollectionValue(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) of the variable. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 | `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. The value will be an empty string if the Collection does not have a set value for its first element. |
 
@@ -1624,7 +1625,7 @@ Example
 
 ### noIdentity
 
-TODO.
+Check if template has no [Identity variables](/markup-language/#identity-and-signatures).
 
 ```scala
 noIdentity(
@@ -1636,27 +1637,24 @@ noIdentity(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `result` | `ValidationResult` | **Required.** TODO. |
+| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const validationResult = Openlaw.validateContract(executionResult.executionResult);
+Openlaw.noIdentity(validationResult);
 ```
 
 **Response**
 
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
+Returns `true` if template does not have any [Identity variables](/markup-language/#identity-and-signatures).
 
 ### missingIdentities
 
-TODO.
+Check if template is missing an input value for any [Identity variable](/markup-language/#identity-and-signatures).
 
 ```scala
 missingIdentities(
@@ -1668,27 +1666,24 @@ missingIdentities(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `result` | `ValidationResult` | **Required.** TODO. |
+| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const validationResult = Openlaw.validateContract(executionResult.executionResult);
+Openlaw.missingIdentities(validationResult);
 ```
 
 **Response**
 
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
+Returns `true` if template is missing a value for any [Identity variable](/markup-language/#identity-and-signatures).
 
 ### missingAllIdentities
 
-TODO.
+Check if template is missing input values for all [Identity variables](/markup-language/#identity-and-signatures).
 
 ```scala
 missingAllIdentities(
@@ -1700,27 +1695,24 @@ missingAllIdentities(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `result` | `ValidationResult` | **Required.** TODO. |
+| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const validationResult = Openlaw.validateContract(executionResult.executionResult);
+Openlaw.missingAllIdentities(validationResult);
 ```
 
 **Response**
 
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
+Returns `true` if template is missing values for all [Identity variables](/markup-language/#identity-and-signatures).
 
 ### getIdentityEmail
 
-TODO.
+Get the email address for an [Identity variable](/markup-language/#identity-and-signatures) value.
 
 ```scala
 getIdentityEmail(
@@ -1732,27 +1724,30 @@ getIdentityEmail(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `identity` | `Identity` | **Required.** TODO. |
+| `identity` | `Identity` | **Required.** An object containing information about an identity, including `email`, `id`, and `identifiers`. |
 
 Example
 
-```
-
+```js
+const identityValue = '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
+// see example above for #checkValidity for other parameters
+const identity = Openlaw.checkValidity(variable, identityValue, executionResult.executionResult);
+Openlaw.getIdentityEmail(identity);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns an email address for an [Identity variable](/markup-language/#identity-and-signatures) value as a string.
 
 Example
 
-```
-
+```js
+"openlawuser+1@gmail.com"
 ```
 
 ### getIdentityId
 
-TODO.
+Get ID for an [Identity variable](/markup-language/#identity-and-signatures) value.
 
 ```scala
 getIdentityId(
@@ -1764,127 +1759,30 @@ getIdentityId(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `identity` | `Identity` | **Required.** TODO. |
+| `identity` | `Identity` | **Required.** An object containing information about an identity, including `email`, `id`, and `identifiers`. |
 
 Example
 
-```
-
+```js
+const identityValue = '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
+// see example above for #checkValidity for other parameters
+const identity = Openlaw.checkValidity(variable, identityValue, executionResult.executionResult);
+Openlaw.getIdentityId(identity);
 ```
 
 **Response**
 
-Returns `String` - TODO.
+Returns an ID for an [Identity variable](/markup-language/#identity-and-signatures) value as a string.
 
 Example
 
-```
-
-```
-
-### createIdentityInternalValue
-
-TODO.
-
-```scala
-createIdentityInternalValue(
-  userId: js.UndefOr[String],
-  email: String
-): String
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `userId` | `js.UndefOr[String]` | **Required.** TODO. |
-| `email` | `String` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `String` - TODO.
-
-Example
-
-```
-
-```
-
-### createIdentity
-
-TODO.
-
-```scala
-createIdentity(
-  userId: js.UndefOr[String],
-  email: String
-): Identity
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `userId` | `js.UndefOr[String]` | **Required.** TODO. |
-| `email` | `String` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `Identity` - TODO.
-
-Example
-
-```
-
-```
-
-### getIdentityId
-
-TODO.
-
-```scala
-getIdentityId(
-  identity: js.UndefOr[Identity]
-): js.UndefOr[String]
-```
-
-**Parameters**
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `identity` | `js.UndefOr[Identity]` | **Required.** TODO. |
-
-Example
-
-```
-
-```
-
-**Response**
-
-Returns `js.UndefOr[String]` - TODO.
-
-Example
-
-```
-
+```js
+"8f26427b-0853-469b-a4f1-132190b7373e"
 ```
 
 ### getIdentities
 
-TODO.
+Get [Identity variables](/markup-language/#identity-and-signatures) that are missing input values.
 
 ```scala
 getIdentities(
@@ -1897,25 +1795,102 @@ getIdentities(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `validationResult` | `ValidationResult` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `validationResult` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const validationResult = Openlaw.validateContract(executionResult.executionResult);
+Openlaw.getIdentities(validationResult);
 ```
 
 **Response**
 
-Returns `js.Array[VariableDefinition]` - TODO.
+Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which includes information about an [Identity variable](/markup-language/#identity-and-signatures) missing an input value.
+
+### createIdentity
+
+Create an identity for a contract signatory.
+
+```scala
+createIdentity(
+  userId: js.UndefOr[String],
+  email: String
+): Identity
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `userId` | `String` | **Required.** A user ID. |
+| `email` | `String` | **Required.** The user's email address. |
 
 Example
 
+```js
+const userId = "8f26427b-0853-469b-a4f1-132190b7373e";
+const email = "openlawuser+1@gmail.com";
+Openlaw.createIdentity(userId, email);
 ```
-[
 
-]
+**Response**
+
+Returns an object containing information about an identity, including `email`, `id`, and `identifiers`.
+
+Example
+
+```js
+{
+  email: {email: "openlawuser+1@gmail.com"},
+  id: {value: {id: "8f26427b-0853-469b-a4f1-132190b7373e"}},
+  identifiers: {
+    head: {
+      identityProvider: "openlaw",
+      identifier: "openlawuser+1@gmail.com"
+    },
+    tl: {}
+  }
+}
+```
+
+### createIdentityInternalValue
+
+Create an identity internal value for a contract signatory.
+
+```scala
+createIdentityInternalValue(
+  userId: js.UndefOr[String],
+  email: String
+): String
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `userId` | `String` | **Required.** A user ID. |
+| `email` | `String` | **Required.** The user's email address. |
+
+Example
+
+```js
+const userId = "8f26427b-0853-469b-a4f1-132190b7373e";
+const email = "openlawuser+1@gmail.com";
+Openlaw.createIdentityInternalValue(userId, email);
+```
+
+**Response**
+
+Returns information about an identity, including `email`, `id`, and `identifiers`, as a string in JSON format.
+
+Example
+
+```js
+'{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}'
 ```
 
 ## Structure
