@@ -18,7 +18,7 @@ compileTemplate(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `text` | `string` | **Required.** The raw content of the template (including markup language) to be compiled. |
+| `text` | `String` | **Required.** The raw content of the template (including markup language) to be compiled. |
 
 Example
 
