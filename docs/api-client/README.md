@@ -91,7 +91,7 @@ Example
 
 **Response**
 
-Returns `Promise<Array<Template>>` - a promise which resolves with an array of [Template objects](#template-type).
+Returns `Promise<Array<Template>>` - a promise which resolves with an array of [`Template` objects](#template-type).
 
 Example
 
@@ -346,7 +346,7 @@ Example
 
 **Response**
 
-Returns `Promise<Array<Template>>` - a promise which resolves with an array of [template objects](#template-type).
+Returns `Promise<Array<Template>>` - a promise which resolves with an array of [`Template` objects](#template-type).
 
 Example
 
@@ -891,7 +891,7 @@ Example
 
 ### Template type
 
-A template object contains information about a specific template.
+A `Template` object contains information about a specific template.
 
 ```js
 {
