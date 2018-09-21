@@ -30,7 +30,7 @@ GET /template/raw/Advisor%20Agreement
 
 **Response**
 
-Returns `Promise<Object>` - a promise which resolves with a JSON object containing information about the retrieved template, including its contents.
+Returns a promise which resolves with a JSON object containing information about the retrieved template, including its contents.
 
 Example
 
@@ -56,7 +56,7 @@ GET /template/raw/:title/:version
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `title` | `string` | **Required.** The title of the template. |
-| `version` | `string` | **Required.** The version of the template. |
+| `version` | `string` | **Required.** The version number of the template. |
 
 Example
 
@@ -66,7 +66,7 @@ GET /template/raw/Advisor%20Agreement/15
 
 **Response**
 
-Returns `Promise<string>` - a promise which resolves with a string representation of the template contents.
+Returns a promise which resolves with a string representation of the template contents.
 
 Example
 
@@ -93,12 +93,12 @@ GET /templates/version
 Example
 
 ```
-GET /templates/version?title=Advisor%20Agreement&pageSize=3&page=1
+GET /templates/version?title=Advisor%20Agreement&pageSize=10&page=1
 ```
 
 **Response**
 
-Returns `Promise<Array<Template>>` - a promise which resolves with an array of JSON objects containing information about the retrieved templates.
+Returns a promise which resolves with an array of JSON objects containing information about the retrieved template versions.
 
 Example
 
@@ -199,12 +199,12 @@ POST /upload/template/:title
 | `title` | `string` | **Required.** The title of the template. |
 | `value` | `string` | **Required.** The template content to be saved. |
 
-Example
+Example (with `value` payload)
 
 ```
 POST /upload/template/Advisor%20Agreement
 
-value: "This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n"
+This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n
 ```
 
 **Response**
@@ -337,7 +337,7 @@ Example
 
 ### uploadDraft
 
-Upload a draft.
+Upload a draft which generates a draft ID.
 
 ```
 POST /upload/draft
@@ -351,22 +351,35 @@ POST /upload/draft
 | ---- | ---- | ----------- |
 | `params` | `Object` | **Required.** The draft object to be uploaded. |
 
-Example
+Example `params` payload
 
-```
+```json
 {
-
+  "templateId":"29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
+  "title":"Advisor Agreement",
+  "text":"This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  "creator":"8f26427b-0853-469b-a4f1-132190b7373e",
+  "parameters":{
+    "Company Name":"ABC, Inc.",
+    "Company Signatory Email":"{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
+    "Advisor Email":"{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}"
+  },
+  "overriddenParagraphs":{},
+  "agreements":{},
+  "readonlyEmails":[],
+  "editEmails":[],
+  "draftId":""
 }
 ```
 
 **Response**
 
-Returns `Promise<string>` - a promise which resolves with the ID of the uploaded draft.
+Returns a promise which resolves with the ID of the uploaded draft.
 
 Example
 
 ```
-
+"cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca"
 ```
 
 ### getDraftVersion
@@ -382,23 +395,86 @@ GET /draft/raw/:draftId/:version
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `draftId` | `string` | **Required.** The ID of the draft. |
-| `version` | `number` | **Required.** The version of the draft. |
+| `version` | `number` | **Required.** The version number of the draft. |
 
 Example
 
 ```
-
+GET /draft/raw/2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e/1
 ```
 
 **Response**
 
-Returns `Promise<Object>` - a promise which resolves with a draft object.
+Returns a promise which resolves with a JSON object containing information about the retrieved draft, including its contents.
 
 Example
 
-```
+```json
 {
-
+  "parameters": [
+    [
+      "Advisor Address",
+      "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"
+    ],
+    [
+      "Effective Date",
+      "1537340400000"
+    ],
+    [
+      "Unit of Vesting",
+      "250"
+    ],
+    [
+      "Company Name",
+      "ABC, Inc."
+    ],
+    [
+      "Number of Shares",
+      "1000"
+    ],
+    [
+      "Company Signatory",
+      "Jane Davis"
+    ],
+    [
+      "Advisor Name",
+      "John Smith"
+    ],
+    [
+      "Advisor Email",
+      "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}"
+    ],
+    [
+      "Time of Vesting",
+      "Yearly"
+    ],
+    [
+      "Company Address",
+      "{\"placeId\":\"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB\",\"streetName\":\"Main Street\",\"streetNumber\":\"987\",\"city\":\"Brooklyn\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11201\",\"formattedAddress\":\"987 Main St, Brooklyn, NY 11201, USA\"}"
+    ],
+    [
+      "Years Vesting",
+      "4"
+    ],
+    [
+      "No Services",
+      "false"
+    ],
+    [
+      "Company Signatory Email",
+      "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}"
+    ]
+  ],
+  "paragraphs": [
+    [
+      0,
+      {
+        "0": "This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and John Smith (\"Advisor\") as of September 19, 2018 (\"Effective Date\"). The parties agree as follows:"
+      }
+    ]
+  ],
+  "content": "This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n\n",
+  "templates": {}
 }
 ```
 
@@ -421,24 +497,33 @@ GET /drafts/version
 Example
 
 ```
-
+GET /drafts/version?draftId=84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7&pageSize=10&page=1
 ```
 
 **Response**
 
-Returns `Promise<Array<Template>>` - a promise which resolves with an array of [`Template` objects](#template-type).
+Returns a promise which resolves with an array of JSON objects containing information about the retrieved draft versions.
 
 Example
 
-```
+```json
 [
-
+  {
+    "timestamp": 1537368290,
+    "creatorId": "8f26427b-0853-469b-a4f1-132190b7373e",
+    "version": 2
+  },
+  {
+    "timestamp": 1537305436,
+    "creatorId": "38e0eb6b-0d52-4fd8-a77d-19686fd3843a",
+    "version": 1
+  }
 ]
 ```
 
 ### searchDrafts
 
-List drafts based on search term.
+List drafts based on search by title, alias (private name), and signatories.
 
 ```
 GET /drafts/search
@@ -448,7 +533,7 @@ GET /drafts/search
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter displayed drafts. |
+| `keyword` | `string` | **Required.** The search term to filter retrieved drafts. |
 | `page` | `number` | **Required.** Which group of drafts to display. Each group consists of `pageSize` drafts. |
 | `pageSize` | `number` | **Required.** The number of drafts to display on page. |
 | `sortBy` | `string` | **Required.** The way in which returned drafts are to be sorted: `creationdate`, `privatename`, or `title` |
@@ -456,19 +541,54 @@ GET /drafts/search
 Example
 
 ```
-
+GET /drafts/search?keyword=advisor&page=1&pageSize=10&sortBy=creationdate
 ```
 
 **Response**
 
-Returns an array of drafts.
+Returns a JSON object containing the number of search hits and data for the retrieved drafts.
 
 Example
 
-```
-[
-
-]
+```json
+{
+  "nbHits": 3,
+  "data": [
+    {
+      "id": "f855e235132e84e94b2de69ac9c5be41faf55d5d3842ea55cd599af79ad0ab57",
+      "title": "Advisor Agreement",
+      "creator": "openlawuser+1",
+      "creationDate": 1537529656000,
+      "privateName": "Advisor Agreement",
+      "signatories": [
+        "8f26427b-0853-469b-a4f1-132190b7373e",
+        "38e0eb6b-0d52-4fd8-a77d-19686fd3843a"
+      ]
+    },
+    {
+      "id": "cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca",
+      "title": "Advisor Agreement",
+      "creator": "openlawuser+1",
+      "creationDate": 1537527568000,
+      "privateName": "Advisor Agreement",
+      "signatories": [
+        "8f26427b-0853-469b-a4f1-132190b7373e",
+        "38e0eb6b-0d52-4fd8-a77d-19686fd3843a"
+      ]
+    },
+    {
+      "id": "dad983eabe93c7fbf43f3969cc2b7509bccf2370b88b4d0710a857ace071ea3d",
+      "title": "Advisor Agreement",
+      "creator": "openlawuser+1",
+      "creationDate": 1537527030000,
+      "privateName": "Advisor Agreement",
+      "signatories": [
+        "8f26427b-0853-469b-a4f1-132190b7373e",
+        "38e0eb6b-0d52-4fd8-a77d-19686fd3843a"
+      ]
+    }
+  ]
+}
 ```
 
 ### sendDraft
@@ -489,15 +609,15 @@ POST /send/draft
 | `editEmails` | `Array<string>` | An array of users' emails who will have access to edit the draft.
 | `id` | `string` | **Required.** The ID of the draft to be sent.
 
-Example
+Example form data
 
 ```
-
+editEmails=openlawuser%2B3%40gmail.com&id=cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca&readonlyEmails=openlawuser%2B4%40gmail.com
 ```
 
 ### changeDraftAlias
 
-Change private name of draft.
+Change alias (private name) of draft.
 
 ```
 GET /draft/alias/:draftId
@@ -507,14 +627,18 @@ GET /draft/alias/:draftId
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `draftId` | `string` | **Required.** The ID of the draft to be given a new private name. |
-| `newName` | `string` | **Required.** The new private name of the contract. |
+| `draftId` | `string` | **Required.** The ID of the draft to be given a new alias. |
+| `newName` | `string` | **Required.** The new alias of the draft. |
 
 Example
 
 ```
-
+GET /draft/alias/cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca?draftId=cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca&newName=Advisor%20Agreement%20Draft%20Copy
 ```
+
+**Response**
+
+Returns `"name changed"` if alias was successfully changed.
 
 ## Contract
 
@@ -965,24 +1089,4 @@ Example
 [
 
 ]
-```
-
-## Shared Types
-
-### Template type
-
-A `Template` object contains information about a specific template.
-
-```js
-{
-  id: string,
-  name: string,
-  compiledTemplate: Object,
-  structuredDocument: Object,
-  timestamp: number,
-  title: string,
-  version: string,
-  index: number,
-  creatorId: string,
-}
 ```
