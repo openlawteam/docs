@@ -1261,7 +1261,7 @@ Example
 
 ### isChoiceType
 
-Check if variable is a [Choice type](/markup-language/#choice).
+Check if variable is a [Choice type](/markup-language/#choice) variable.
 
 ```scala
 isChoiceType(
@@ -1289,7 +1289,7 @@ Openlaw.isChoiceType(variable, executionResult.executionResult);
 
 **Response**
 
-Returns `true` if variable is a [Choice type](/markup-language/#choice).
+Returns `true` if variable is a [Choice type](/markup-language/#choice) variable.
 
 ### getChoiceValues
 
@@ -1897,7 +1897,7 @@ Example
 
 ### isStructuredType
 
-TODO.
+Check if variable is a [Structure type](/markup-language/#structure) variable.
 
 ```scala
 isStructuredType(
@@ -1910,28 +1910,26 @@ isStructuredType(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // variable being checked is first variable in template
+Openlaw.isStructuredType(variable, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `Boolean` - TODO.
-
-Example
-
-```
-
-```
+Returns `true` if variable is a [Structure type](/markup-language/#structure) variable.
 
 ### getStructureFieldDefinitions
 
-TODO.
+Get variable fields in a [Structure type](/markup-language/#structure) variable.
 
 ```scala
 getStructureFieldDefinitions(
@@ -1944,30 +1942,26 @@ getStructureFieldDefinitions(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Structure type
+Openlaw.getStructureFieldDefinitions(variable, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `js.Array[VariableDefinition]` - TODO.
-
-Example
-
-```
-[
-
-]
-```
+Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which includes information about a variable field in the [Structure type](/markup-language/#structure), including name and variable type.
 
 ### getStructureFieldValue
 
-TODO.
+Get value of a variable field in a [Structure type](/markup-language/#structure) variable.
 
 ```scala
 getStructureFieldValue(
@@ -1982,30 +1976,36 @@ getStructureFieldValue(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `field` | `VariableDefinition` | **Required.** TODO. |
-| `structureValue` | `js.UndefOr[String]` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the [Structure type](/markup-language/#structure) variable. |
+| `field` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable field. |
+| `structureValue` | `String` | **Required.** The variable fields with input values as a string in JSON format. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Structure type
+const field = Openlaw.getStructureFieldDefinitions(variable, executionResult.executionResult)[0]; // variable being checked is first variable field in Structure type variable
+const structureValue = '{"First name":"John","Last name":"Smith"}';
+Openlaw.getStructureFieldValue(variable, field, structureValue, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `js.UndefOr[String]` - TODO.
+Returns value of the variable field in a [Structure type](/markup-language/#structure) variable as a string.
 
 Example
 
-```
-
+```js
+"John"
 ```
 
 ### setStructureFieldValue
 
-TODO.
+Set value of a variable field in a [Structure type](/markup-language/#structure) variable.
 
 ```scala
 setStructureFieldValue(
@@ -2021,26 +2021,31 @@ setStructureFieldValue(
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `variable` | `VariableDefinition` | **Required.** TODO. |
-| `fieldName` | `String` | **Required.** TODO. |
-| `fieldValue` | `js.UndefOr[String]` | **Required.** TODO. |
-| `structureValue` | `js.UndefOr[String]` | **Required.** TODO. |
-| `executionResult` | `TemplateExecutionResult` | **Required.** TODO. |
+| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the [Structure type](/markup-language/#structure) variable. |
+| `fieldName` | `String` | **Required.** Name of variable field to be set with value. |
+| `fieldValue` | `String` | **Required.** The value to be set in the variable field. |
+| `structureValue` | `String` | **Required.** The current variable fields with input values (before the new value is set) in JSON format. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
-```
-
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
+const variable = allVariables[0]; // first variable in template is a Structure type
+const structureValue = '{"First name":"John","Last name":"Smith"}';
+Openlaw.getStructureFieldValue(variable, "Position", "CTO", structureValue, executionResult.executionResult);
 ```
 
 **Response**
 
-Returns `js.UndefOr[String]` - TODO.
+Returns a string of the current variable fields with input values in a [Structure type](/markup-language/#structure) (after the new value is set) in JSON format.
 
 Example
 
-```
-
+```js
+'{"Last name":"Smith","First name":"John","Position":"CTO"}'
 ```
 
 ## Shared Types
