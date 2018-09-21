@@ -2,6 +2,10 @@
 
 The OpenLaw REST API in APIClient.js is an interface in the OpenLaw protocol for querying, saving, and changing data in an OpenLaw instance. The API methods are categorized below.
 
+For GET requests, any parameters not included as a segment in the path can be passed as an HTTP query string parameter.
+
+For POST requests, any parameters not included as a segment in the path should be data of the specified Content-Type.
+
 ## Template
 
 ### getTemplate
@@ -21,18 +25,21 @@ GET /template/raw/:title
 Example
 
 ```
-
+GET /template/raw/Advisor%20Agreement
 ```
 
 **Response**
 
-Returns `Promise<Object>` - a promise which resolves with a template object.
+Returns `Promise<Object>` - a promise which resolves with a JSON object containing information about the retrieved template, including its contents.
 
 Example
 
-```
+```json
 {
-
+  "id": "d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
+  "title": "Advisor Agreement",
+  "content": "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  "templateType": "agreement"
 }
 ```
 
@@ -54,7 +61,7 @@ GET /template/raw/:title/:version
 Example
 
 ```
-
+GET /template/raw/Advisor%20Agreement/15
 ```
 
 **Response**
@@ -64,7 +71,7 @@ Returns `Promise<string>` - a promise which resolves with a string representatio
 Example
 
 ```
-
+"This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n"
 ```
 
 ### getTemplateVersions
@@ -86,24 +93,47 @@ GET /templates/version
 Example
 
 ```
-
+GET /templates/version?title=Advisor%20Agreement&pageSize=3&page=1
 ```
 
 **Response**
 
-Returns `Promise<Array<Template>>` - a promise which resolves with an array of [`Template` objects](#template-type).
+Returns `Promise<Array<Template>>` - a promise which resolves with an array of JSON objects containing information about the retrieved templates.
 
 Example
 
-```
+```json
 [
-
+  {
+    "id": "d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
+    "title": "Advisor Agreement",
+    "timestamp": 1537509029000,
+    "version": 15,
+    "templateType": "agreement",
+    "creatorId": "openlawuser+1"
+  },
+  {
+    "id": "8a1e1471d3d38b8c1ab44092388089814b7d986375648fb441719680917e6730",
+    "title": "Advisor Agreement",
+    "timestamp": 1537509001000,
+    "version": 14,
+    "templateType": "agreement",
+    "creatorId": "openlawuser+2"
+  },
+  {
+    "id": "7f86a0db26f2014e1ebceec214f4a7bfa004741b1bfc1448c4914e3bc17c0804",
+    "title": "Advisor Agreement",
+    "timestamp": 1537444950000,
+    "version": 13,
+    "templateType": "agreement",
+    "creatorId": "openlawuser+1"
+  }
 ]
 ```
 
 ### templateSearch
 
-List templates based on search term.
+List templates based on search by title.
 
 ```
 GET /templates/search
@@ -113,26 +143,43 @@ GET /templates/search
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter displayed templates. |
+| `keyword` | `string` | **Required.** The search term to filter retrieved templates. |
 | `page` | `number` | **Required.** Which group of templates to display. Each group consists of `pageSize` templates. |
 | `pageSize` | `number` | **Required.** The number of templates to display on page. |
 
 Example
 
 ```
-
+GET /templates/search?keyword=employee&page=1&pageSize=10
 ```
 
 **Response**
 
-Returns an array of templates.
+Returns a JSON object containing the number of search hits and data for the retrieved templates.
 
 Example
 
-```
-[
-
-]
+```json
+{
+  "nbHits": 3,
+  "data": [
+    {
+      "id": "9958a927caafaf6d406bfa3ee3c0c43980aab21050f9573be2c75787bd3f5dd9",
+      "title": "Employee Offer Letter",
+      "templateType": "agreement"
+    },
+    {
+      "id": "c718cd447e674042d3f2ac843439c18cd04e921869e389959943fc9991123632",
+      "title": "Employee Onboarding",
+      "templateType": "deal"
+    },
+    {
+      "id": "22cc8da7f456abca9286be5957a40a0a32cce3f28c13fa848a0936a8518b6c02",
+      "title": "Employee Stock Award",
+      "templateType": "agreement"
+    }
+  ]
+}
 ```
 
 ### saveTemplate
@@ -143,7 +190,7 @@ Save a template after changes are made.
 POST /upload/template/:title
 ```
 
-**Headers:** `'Content-Type': 'text/plain;charset=UTF-8'`
+**Content-Type:** `text/plain;charset=UTF-8`
 
 **Parameters**
 
@@ -155,7 +202,24 @@ POST /upload/template/:title
 Example
 
 ```
+POST /upload/template/Advisor%20Agreement
 
+value: "This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n"
+```
+
+**Response**
+
+Returns a JSON object containing information about the saved template.
+
+Example
+
+```json
+{
+  "id":"29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
+  "title":"Advisor Agreement",
+  "content":"This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  "templateType":"agreement"
+}
 ```
 
 ### renameTemplate
@@ -170,14 +234,18 @@ GET /templates/rename
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `oldName` | `string` | **Required.** The current title of the template to be renamed. |
+| `name` | `string` | **Required.** The current title of the template to be renamed. |
 | `newName` | `string` | **Required.** The new title of the template. |
 
 Example
 
 ```
-
+GET /templates/rename?name=Advisor%20Agreement&newName=New%20Advisor%20Agreement
 ```
+
+**Response**
+
+Returns `"renamed"` if template was successfully renamed.
 
 ### deleteTemplate
 
@@ -196,8 +264,12 @@ GET /templates/delete
 Example
 
 ```
-
+GET /templates/delete?name=Loan%20Agreement
 ```
+
+**Response**
+
+Returns `"Template deleted!"` if template was successfully deleted.
 
 ### restoreTemplate
 
@@ -216,12 +288,16 @@ GET /templates/restore
 Example
 
 ```
-
+GET /templates/restore?name=Loan%20Agreement
 ```
+
+**Response**
+
+Returns `"Template restored!"` if template was successfully restored.
 
 ### searchDeletedTemplates
 
-List deleted templates based on search term.
+List deleted templates based on search by title.
 
 ```
 GET /templates/searchDeleted
@@ -231,26 +307,30 @@ GET /templates/searchDeleted
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter displayed deleted templates. |
+| `keyword` | `string` | **Required.** The search term to filter retrieved deleted templates. |
 | `page` | `number` | **Required.** Which group of deleted templates to display. Each group consists of `pageSize` deleted templates. |
 | `pageSize` | `number` | **Required.** The number of deleted templates to display on page. |
 
 Example
 
 ```
-
+GET /templates/searchDeleted?keyword=employee&page=1&pageSize=10
 ```
 
 **Response**
 
-Returns an array of templates.
+Returns a JSON object containing the number of search hits and the names of the retrieved deleted templates.
 
 Example
 
-```
-[
-
-]
+```json
+{
+  "nbHits": 2,
+  "data": [
+    "Insider Trading Policy for Employees",
+    "Employee Stock Award"
+  ]
+}
 ```
 
 ## Draft
@@ -263,7 +343,7 @@ Upload a draft.
 POST /upload/draft
 ```
 
-**Headers:** `'Content-Type': 'text/plain;charset=UTF-8'`
+**Content-Type:** `text/plain;charset=UTF-8`
 
 **Parameters**
 
@@ -399,7 +479,7 @@ Send a draft to other users.
 POST /send/draft
 ```
 
-**Headers:** `'Content-Type': 'application/x-www-form-urlencoded'`
+**Content-Type:** `application/x-www-form-urlencoded`
 
 **Parameters**
 
@@ -446,7 +526,7 @@ Upload a contract.
 POST /upload/contract
 ```
 
-**Headers:** `'Content-Type': 'text/plain;charset=UTF-8'`
+**Content-Type:** `text/plain;charset=UTF-8`
 
 **Parameters**
 
@@ -547,7 +627,7 @@ Send a contract to other users.
 POST /send/contract
 ```
 
-**Headers:** `'Content-Type': 'application/x-www-form-urlencoded'`
+**Content-Type:** `application/x-www-form-urlencoded`
 
 **Parameters**
 
