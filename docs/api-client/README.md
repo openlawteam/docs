@@ -30,7 +30,7 @@ GET /template/raw/Advisor%20Agreement
 
 **Response**
 
-Returns a promise which resolves with a JSON object containing information about the retrieved template, including its contents.
+Returns a promise which resolves with a JSON object containing information about the retrieved template, including its content.
 
 Example
 
@@ -66,7 +66,7 @@ GET /template/raw/Advisor%20Agreement/15
 
 **Response**
 
-Returns a promise which resolves with a string representation of the template contents.
+Returns a promise which resolves with a string representation of the template's raw content.
 
 Example
 
@@ -405,7 +405,7 @@ GET /draft/raw/2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e/
 
 **Response**
 
-Returns a promise which resolves with a JSON object containing information about the retrieved draft, including its contents.
+Returns a promise which resolves with a JSON object containing information about the retrieved draft, including its content.
 
 Example
 
@@ -721,7 +721,7 @@ GET /contract/raw/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd24
 
 **Response**
 
-Returns a promise which resolves with a JSON object containing information about the retrieved contract, including its contents.
+Returns a promise which resolves with a JSON object containing information about the retrieved contract, including its content.
 
 Example
 
