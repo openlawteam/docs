@@ -612,7 +612,7 @@ POST /send/draft
 Example form data
 
 ```
-editEmails=openlawuser%2B3%40gmail.com&id=cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca&readonlyEmails=openlawuser%2B4%40gmail.com
+editEmails=openlawuser%2B3%40gmail.com&id=cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca&readonlyEmails=openlawuser%2B4%40gmail.com&readonlyEmails=openlawuser%2B5%40gmail.com
 ```
 
 ### changeDraftAlias
@@ -859,7 +859,7 @@ POST /send/contract
 Example form data
 
 ```
-editEmails=openlawuser%2B3%40gmail.com&id=8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a&readonlyEmails=openlawuser%2B4%40gmail.com
+editEmails=openlawuser%2B3%40gmail.com&id=8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a&readonlyEmails=openlawuser%2B4%40gmail.com&readonlyEmails=openlawuser%2B5%40gmail.com
 ```
 
 ### changeContractAlias
