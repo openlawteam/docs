@@ -1,6 +1,100 @@
 # Openlaw Object
 
-The `Openlaw` object defined in Openlaw.scala compiles to JavaScript and is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types. The object methods are categorized below.
+The `Openlaw` object defined in Openlaw.scala compiles to JavaScript and is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types.
+
+There are certain object types that are referenced in the requests and responses of many of the `Openlaw` object methods categorized in this section. These object types are defined immediately below under [Shared Types](#shared-types). The `Openlaw` object methods follow and start with [Template](#template)-related methods.
+
+## Shared Types
+
+### CompiledTemplate
+
+A `CompildTemplate` object contains information about a compiled template.
+
+```js
+{
+  block: Object,
+  clock: Object,
+  endOfParagraph: Object,
+  header: Object,
+  redefinition: Object
+}
+```
+
+### StructuredAgreement
+
+A `StructuredAgreement` object contains information about a rendered agreement.
+
+```js
+{
+  executionResult: TemplateExecutionResult,
+  mainTemplate: Boolean,
+  header: Object,
+  paragraphs: Object,
+  path: Object
+}
+```
+
+### TemplateExecutionResult
+
+A `TemplateExecutionResult` object is part of the return object from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview) and contains information about the executed template.
+
+```js
+{
+  agreements: Object,
+  aliases: Object,
+  anonymousVariableCounter: Object,
+  clock: Object,
+  compiledAgreement: CompiledTemplate,
+  embedded: Boolean,
+  embeddedExecutions: Object,
+  executedVariables: Object,
+  finishedEmbeddedExecutions: Object,
+  forEachQueue: Object,
+  id: Object,
+  mapping: Object,
+  parameters: Object,
+  parentExecution: Object,
+  remainingElements: Object,
+  sectionList: Object,
+  sectionsInternal: Object,
+  signatureNames: Object,
+  state: Object,
+  subExecutions: Object,
+  template: Object,
+  templateDefinition: TemplateDefinition,
+  variableRedefinition: Object,
+  variableTypes: Object,
+  variables: Object
+}
+```
+
+### ValidationResult
+
+A `ValidationResult` object contains information about a compiled and executed template.
+
+```js
+{
+  identities: Object,
+  missingInputs: Object,
+  missingIdentities: Object,
+  validationExpressionErrors: Object
+}
+```
+
+### VariableDefinition
+
+A `VariableDefinition` object contains information about a variable in a compiled and executed template.
+
+```js
+{
+  defaultValue: Object,
+  description: Object,
+  formatter: Object,
+  isHidden: Boolean,
+  name: Object,
+  variableTypeDefinition: Object
+}
+```
 
 ## Template
 
@@ -28,7 +122,7 @@ Openlaw.compileTemplate("This Advisor Agreement is entered into between [[Compan
 
 **Response**
 
-Returns an object containing a [`CompiledTemplate` object](#compiledtemplate) (and key/value pairs indicating that no error has occurred) if compilation is successful.
+Returns an object containing a [`CompiledTemplate` object](#compiledtemplate) and key/value pairs indicating that no error has occurred if compilation is successful.
 
 Example
 
@@ -77,7 +171,7 @@ Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 
 **Response**
 
-Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult) (and key/value pairs indicating that no error has occurred and that no templates are missing) if execution is successful.
+Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult) and key/value pairs indicating that no error has occurred and that no templates are missing if execution is successful.
 
 Example
 
@@ -133,7 +227,7 @@ Openlaw.executeForReview(compiledTemplate.compiledTemplate, signatures, {}, para
 
 **Response**
 
-Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult) (and key/value pairs indicating that no error has occurred and that no templates are missing) if execution is successful. The [`TemplateExecutionResult` object](#templateexecutionresult) contains a nested object with the ID and name of each signatory as a key/value pair.
+Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult), which includes a nested object with the ID and name of each signatory as a key/value pair. The object also contains key/value pairs indicating that no error has occurred and that no templates are missing if execution is successful.
 
 Example
 
@@ -175,7 +269,7 @@ Openlaw.resumeExecution(executionResult.executionResult, templatesForExecution);
 
 **Response**
 
-Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult) (and key/value pairs indicating that no error has occurred and that no templates are missing) if execution is successful.
+Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult) and key/value pairs indicating that no error has occurred and that no templates are missing if execution is successful.
 
 Example
 
@@ -526,7 +620,7 @@ Example
 
 ### parseMarkdown
 
-Parse selected paragraph text to edit (in draft mode) to HTML.
+Parse selected paragraph text to edit (in draft mode) to HTML. In addition to editing a template directly by changing the language in its source, OpenLaw's [draft tools](https://media.consensys.net/frictionless-contracting-628884915b8c) allow a user to edit the text of a draft agreement without changing the template itself. This is especially useful when parties are negotiating an agreement and want to edit certain provisions.
 
 ```scala
 parseMarkdown(
@@ -559,7 +653,7 @@ Example
 
 ### renderParagraphForEdit
 
-Render paragraph of agreement for editing.
+Render paragraph of agreement for editing. Learn more about the ability to edit an agreement with our draft tools in the [parseMarkdown method](#parsemarkdown).
 
 ```scala
 renderParagraphForEdit(
@@ -596,7 +690,7 @@ Example
 
 ### getTypes
 
-Get all [markup language](/markup-language/) variable types for use in markdown editor.
+Get all [markup language](/markup-language/) input and specialized variable types for use in the template editor.
 
 ```scala
 getTypes: js.Array[String]
@@ -608,7 +702,7 @@ None
 
 **Response**
 
-Returns array of [markup language](/markup-language/) variable types as strings.
+Returns array of input and specialized variable types as strings. Learn more about these different types in our [markup language documentation](/markup-language/).
 
 Example
 
@@ -874,7 +968,7 @@ Returns `true` if template is a [deal](/markup-language/#deals) template.
 
 ### showInForm
 
-Check if variable is shown in the input form in draft mode.
+Check if variable is shown in the input form in draft mode (e.g., [input variables](/markup-language/#variables) like Text, Number, Date, Address, etc.). Some specialized types like Template (as used in connection with a [deal](/markup-language/#deals)) and EthereumCall (as used in connection with embedding [smart contract](/markup-language/#smart-contracts) calls in a template) are not intended to generate a form field in an agreement for a user to provide an input.
 
 ```scala
 showInForm(
@@ -926,23 +1020,13 @@ Example
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-allVariables.forEach(variable => {
-  Openlaw.getType(variable));
-});
+const variable = allVariables[0]; // variable being checked is first variable in template
+Openlaw.getType(variable);
 ```
 
 **Response**
 
-Returns variable type as a string.
-
-Example
-
-```js
-"Text"
-"Date"
-"YesNo"
-"Number"
-```
+Returns variable type as a string, such as `"Text"`, `"Date"`, `"YesNo"`, `"Number"`, etc.
 
 ### getName
 
@@ -966,27 +1050,17 @@ Example
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-allVariables.forEach(variable => {
-  Openlaw.getName(variable));
-});
+const variable = allVariables[0]; // variable being checked is first variable in template
+Openlaw.getName(variable);
 ```
 
 **Response**
 
-Returns name of variable as a string.
-
-Example
-
-```js
-"Company Name"
-"Effective Date"
-"No Services"
-"Number of Shares"
-```
+Returns name of variable as a string, such as `"Company Name"` or `"No Services"`.
 
 ### getDescription
 
-Get description of a variable.
+Get description of a variable. The default description is the variable name. You can also modify the description that appears in the form prompting an input value for the variable as described in our [markup language documentation](/markup-language/#variables).
 
 ```scala
 getDescription(
@@ -1006,23 +1080,13 @@ Example
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-allVariables.forEach(variable => {
-  Openlaw.getDescription(variable));
-});
+const variable = allVariables[0]; // variable being checked is first variable in template
+Openlaw.getDescription(variable);
 ```
 
 **Response**
 
-Returns description of variable as a string. The default description is the variable name. You can also modify the description that appears in the form as described in our [markup language documentation](/markup-language/#variables).
-
-Example
-
-```js
-"Company Name"
-"Effective Date"
-"Do you want to limit the advisor's services?"
-"Number of Shares"
-```
+Returns description of variable as a string, such as `"Company Name"` (a default description for a Text variable with the name `"Company Name"`) or `"Do you want to limit the advisor's services?"` (a modified description for a YesNo variable with the name `"No Services"`).
 
 ### getCleanName
 
@@ -1046,23 +1110,13 @@ Example
 // see examples above for #execute and #executeForReview for parameters
 const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
-allVariables.forEach(variable => {
-  Openlaw.getCleanName(variable));
-});
+const variable = allVariables[0]; // variable being checked is first variable in template
+Openlaw.getCleanName(variable);
 ```
 
 **Response**
 
-Returns name of variable as a string and replaces any spaces with a `-`.
-
-Example
-
-```js
-"Company-Name"
-"Effective-Date"
-"No-Services"
-"Number-of-Shares"
-```
+Returns name of variable as a string and replaces any spaces with a `-`, such as `"Company-Name"` or `"No-Services"`.
 
 ### checkValidity
 
@@ -2046,96 +2100,4 @@ Example
 
 ```js
 '{"Last name":"Smith","First name":"John","Position":"CTO"}'
-```
-
-## Shared Types
-
-### CompiledTemplate
-
-A `CompildTemplate` object contains information about a compiled template.
-
-```js
-{
-  block: Object,
-  clock: Object,
-  endOfParagraph: Object,
-  header: Object,
-  redefinition: Object
-}
-```
-
-### StructuredAgreement
-
-A `StructuredAgreement` object contains information about a rendered agreement.
-
-```js
-{
-  executionResult: TemplateExecutionResult,
-  mainTemplate: Boolean,
-  header: Object,
-  paragraphs: Object,
-  path: Object
-}
-```
-
-### TemplateExecutionResult
-
-A `TemplateExecutionResult` object is part of the return object from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview) and contains information about the executed template.
-
-```js
-{
-  agreements: Object,
-  aliases: Object,
-  anonymousVariableCounter: Object,
-  clock: Object,
-  compiledAgreement: CompiledTemplate,
-  embedded: Boolean,
-  embeddedExecutions: Object,
-  executedVariables: Object,
-  finishedEmbeddedExecutions: Object,
-  forEachQueue: Object,
-  id: Object,
-  mapping: Object,
-  parameters: Object,
-  parentExecution: Object,
-  remainingElements: Object,
-  sectionList: Object,
-  sectionsInternal: Object,
-  signatureNames: Object,
-  state: Object,
-  subExecutions: Object,
-  template: Object,
-  templateDefinition: TemplateDefinition,
-  variableRedefinition: Object,
-  variableTypes: Object,
-  variables: Object
-}
-```
-
-### ValidationResult
-
-A `ValidationResult` object contains information about a compiled and executed template.
-
-```js
-{
-  identities: Object,
-  missingInputs: Object,
-  missingIdentities: Object,
-  validationExpressionErrors: Object
-}
-```
-
-### VariableDefinition
-
-A `VariableDefinition` object contains information about a variable in a compiled and executed template.
-
-```js
-{
-  defaultValue: Object,
-  description: Object,
-  formatter: Object,
-  isHidden: Boolean,
-  name: Object,
-  variableTypeDefinition: Object
-}
 ```

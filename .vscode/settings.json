@@ -8,4 +8,12 @@
     "spellright.ignoreRegExpsByClass": {
         "markdown": ["/:\\w+:/g"]
     },
+    "spellright.language": [
+      "en"
+    ],
+    "spellright.documentTypes": [
+      "latex",
+      "plaintext",
+      "markdown"
+    ],
 }
