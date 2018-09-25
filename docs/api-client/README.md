@@ -2,9 +2,15 @@
 
 The OpenLaw REST API in APIClient.js is an interface in the OpenLaw protocol for querying, saving, and changing data in an OpenLaw instance. The API methods are categorized below.
 
+**Parameters**
+
 For GET requests, any parameters not included as a segment in the path can be passed as an HTTP query string parameter.
 
 For POST requests, any parameters not included as a segment in the path should be data of the specified Content-Type.
+
+**Authorization**
+
+Unless otherwise specified, each of the resources can be accessed by a logged in user with a `StandardUser` role, which is the default permission for a newly-registered user, or an `Admin` role, which has greater permissions as explained in the [toAdminUser method](#toadminuser) below.
 
 ## Template
 
@@ -251,6 +257,10 @@ Returns `"renamed"` if template was successfully renamed.
 
 Delete a template.
 
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
+
 ```
 GET /templates/delete
 ```
@@ -275,6 +285,10 @@ Returns `"Template deleted!"` if template was successfully deleted.
 
 Restore a previously deleted template.
 
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
+
 ```
 GET /templates/restore
 ```
@@ -298,6 +312,10 @@ Returns `"Template restored!"` if template was successfully restored.
 ### searchDeletedTemplates
 
 List deleted templates based on search by title.
+
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
 
 ```
 GET /templates/searchDeleted
@@ -384,7 +402,7 @@ Example
 
 ### getDraftVersion
 
-Get draft by its ID and version.
+Get user's draft by its ID and version.
 
 ```
 GET /draft/raw/:draftId/:version
@@ -480,7 +498,7 @@ Example
 
 ### getDraftVersions
 
-List saved versions of a draft.
+List saved versions of a user's draft.
 
 ```
 GET /drafts/version
@@ -523,7 +541,7 @@ Example
 
 ### searchDrafts
 
-List drafts based on search by title, alias (private name), and signatories.
+List user's drafts based on search by title, alias (private name), and signatories.
 
 ```
 GET /drafts/search
@@ -617,7 +635,7 @@ editEmails=openlawuser%2B3%40gmail.com&id=cb3ba52ccd277f650859f60b9a4cf828439382
 
 ### changeDraftAlias
 
-Change alias (private name) of draft.
+Change alias (private name) of user's draft.
 
 ```
 GET /draft/alias/:draftId
@@ -701,7 +719,7 @@ Example
 
 ### getContract
 
-Get contract by its ID.
+Get user's contract by its ID.
 
 ```
 GET /contract/raw/:contractId
@@ -751,7 +769,7 @@ Example
 
 ### searchContracts
 
-List contracts based on search by title, alias (private name), and signatories.
+List user's contracts based on search by title, alias (private name), and signatories.
 
 ```
 GET /contracts/search
@@ -864,7 +882,7 @@ editEmails=openlawuser%2B3%40gmail.com&id=8fecc55da4598a062b90b0837e7badb1c649af
 
 ### changeContractAlias
 
-Change alias (private name) of contract.
+Change alias (private name) of user's contract.
 
 ```
 GET /contract/alias/:contractId
@@ -889,7 +907,7 @@ Returns `"name changed"` if alias was successfully changed.
 
 ### stopContract
 
-Stop smart contract transactions that are pending for a signed contract.
+Stop smart contract transactions that are pending for a user's signed contract.
 
 ```
 GET /contract/stop/:id
@@ -913,7 +931,7 @@ Returns `"contract stopped"` if smart contract transactions were successfully st
 
 ### resumeContract
 
-Resume scheduled execution of smart contract transactions that were stopped for a signed contract.
+Resume scheduled execution of smart contract transactions that were stopped for a user's signed contract.
 
 ```
 GET /contract/resume/:id
@@ -940,6 +958,10 @@ Returns `"contract resumed"` if smart contract transactions were successfully re
 ### getUserDetails
 
 Method used as part of `IdentityVariable` to get information about a contract signatory. An [Identity variable](/markup-language/#identity-and-signatures) allows a party to electronically sign an agreement and store that electronic signature (along with the cryptographic hash of the contract) on the blockchain.
+
+::: warning Authorization
+This resource can be accessed without having to be a logged in user.
+:::
 
 ```
 GET /user/details
@@ -980,6 +1002,10 @@ Example
 ### searchUsers
 
 List users based on search by name and email.
+
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
 
 ```
 GET /users/search
@@ -1027,7 +1053,11 @@ Example
 
 ### toAdminUser
 
-Change role of a user to `Admin`, which allows user to access additional features such as deleting and restoring templates, changing permissions of and deleting other users, and loading a set of standard templates into an instance.
+Change role of a user to `Admin`, which allows user to access additional features such as deleting and restoring templates, viewing the list of all other users, changing permissions of and deleting other users, and loading a set of standard templates into an instance.
+
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role.
+:::
 
 ```
 GET /users/toadmin
@@ -1059,6 +1089,10 @@ Example
 
 Change role of a user to restricted `NoAccessUser`, which prevents user from accessing a majority of the features of an instance, including viewing and editing templates.
 
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
+
 ```
 GET /users/torestricted
 ```
@@ -1089,6 +1123,10 @@ Example
 
 Change role of a user to `StandardUser`, which is the default permission for a newly-registered user.
 
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
+
 ```
 GET /users/touser
 ```
@@ -1118,6 +1156,10 @@ Example
 ### deleteUser
 
 Delete a user.
+
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
 
 ```
 GET /users/delete
@@ -1153,6 +1195,10 @@ Example
 ### getAddressDetails
 
 Method used as part of `AddressVariable` to get details about a selected address. An [Address variable](/markup-language/#address) generates an address using the Google Maps API.
+
+::: warning Authorization
+This resource can be accessed without having to be a logged in user.
+:::
 
 ```
 GET /address/details
@@ -1192,6 +1238,10 @@ Example
 ### searchAddress
 
 Method used as part of `AddressVariable` and the Google Maps API to autosuggest addresses based on user input. An [Address variable](/markup-language/#address) generates an address using the Google Maps API.
+
+::: warning Authorization
+This resource can be accessed without having to be a logged in user.
+:::
 
 ```
 GET /address/search
