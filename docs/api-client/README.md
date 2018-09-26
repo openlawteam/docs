@@ -24,8 +24,8 @@ GET /template/raw/:title
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name    | Type     | Description                              |
+| ------- | -------- | ---------------------------------------- |
 | `title` | `string` | **Required.** The title of the template. |
 
 Example
@@ -59,9 +59,9 @@ GET /template/raw/:title/:version
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `title` | `string` | **Required.** The title of the template. |
+| Name      | Type     | Description                                       |
+| --------- | -------- | ------------------------------------------------- |
+| `title`   | `string` | **Required.** The title of the template.          |
 | `version` | `string` | **Required.** The version number of the template. |
 
 Example
@@ -90,11 +90,11 @@ GET /templates/version
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `title` | `string` | **Required.** The title of the template. |
-| `pageSize` | `number` | **Required.** The number of versions to display on page. |
-| `page` | `number` | **Required.** Which group of versions to display. Each group consists of `pageSize` versions. |
+| Name       | Type     | Description                                                                                   |
+| ---------- | -------- | --------------------------------------------------------------------------------------------- |
+| `title`    | `string` | **Required.** The title of the template.                                                      |
+| `pageSize` | `number` | **Required.** The number of versions to display on page.                                      |
+| `page`     | `number` | **Required.** Which group of versions to display. Each group consists of `pageSize` versions. |
 
 Example
 
@@ -147,11 +147,11 @@ GET /templates/search
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter retrieved templates. |
-| `page` | `number` | **Required.** Which group of templates to display. Each group consists of `pageSize` templates. |
-| `pageSize` | `number` | **Required.** The number of templates to display on page. |
+| Name       | Type     | Description                                                                                     |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved templates.                                    |
+| `page`     | `number` | **Required.** Which group of templates to display. Each group consists of `pageSize` templates. |
+| `pageSize` | `number` | **Required.** The number of templates to display on page.                                       |
 
 Example
 
@@ -200,9 +200,9 @@ POST /upload/template/:title
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `title` | `string` | **Required.** The title of the template. |
+| Name    | Type     | Description                                     |
+| ------- | -------- | ----------------------------------------------- |
+| `title` | `string` | **Required.** The title of the template.        |
 | `value` | `string` | **Required.** The template content to be saved. |
 
 Example (with `value` payload)
@@ -221,10 +221,10 @@ Example
 
 ```json
 {
-  "id":"29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
-  "title":"Advisor Agreement",
-  "content":"This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
-  "templateType":"agreement"
+  "id": "29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
+  "title": "Advisor Agreement",
+  "content": "This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  "templateType": "agreement"
 }
 ```
 
@@ -238,10 +238,10 @@ GET /templates/rename
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `name` | `string` | **Required.** The current title of the template to be renamed. |
-| `newName` | `string` | **Required.** The new title of the template. |
+| Name      | Type     | Description                                                    |
+| --------- | -------- | -------------------------------------------------------------- |
+| `name`    | `string` | **Required.** The current title of the template to be renamed. |
+| `newName` | `string` | **Required.** The new title of the template.                   |
 
 Example
 
@@ -267,8 +267,8 @@ GET /templates/delete
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name   | Type     | Description                                           |
+| ------ | -------- | ----------------------------------------------------- |
 | `name` | `string` | **Required.** The name of the template to be deleted. |
 
 Example
@@ -295,8 +295,8 @@ GET /templates/restore
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name   | Type     | Description                                            |
+| ------ | -------- | ------------------------------------------------------ |
 | `name` | `string` | **Required.** The name of the template to be restored. |
 
 Example
@@ -323,11 +323,11 @@ GET /templates/searchDeleted
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter retrieved deleted templates. |
-| `page` | `number` | **Required.** Which group of deleted templates to display. Each group consists of `pageSize` deleted templates. |
-| `pageSize` | `number` | **Required.** The number of deleted templates to display on page. |
+| Name       | Type     | Description                                                                                                     |
+| ---------- | -------- | --------------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved deleted templates.                                            |
+| `page`     | `number` | **Required.** Which group of deleted templates to display. Each group consists of `pageSize` deleted templates. |
+| `pageSize` | `number` | **Required.** The number of deleted templates to display on page.                                               |
 
 Example
 
@@ -344,10 +344,7 @@ Example
 ```json
 {
   "nbHits": 2,
-  "data": [
-    "Insider Trading Policy for Employees",
-    "Employee Stock Award"
-  ]
+  "data": ["Insider Trading Policy for Employees", "Employee Stock Award"]
 }
 ```
 
@@ -365,28 +362,28 @@ POST /upload/draft
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type     | Description                                                                     |
+| -------- | -------- | ------------------------------------------------------------------------------- |
 | `params` | `Object` | **Required.** The object containing information about the draft to be uploaded. |
 
 Example `params` payload
 
 ```json
 {
-  "templateId":"29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
-  "title":"Advisor Agreement",
-  "text":"This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
-  "creator":"8f26427b-0853-469b-a4f1-132190b7373e",
-  "parameters":{
-    "Company Name":"ABC, Inc.",
-    "Company Signatory Email":"{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
-    "Advisor Email":"{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}"
+  "templateId": "29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
+  "title": "Advisor Agreement",
+  "text": "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  "creator": "8f26427b-0853-469b-a4f1-132190b7373e",
+  "parameters": {
+    "Company Name": "ABC, Inc.",
+    "Company Signatory Email": "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
+    "Advisor Email": "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}"
   },
-  "overriddenParagraphs":{},
-  "agreements":{},
-  "readonlyEmails":[],
-  "editEmails":[],
-  "draftId":""
+  "overriddenParagraphs": {},
+  "agreements": {},
+  "readonlyEmails": [],
+  "editEmails": [],
+  "draftId": ""
 }
 ```
 
@@ -410,9 +407,9 @@ GET /draft/raw/:draftId/:version
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `draftId` | `string` | **Required.** The ID of the draft. |
+| Name      | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| `draftId` | `string` | **Required.** The ID of the draft.             |
 | `version` | `number` | **Required.** The version number of the draft. |
 
 Example
@@ -434,50 +431,23 @@ Example
       "Advisor Address",
       "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"
     ],
-    [
-      "Effective Date",
-      "1537340400000"
-    ],
-    [
-      "Unit of Vesting",
-      "250"
-    ],
-    [
-      "Company Name",
-      "ABC, Inc."
-    ],
-    [
-      "Number of Shares",
-      "1000"
-    ],
-    [
-      "Company Signatory",
-      "Jane Davis"
-    ],
-    [
-      "Advisor Name",
-      "John Smith"
-    ],
+    ["Effective Date", "1537340400000"],
+    ["Unit of Vesting", "250"],
+    ["Company Name", "ABC, Inc."],
+    ["Number of Shares", "1000"],
+    ["Company Signatory", "Jane Davis"],
+    ["Advisor Name", "John Smith"],
     [
       "Advisor Email",
       "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}"
     ],
-    [
-      "Time of Vesting",
-      "Yearly"
-    ],
+    ["Time of Vesting", "Yearly"],
     [
       "Company Address",
       "{\"placeId\":\"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB\",\"streetName\":\"Main Street\",\"streetNumber\":\"987\",\"city\":\"Brooklyn\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11201\",\"formattedAddress\":\"987 Main St, Brooklyn, NY 11201, USA\"}"
     ],
-    [
-      "Years Vesting",
-      "4"
-    ],
-    [
-      "No Services",
-      "false"
-    ],
+    ["Years Vesting", "4"],
+    ["No Services", "false"],
     [
       "Company Signatory Email",
       "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}"
@@ -506,11 +476,11 @@ GET /drafts/version
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `draftId` | `string` | **Required.** The ID of the draft. |
-| `pageSize` | `number` | **Required.** The number of versions to display on page. |
-| `page` | `number` | **Required.** Which group of versions to display. Each group consists of `pageSize` versions. |
+| Name       | Type     | Description                                                                                   |
+| ---------- | -------- | --------------------------------------------------------------------------------------------- |
+| `draftId`  | `string` | **Required.** The ID of the draft.                                                            |
+| `pageSize` | `number` | **Required.** The number of versions to display on page.                                      |
+| `page`     | `number` | **Required.** Which group of versions to display. Each group consists of `pageSize` versions. |
 
 Example
 
@@ -549,12 +519,12 @@ GET /drafts/search
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter retrieved drafts. |
-| `page` | `number` | **Required.** Which group of drafts to display. Each group consists of `pageSize` drafts. |
-| `pageSize` | `number` | **Required.** The number of drafts to display on page. |
-| `sortBy` | `string` | **Required.** The way in which returned drafts are to be sorted: `creationdate`, `privatename`, or `title` |
+| Name       | Type     | Description                                                                                                |
+| ---------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved drafts.                                                  |
+| `page`     | `number` | **Required.** Which group of drafts to display. Each group consists of `pageSize` drafts.                  |
+| `pageSize` | `number` | **Required.** The number of drafts to display on page.                                                     |
+| `sortBy`   | `string` | **Required.** The way in which returned drafts are to be sorted: `creationdate`, `privatename`, or `title` |
 
 Example
 
@@ -621,11 +591,11 @@ POST /send/draft
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name             | Type            | Description                                                            |
+| ---------------- | --------------- | ---------------------------------------------------------------------- |
 | `readonlyEmails` | `Array<string>` | An array of users' emails who will have read-only access to the draft. |
-| `editEmails` | `Array<string>` | An array of users' emails who will have access to edit the draft.
-| `id` | `string` | **Required.** The ID of the draft to be sent.
+| `editEmails`     | `Array<string>` | An array of users' emails who will have access to edit the draft.      |
+| `id`             | `string`        | **Required.** The ID of the draft to be sent.                          |
 
 Example form data
 
@@ -643,10 +613,10 @@ GET /draft/alias/:draftId
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name      | Type     | Description                                                |
+| --------- | -------- | ---------------------------------------------------------- |
 | `draftId` | `string` | **Required.** The ID of the draft to be given a new alias. |
-| `newName` | `string` | **Required.** The new alias of the draft. |
+| `newName` | `string` | **Required.** The new alias of the draft.                  |
 
 Example
 
@@ -672,38 +642,38 @@ POST /upload/contract
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type     | Description                                                                        |
+| -------- | -------- | ---------------------------------------------------------------------------------- |
 | `params` | `Object` | **Required.** The object containing information about the contract to be uploaded. |
 
 Example `params` payload
 
 ```json
 {
-  "templateId":"d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
-  "title":"Advisor Agreement",
-  "text":"This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
-  "creator":"8f26427b-0853-469b-a4f1-132190b7373e",
-  "parameters":{
-    "Company Name":"ABC, Inc.",
-    "Effective Date":"1537426800000",
-    "Number of Shares":"1000",
-    "Years Vesting":"4",
-    "Unit of Vesting":"250",
-    "Company Signatory Email":"{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
-    "Advisor Name":"John Smith",
-    "Company Signatory":"Mary Davis",
-    "Advisor Email":"{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}",
-    "Time of Vesting":"Yearly",
-    "No Services":"false",
-    "Advisor Address":"{\"placeId\":\"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB\",\"streetName\":\"Main Street\",\"streetNumber\":\"987\",\"city\":\"Brooklyn\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11201\",\"formattedAddress\":\"987 Main St, Brooklyn, NY 11201, USA\"}",
-    "Company Address":"{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"
+  "templateId": "d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
+  "title": "Advisor Agreement",
+  "text": "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  "creator": "8f26427b-0853-469b-a4f1-132190b7373e",
+  "parameters": {
+    "Company Name": "ABC, Inc.",
+    "Effective Date": "1537426800000",
+    "Number of Shares": "1000",
+    "Years Vesting": "4",
+    "Unit of Vesting": "250",
+    "Company Signatory Email": "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
+    "Advisor Name": "John Smith",
+    "Company Signatory": "Mary Davis",
+    "Advisor Email": "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}",
+    "Time of Vesting": "Yearly",
+    "No Services": "false",
+    "Advisor Address": "{\"placeId\":\"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB\",\"streetName\":\"Main Street\",\"streetNumber\":\"987\",\"city\":\"Brooklyn\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11201\",\"formattedAddress\":\"987 Main St, Brooklyn, NY 11201, USA\"}",
+    "Company Address": "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"
   },
-  "overriddenParagraphs":{},
-  "agreements":{},
-  "readonlyEmails":[],
-  "editEmails":[],
-  "draftId":"8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
+  "overriddenParagraphs": {},
+  "agreements": {},
+  "readonlyEmails": [],
+  "editEmails": [],
+  "draftId": "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
 }
 ```
 
@@ -727,8 +697,8 @@ GET /contract/raw/:contractId
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name         | Type     | Description                           |
+| ------------ | -------- | ------------------------------------- |
 | `contractId` | `string` | **Required.** The ID of the contract. |
 
 Example
@@ -777,12 +747,12 @@ GET /contracts/search
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter retrieved contracts. |
-| `page` | `number` | **Required.** Which group of contracts to display. Each group consists of `pageSize` contracts. |
-| `pageSize` | `number` | **Required.** The number of contracts to display on page. |
-| `sortBy` | `string` | **Required.** The way in which returned contracts are to be sorted: `creationdate`, `privatename`, or `title` |
+| Name       | Type     | Description                                                                                                   |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved contracts.                                                  |
+| `page`     | `number` | **Required.** Which group of contracts to display. Each group consists of `pageSize` contracts.               |
+| `pageSize` | `number` | **Required.** The number of contracts to display on page.                                                     |
+| `sortBy`   | `string` | **Required.** The way in which returned contracts are to be sorted: `creationdate`, `privatename`, or `title` |
 
 Example
 
@@ -806,13 +776,8 @@ Example
       "creator": "openlawuser+1",
       "creationDate": 1537540029000,
       "privateName": "Advisor Agreement",
-      "signatories": [
-        "openlawuser+1",
-        "openlawuser+2"
-      ],
-      "signaturesDone": [
-
-      ],
+      "signatories": ["openlawuser+1", "openlawuser+2"],
+      "signaturesDone": [],
       "executionState": "created",
       "hasPendingActions": true,
       "hasExecutions": false
@@ -823,13 +788,8 @@ Example
       "creator": "openlawuser+1",
       "creationDate": 1537391343000,
       "privateName": "Advisor Agreement",
-      "signatories": [
-        "openlawuser+1",
-        "openlawuser+2"
-      ],
-      "signaturesDone": [
-        "8f26427b-0853-469b-a4f1-132190b7373e"
-      ],
+      "signatories": ["openlawuser+1", "openlawuser+2"],
+      "signaturesDone": ["8f26427b-0853-469b-a4f1-132190b7373e"],
       "executionState": "created",
       "hasPendingActions": true,
       "hasExecutions": false
@@ -840,10 +800,7 @@ Example
       "creator": "openlawuser+2",
       "creationDate": 1537305436000,
       "privateName": "Advisor Agreement",
-      "signatories": [
-        "openlawuser+1",
-        "openlawuser+2"
-      ],
+      "signatories": ["openlawuser+1", "openlawuser+2"],
       "signaturesDone": [
         "38e0eb6b-0d52-4fd8-a77d-19686fd3843a",
         "8f26427b-0853-469b-a4f1-132190b7373e"
@@ -868,11 +825,11 @@ POST /send/contract
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name             | Type            | Description                                                               |
+| ---------------- | --------------- | ------------------------------------------------------------------------- |
 | `readonlyEmails` | `Array<string>` | An array of users' emails who will have read-only access to the contract. |
-| `editEmails` | `Array<string>` | An array of users' emails who will have access to edit the contract.
-| `id` | `string` | **Required.** The ID of the contract to be sent.
+| `editEmails`     | `Array<string>` | An array of users' emails who will have access to edit the contract.      |
+| `id`             | `string`        | **Required.** The ID of the contract to be sent.                          |
 
 Example form data
 
@@ -890,10 +847,10 @@ GET /contract/alias/:contractId
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name         | Type     | Description                                                   |
+| ------------ | -------- | ------------------------------------------------------------- |
 | `contractId` | `string` | **Required.** The ID of the contract to be given a new alias. |
-| `newName` | `string` | **Required.** The new alias of the contract. |
+| `newName`    | `string` | **Required.** The new alias of the contract.                  |
 
 Example
 
@@ -915,8 +872,8 @@ GET /contract/stop/:id
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name | Type     | Description                                                                        |
+| ---- | -------- | ---------------------------------------------------------------------------------- |
 | `id` | `string` | **Required.** The ID of the contract with the pending smart contract transactions. |
 
 Example
@@ -939,8 +896,8 @@ GET /contract/resume/:id
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name | Type     | Description                                                                        |
+| ---- | -------- | ---------------------------------------------------------------------------------- |
 | `id` | `string` | **Required.** The ID of the contract with the stopped smart contract transactions. |
 
 Example
@@ -969,8 +926,8 @@ GET /user/details
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name    | Type     | Description                          |
+| ------- | -------- | ------------------------------------ |
 | `email` | `string` | **Required.** The email of the user. |
 
 Example
@@ -1013,11 +970,11 @@ GET /users/search
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `keyword` | `string` | **Required.** The search term to filter retrieved users. |
-| `page` | `number` | **Required.** Which group of users to display. Each group consists of `pageSize` users. |
-| `pageSize` | `number` | **Required.** The number of users to display on page. |
+| Name       | Type     | Description                                                                             |
+| ---------- | -------- | --------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved users.                                |
+| `page`     | `number` | **Required.** Which group of users to display. Each group consists of `pageSize` users. |
+| `pageSize` | `number` | **Required.** The number of users to display on page.                                   |
 
 Example
 
@@ -1065,8 +1022,8 @@ GET /users/toadmin
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type     | Description                                               |
+| -------- | -------- | --------------------------------------------------------- |
 | `userId` | `string` | **Required.** The ID of the user to receive `Admin` role. |
 
 Example
@@ -1099,8 +1056,8 @@ GET /users/torestricted
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type     | Description                                                      |
+| -------- | -------- | ---------------------------------------------------------------- |
 | `userId` | `string` | **Required.** The ID of the user to receive `NoAccessUser` role. |
 
 Example
@@ -1133,8 +1090,8 @@ GET /users/touser
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type     | Description                                                      |
+| -------- | -------- | ---------------------------------------------------------------- |
 | `userId` | `string` | **Required.** The ID of the user to receive `StandardUser` role. |
 
 Example
@@ -1167,8 +1124,8 @@ GET /users/delete
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type     | Description                                     |
+| -------- | -------- | ----------------------------------------------- |
 | `userId` | `string` | **Required.** The ID of the user to be deleted. |
 
 Example
@@ -1206,8 +1163,8 @@ GET /address/details
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name      | Type     | Description                                                             |
+| --------- | -------- | ----------------------------------------------------------------------- |
 | `placeId` | `string` | **Required.** The ID of the address (generated by the Google Maps API). |
 
 Example
@@ -1249,10 +1206,10 @@ GET /address/search
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `term` | `string` | **Required.** The input term to filter returned addresses. |
-| `latitude` | `number` | **Required.** The latitude of the address is equal to `0` for the search. |
+| Name        | Type     | Description                                                                |
+| ----------- | -------- | -------------------------------------------------------------------------- |
+| `term`      | `string` | **Required.** The input term to filter returned addresses.                 |
+| `latitude`  | `number` | **Required.** The latitude of the address is equal to `0` for the search.  |
 | `longitude` | `number` | **Required.** The longitude of the address is equal to `0` for the search. |
 
 Example
@@ -1304,10 +1261,10 @@ GET /recentActivity
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `page` | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events. |
-| `pageSize` | `number` | **Required.** The number of community activity events to display on page. |
+| Name       | Type     | Description                                                                                                  |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `page`     | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events. |
+| `pageSize` | `number` | **Required.** The number of community activity events to display on page.                                    |
 
 Example
 
