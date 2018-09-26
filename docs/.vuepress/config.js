@@ -7,14 +7,16 @@ module.exports = {
     // ],
     sidebar: [
       "/",
-      "/markup-language/"
+      "/markup-language/",
+      "/api-client/",
+      "/openlaw-object/"
       // add new top level sections here...
     ],
     algolia: {
       apiKey: "68c3c0d36676a3acce1cd3c7087bc7c9",
       indexName: "openlaw"
     },
-    logo: "/ol-logo-black.svg",
+    logo: "/ol-logo-color.svg",
     repo: "openlawteam/docs",
     docsDir: "docs",
     editLinks: true,
