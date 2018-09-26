@@ -6,10 +6,21 @@ module.exports = {
     //   { text: 'OpenLaw.io', link: 'https://openlaw.io' },
     // ],
     sidebar: [
-      "/",
-      "/markup-language/",
-      "/api-client/",
-      "/openlaw-object/"
+      {
+        title: "Guide",
+        collapsable: false,
+        children: ["/", "/getting-started/"]
+      },
+      {
+        title: "Reference",
+        collapsable: false,
+        children: ["/api-client/", "/openlaw-object/"]
+      },
+      {
+        title: "Using OpenLaw",
+        collapsable: false,
+        children: ["/markup-language/"]
+      }
       // add new top level sections here...
     ],
     algolia: {
