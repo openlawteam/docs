@@ -1,100 +1,6 @@
 # Openlaw Object
 
-The `Openlaw` object defined in Openlaw.scala compiles to JavaScript and is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types.
-
-There are certain object types that are referenced in the requests and responses of many of the `Openlaw` object methods categorized in this section. These object types are defined immediately below under [Shared Types](#shared-types). The `Openlaw` object methods follow and start with [Template](#template)-related methods.
-
-## Shared Types
-
-### CompiledTemplate
-
-A `CompildTemplate` object contains information about a compiled template.
-
-```js
-{
-  block: Object,
-  clock: Object,
-  endOfParagraph: Object,
-  header: Object,
-  redefinition: Object
-}
-```
-
-### StructuredAgreement
-
-A `StructuredAgreement` object contains information about a rendered agreement.
-
-```js
-{
-  executionResult: TemplateExecutionResult,
-  mainTemplate: Boolean,
-  header: Object,
-  paragraphs: Object,
-  path: Object
-}
-```
-
-### TemplateExecutionResult
-
-A `TemplateExecutionResult` object is part of the return object from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview) and contains information about the executed template.
-
-```js
-{
-  agreements: Object,
-  aliases: Object,
-  anonymousVariableCounter: Object,
-  clock: Object,
-  compiledAgreement: CompiledTemplate,
-  embedded: Boolean,
-  embeddedExecutions: Object,
-  executedVariables: Object,
-  finishedEmbeddedExecutions: Object,
-  forEachQueue: Object,
-  id: Object,
-  mapping: Object,
-  parameters: Object,
-  parentExecution: Object,
-  remainingElements: Object,
-  sectionList: Object,
-  sectionsInternal: Object,
-  signatureNames: Object,
-  state: Object,
-  subExecutions: Object,
-  template: Object,
-  templateDefinition: TemplateDefinition,
-  variableRedefinition: Object,
-  variableTypes: Object,
-  variables: Object
-}
-```
-
-### ValidationResult
-
-A `ValidationResult` object contains information about a compiled and executed template.
-
-```js
-{
-  identities: Object,
-  missingInputs: Object,
-  missingIdentities: Object,
-  validationExpressionErrors: Object
-}
-```
-
-### VariableDefinition
-
-A `VariableDefinition` object contains information about a variable in a compiled and executed template.
-
-```js
-{
-  defaultValue: Object,
-  description: Object,
-  formatter: Object,
-  isHidden: Boolean,
-  name: Object,
-  variableTypeDefinition: Object
-}
-```
+The `Openlaw` object defined in Openlaw.scala is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types. [Scala.js](https://www.scala-js.org/) compiles the Scala code to executable JavaScript that can run in a web browser or other JavaScript-supported environments. The object methods are categorized below.
 
 ## Template
 
@@ -124,7 +30,7 @@ Openlaw.compileTemplate(
 
 **Response**
 
-Returns an object containing a [`CompiledTemplate` object](#compiledtemplate) and key/value pairs indicating that no error has occurred if compilation is successful.
+Returns an object containing a `CompiledTemplate` type, which includes information about a compiled template. The object also contains key/value pairs indicating that no error has occurred if the compilation is successful.
 
 Example
 
@@ -150,11 +56,11 @@ execute(
 
 **Parameters**
 
-| Name               | Type                                    | Description                                                                                                                                                               |
-| ------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate).                                                                           |
-| `jsTemplates`      | `Object`                                | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
-| `jsParams`         | `Object`                                | **Required.** The parameters of the template to be executed.                                                                                                              |
+| Name               | Type               | Description                                                                                                                                                               |
+| ------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `compiledTemplate` | `CompiledTemplate` | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate), which includes information about a compiled template.                     |
+| `jsTemplates`      | `Object`           | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
+| `jsParams`         | `Object`           | **Required.** The parameters of the template to be executed.                                                                                                              |
 
 Example
 
@@ -175,7 +81,7 @@ Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
 
 **Response**
 
-Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult) and key/value pairs indicating that no error has occurred and that no templates are missing if execution is successful.
+Returns an object containing a `TemplateExecutionResult` type, which includes information about the executed template. The object also contains key/value pairs indicating that no error has occurred and that no templates are missing if the execution is successful.
 
 Example
 
@@ -203,12 +109,12 @@ executeForReview(
 
 **Parameters**
 
-| Name               | Type                                    | Description                                                                                                                                                               |
-| ------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate).                                                                           |
-| `names`            | `Object`                                | **Required.** The ID and name of each signatory as a key/value pair.                                                                                                      |
-| `jsTemplates`      | `Object`                                | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
-| `jsParams`         | `Object`                                | **Required.** The parameters of the template to be executed for review.                                                                                                   |
+| Name               | Type               | Description                                                                                                                                                               |
+| ------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `compiledTemplate` | `CompiledTemplate` | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate), which includes information about a compiled template.                     |
+| `names`            | `Object`           | **Required.** The ID and name of each signatory as a key/value pair.                                                                                                      |
+| `jsTemplates`      | `Object`           | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
+| `jsParams`         | `Object`           | **Required.** The parameters of the template to be executed for review.                                                                                                   |
 
 Example
 
@@ -233,7 +139,7 @@ Openlaw.executeForReview(compiledTemplate.compiledTemplate, signatures, {}, para
 
 **Response**
 
-Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult), which includes a nested object with the ID and name of each signatory as a key/value pair. The object also contains key/value pairs indicating that no error has occurred and that no templates are missing if execution is successful.
+Returns an object containing a `TemplateExecutionResult` type, which includes a nested object with the ID and name of each signatory as a key/value pair. The object also contains key/value pairs indicating that no error has occurred and that no templates are missing if the execution is successful.
 
 Example
 
@@ -259,10 +165,10 @@ resumeExecution(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `jsTemplates`     | `Object`                                              | **Required.** An object containing the compiled template to be executed that was missing from the initial execution.               |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
+| `jsTemplates`     | `Object`                  | **Required.** An object containing the compiled template to be executed that was missing from the initial execution.                                                                       |
 
 Example
 
@@ -281,7 +187,7 @@ Openlaw.resumeExecution(executionResult.executionResult, templatesForExecution);
 
 **Response**
 
-Returns an object containing a [`TemplateExecutionResult` object](#templateexecutionresult) and key/value pairs indicating that no error has occurred and that no templates are missing if execution is successful.
+Returns an object containing a `TemplateExecutionResult` type, which includes information about the executed template. The object also contains key/value pairs indicating that no error has occurred and that no templates are missing if the execution is successful.
 
 Example
 
@@ -306,9 +212,9 @@ getInitialParameters(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -354,9 +260,9 @@ validateContract(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -372,7 +278,7 @@ Openlaw.validateContract(executionResult.executionResult);
 
 **Response**
 
-Returns a [`ValidationResult` object](#validationresult) containing information about a compiled and executed template.
+Returns a `ValidationResult` type, which includes information about a compiled and executed template.
 
 ### validationErrors
 
@@ -386,9 +292,9 @@ validationErrors(
 
 **Parameters**
 
-| Name     | Type                                    | Description                                                                                |
-| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
+| Name     | Type               | Description                                                                                                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `result` | `ValidationResult` | **Required.** The shared type returned from the [`validateContract` method](#validatecontract), which includes information about a compiled and executed template. |
 
 Example
 
@@ -421,9 +327,9 @@ hasMissingInputs(
 
 **Parameters**
 
-| Name     | Type                                    | Description                                                                                |
-| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
+| Name     | Type               | Description                                                                                                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `result` | `ValidationResult` | **Required.** The shared type returned from the [`validateContract` method](#validatecontract), which includes information about a compiled and executed template. |
 
 Example
 
@@ -456,9 +362,9 @@ getMissingInputs(
 
 **Parameters**
 
-| Name     | Type                                    | Description                                                                                |
-| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
+| Name     | Type               | Description                                                                                                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `result` | `ValidationResult` | **Required.** The shared type returned from the [`validateContract` method](#validatecontract), which includes information about a compiled and executed template. |
 
 Example
 
@@ -498,9 +404,9 @@ getTemplateName(
 
 **Parameters**
 
-| Name                 | Type                 | Description                                                                                           |
-| -------------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
-| `templateDefinition` | `TemplateDefinition` | **Required.** An object nested within a [`TemplateExecutionResult` object](#templateexecutionresult). |
+| Name                 | Type                 | Description                                                             |
+| -------------------- | -------------------- | ----------------------------------------------------------------------- |
+| `templateDefinition` | `TemplateDefinition` | **Required.** An object nested within a `TemplateExecutionResult` type. |
 
 Example
 
@@ -538,9 +444,9 @@ getAgreements(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -556,7 +462,7 @@ Openlaw.getAgreements(executionResult.executionResult);
 
 **Response**
 
-Returns an array of objects containing information about the rendered agreements, including a nested [`StructuredAgreement` object](#structuredagreement) and a nested [`TemplateExecutionResult` object](#templateexecutionresult) for each agreement.
+Returns an array of objects each containing information about a rendered agreement, including a nested `StructuredAgreement` type, which includes information about a rendered agreement, and a nested `TemplateExecutionResult` type, which includes information about the executed template.
 
 Example
 
@@ -595,10 +501,10 @@ renderForReview(
 
 **Parameters**
 
-| Name                     | Type                                          | Description                                                                                                                |
-| ------------------------ | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `agreement`              | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered for review. |
-| `jsOverriddenParagraphs` | `Object`                                      | **Required.** An object containing the agreement paragraphs that were directly edited in draft mode.                       |
+| Name                     | Type                  | Description                                                                                          |
+| ------------------------ | --------------------- | ---------------------------------------------------------------------------------------------------- |
+| `agreement`              | `StructuredAgreement` | **Required.** A shared type representing the agreement to be rendered for review.                    |
+| `jsOverriddenParagraphs` | `Object`              | **Required.** An object containing the agreement paragraphs that were directly edited in draft mode. |
 
 Example
 
@@ -636,11 +542,11 @@ renderForPreview(
 
 **Parameters**
 
-| Name                     | Type                                          | Description                                                                                                                 |
-| ------------------------ | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `agreement`              | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered for preview. |
-| `hiddenVariables`        | `Array<String>`                               | **Required.** An array of the agreement variables as strings.                                                               |
-| `jsOverriddenParagraphs` | `Object`                                      | **Required.** An object containing the agreement paragraphs that were directly edited in draft mode.                        |
+| Name                     | Type                  | Description                                                                                          |
+| ------------------------ | --------------------- | ---------------------------------------------------------------------------------------------------- |
+| `agreement`              | `StructuredAgreement` | **Required.** A shared type representing the agreement to be rendered for preview.                   |
+| `hiddenVariables`        | `Array<String>`       | **Required.** An array of the agreement variables as strings.                                        |
+| `jsOverriddenParagraphs` | `Object`              | **Required.** An object containing the agreement paragraphs that were directly edited in draft mode. |
 
 Example
 
@@ -712,10 +618,10 @@ renderParagraphForEdit(
 
 **Parameters**
 
-| Name        | Type                                          | Description                                                                                                     |
-| ----------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `agreement` | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered. |
-| `index`     | `Int`                                         | **Required.** The index number of the paragraph to be rendered for edit.                                        |
+| Name        | Type                  | Description                                                              |
+| ----------- | --------------------- | ------------------------------------------------------------------------ |
+| `agreement` | `StructuredAgreement` | **Required.** A shared type representing the agreement to be rendered.   |
+| `index`     | `Int`                 | **Required.** The index number of the paragraph to be rendered for edit. |
 
 Example
 
@@ -794,10 +700,10 @@ getVariables(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `jsDefinedValues` | `Object`                                              | **Required.** An empty object in order to retrieve all variables.                                                                  |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
+| `jsDefinedValues` | `Object`                  | **Required.** An empty object in order to retrieve all variables.                                                                                                                          |
 
 Example
 
@@ -813,7 +719,7 @@ Openlaw.getVariables(executionResult.executionResult, {});
 
 **Response**
 
-Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which includes information about a variable, including `defaultValue` and `name`.
+Returns an array of `VariableDefinition` types, each of which includes information about a variable in a compiled and executed template, including `defaultValue` and `name`.
 
 ### getExecutedVariables
 
@@ -828,10 +734,10 @@ getExecutedVariables(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                                                                |
-| ----------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                                         |
-| `jsDefinedValues` | `Object`                                              | **Required.** The variable inputs for a template linked to a [deal](/markup-language/#deals) template. The object will be empty for templates that are not part of a deal. |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
+| `jsDefinedValues` | `Object`                  | **Required.** The variable inputs for a template linked to a [deal](/markup-language/#deals) template. The object will be empty for templates that are not part of a deal.                 |
 
 Example
 
@@ -851,7 +757,7 @@ Openlaw.getExecutedVariables(executionResult.executionResult, definedValues);
 
 **Response**
 
-Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which includes information about a variable, including `defaultValue` and `name`. For a template linked to a [deal](/markup-language/#deals) template, the array will include only those variables that have not been provided an input value.
+Returns an array of `VariableDefinition` types, each of which includes information about a variable in a compiled and executed template, including `defaultValue` and `name`. For a template linked to a [deal](/markup-language/#deals) template, the array will include only those variables that have not been provided an input value.
 
 ### getAllConditionalVariableNames
 
@@ -865,9 +771,9 @@ getAllConditionalVariableNames(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -904,9 +810,9 @@ getSections(
 
 **Parameters**
 
-| Name       | Type                                                  | Description                                                                                                                        |
-| ---------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name       | Type                      | Description                                                                                                                                                                                |
+| ---------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `document` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -939,9 +845,9 @@ getVariableSections(
 
 **Parameters**
 
-| Name       | Type                                                  | Description                                                                                                                        |
-| ---------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name       | Type                      | Description                                                                                                                                                                                |
+| ---------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `document` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -1001,9 +907,9 @@ isDeal(
 
 **Parameters**
 
-| Name       | Type                                    | Description                                                                                     |
-| ---------- | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `template` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate). |
+| Name       | Type               | Description                                                                                                                                           |
+| ---------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `template` | `CompiledTemplate` | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate), which includes information about a compiled template. |
 
 Example
 
@@ -1033,10 +939,10 @@ showInForm(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -1068,9 +974,9 @@ getType(
 
 **Parameters**
 
-| Name       | Type                                        | Description                                                                                   |
-| ---------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name       | Type                 | Description                                                                                              |
+| ---------- | -------------------- | -------------------------------------------------------------------------------------------------------- |
+| `variable` | `VariableDefinition` | **Required.** A shared type containing information about a variable in a compiled and executed template. |
 
 Example
 
@@ -1102,9 +1008,9 @@ getName(
 
 **Parameters**
 
-| Name       | Type                                        | Description                                                                                   |
-| ---------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name       | Type                 | Description                                                                                              |
+| ---------- | -------------------- | -------------------------------------------------------------------------------------------------------- |
+| `variable` | `VariableDefinition` | **Required.** A shared type containing information about a variable in a compiled and executed template. |
 
 Example
 
@@ -1136,9 +1042,9 @@ getDescription(
 
 **Parameters**
 
-| Name       | Type                                        | Description                                                                                   |
-| ---------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name       | Type                 | Description                                                                                              |
+| ---------- | -------------------- | -------------------------------------------------------------------------------------------------------- |
+| `variable` | `VariableDefinition` | **Required.** A shared type containing information about a variable in a compiled and executed template. |
 
 Example
 
@@ -1170,9 +1076,9 @@ getCleanName(
 
 **Parameters**
 
-| Name       | Type                                        | Description                                                                                   |
-| ---------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name       | Type                 | Description                                                                                              |
+| ---------- | -------------------- | -------------------------------------------------------------------------------------------------------- |
+| `variable` | `VariableDefinition` | **Required.** A shared type containing information about a variable in a compiled and executed template. |
 
 Example
 
@@ -1206,11 +1112,11 @@ checkValidity(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `optValue`        | `String`                                              | **Required.** The value of the variable input as a string.                                                                         |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `optValue`        | `String`                  | **Required.** The value of the variable input as a string.                                                                                                                                 |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example (for [Identity variable](/markup-language/#identity-and-signatures))
 
@@ -1244,9 +1150,9 @@ isHidden(
 
 **Parameters**
 
-| Name                 | Type                                        | Description                                                                                   |
-| -------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `variableDefinition` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name                 | Type                 | Description                                                                                              |
+| -------------------- | -------------------- | -------------------------------------------------------------------------------------------------------- |
+| `variableDefinition` | `VariableDefinition` | **Required.** A shared type containing information about a variable in a compiled and executed template. |
 
 Example
 
@@ -1412,10 +1318,10 @@ isChoiceType(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -1448,10 +1354,10 @@ getChoiceValues(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -1494,11 +1400,11 @@ getCollectionSize(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format.       |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `value`           | `String`                  | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format.                                                               |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -1534,11 +1440,11 @@ createVariableFromCollection(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `index`           | `Int`                                                 | **Required.** The index number of the new element in the Collection.                                                               |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `index`           | `Int`                     | **Required.** The index number of the new element in the Collection.                                                                                                                       |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -1560,7 +1466,7 @@ Openlaw.createVariableFromCollection(
 
 **Response**
 
-Returns a [`VariableDefinition` object](#variabledefinition) for each element in the [Collection type](/markup-language/#collection). Each object includes information about the variable, including name and variable type.
+Returns a `VariableDefinition` type for each element in the [Collection type](/markup-language/#collection). Each `VariableDefinition` includes information about the variable, including name and variable type.
 
 ### addElementToCollection
 
@@ -1576,11 +1482,11 @@ addElementToCollection(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                                                    |
-| ----------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                                                  |
-| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the new element is added) in JSON format. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                             |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `value`           | `String`                  | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the new element is added) in JSON format.                             |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -1629,13 +1535,13 @@ setElementToCollection(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                                                                  |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `optValue`        | `String`                                              | **Required.** The value for the added element as a string.                                                                                                                   |
-| `index`           | `Int`                                                 | **Required.** The index number of the new element in the Collection.                                                                                                         |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                                                                |
-| `collectionValue` | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the value is set for the added element) in JSON format. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                                           |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `optValue`        | `String`                  | **Required.** The value for the added element as a string.                                                                                                                                 |
+| `index`           | `Int`                     | **Required.** The index number of the new element in the Collection.                                                                                                                       |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `collectionValue` | `String`                  | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the value is set for the added element) in JSON format.               |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -1685,12 +1591,12 @@ removeElementFromCollection(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                                                  |
-| ----------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `index`           | `Int`                                                 | **Required.** The index number of the element to be removed from the Collection.                                                                             |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                                                |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                           |
-| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the element is removed) in JSON format. |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `index`           | `Int`                     | **Required.** The index number of the element to be removed from the Collection.                                                                                                           |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
+| `value`           | `String`                  | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the element is removed) in JSON format.                               |
 
 Example
 
@@ -1739,12 +1645,12 @@ getCollectionElementValue(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format.       |
-| `index`           | `Int`                                                 | **Required.** The index number of the element to be checked in the Collection.                                                     |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
+| `value`           | `String`                  | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format.                                                               |
+| `index`           | `Int`                     | **Required.** The index number of the element to be checked in the Collection.                                                                                                             |
 
 Example
 
@@ -1792,11 +1698,11 @@ getCollectionValue(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                                                                                                                       |
-| ----------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                                                                                                                     |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                                                                                                |
-| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. The value will be an empty string if the Collection does not have a set value for its first element. |
+| Name              | Type                      | Description                                                                                                                                                                                                                       |
+| ----------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                                                          |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template.                                        |
+| `value`           | `String`                  | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. The value will be an empty string if the Collection does not have a set value for its first element. |
 
 Example
 
@@ -1839,9 +1745,9 @@ noIdentity(
 
 **Parameters**
 
-| Name     | Type                                    | Description                                                                                |
-| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
+| Name     | Type               | Description                                                                                                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `result` | `ValidationResult` | **Required.** The shared type returned from the [`validateContract` method](#validatecontract), which includes information about a compiled and executed template. |
 
 Example
 
@@ -1874,9 +1780,9 @@ missingIdentities(
 
 **Parameters**
 
-| Name     | Type                                    | Description                                                                                |
-| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
+| Name     | Type               | Description                                                                                                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `result` | `ValidationResult` | **Required.** The shared type returned from the [`validateContract` method](#validatecontract), which includes information about a compiled and executed template. |
 
 Example
 
@@ -1909,9 +1815,9 @@ missingAllIdentities(
 
 **Parameters**
 
-| Name     | Type                                    | Description                                                                                |
-| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
+| Name     | Type               | Description                                                                                                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `result` | `ValidationResult` | **Required.** The shared type returned from the [`validateContract` method](#validatecontract), which includes information about a compiled and executed template. |
 
 Example
 
@@ -2027,10 +1933,10 @@ getIdentities(
 
 **Parameters**
 
-| Name               | Type                                                  | Description                                                                                                                        |
-| ------------------ | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `validationResult` | [`ValidationResult`](#validationresult)               | **Required.** The object returned from the [`validateContract` method](#validatecontract).                                         |
-| `executionResult`  | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name               | Type                      | Description                                                                                                                                                                                |
+| ------------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `validationResult` | `ValidationResult`        | **Required.** The shared type returned from the [`validateContract` method](#validatecontract), which includes information about a compiled and executed template.                         |
+| `executionResult`  | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -2049,7 +1955,7 @@ Openlaw.getIdentities(validationResult);
 
 **Response**
 
-Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which includes information about an [Identity variable](/markup-language/#identity-and-signatures) missing an input value.
+Returns an array of `VariableDefinition` types, each of which includes information about an [Identity variable](/markup-language/#identity-and-signatures) missing an input value.
 
 ### createIdentity
 
@@ -2149,10 +2055,10 @@ isStructuredType(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -2185,10 +2091,10 @@ getStructureFieldDefinitions(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                        |
-| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about a variable in a compiled and executed template.                                                                                   |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -2206,7 +2112,7 @@ Openlaw.getStructureFieldDefinitions(variable, executionResult.executionResult);
 
 **Response**
 
-Returns an array of [`VariableDefinition` objects](#variabledefinition), each of which includes information about a variable field in the [Structure type](/markup-language/#structure), including name and variable type.
+Returns an array of `VariableDefinition` types, each of which includes information about a variable field in the [Structure type](/markup-language/#structure), including name and variable type.
 
 ### getStructureFieldValue
 
@@ -2223,12 +2129,12 @@ getStructureFieldValue(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                                 |
-| ----------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the [Structure type](/markup-language/#structure) variable. |
-| `field`           | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable field.                                         |
-| `structureValue`  | `String`                                              | **Required.** The variable fields with input values as a string in JSON format.                                                             |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).          |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about the [Structure type](/markup-language/#structure) variable in a compiled and executed template.                                   |
+| `field`           | `VariableDefinition`      | **Required.** A shared type representing the variable field.                                                                                                                               |
+| `structureValue`  | `String`                  | **Required.** The variable fields with input values as a string in JSON format.                                                                                                            |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
@@ -2281,13 +2187,13 @@ setStructureFieldValue(
 
 **Parameters**
 
-| Name              | Type                                                  | Description                                                                                                                                 |
-| ----------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the [Structure type](/markup-language/#structure) variable. |
-| `fieldName`       | `String`                                              | **Required.** Name of variable field to be set with value.                                                                                  |
-| `fieldValue`      | `String`                                              | **Required.** The value to be set in the variable field.                                                                                    |
-| `structureValue`  | `String`                                              | **Required.** The current variable fields with input values (before the new value is set) in JSON format.                                   |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).          |
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variable`        | `VariableDefinition`      | **Required.** A shared type containing information about the [Structure type](/markup-language/#structure) variable in a compiled and executed template.                                   |
+| `fieldName`       | `String`                  | **Required.** Name of variable field to be set with value.                                                                                                                                 |
+| `fieldValue`      | `String`                  | **Required.** The value to be set in the variable field.                                                                                                                                   |
+| `structureValue`  | `String`                  | **Required.** The current variable fields with input values (before the new value is set) in JSON format.                                                                                  |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
 
 Example
 
