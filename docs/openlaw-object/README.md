@@ -110,14 +110,16 @@ compileTemplate(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name   | Type     | Description                                                                               |
+| ------ | -------- | ----------------------------------------------------------------------------------------- |
 | `text` | `String` | **Required.** The raw content of the template (including markup language) to be compiled. |
 
 Example
 
 ```js
-Openlaw.compileTemplate("This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows: \n\n^**Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\").");
+Openlaw.compileTemplate(
+  'This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and [[Advisor Name]] ("Advisor") as of [[Effective Date: Date]] ("Effective Date"). Company and Advisor agree as follows: \n\n^**Services**. Advisor agrees to consult with and advise Company from time to time, at Company\'s request (the "Services").'
+);
 ```
 
 **Response**
@@ -148,16 +150,18 @@ execute(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate). |
-| `jsTemplates` | `Object` | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
-| `jsParams` | `Object` | **Required.** The parameters of the template to be executed. |
+| Name               | Type                                    | Description                                                                                                                                                               |
+| ------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate).                                                                           |
+| `jsTemplates`      | `Object`                                | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
+| `jsParams`         | `Object`                                | **Required.** The parameters of the template to be executed.                                                                                                              |
 
 Example
 
 ```
-const compiledTemplate = Openlaw.compileTemplate("This Advisor Agreement is entered into between [[Company Name]]...");
+const compiledTemplate = Openlaw.compileTemplate(
+  'This Advisor Agreement is entered into between [[Company Name]]...'
+);
 const params = {
   Company Name: "ABC, Inc.",
   Effective Date: "1537254000000",
@@ -199,17 +203,19 @@ executeForReview(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate). |
-| `names` | `Object` | **Required.** The ID and name of each signatory as a key/value pair. |
-| `jsTemplates` | `Object` | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
-| `jsParams` | `Object` | **Required.** The parameters of the template to be executed for review. |
+| Name               | Type                                    | Description                                                                                                                                                               |
+| ------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `compiledTemplate` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate).                                                                           |
+| `names`            | `Object`                                | **Required.** The ID and name of each signatory as a key/value pair.                                                                                                      |
+| `jsTemplates`      | `Object`                                | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
+| `jsParams`         | `Object`                                | **Required.** The parameters of the template to be executed for review.                                                                                                   |
 
 Example
 
 ```
-const compiledTemplate = Openlaw.compileTemplate("This Advisor Agreement is entered into between [[Company Name]]...");
+const compiledTemplate = Openlaw.compileTemplate(
+  'This Advisor Agreement is entered into between [[Company Name]]...'
+);
 const signatures = {
   8f26427b-0853-469b-a4f1-132190b7373e: "openlawuser+1",
   38e0eb6b-0d52-4fd8-a77d-19686fd3843a: "openlawuser+2"
@@ -253,17 +259,23 @@ resumeExecution(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `jsTemplates` | `Object` | **Required.** An object containing the compiled template to be executed that was missing from the initial execution. |
+| `jsTemplates`     | `Object`                                              | **Required.** An object containing the compiled template to be executed that was missing from the initial execution.               |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
-const templatesForExecution = {[executionResult.missingTemplateName]: compiledTemplate.compiledTemplate};
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const templatesForExecution = {
+  [executionResult.missingTemplateName]: compiledTemplate.compiledTemplate
+};
 Openlaw.resumeExecution(executionResult.executionResult, templatesForExecution);
 ```
 
@@ -294,15 +306,19 @@ getInitialParameters(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 Openlaw.getInitialParameters(executionResult.executionResult);
 ```
 
@@ -312,6 +328,7 @@ Returns an array of objects of initial parameters with default values.
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 [
   {
@@ -337,15 +354,19 @@ validateContract(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 Openlaw.validateContract(executionResult.executionResult);
 ```
 
@@ -365,16 +386,22 @@ validationErrors(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type                                    | Description                                                                                |
+| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
-const validationResult = Openlaw.validateContract(executionResult.executionResult);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const validationResult = Openlaw.validateContract(
+  executionResult.executionResult
+);
 Openlaw.validationErrors(validationResult);
 ```
 
@@ -394,16 +421,22 @@ hasMissingInputs(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type                                    | Description                                                                                |
+| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
-const validationResult = Openlaw.validateContract(executionResult.executionResult);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const validationResult = Openlaw.validateContract(
+  executionResult.executionResult
+);
 Openlaw.hasMissingInputs(validationResult);
 ```
 
@@ -423,16 +456,22 @@ getMissingInputs(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type                                    | Description                                                                                |
+| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
-const validationResult = Openlaw.validateContract(executionResult.executionResult);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const validationResult = Openlaw.validateContract(
+  executionResult.executionResult
+);
 Openlaw.getMissingInputs(validationResult);
 ```
 
@@ -442,11 +481,9 @@ Returns an array of missing variable inputs as strings. An empty array `[]` will
 
 Example
 
+<!-- prettier-ignore -->
 ```js
-[
-  "Company Name",
-  "Advisor Email"
-]
+["Company Name", "Advisor Email"]
 ```
 
 ### getTemplateName
@@ -461,15 +498,19 @@ getTemplateName(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name                 | Type                 | Description                                                                                           |
+| -------------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
 | `templateDefinition` | `TemplateDefinition` | **Required.** An object nested within a [`TemplateExecutionResult` object](#templateexecutionresult). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const templateDefinition = executionResult.executionResult.templateDefinition;
 Openlaw.getTemplateName(templateDefinition);
 ```
@@ -480,6 +521,7 @@ Returns name of template as string.
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 "Advisor Agreement"
 ```
@@ -496,15 +538,19 @@ getAgreements(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 Openlaw.getAgreements(executionResult.executionResult);
 ```
 
@@ -514,6 +560,7 @@ Returns an array of objects containing information about the rendered agreements
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 [
   {
@@ -548,10 +595,10 @@ renderForReview(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `agreement` | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered for review. |
-| `jsOverriddenParagraphs` | `Object` | **Required.** An object containing the agreement paragraphs that were directly edited in draft mode. |
+| Name                     | Type                                          | Description                                                                                                                |
+| ------------------------ | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `agreement`              | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered for review. |
+| `jsOverriddenParagraphs` | `Object`                                      | **Required.** An object containing the agreement paragraphs that were directly edited in draft mode.                       |
 
 Example
 
@@ -589,11 +636,11 @@ renderForPreview(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `agreement` | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered for preview. |
-| `hiddenVariables` | `Array<String>` | **Required.** An array of the agreement variables as strings. |
-| `jsOverriddenParagraphs` | `Object` | **Required.** An object containing the agreement paragraphs that were directly edited in draft mode. |
+| Name                     | Type                                          | Description                                                                                                                 |
+| ------------------------ | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `agreement`              | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered for preview. |
+| `hiddenVariables`        | `Array<String>`                               | **Required.** An array of the agreement variables as strings.                                                               |
+| `jsOverriddenParagraphs` | `Object`                                      | **Required.** An object containing the agreement paragraphs that were directly edited in draft mode.                        |
 
 Example
 
@@ -630,14 +677,15 @@ parseMarkdown(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type     | Description                                               |
+| ----- | -------- | --------------------------------------------------------- |
 | `str` | `String` | **Required.** The text of the selected paragraph to edit. |
 
 Example
 
 ```js
-const currentParagraph = 'This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:';
+const currentParagraph =
+  'This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:';
 Openlaw.parseMarkdown(currentParagraph);
 ```
 
@@ -664,16 +712,20 @@ renderParagraphForEdit(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name        | Type                                          | Description                                                                                                     |
+| ----------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | `agreement` | [`StructuredAgreement`](#structuredagreement) | **Required.** A [`StructuredAgreement` object](#structuredagreement) representing the agreement to be rendered. |
-| `index` | `Int` | **Required.** The index number of the paragraph to be rendered for edit. |
+| `index`     | `Int`                                         | **Required.** The index number of the paragraph to be rendered for edit.                                        |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const agreements = Openlaw.getAgreements(executionResult.executionResult);
 Openlaw.renderParagraphForEdit(agreements[0].agreement, 1);
 ```
@@ -706,6 +758,7 @@ Returns array of input and specialized variable types as strings. Learn more abo
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 [
   "Collection",
@@ -741,16 +794,20 @@ getVariables(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `jsDefinedValues` | `Object` | **Required.** An empty object in order to retrieve all variables. |
+| `jsDefinedValues` | `Object`                                              | **Required.** An empty object in order to retrieve all variables.                                                                  |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 Openlaw.getVariables(executionResult.executionResult, {});
 ```
 
@@ -771,10 +828,10 @@ getExecutedVariables(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `jsDefinedValues` | `Object` | **Required.** The variable inputs for a template linked to a [deal](/markup-language/#deals) template. The object will be empty for templates that are not part of a deal. |
+| Name              | Type                                                  | Description                                                                                                                                                                |
+| ----------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                                         |
+| `jsDefinedValues` | `Object`                                              | **Required.** The variable inputs for a template linked to a [deal](/markup-language/#deals) template. The object will be empty for templates that are not part of a deal. |
 
 Example
 
@@ -808,15 +865,19 @@ getAllConditionalVariableNames(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 Openlaw.getAllConditionalVariableNames(executionResult.executionResult);
 ```
 
@@ -826,14 +887,9 @@ Returns an array of the names of conditional variables in a template as strings.
 
 Example
 
+<!-- prettier-ignore -->
 ```js
-[
-  "Corporation",
-  "LLC",
-  "PBC",
-  "Open Source Software",
-  "VoiceImageLikeness"
-]
+["Corporation", "LLC", "PBC", "Open Source Software", "VoiceImageLikeness"]
 ```
 
 ### getSections
@@ -848,8 +904,8 @@ getSections(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type                                                  | Description                                                                                                                        |
+| ---------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
@@ -866,13 +922,9 @@ Returns an array of header names of [groupings](/markup-language/#groupings) in 
 
 Example
 
+<!-- prettier-ignore -->
 ```js
-[
-  "Effective Date",
-  "Company Information",
-  "Employee Information",
-  "Other"
-]
+["Effective Date", "Company Information", "Employee Information", "Other"]
 ```
 
 ### getVariableSections
@@ -887,8 +939,8 @@ getVariableSections(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type                                                  | Description                                                                                                                        |
+| ---------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `document` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
@@ -949,14 +1001,16 @@ isDeal(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type                                    | Description                                                                                     |
+| ---------- | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `template` | [`CompiledTemplate`](#compiledtemplate) | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate). |
 
 Example
 
 ```js
-const compiledTemplate = Openlaw.compileTemplate('<%\n==Effective Date==\n[[Effective Date: Date]]\n\n==Company Name and Address==\n[[Company Name]]\n[[Company Address:Address]]\n[[Corporation:YesNo \"Is the company a corporation?\"]]\n[[LLC:YesNo \"An LLC?\"]]\n...[[Employee Offer Letter: Template(\"Employee Offer Letter\")]]...');
+const compiledTemplate = Openlaw.compileTemplate(
+  '<%\n==Effective Date==\n[[Effective Date: Date]]\n\n==Company Name and Address==\n[[Company Name]]\n[[Company Address:Address]]\n[[Corporation:YesNo "Is the company a corporation?"]]\n[[LLC:YesNo "An LLC?"]]\n...[[Employee Offer Letter: Template("Employee Offer Letter")]]...'
+);
 Openlaw.isDeal(compiledTemplate.compiledTemplate);
 ```
 
@@ -979,16 +1033,20 @@ showInForm(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.showInForm(variable, executionResult.executionResult);
@@ -1010,15 +1068,19 @@ getType(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type                                        | Description                                                                                   |
+| ---------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.getType(variable);
@@ -1040,15 +1102,19 @@ getName(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type                                        | Description                                                                                   |
+| ---------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.getName(variable);
@@ -1070,15 +1136,19 @@ getDescription(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type                                        | Description                                                                                   |
+| ---------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.getDescription(variable);
@@ -1100,15 +1170,19 @@ getCleanName(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type                                        | Description                                                                                   |
+| ---------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.getCleanName(variable);
@@ -1132,20 +1206,25 @@ checkValidity(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
-| `optValue` | `String` | **Required.** The value of the variable input as a string. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
+| `optValue`        | `String`                                              | **Required.** The value of the variable input as a string.                                                                         |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example (for [Identity variable](/markup-language/#identity-and-signatures))
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
-const identityValue = '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
+const identityValue =
+  '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
 Openlaw.checkValidity(variable, identityValue, executionResult.executionResult);
 ```
 
@@ -1165,15 +1244,19 @@ isHidden(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name                 | Type                                        | Description                                                                                   |
+| -------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `variableDefinition` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.isHidden(variable);
@@ -1197,8 +1280,8 @@ createAddress(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name      | Type     | Description                                                                                                                                         |
+| --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `address` | `Object` | **Required.** Information about an autosuggested address selected from the address box created by an [Address variable](/markup-language/#address). |
 
 Example
@@ -1223,6 +1306,7 @@ Returns the created address as a string in JSON format.
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}'
 ```
@@ -1239,14 +1323,15 @@ getAddress(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name   | Type     | Description                                                                                                 |
+| ------ | -------- | ----------------------------------------------------------------------------------------------------------- |
 | `json` | `String` | **Required.** The string address in JSON format returned from the [`createAddress` method](#createaddress). |
 
 Example
 
 ```js
-const json = '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}';
+const json =
+  '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}';
 Openlaw.getAddress(json);
 ```
 
@@ -1281,8 +1366,8 @@ getFormattedAddress(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name      | Type      | Description                                                                            |
+| --------- | --------- | -------------------------------------------------------------------------------------- |
 | `address` | `Address` | **Required.** The address object returned from the [`getAddress` method](#getaddress). |
 
 Example
@@ -1307,6 +1392,7 @@ Returns formatted address as a string.
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 "123 Main St, Flushing, NY 11354, USA"
 ```
@@ -1326,16 +1412,20 @@ isChoiceType(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.isChoiceType(variable, executionResult.executionResult);
@@ -1358,16 +1448,20 @@ getChoiceValues(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Choice type
 Openlaw.getChoiceValues(variable, executionResult.executionResult);
@@ -1379,16 +1473,9 @@ Returns an array of option values for the [Choice type](/markup-language/#choice
 
 Example
 
+<!-- prettier-ignore -->
 ```js
-[
-  "Brazil",
-  "Canada",
-  "India",
-  "Israel",
-  "Switzerland",
-  "Thailand",
-  "USA"
-]
+["Brazil", "Canada", "India", "Israel", "Switzerland", "Thailand", "USA"]
 ```
 
 ## Collection
@@ -1407,20 +1494,25 @@ getCollectionSize(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
-| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
+| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format.       |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Collection type
-const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":3}';
+const value =
+  '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":3}';
 Openlaw.getCollectionSize(variable, value, executionResult.executionResult);
 ```
 
@@ -1442,20 +1534,28 @@ createVariableFromCollection(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
-| `index` | `Int` | **Required.** The index number of the new element in the Collection. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
+| `index`           | `Int`                                                 | **Required.** The index number of the new element in the Collection.                                                               |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Collection type
-Openlaw.createVariableFromCollection(variable, 1, executionResult.executionResult);
+Openlaw.createVariableFromCollection(
+  variable,
+  1,
+  executionResult.executionResult
+);
 ```
 
 **Response**
@@ -1476,21 +1576,30 @@ addElementToCollection(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
-| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the new element is added) in JSON format. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                                                  | Description                                                                                                                                                    |
+| ----------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                                                  |
+| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the new element is added) in JSON format. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                             |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Collection type
-const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":3}';
-Openlaw.addElementToCollection(variable, value, executionResult.executionResult);
+const value =
+  '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":3}';
+Openlaw.addElementToCollection(
+  variable,
+  value,
+  executionResult.executionResult
+);
 ```
 
 **Response**
@@ -1499,6 +1608,7 @@ Returns a string of the current values and size of the [Collection type](/markup
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":4}'
 ```
@@ -1519,23 +1629,34 @@ setElementToCollection(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `optValue` | `String` | **Required.** The value for the added element as a string. |
-| `index` | `Int` | **Required.** The index number of the new element in the Collection. |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
-| `collectionValue` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the value is set for the added element) in JSON format. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                                                  | Description                                                                                                                                                                  |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `optValue`        | `String`                                              | **Required.** The value for the added element as a string.                                                                                                                   |
+| `index`           | `Int`                                                 | **Required.** The index number of the new element in the Collection.                                                                                                         |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                                                                |
+| `collectionValue` | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the value is set for the added element) in JSON format. |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                                           |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Collection type
-const collectionValue = '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":4}';
-Openlaw.setElementToCollection("Soccer", 3, variable, collectionValue, executionResult.executionResult);
+const collectionValue =
+  '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":4}';
+Openlaw.setElementToCollection(
+  "Soccer",
+  3,
+  variable,
+  collectionValue,
+  executionResult.executionResult
+);
 ```
 
 **Response**
@@ -1544,6 +1665,7 @@ Returns a string of the current values and size of the [Collection type](/markup
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}'
 ```
@@ -1563,22 +1685,32 @@ removeElementFromCollection(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `index` | `Int` | **Required.** The index number of the element to be removed from the Collection. |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the element is removed) in JSON format. |
+| Name              | Type                                                  | Description                                                                                                                                                  |
+| ----------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `index`           | `Int`                                                 | **Required.** The index number of the element to be removed from the Collection.                                                                             |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                                                |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                           |
+| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) (before the element is removed) in JSON format. |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Collection type
-const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
-Openlaw.removeElementFromCollection(3, variable, executionResult.executionResult, value);
+const value =
+  '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
+Openlaw.removeElementFromCollection(
+  3,
+  variable,
+  executionResult.executionResult,
+  value
+);
 ```
 
 **Response**
@@ -1587,6 +1719,7 @@ Returns a string of the current values and size of the [Collection type](/markup
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 '{"values":{"0":"Football","1":"Basketball","2":"Baseball"},"size":3}'
 ```
@@ -1606,22 +1739,32 @@ getCollectionElementValue(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. |
-| `index` | `Int` | **Required.** The index number of the element to be checked in the Collection. |
+| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format.       |
+| `index`           | `Int`                                                 | **Required.** The index number of the element to be checked in the Collection.                                                     |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Collection type
-const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
-Openlaw.getCollectionElementValue(variable, executionResult.executionResult, value, 2);
+const value =
+  '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
+Openlaw.getCollectionElementValue(
+  variable,
+  executionResult.executionResult,
+  value,
+  2
+);
 ```
 
 **Response**
@@ -1630,6 +1773,7 @@ Returns the value of an element in a [Collection type](/markup-language/#collect
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 "Baseball"
 ```
@@ -1648,20 +1792,25 @@ getCollectionValue(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
-| `value` | `String` | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. The value will be an empty string if the Collection does not have a set value for its first element. |
+| Name              | Type                                                  | Description                                                                                                                                                                                                                       |
+| ----------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                                                                                                                     |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).                                                                                                |
+| `value`           | `String`                                              | **Required.** A string of the current values and size of the [Collection type](/markup-language/#collection) in JSON format. The value will be an empty string if the Collection does not have a set value for its first element. |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Collection type
-const value = '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
+const value =
+  '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}';
 Openlaw.getCollectionValue(variable, executionResult.executionResult, value);
 ```
 
@@ -1671,6 +1820,7 @@ Returns a string of the current values and size of the [Collection type](/markup
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 '{"values":{"0":"Football","1":"Basketball","2":"Baseball","3":"Soccer"},"size":4}'
 ```
@@ -1689,16 +1839,22 @@ noIdentity(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type                                    | Description                                                                                |
+| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
-const validationResult = Openlaw.validateContract(executionResult.executionResult);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const validationResult = Openlaw.validateContract(
+  executionResult.executionResult
+);
 Openlaw.noIdentity(validationResult);
 ```
 
@@ -1718,16 +1874,22 @@ missingIdentities(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type                                    | Description                                                                                |
+| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
-const validationResult = Openlaw.validateContract(executionResult.executionResult);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const validationResult = Openlaw.validateContract(
+  executionResult.executionResult
+);
 Openlaw.missingIdentities(validationResult);
 ```
 
@@ -1747,16 +1909,22 @@ missingAllIdentities(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name     | Type                                    | Description                                                                                |
+| -------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `result` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
-const validationResult = Openlaw.validateContract(executionResult.executionResult);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const validationResult = Openlaw.validateContract(
+  executionResult.executionResult
+);
 Openlaw.missingAllIdentities(validationResult);
 ```
 
@@ -1776,16 +1944,21 @@ getIdentityEmail(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type       | Description                                                                                                   |
+| ---------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
 | `identity` | `Identity` | **Required.** An object containing information about an identity, including `email`, `id`, and `identifiers`. |
 
 Example
 
 ```js
-const identityValue = '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
+const identityValue =
+  '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
 // see example above for #checkValidity for other parameters
-const identity = Openlaw.checkValidity(variable, identityValue, executionResult.executionResult);
+const identity = Openlaw.checkValidity(
+  variable,
+  identityValue,
+  executionResult.executionResult
+);
 Openlaw.getIdentityEmail(identity);
 ```
 
@@ -1795,6 +1968,7 @@ Returns an email address for an [Identity variable](/markup-language/#identity-a
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 "openlawuser+1@gmail.com"
 ```
@@ -1811,16 +1985,21 @@ getIdentityId(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type       | Description                                                                                                   |
+| ---------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
 | `identity` | `Identity` | **Required.** An object containing information about an identity, including `email`, `id`, and `identifiers`. |
 
 Example
 
 ```js
-const identityValue = '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
+const identityValue =
+  '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}';
 // see example above for #checkValidity for other parameters
-const identity = Openlaw.checkValidity(variable, identityValue, executionResult.executionResult);
+const identity = Openlaw.checkValidity(
+  variable,
+  identityValue,
+  executionResult.executionResult
+);
 Openlaw.getIdentityId(identity);
 ```
 
@@ -1830,6 +2009,7 @@ Returns an ID for an [Identity variable](/markup-language/#identity-and-signatur
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 "8f26427b-0853-469b-a4f1-132190b7373e"
 ```
@@ -1847,17 +2027,23 @@ getIdentities(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `validationResult` | [`ValidationResult`](#validationresult) | **Required.** The object returned from the [`validateContract` method](#validatecontract). |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name               | Type                                                  | Description                                                                                                                        |
+| ------------------ | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `validationResult` | [`ValidationResult`](#validationresult)               | **Required.** The object returned from the [`validateContract` method](#validatecontract).                                         |
+| `executionResult`  | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
-const validationResult = Openlaw.validateContract(executionResult.executionResult);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const validationResult = Openlaw.validateContract(
+  executionResult.executionResult
+);
 Openlaw.getIdentities(validationResult);
 ```
 
@@ -1878,10 +2064,10 @@ createIdentity(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `userId` | `String` | **Required.** A user ID. |
-| `email` | `String` | **Required.** The user's email address. |
+| Name     | Type     | Description                             |
+| -------- | -------- | --------------------------------------- |
+| `userId` | `String` | **Required.** A user ID.                |
+| `email`  | `String` | **Required.** The user's email address. |
 
 Example
 
@@ -1924,10 +2110,10 @@ createIdentityInternalValue(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `userId` | `String` | **Required.** A user ID. |
-| `email` | `String` | **Required.** The user's email address. |
+| Name     | Type     | Description                             |
+| -------- | -------- | --------------------------------------- |
+| `userId` | `String` | **Required.** A user ID.                |
+| `email`  | `String` | **Required.** The user's email address. |
 
 Example
 
@@ -1943,6 +2129,7 @@ Returns information about an identity, including `email`, `id`, and `identifiers
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}'
 ```
@@ -1962,16 +2149,20 @@ isStructuredType(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // variable being checked is first variable in template
 Openlaw.isStructuredType(variable, executionResult.executionResult);
@@ -1994,16 +2185,20 @@ getStructureFieldDefinitions(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable. |
+| Name              | Type                                                  | Description                                                                                                                        |
+| ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable.                                      |
 | `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Structure type
 Openlaw.getStructureFieldDefinitions(variable, executionResult.executionResult);
@@ -2028,23 +2223,35 @@ getStructureFieldValue(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the [Structure type](/markup-language/#structure) variable. |
-| `field` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable field. |
-| `structureValue` | `String` | **Required.** The variable fields with input values as a string in JSON format. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                                                  | Description                                                                                                                                 |
+| ----------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the [Structure type](/markup-language/#structure) variable. |
+| `field`           | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the variable field.                                         |
+| `structureValue`  | `String`                                              | **Required.** The variable fields with input values as a string in JSON format.                                                             |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).          |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Structure type
-const field = Openlaw.getStructureFieldDefinitions(variable, executionResult.executionResult)[0]; // variable being checked is first variable field in Structure type variable
+const field = Openlaw.getStructureFieldDefinitions(
+  variable,
+  executionResult.executionResult
+)[0]; // variable being checked is first variable field in Structure type variable
 const structureValue = '{"First name":"John","Last name":"Smith"}';
-Openlaw.getStructureFieldValue(variable, field, structureValue, executionResult.executionResult);
+Openlaw.getStructureFieldValue(
+  variable,
+  field,
+  structureValue,
+  executionResult.executionResult
+);
 ```
 
 **Response**
@@ -2053,6 +2260,7 @@ Returns value of the variable field in a [Structure type](/markup-language/#stru
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 "John"
 ```
@@ -2073,23 +2281,33 @@ setStructureFieldValue(
 
 **Parameters**
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `variable` | [`VariableDefinition`](#variabledefinition) | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the [Structure type](/markup-language/#structure) variable. |
-| `fieldName` | `String` | **Required.** Name of variable field to be set with value. |
-| `fieldValue` | `String` | **Required.** The value to be set in the variable field. |
-| `structureValue` | `String` | **Required.** The current variable fields with input values (before the new value is set) in JSON format. |
-| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview). |
+| Name              | Type                                                  | Description                                                                                                                                 |
+| ----------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `variable`        | [`VariableDefinition`](#variabledefinition)           | **Required.** A [`VariableDefinition` object](#variabledefinition) representing the [Structure type](/markup-language/#structure) variable. |
+| `fieldName`       | `String`                                              | **Required.** Name of variable field to be set with value.                                                                                  |
+| `fieldValue`      | `String`                                              | **Required.** The value to be set in the variable field.                                                                                    |
+| `structureValue`  | `String`                                              | **Required.** The current variable fields with input values (before the new value is set) in JSON format.                                   |
+| `executionResult` | [`TemplateExecutionResult`](#templateexecutionresult) | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview).          |
 
 Example
 
 ```js
 // see examples above for #execute and #executeForReview for parameters
-const executionResult = Openlaw.execute(compiledTemplate.compiledTemplate, {}, params);
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Structure type
 const structureValue = '{"First name":"John","Last name":"Smith"}';
-Openlaw.getStructureFieldValue(variable, "Position", "CTO", structureValue, executionResult.executionResult);
+Openlaw.getStructureFieldValue(
+  variable,
+  "Position",
+  "CTO",
+  structureValue,
+  executionResult.executionResult
+);
 ```
 
 **Response**
@@ -2098,6 +2316,7 @@ Returns a string of the current variable fields with input values in a [Structur
 
 Example
 
+<!-- prettier-ignore -->
 ```js
 '{"Last name":"Smith","First name":"John","Position":"CTO"}'
 ```
