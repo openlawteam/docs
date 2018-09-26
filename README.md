@@ -55,3 +55,10 @@ PR to the [config file] (format [documentation]). Index is updated once every
 
 [config file]: https://github.com/algolia/docsearch-configs/blob/master/configs/openlaw.json
 [documentation]: https://community.algolia.com/docsearch/config-file.html
+
+## License
+
+The written documentation and source code examples are licensed under the
+[Creative Commons Attribution 4.0 International][license] license.
+
+[license]: https://creativecommons.org/licenses/by/4.0/

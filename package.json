@@ -10,7 +10,7 @@
     "test": "prettier-check '**/*.{js,md}'"
   },
   "author": "OpenLaw Team <opensource@openlaw.io>",
-  "license": "UNLICENSED",
+  "license": "CC-BY-4.0",
   "devDependencies": {
     "prettier": "^1.14.2",
     "prettier-check": "^2.0.0",
