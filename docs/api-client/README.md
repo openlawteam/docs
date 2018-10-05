@@ -937,7 +937,7 @@ Returns a promise which resolves with the status of the signature event.
 
 Example
 
-```json
+```
 "signature + userId/contractId pair stored"
 ```
 
