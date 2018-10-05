@@ -689,7 +689,7 @@ Example
 
 ### getContract
 
-Get user's contract by its ID.
+Get user's contract by its ID, which is a cryptographic hash of the contract.
 
 ```
 GET /contract/raw/:contractId
@@ -909,6 +909,37 @@ GET /contract/resume/1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37
 **Response**
 
 Returns `"contract resumed"` if smart contract transactions were successfully resumed.
+
+### sendTxHash
+
+Method used in connection with a contract signatory using own [MetaMask](https://metamask.io/) account to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on the blockchain. Upon completion of that transaction for signing the contract with MetaMask, the transaction hash for the contract ID is passed back to the server for validation and record-keeping.
+
+```
+GET /contract/sendTxHash/:contractId
+```
+
+**Parameters**
+
+| Name         | Type     | Description                                                                           |
+| ------------ | -------- | ------------------------------------------------------------------------------------- |
+| `contractId` | `string` | **Required.** The ID of the contract.                                                 |
+| `txHash`     | `string` | **Required.** The transaction hash resulting from signing the contract with MetaMask. |
+
+Example
+
+```
+GET /contract/sendTxHash/5f468fe079d8c42cd27219c9f76f57296ad03c9ae9ff31f7d8c1f59337707ab5?contractId=5f468fe079d8c42cd27219c9f76f57296ad03c9ae9ff31f7d8c1f59337707ab5&txHash=0x32ea4b144b7320855188a476119f7ca24dcb8336f20d574e7abe65c296208e72
+```
+
+**Response**
+
+Returns a promise which resolves with the status of the signature event.
+
+Example
+
+```
+"signature + userId/contractId pair stored"
+```
 
 ## User
 
