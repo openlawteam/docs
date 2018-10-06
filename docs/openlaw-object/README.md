@@ -2040,6 +2040,41 @@ Example
 '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}'
 ```
 
+### isSignatory
+
+Check if user is a signatory to a contract.
+
+```scala
+isSignatory(
+  userId: String,
+  executionResult: TemplateExecutionResult
+): Boolean
+```
+
+**Parameters**
+
+| Name              | Type                      | Description                                                                                                                                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `userId`          | `String`                  | **Required.** A user ID.                                                                                                                                                                   |
+| `executionResult` | `TemplateExecutionResult` | **Required.** The nested object returned from the [`execute` method](#execute) and [`executeForReview` method](#executeforreview), which includes information about the executed template. |
+
+Example
+
+```js
+// see examples above for #execute and #executeForReview for parameters
+const executionResult = Openlaw.execute(
+  compiledTemplate.compiledTemplate,
+  {},
+  params
+);
+const userId = "8f26427b-0853-469b-a4f1-132190b7373e";
+Openlaw.isSignatory(userId, executionResult.executionResult);
+```
+
+**Response**
+
+Returns `true` if user is a contract signatory.
+
 ## Structure
 
 ### isStructuredType
