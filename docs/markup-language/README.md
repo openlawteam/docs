@@ -306,6 +306,16 @@ executed and delivered by the Company pursuant to this Agreement.
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
+## Titles
+
+You can hide the template title for an agreement by including the following option at the beginning of the document
+
+```
+####
+show title:false;
+####
+```
+
 ## Conditionals and Decision Branches
 
 You can markup an agreement with "conditionals" to embed advanced logic into an agreement, helping you create more dynamic and customizable legal agreements.
