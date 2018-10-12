@@ -308,7 +308,7 @@ executed and delivered by the Company pursuant to this Agreement.
 
 ## Titles
 
-You can hide the template title for an agreement by including the following option at the beginning of the document
+You can hide the template title for an agreement by including the following option at the beginning of the document.
 
 ```
 ####
