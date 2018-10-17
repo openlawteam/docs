@@ -1404,3 +1404,95 @@ Example
   ]
 }
 ```
+## Private Instances
+
+### getGithubToken
+
+Retrieves Github personal access token stored in your environment variables. Used for automated private instance creation to push yaml files (associated with private instance you're creating) to `openlaw-infra` repo.
+
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
+
+```
+GET /getGithubToken
+```
+
+**Parameters**
+None.
+
+**Response**
+Returns Github personal access token stored in your environment variables.
+
+Example
+
+```
+32759f037558e0cjp67163kf1le25bc6kfbv2c61
+```
+
+### getInstanceEthAddress
+
+Retrieves the Ethereum address associated with a private instance - address contains Ether funds acting as gas for the execution of transactions in said instance.
+
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
+
+```
+GET /getInstanceEthAddress/:instanceName/:env
+```
+
+**Parameters**
+
+| Name   | Type     | Description                                                                                                                     |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `instanceName` | `string` | **Required.** The name of the private instance to retrieve the Ethereum address for.|
+|  `env` | `string` | **Required.** The development environment the private instance is in: `dev` or `prod`.|
+
+Example
+
+```
+GET /getInstanceEthAddress/bloomberg/prod
+```
+
+**Response**
+
+Returns Ethereum address of desired private instance.
+
+Example
+
+```
+0x952d8a1e72c23f8d9cb64ac2b8179028e1d382d2
+```
+
+### sendEtherToInstance
+
+Sends Ether to an Ethereum address associated with a private instance to provide Ether funds acting as gas for the execution of transactions in said instance.
+
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
+
+```
+GET /sendEtherToInstance/:instanceAddress/:ethValue
+```
+
+**Parameters**
+
+| Name   | Type     | Description                                                                                                                     |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `instanceAddress` | `string` | **Required.** The address of the private instance (can be retreived using `getInstanceEthAddress` to send the Ether to.|
+|  `ethValue` | `number` | **Required.** The amount of Ether to send to `instanceAddress`.  (**Note**: Denominated in ether, not gwei. Both partial and whole ether amounts permitted) |
+
+**Response**
+
+Returns a JSON object containing confirmation that the Ether transaction was successful along with the transaction hash.
+
+Example
+
+```json
+{
+  "status": "success", 
+  "txnHash": "0x7b70d21ef41810579ea058c5be9bd0fd22c3fb36eb4bca73760ffc1613008a30"
+}
+```
