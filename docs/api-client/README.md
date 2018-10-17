@@ -1404,6 +1404,7 @@ Example
   ]
 }
 ```
+
 ## Private Instances
 
 ### getGithubToken
@@ -1444,10 +1445,10 @@ GET /getInstanceEthAddress/:instanceName/:env
 
 **Parameters**
 
-| Name   | Type     | Description                                                                                                                     |
-| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `instanceName` | `string` | **Required.** The name of the private instance to retrieve the Ethereum address for.|
-|  `env` | `string` | **Required.** The development environment the private instance is in: `dev` or `prod`.|
+| Name           | Type     | Description                                                                            |
+| -------------- | -------- | -------------------------------------------------------------------------------------- |
+| `instanceName` | `string` | **Required.** The name of the private instance to retrieve the Ethereum address for.   |
+| `env`          | `string` | **Required.** The development environment the private instance is in: `dev` or `prod`. |
 
 Example
 
@@ -1479,10 +1480,10 @@ GET /sendEtherToInstance/:instanceAddress/:ethValue
 
 **Parameters**
 
-| Name   | Type     | Description                                                                                                                     |
-| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `instanceAddress` | `string` | **Required.** The address of the private instance (can be retreived using `getInstanceEthAddress` to send the Ether to.|
-|  `ethValue` | `number` | **Required.** The amount of Ether to send to `instanceAddress`.  (**Note**: Denominated in ether, not gwei. Both partial and whole ether amounts permitted) |
+| Name              | Type     | Description                                                                                                                                                |
+| ----------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `instanceAddress` | `string` | **Required.** The address of the private instance (can be retreived using `getInstanceEthAddress` to send the Ether to.                                    |
+| `ethValue`        | `number` | **Required.** The amount of Ether to send to `instanceAddress`. (**Note**: Denominated in ether, not gwei. Both partial and whole ether amounts permitted) |
 
 **Response**
 
@@ -1492,7 +1493,7 @@ Example
 
 ```json
 {
-  "status": "success", 
+  "status": "success",
   "txnHash": "0x7b70d21ef41810579ea058c5be9bd0fd22c3fb36eb4bca73760ffc1613008a30"
 }
 ```
