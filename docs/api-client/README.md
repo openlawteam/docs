@@ -519,12 +519,12 @@ GET /drafts/search
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                |
-| ---------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `keyword`  | `string` | **Required.** The search term to filter retrieved drafts.                                                  |
-| `page`     | `number` | **Required.** Which group of drafts to display. Each group consists of `pageSize` drafts.                  |
-| `pageSize` | `number` | **Required.** The number of drafts to display on page.                                                     |
-| `sortBy`   | `string` | **Required.** The way in which returned drafts are to be sorted: `creationdate`, `privatename`, or `title` |
+| Name       | Type     | Description                                                                                                 |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved drafts.                                                   |
+| `page`     | `number` | **Required.** Which group of drafts to display. Each group consists of `pageSize` drafts.                   |
+| `pageSize` | `number` | **Required.** The number of drafts to display on page.                                                      |
+| `sortBy`   | `string` | **Required.** The way in which returned drafts are to be sorted: `creationdate`, `privatename`, or `title`. |
 
 Example
 
@@ -747,12 +747,12 @@ GET /contracts/search
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                   |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------- |
-| `keyword`  | `string` | **Required.** The search term to filter retrieved contracts.                                                  |
-| `page`     | `number` | **Required.** Which group of contracts to display. Each group consists of `pageSize` contracts.               |
-| `pageSize` | `number` | **Required.** The number of contracts to display on page.                                                     |
-| `sortBy`   | `string` | **Required.** The way in which returned contracts are to be sorted: `creationdate`, `privatename`, or `title` |
+| Name       | Type     | Description                                                                                                    |
+| ---------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved contracts.                                                   |
+| `page`     | `number` | **Required.** Which group of contracts to display. Each group consists of `pageSize` contracts.                |
+| `pageSize` | `number` | **Required.** The number of contracts to display on page.                                                      |
+| `sortBy`   | `string` | **Required.** The way in which returned contracts are to be sorted: `creationdate`, `privatename`, or `title`. |
 
 Example
 
@@ -912,23 +912,24 @@ Returns `"contract resumed"` if smart contract transactions were successfully re
 
 ### sendTxHash
 
-Method used in connection with a contract signatory using own [MetaMask](https://metamask.io/) account to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on the blockchain. Upon completion of that transaction for signing the contract with MetaMask, the transaction hash for the contract ID is passed back to the server for validation and record-keeping.
+Method used in connection with a contract signatory using own [MetaMask](https://metamask.io/) account to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract with MetaMask, the transaction hash for the contract ID is passed back to the server for validation and record-keeping.
 
 ```
-GET /contract/sendTxHash/:contractId
+GET /contract/signature/sendTxHash
 ```
 
 **Parameters**
 
-| Name         | Type     | Description                                                                           |
-| ------------ | -------- | ------------------------------------------------------------------------------------- |
-| `contractId` | `string` | **Required.** The ID of the contract.                                                 |
-| `txHash`     | `string` | **Required.** The transaction hash resulting from signing the contract with MetaMask. |
+| Name         | Type     | Description                                                                                                                     |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `contractId` | `string` | **Required.** The ID of the contract.                                                                                           |
+| `network`    | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Mainnet`, `Ropsten`, `Kovan`, or `Rinkeby`. |
+| `txHash`     | `string` | **Required.** The transaction hash resulting from signing the contract with MetaMask.                                           |
 
 Example
 
 ```
-GET /contract/sendTxHash/5f468fe079d8c42cd27219c9f76f57296ad03c9ae9ff31f7d8c1f59337707ab5?contractId=5f468fe079d8c42cd27219c9f76f57296ad03c9ae9ff31f7d8c1f59337707ab5&txHash=0x32ea4b144b7320855188a476119f7ca24dcb8336f20d574e7abe65c296208e72
+GET /contract/signature/sendTxHash?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487&network=Rinkeby&txHash=0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc
 ```
 
 **Response**
@@ -939,6 +940,64 @@ Example
 
 ```
 "signature + userId/contractId pair stored"
+```
+
+## Network
+
+### getCurrentNetwork
+
+Get the application level Ethereum network that has been set by an `Admin` user to be the default network for all signatures and smart contract executions performed on an OpenLaw instance.
+
+```
+GET /network
+```
+
+**Parameters**
+
+None
+
+**Response**
+
+Returns a JSON object containing the name of the selected Ethereum network (`"Mainnet"`, `"Ropsten"`, `"Kovan"`, or `"Rinkeby"`) and the address of the smart contract that handles the signature transaction.
+
+Example
+
+```json
+{ "name": "Rinkeby", "address": "0x74de946322957ec5a7c4ad0f5c88e4076c65f3bb" }
+```
+
+### changeEthereumNetwork
+
+Change the default application level Ethereum network used for all signatures and smart contract executions performed on an OpenLaw instance.
+
+::: warning Authorization
+This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
+:::
+
+```
+GET /ethereum/changeEthereumNetwork/:name
+```
+
+**Parameters**
+
+| Name   | Type     | Description                                                                                                                     |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `name` | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Mainnet`, `Ropsten`, `Kovan`, or `Rinkeby`. |
+
+Example
+
+```
+GET /ethereum/changeEthereumNetwork/Mainnet
+```
+
+**Response**
+
+Returns confirmation that the network was changed if successful.
+
+Example
+
+```
+"new network linked!"
 ```
 
 ## User
