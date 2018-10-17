@@ -946,7 +946,7 @@ Example
 
 ### getCurrentNetwork
 
-Get the application level Ethereum network that has been set by an `Admin` user to be the default network for all signatures and smart contract executions performed on an OpenLaw instance.
+Get the application level Ethereum network that has been set by an `Admin` user to be the default network for all signatures and smart contract executions (if no [contract level network](/markup-language/#selecting-the-contract-level-ethereum-network) is specified in a template for the executions) performed on an OpenLaw instance.
 
 ```
 GET /network
@@ -968,7 +968,7 @@ Example
 
 ### changeEthereumNetwork
 
-Change the default application level Ethereum network used for all signatures and smart contract executions performed on an OpenLaw instance.
+Change the default application level Ethereum network used for all signatures and smart contract executions (if no [contract level network](/markup-language/#selecting-the-contract-level-ethereum-network) is specified in a template for the executions) performed on an OpenLaw instance.
 
 ::: warning Authorization
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
@@ -1100,7 +1100,7 @@ Example
 
 ### toAdminUser
 
-Change role of a user to `Admin`, which allows user to access additional features such as deleting and restoring templates, viewing the list of all other users, changing permissions of and deleting other users, and loading a set of standard templates into an instance.
+Change role of a user to `Admin`, which allows user to access additional features such as deleting and restoring templates, viewing the list of all other users, changing permissions of and deleting other users, loading a set of standard templates into an instance, and changing the application level Ethereum network.
 
 ::: warning Authorization
 This resource can only be accessed by a logged in user with an `Admin` role.
