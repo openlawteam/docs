@@ -1039,6 +1039,30 @@ and then separately called:
 
 :::
 
+### Selecting the Contract Level Ethereum Network
+
+As an option for embedding a smart contract to execute as part of an agreement, you can select the Ethereum network used for the smart contract executions by specifying the `network` with `"Mainnet"`, `"Ropsten"`, `"Kovan"`, or `"Rinkeby"` as shown below:
+
+```
+[[Pay Vendor:EthereumCall(
+contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
+interface:[{"name":"makePayment", "type":"function","inputs":
+[{"name":"RecipientAddress", "type":"address"},
+{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
+network:"Rinkeby";
+function:"makePayment";
+arguments:Recipient Ethereum Address,Payment in Wei;
+startDate:Payment Start Date;
+endDate:Payment End Date;
+repeatEvery:"1 minute")]]
+```
+
+The contract level network set in the `EthereumCall` is specific to only the smart contract executions for that particular agreement. A signature transaction which occurs after an agreement is signed on an OpenLaw instance will use the [application level network](/api-client/#getcurrentnetwork) set by an `Admin` user for that instance. So it is possible to use one network for signing an agreement and another network for executing any smart contract transactions as part of that same agreement.
+
+::: tip
+If you omit the contract level `network` parameter and value from the `EthereumCall`, the network used for the smart contract executions will default to the [application level network](/api-client/#getcurrentnetwork) set at the time the executions are initiated.
+:::
+
 ## Deals
 
 Using OpenLaw, you can link together multiple templates into what we call a "deal." A deal is simply a collection of templates. To create a deal, you need to call a template. You can do so using the following syntax:
