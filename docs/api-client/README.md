@@ -1425,15 +1425,9 @@ None.
 **Response**
 Returns Github personal access token stored in your environment variables.
 
-Example
-
-```
-32759f037558e0cjp67163kf1le25bc6kfbv2c61
-```
-
 ### getInstanceEthAddress
 
-Retrieves the Ethereum address associated with a private instance - address contains Ether funds acting as gas for the execution of transactions in said instance.
+Retrieve the Ethereum address associated with a private instance - address contains Ether funds acting as gas for the execution of transactions in said instance.
 
 ::: warning Authorization
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
@@ -1453,22 +1447,22 @@ GET /getInstanceEthAddress/:instanceName/:env
 Example
 
 ```
-GET /getInstanceEthAddress/bloomberg/prod
+GET /getInstanceEthAddress/openlaw/prod
 ```
 
 **Response**
 
-Returns Ethereum address of desired private instance.
+Returns Ethereum address associated with desired private instance.
 
 Example
 
 ```
-0x952d8a1e72c23f8d9cb64ac2b8179028e1d382d2
+0x952d8a1e72c26f8d9cf64ac2b8169028e0d386d1
 ```
 
 ### sendEtherToInstance
 
-Sends Ether to an Ethereum address associated with a private instance to provide Ether funds acting as gas for the execution of transactions in said instance.
+Send Ether to an Ethereum address associated with a private instance to provide Ether funds acting as gas for the execution of transactions in said instance.
 
 ::: warning Authorization
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
@@ -1480,10 +1474,16 @@ GET /sendEtherToInstance/:instanceAddress/:ethValue
 
 **Parameters**
 
-| Name              | Type     | Description                                                                                                                                                |
-| ----------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `instanceAddress` | `string` | **Required.** The address of the private instance (can be retreived using `getInstanceEthAddress` to send the Ether to.                                    |
-| `ethValue`        | `number` | **Required.** The amount of Ether to send to `instanceAddress`. (**Note**: Denominated in ether, not gwei. Both partial and whole ether amounts permitted) |
+| Name              | Type     | Description                                                                                                                                                 |
+| ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `instanceAddress` | `string` | **Required.** The address associated with the private instance (can be retrieved using `getInstanceEthAddress`) to send the Ether to.                       |
+| `ethValue`        | `number` | **Required.** The amount of Ether to send to `instanceAddress`. (**Note**: Denominated in ether, not gwei. Both partial and whole ether amounts permitted.) |
+
+Example
+
+```
+GET /sendEtherToInstance/0x952d8a1e72c26f8d9cf64ac2b8169028e0d386d1/2.5
+```
 
 **Response**
 
