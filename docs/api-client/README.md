@@ -920,11 +920,11 @@ GET /contract/signature/sendTxHash
 
 **Parameters**
 
-| Name         | Type     | Description                                                                                                                     |
-| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `contractId` | `string` | **Required.** The ID of the contract.                                                                                           |
-| `network`    | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Mainnet`, `Ropsten`, `Kovan`, or `Rinkeby`. |
-| `txHash`     | `string` | **Required.** The transaction hash resulting from signing the contract with MetaMask.                                           |
+| Name         | Type     | Description                                                                                                                                                         |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contractId` | `string` | **Required.** The ID of the contract.                                                                                                                               |
+| `network`    | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Ropsten`, `Kovan`, or `Rinkeby`. Support for `Mainnet` will be integrated soon. |
+| `txHash`     | `string` | **Required.** The transaction hash resulting from signing the contract with MetaMask.                                                                               |
 
 Example
 
@@ -987,7 +987,7 @@ GET /ethereum/changeEthereumNetwork/:name
 Example
 
 ```
-GET /ethereum/changeEthereumNetwork/Mainnet
+GET /ethereum/changeEthereumNetwork/Rinkeby
 ```
 
 **Response**
