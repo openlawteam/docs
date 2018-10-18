@@ -1041,7 +1041,7 @@ and then separately called:
 
 ### Selecting the Contract Level Ethereum Network
 
-As an option for embedding a smart contract to execute as part of an agreement, you can select the Ethereum network used for the smart contract executions by specifying the `network` with `"Mainnet"`, `"Ropsten"`, `"Kovan"`, or `"Rinkeby"` as shown below:
+As an option for embedding a smart contract to execute as part of an agreement, you can select the Ethereum network used for the smart contract executions by specifying the `network` with `"Ropsten"`, `"Kovan"`, or `"Rinkeby"` as shown below. Support for `"Mainnet"` will be integrated soon.
 
 ```
 [[Pay Vendor:EthereumCall(
