@@ -1424,6 +1424,7 @@ GET /getGithubToken
 None
 
 **Response**
+
 Returns Github personal access token stored in your environment variables.
 
 Example
