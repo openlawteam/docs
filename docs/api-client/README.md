@@ -1351,15 +1351,16 @@ GET /recentActivity
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                  |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------ |
-| `page`     | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events. |
-| `pageSize` | `number` | **Required.** The number of community activity events to display on page.                                    |
+| Name   | Type     | Description                                                                                                  |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `page` | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events. |
+| `pageSize` | `number` | **Required.** The number of community activity events to display on page.                                |
+| `filter` | `array<string> | null` | **Required.** Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Using `filter` requires at least one valid filter, unless empty. Leaving `filter` empty will return all activity types as if no filter were applied.|
 
 Example
 
 ```
-GET /recentActivity?page=1&pageSize=5
+GET /recentActivity?filter=TemplateCreated,TemplateUpdated&page=1&pageSize=5
 ```
 
 **Response**
@@ -1373,9 +1374,10 @@ Example
   "nbHits": 100,
   "data": [
     {
-      "EventType": "UserCreated",
-      "user": "John Doe",
-      "timestamp": "2018-09-21T15:20:02.102772"
+      "EventType": "TemplateCreated",
+      "creator": "openlawuser+1",
+      "timestamp": "2018-09-21T15:20:02.102772",
+      "title": "Ridesharing Agreement"
     },
     {
       "EventType": "TemplateUpdated",
