@@ -1409,7 +1409,7 @@ Example
 
 ### getGithubToken
 
-Retrieves Github personal access token stored in your environment variables. Used for automated private instance creation to push yaml files (associated with private instance you're creating) to `openlaw-infra` repo.
+Retrieve Github personal access token stored in user's environment variables. Used for automated private instance creation to push yaml files (associated with private instance user is creating) to `openlaw-infra` repo.
 
 ::: warning Authorization
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
@@ -1420,9 +1420,11 @@ GET /getGithubToken
 ```
 
 **Parameters**
-None.
+
+None
 
 **Response**
+
 Returns Github personal access token stored in your environment variables.
 
 ### getInstanceEthAddress
