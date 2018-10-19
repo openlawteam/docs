@@ -1,13 +1,13 @@
 # Overview
 
-Creating and publishing high-quality "smart" legal agreements from scratch is a though task,
+Creating and publishing high-quality "smart" legal agreements from scratch is a tough task,
 but now that you know more about OpenLaw Markup Language you can help us to automate this process.
 
-We’re converting tens of thousands of traditional “legacy” agreements, into “blockchain compatible” contracts -
+We’re converting tens of thousands of traditional “legacy” agreements into “blockchain compatible” contracts -
 which are markdown files with our markup language.
 
-The goal is the build a huge library of "smart" legal agreements, so you can use any of these base documents to
-build your own version without converting a real world contract into markdown format.
+The goal is to build a huge library of "smart" legal agreements, so you can use any of these base documents and create
+your own version without converting a real world contract into markdown format.
 
 There are five main steps that compose this process to build up our library:
 
@@ -37,8 +37,7 @@ to build up this library of agreements.
 
 ### Modes
 
-The Review Tool allows you to whether reviewing a particular agreement -
-which you can pick from the table, or you can start from where you left last time you have reviewed.
+The Review Tool allows you to decide whether to review a particular agreement or start from where you left off.
 
 <center>
     <img src="./img/review-tool-dashboard.png" alt="Dashboard" />
@@ -64,7 +63,7 @@ which you can pick from the table, or you can start from where you left last tim
 
 ### Entity Classification
 
-The Review Tool identifies different types of entities and convert them into markdown variables. The first
+The Review Tool identifies different types of entities and converts them into markdown variables. The first
 version detects Organization and Person names. However we often see invalid or partial matches, and that's
 why we need to review this information.
 
@@ -114,7 +113,7 @@ Clearly `David V. Singer` is not an Organization name. Fix the entity type by cl
 
 And set correct entity type (`Person`), it will be applied to the text and move to the next item.
 
-At this of this review step all classified entities will be converted into OpenLaw Markdown variables and applied to
+At this stage of the review all classified entities will be converted into OpenLaw Markdown variables and applied to
 the background text in the editor.
 
 With the variables updated in the editor the Review Tool starts the next task automatically: Variable Renaming.
@@ -128,7 +127,7 @@ Remember that each entity you have classified in the previous step is converted 
 Some of the variables we already converted for you, such as dates and addresses. That's why do not need to classify
 these two types.
 
-There are several types of variables to rename, currently these are the types that are available:
+There are several types of variables to rename. Currently these are the types that are available:
 
 Variable type `Date`:
 
@@ -178,14 +177,14 @@ Hit **Save** and all the changes you have suggested will be applied to the edito
 
 ### Editor
 
-The text editor allows add/fix variables that were not identified during Entity Classification
+The text editor allows the option of adding/fixing variables that were not identified during Entity Classification
 and Variable Renaming steps.
 
 <center>
     <img src="./img/editor.png" alt="Editor" />
 </center>
 
-You can add new variables, remove lines and fix variables names in the text, after you finish your
+You can add new variables, remove lines and fix variables names in the text. After you finish your
 edits the review is ready to be uploaded.
 
 ---
@@ -209,7 +208,7 @@ can edit the file and upload it again.
 
 ### Feedback
 
-For each review uploaded review the tool asks some feedback about the process. It is completely optional
+For each uploaded review the tool asks some feedback about the process. It is completely optional
 but your feedback help us to improve it.
 
 <center>
