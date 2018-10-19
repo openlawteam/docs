@@ -325,7 +325,6 @@ Tabular data can be easily displayed using tables. A table is defined using pipe
 | --------- | --------- | --------- |
 | Data 1    | Data 2    | Data 3    |
 | {{var1}}  | {{var2}}  | {{var3}}  |
-
 ```
 
 Note that the column delimiters do not have to be aligned from row to row, so the following is also a valid table definition.
