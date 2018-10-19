@@ -316,6 +316,28 @@ show title:false;
 ####
 ```
 
+## Tables
+
+Tabular data can be easily displayed using tables. A table is defined using pipe characters (`|`) as column delimiters and dashes (`-`) to separate the table header from the data rows.
+
+```
+| Heading 1 | Heading 2 | Heading 3 |
+| --------- | --------- | --------- |
+| Data 1    | Data 2    | Data 3    |
+| {{var1}}  | {{var2}}  | {{var3}}  |
+
+```
+
+Note that the column delimiters do not have to be aligned from row to row, so the following is also a valid table definition.
+
+```
+| H1 | Heading 2 | H3 |
+| - | - | - |
+| Data 1 | D2 | D3 |
+```
+
+Table cells may contain text content, variables or conditionals.
+
 ## Conditionals and Decision Branches
 
 You can markup an agreement with "conditionals" to embed advanced logic into an agreement, helping you create more dynamic and customizable legal agreements.
