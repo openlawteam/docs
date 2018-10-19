@@ -20,6 +20,11 @@ module.exports = {
         title: "Using OpenLaw",
         collapsable: false,
         children: ["/markup-language/"]
+      },
+      {
+        title: "Review Tool",
+        collapsable: false,
+        children: ["/review-tool/"]
       }
       // add new top level sections here...
     ],
