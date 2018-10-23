@@ -920,11 +920,11 @@ GET /contract/signature/sendTxHash
 
 **Parameters**
 
-| Name         | Type     | Description                                                                                                                     |
-| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `contractId` | `string` | **Required.** The ID of the contract.                                                                                           |
-| `network`    | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Mainnet`, `Ropsten`, `Kovan`, or `Rinkeby`. |
-| `txHash`     | `string` | **Required.** The transaction hash resulting from signing the contract with MetaMask.                                           |
+| Name         | Type     | Description                                                                                                                                                         |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contractId` | `string` | **Required.** The ID of the contract.                                                                                                                               |
+| `network`    | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Ropsten`, `Kovan`, or `Rinkeby`. Support for `Mainnet` will be integrated soon. |
+| `txHash`     | `string` | **Required.** The transaction hash resulting from signing the contract with MetaMask.                                                                               |
 
 Example
 
@@ -958,7 +958,7 @@ None
 
 **Response**
 
-Returns a JSON object containing the name of the selected Ethereum network (`"Mainnet"`, `"Ropsten"`, `"Kovan"`, or `"Rinkeby"`) and the address of the smart contract that handles the signature transaction.
+Returns a JSON object containing the name of the selected Ethereum network (`"Ropsten"`, `"Kovan"`, or `"Rinkeby"`) and the address of the smart contract that handles the signature transaction. Support for `"Mainnet"` will be integrated soon.
 
 Example
 
@@ -980,14 +980,14 @@ GET /ethereum/changeEthereumNetwork/:name
 
 **Parameters**
 
-| Name   | Type     | Description                                                                                                                     |
-| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `name` | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Mainnet`, `Ropsten`, `Kovan`, or `Rinkeby`. |
+| Name   | Type     | Description                                                                                                                                                         |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name` | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Ropsten`, `Kovan`, or `Rinkeby`. Support for `Mainnet` will be integrated soon. |
 
 Example
 
 ```
-GET /ethereum/changeEthereumNetwork/Mainnet
+GET /ethereum/changeEthereumNetwork/Rinkeby
 ```
 
 **Response**
