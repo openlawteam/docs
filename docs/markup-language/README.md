@@ -52,6 +52,8 @@ In addition to Text variables, OpenLaw supports several other input variable typ
 
 The Number type indicates that a variable should be an integer or decimal number. You may choose to rely on this type if you need to perform [basic calculations](#calculations-and-aliasing). To create a Number variable just include `: Number` after a variable name: `[[Variable: Number]]`.
 
+The value of an integer input will be displayed as a comma separated number. For example, an input of `1000000` will be formatted as `1,000,000` in the agreement. If you wish to omit the commas in a displayed integer number, you can define the Number variable as `[[Variable: Number | raw]]`.
+
 After a Number variable has been defined, you can also display the input for that variable as a rounded number with the ability to specify the precision. For example, `[[Variable | rounding(2)]]`.
 
 ::: tip
