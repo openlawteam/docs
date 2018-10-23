@@ -1351,11 +1351,11 @@ GET /recentActivity
 
 **Parameters**
 
-| Name       | Type                   | Description                                                                                                                                                                                                                                                                                 |
-| ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `page`     | `number`               | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                                                                                                |
-| `pageSize` | `number`               | **Required.** The number of community activity events to display on page.                                                                                                                                                                                                                   |
-| `filter`   | `array<string> | null` | **Required.** Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Using `filter` requires at least one valid filter, unless empty. Leaving `filter` empty will return all activity types as if no filter were applied. |
+| Name       | Type                   | Description                                                                                                                                                                                                  |
+| ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `page`     | `number`               | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                 |
+| `pageSize` | `number`               | **Required.** The number of community activity events to display on page.                                                                                                                                    |
+| `filter`   | `array<string> | null` | Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Leaving `filter` empty will return all activity types as if no filter were applied. |
 
 Example
 
