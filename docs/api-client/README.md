@@ -26,10 +26,10 @@ POST  /app/login
 
 **Parameters**
 
-| Name       | Type     | Description                              |
-| -------    | -------- | ---------------------------------------- |
-| `userId`   | `string` | **Required.** The user email.            |
-| `password` | `string` | **Required.** The user password          |
+| Name       | Type     | Description                     |
+| ---------- | -------- | ------------------------------- |
+| `userId`   | `string` | **Required.** The user email.   |
+| `password` | `string` | **Required.** The user password |
 
 **Response**
 Returns the JSON Web Token
