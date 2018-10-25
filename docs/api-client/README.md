@@ -12,6 +12,31 @@ For POST requests, any parameters not included as a segment in the path should b
 
 Unless otherwise specified, each of the resources can be accessed by a logged in user with a `StandardUser` role, which is the default permission for a newly-registered user, or an `Admin` role, which has greater permissions as explained in the [toAdminUser method](#toadminuser) below.
 
+## Authentication
+
+We use JWT to handle authentication. For every call that needs authentication (standard user or admin), you need to pass the JWT in the headers under the value 'OPENLAW_JWT'.
+
+The class APIClient handles that automatically so you don't have to take care of it but you will need to add it if you implement the calls yourself.
+
+### login
+
+```
+POST  /app/login
+```
+
+**Parameters**
+
+| Name       | Type     | Description                              |
+| -------    | -------- | ---------------------------------------- |
+| `userId`   | `string` | **Required.** The user email.            |
+| `password` | `string` | **Required.** The user password          |
+
+**Response**
+Returns the JSON Web Token
+
+Example
+eyAiaXNzIjogImVraW5vLmNvbSIsICJuYW1lIjogIkpvaG4gRG9lIiwgImFkbWluIjogdHJ1ZSB9
+
 ## Template
 
 ### getTemplate
