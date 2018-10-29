@@ -37,6 +37,8 @@ Returns the JSON Web Token
 Example
 eyAiaXNzIjogImVraW5vLmNvbSIsICJuYW1lIjogIkpvaG4gRG9lIiwgImFkbWluIjogdHJ1ZSB9
 
+For more information about JSON Web Tokens (JWT) please see https://jwt.io/
+
 ## Template
 
 ### getTemplate
