@@ -9,7 +9,7 @@ module.exports = {
       {
         title: "Guide",
         collapsable: false,
-        children: ["/", "/getting-started/"]
+        children: ["/", "/getting-started/", "/openlaw-core/"]
       },
       {
         title: "Reference",
