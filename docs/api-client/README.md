@@ -1,8 +1,8 @@
-# REST API
+# REST API and APIClient
 
-The OpenLaw REST API in APIClient.js is an interface in the OpenLaw protocol for querying, saving, and changing data in an OpenLaw instance. The API methods are categorized below.
+The OpenLaw REST API is an interface in the OpenLaw protocol for querying, saving, and changing data in an OpenLaw instance. The class APIClient library in APIClient.js serves as a convenient wrapper to the REST API and can be used for many of the method calls. The API methods are categorized below.
 
-**Parameters**
+**Parameters for REST calls**
 
 For GET requests, any parameters not included as a segment in the path can be passed as an HTTP query string parameter.
 
@@ -12,32 +12,50 @@ For POST requests, any parameters not included as a segment in the path should b
 
 Unless otherwise specified, each of the resources can be accessed by a logged in user with a `StandardUser` role, which is the default permission for a newly-registered user, or an `Admin` role, which has greater permissions as explained in the [toAdminUser method](#toadminuser) below.
 
+::: tip APIClient
+In order to use the APIClient method calls, a class instance will first need to be instantiated with the root URL of an OpenLaw instance. For example:
+
+```js
+apiClient = new APIClient('https://app.openlaw.io');
+```
+
+Each method below will include example usage of the APIClient library (with the `apiclient` instance) if available.
+:::
+
 ## Authentication
 
-We use JWT to handle authentication. For every call that needs authentication (standard user or admin), you need to pass the JWT in the headers under the value 'OPENLAW_JWT'.
+We use [JSON Web Tokens (JWT)](https://jwt.io/) to handle authentication. For every call that needs authentication (user with a `StandardUser` role or an `Admin` role), you will need to pass the JWT in the headers under the value `OPENLAW_JWT`.
 
-The class APIClient handles that automatically so you don't have to take care of it but you will need to add it if you implement the calls yourself.
+The class APIClient handles setting the token in the headers automatically for convenience. Subsequent method calls on the APIClient class instance after login will already have the JWT set. However, you will need to handle passing the JWT in the headers if you implement the REST calls without the APIClient wrapper.
 
 ### login
 
 ```
-POST  /app/login
+POST /app/login
 ```
 
 **Parameters**
 
 | Name       | Type     | Description                     |
 | ---------- | -------- | ------------------------------- |
-| `userId`   | `string` | **Required.** The user email.   |
-| `password` | `string` | **Required.** The user password |
+| `userId`   | `string` | **Required.** The ID (email) of the user. |
+| `password` | `string` | **Required.** The user password. |
+
+Example form data
+
+```
+userId=openlawuser%2B1%40gmail.com&password=password1234
+```
+
+::: tip APIClient
+```js
+apiClient.login('openlawuser+1@gmail.com', 'password1234');
+```
+:::
 
 **Response**
-Returns the JSON Web Token
 
-Example
-eyAiaXNzIjogImVraW5vLmNvbSIsICJuYW1lIjogIkpvaG4gRG9lIiwgImFkbWluIjogdHJ1ZSB9
-
-For more information about JSON Web Tokens (JWT) please see https://jwt.io/
+Returns a promise which resolves with an object containing headers with the `OPENLAW_JWT` (e.g., `eyAiaXNzIjogImVraW5vLmNvbSIsICJuYW1lIjogIkpvaG4gRG9lIiwgImFkbWluIjogdHJ1ZSB9`).
 
 ## Template
 
@@ -60,6 +78,12 @@ Example
 ```
 GET /template/raw/Advisor%20Agreement
 ```
+
+::: tip APIClient
+```js
+apiClient.getTemplate('Advisor Agreement');
+```
+:::
 
 **Response**
 
@@ -97,6 +121,12 @@ Example
 GET /template/raw/Advisor%20Agreement/15
 ```
 
+::: tip APIClient
+```js
+apiClient.getTemplateVersion('Advisor Agreement', '15');
+```
+:::
+
 **Response**
 
 Returns a promise which resolves with a string representation of the template's raw content.
@@ -128,6 +158,12 @@ Example
 ```
 GET /templates/version?title=Advisor%20Agreement&pageSize=10&page=1
 ```
+
+::: tip APIClient
+```js
+apiClient.getTemplateVersions('Advisor Agreement', 10, 1);
+```
+:::
 
 **Response**
 
@@ -186,6 +222,12 @@ Example
 GET /templates/search?keyword=employee&page=1&pageSize=10
 ```
 
+::: tip APIClient
+```js
+apiClient.templateSearch('employee', 1, 10);
+```
+:::
+
 **Response**
 
 Returns a JSON object containing the number of search hits and data for the retrieved templates.
@@ -240,6 +282,13 @@ POST /upload/template/Advisor%20Agreement
 This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n
 ```
 
+::: tip APIClient
+```js
+const value = "This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n";
+apiClient.saveTemplate('Advisor Agreement', value);
+```
+:::
+
 **Response**
 
 Returns a JSON object containing information about the saved template.
@@ -276,6 +325,12 @@ Example
 GET /templates/rename?name=Advisor%20Agreement&newName=New%20Advisor%20Agreement
 ```
 
+::: tip APIClient
+```js
+apiClient.renameTemplate('Advisor Agreement', 'New Advisor Agreement');
+```
+:::
+
 **Response**
 
 Returns `"renamed"` if template was successfully renamed.
@@ -304,6 +359,12 @@ Example
 GET /templates/delete?name=Loan%20Agreement
 ```
 
+::: tip APIClient
+```js
+apiClient.deleteTemplate('Loan Agreement');
+```
+:::
+
 **Response**
 
 Returns `"Template deleted!"` if template was successfully deleted.
@@ -331,6 +392,12 @@ Example
 ```
 GET /templates/restore?name=Loan%20Agreement
 ```
+
+::: tip APIClient
+```js
+apiClient.restoreTemplate('Loan Agreement');
+```
+:::
 
 **Response**
 
@@ -361,6 +428,12 @@ Example
 ```
 GET /templates/searchDeleted?keyword=employee&page=1&pageSize=10
 ```
+
+::: tip APIClient
+```js
+apiClient.searchDeletedTemplates('employee', 1, 10);
+```
+:::
 
 **Response**
 
@@ -414,6 +487,28 @@ Example `params` payload
 }
 ```
 
+::: tip APIClient
+```js
+const params = {
+  templateId: "29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
+  title: "Advisor Agreement",
+  text: "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  creator: "8f26427b-0853-469b-a4f1-132190b7373e",
+  parameters: {
+    "Company Name": "ABC, Inc.",
+    "Company Signatory Email": "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
+    "Advisor Email": "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}"
+  },
+  overriddenParagraphs: {},
+  agreements: {},
+  readonlyEmails: [],
+  editEmails: [],
+  draftId: ""
+};
+apiClient.uploadDraft(params);
+```
+:::
+
 **Response**
 
 Returns a promise which resolves with the string ID of the uploaded draft.
@@ -444,6 +539,12 @@ Example
 ```
 GET /draft/raw/2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e/1
 ```
+
+::: tip APIClient
+```js
+apiClient.getDraftVersion('2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e', 1);
+```
+:::
 
 **Response**
 
@@ -515,6 +616,12 @@ Example
 GET /drafts/version?draftId=84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7&pageSize=10&page=1
 ```
 
+::: tip APIClient
+```js
+apiClient.getDraftVersions('84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7', 10, 1);
+```
+:::
+
 **Response**
 
 Returns a promise which resolves with an array of JSON objects containing information about the retrieved draft versions.
@@ -558,6 +665,12 @@ Example
 ```
 GET /drafts/search?keyword=advisor&page=1&pageSize=10&sortBy=creationdate
 ```
+
+::: tip APIClient
+```js
+apiClient.searchDrafts('advisor', 1, 10, 'creationdate');
+```
+:::
 
 **Response**
 
@@ -627,8 +740,14 @@ POST /send/draft
 Example form data
 
 ```
-editEmails=openlawuser%2B3%40gmail.com&id=cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca&readonlyEmails=openlawuser%2B4%40gmail.com&readonlyEmails=openlawuser%2B5%40gmail.com
+readonlyEmails=openlawuser%2B4%40gmail.com&readonlyEmails=openlawuser%2B5%40gmail.com&editEmails=openlawuser%2B3%40gmail.com&id=cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca
 ```
+
+::: tip APIClient
+```js
+apiClient.sendDraft(['openlawuser+4@gmail.com', 'openlawuser+5@gmail.com'], ['openlawuser+3@gmail.com'], 'cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca');
+```
+:::
 
 ### changeDraftAlias
 
@@ -650,6 +769,12 @@ Example
 ```
 GET /draft/alias/cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca?draftId=cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca&newName=Advisor%20Agreement%20Draft%20Copy
 ```
+
+::: tip APIClient
+```js
+apiClient.changeDraftAlias('cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca', 'Advisor Agreement Draft Copy');
+```
+:::
 
 **Response**
 
@@ -704,6 +829,38 @@ Example `params` payload
 }
 ```
 
+::: tip APIClient
+```js
+const params = {
+  templateId: "d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
+  title: "Advisor Agreement",
+  text: "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  creator: "8f26427b-0853-469b-a4f1-132190b7373e",
+  parameters: {
+    "Company Name": "ABC, Inc.",
+    "Effective Date": "1537426800000",
+    "Number of Shares": "1000",
+    "Years Vesting": "4",
+    "Unit of Vesting": "250",
+    "Company Signatory Email": "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
+    "Advisor Name": "John Smith",
+    "Company Signatory": "Mary Davis",
+    "Advisor Email": "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}",
+    "Time of Vesting": "Yearly",
+    "No Services": "false",
+    "Advisor Address": "{\"placeId\":\"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB\",\"streetName\":\"Main Street\",\"streetNumber\":\"987\",\"city\":\"Brooklyn\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11201\",\"formattedAddress\":\"987 Main St, Brooklyn, NY 11201, USA\"}",
+    "Company Address": "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"
+  },
+  overriddenParagraphs: {},
+  agreements: {},
+  readonlyEmails: [],
+  editEmails: [],
+  draftId: "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
+};
+apiClient.uploadContract(params);
+```
+:::
+
 **Response**
 
 Returns a promise which resolves with the string ID of the uploaded contract.
@@ -733,6 +890,12 @@ Example
 ```
 GET /contract/raw/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a
 ```
+
+::: tip APIClient
+```js
+apiClient.getContract('8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a');
+```
+:::
 
 **Response**
 
@@ -786,6 +949,12 @@ Example
 ```
 GET /contracts/search?keyword=advisor&page=1&pageSize=10&sortBy=creationdate
 ```
+
+::: tip APIClient
+```js
+apiClient.searchContracts('advisor', 1, 10, 'creationdate');
+```
+:::
 
 **Response**
 
@@ -861,8 +1030,14 @@ POST /send/contract
 Example form data
 
 ```
-editEmails=openlawuser%2B3%40gmail.com&id=8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a&readonlyEmails=openlawuser%2B4%40gmail.com&readonlyEmails=openlawuser%2B5%40gmail.com
+readonlyEmails=openlawuser%2B4%40gmail.com&readonlyEmails=openlawuser%2B5%40gmail.com&editEmails=openlawuser%2B3%40gmail.com&id=8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a
 ```
+
+::: tip APIClient
+```js
+apiClient.sendContract(['openlawuser+4@gmail.com', 'openlawuser+5@gmail.com'], ['openlawuser+3@gmail.com'], '8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a');
+```
+:::
 
 ### changeContractAlias
 
@@ -884,6 +1059,12 @@ Example
 ```
 GET /contract/alias/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a?contractId=8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a&newName=Advisor%20Agreement%20Final%20Copy
 ```
+
+::: tip APIClient
+```js
+apiClient.changeContractAlias('8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a', 'Advisor Agreement Final Copy');
+```
+:::
 
 **Response**
 
@@ -909,6 +1090,12 @@ Example
 GET /contract/stop/1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b
 ```
 
+::: tip APIClient
+```js
+apiClient.stopContract('1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b');
+```
+:::
+
 **Response**
 
 Returns `"contract stopped"` if smart contract transactions were successfully stopped.
@@ -932,6 +1119,12 @@ Example
 ```
 GET /contract/resume/1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b
 ```
+
+::: tip APIClient
+```js
+apiClient.resumeContract('1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b');
+```
+:::
 
 **Response**
 
@@ -959,6 +1152,12 @@ Example
 GET /contract/signature/sendTxHash?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487&network=Rinkeby&txHash=0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc
 ```
 
+::: tip APIClient
+```js
+apiClient.sendTxHash('703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487', 'Rinkeby', '0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc');
+```
+:::
+
 **Response**
 
 Returns a promise which resolves with the status of the signature event.
@@ -982,6 +1181,12 @@ GET /network
 **Parameters**
 
 None
+
+::: tip APIClient
+```js
+apiClient.getCurrentNetwork();
+```
+:::
 
 **Response**
 
@@ -1016,6 +1221,12 @@ Example
 ```
 GET /ethereum/changeEthereumNetwork/Rinkeby
 ```
+
+::: tip APIClient
+```js
+apiClient.changeEthereumNetwork('Rinkeby');
+```
+:::
 
 **Response**
 
@@ -1052,6 +1263,12 @@ Example
 ```
 GET /user/details?email=openlawuser%2B1%40gmail.com
 ```
+
+::: tip APIClient
+```js
+apiClient.getUserDetails('openlawuser+1@gmail.com');
+```
+:::
 
 **Response**
 
@@ -1098,6 +1315,12 @@ Example
 ```
 GET /users/search?keyword=john&page=1&pageSize=25
 ```
+
+::: tip APIClient
+```js
+apiClient.searchUsers('john', 1, 25);
+```
+:::
 
 **Response**
 
@@ -1149,6 +1372,12 @@ Example
 GET /users/toadmin?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
 
+::: tip APIClient
+```js
+apiClient.toAdminUser('f0bf888a-1f45-4277-a6d0-a71bb95095ed');
+```
+:::
+
 **Response**
 
 Returns confirmation that the user role was changed if successful.
@@ -1182,6 +1411,12 @@ Example
 ```
 GET /users/torestricted?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
+
+::: tip APIClient
+```js
+apiClient.toRestricted('f0bf888a-1f45-4277-a6d0-a71bb95095ed');
+```
+:::
 
 **Response**
 
@@ -1217,6 +1452,12 @@ Example
 GET /users/touser?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
 
+::: tip APIClient
+```js
+apiClient.toStandardUser('f0bf888a-1f45-4277-a6d0-a71bb95095ed');
+```
+:::
+
 **Response**
 
 Returns confirmation that the user role was changed if successful.
@@ -1250,6 +1491,12 @@ Example
 ```
 GET /users/delete?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
+
+::: tip APIClient
+```js
+apiClient.deleteUser('f0bf888a-1f45-4277-a6d0-a71bb95095ed');
+```
+:::
 
 **Response**
 
@@ -1289,6 +1536,12 @@ Example
 ```
 GET /address/details?placeId=ChIJWbGLkg9gwokR76ZxzYbdnpM
 ```
+
+::: tip APIClient
+```js
+apiClient.getAddressDetails('ChIJWbGLkg9gwokR76ZxzYbdnpM');
+```
+:::
 
 **Response**
 
@@ -1335,6 +1588,12 @@ Example
 GET /address/search?latitude=0&longitude=0&term=123%20main%20street%2C%20new
 ```
 
+::: tip APIClient
+```js
+apiClient.searchAddress(0, 0, '123 main street new');
+```
+:::
+
 **Response**
 
 Returns an array of JSON objects containing autosuggested addresses based on the input term.
@@ -1380,15 +1639,21 @@ GET /recentActivity
 
 | Name       | Type                   | Description                                                                                                                                                                                                  |
 | ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `filter`   | `Array<string> | null` | Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Leaving `filter` empty will return all activity types as if no filter were applied. |
 | `page`     | `number`               | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                 |
 | `pageSize` | `number`               | **Required.** The number of community activity events to display on page.                                                                                                                                    |
-| `filter`   | `array<string> | null` | Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Leaving `filter` empty will return all activity types as if no filter were applied. |
 
 Example
 
 ```
-GET /recentActivity?filter=TemplateCreated,TemplateUpdated&page=1&pageSize=5
+GET /recentActivity?filter=TemplateCreated%2CTemplateUpdated&page=1&pageSize=5
 ```
+
+::: tip APIClient
+```js
+apiClient.getCommunityActivity(['TemplateCreated', 'TemplateUpdated'], 1, 5);
+```
+:::
 
 **Response**
 
