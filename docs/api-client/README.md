@@ -16,7 +16,7 @@ Unless otherwise specified, each of the resources can be accessed by a logged in
 In order to use the APIClient method calls, a class instance will first need to be instantiated with the root URL of an OpenLaw instance. For example:
 
 ```js
-apiClient = new APIClient('https://app.openlaw.io');
+apiClient = new APIClient("https://app.openlaw.io");
 ```
 
 Each method below will include example usage of the APIClient library (with the `apiclient` instance) if available.
@@ -36,10 +36,10 @@ POST /app/login
 
 **Parameters**
 
-| Name       | Type     | Description                     |
-| ---------- | -------- | ------------------------------- |
+| Name       | Type     | Description                               |
+| ---------- | -------- | ----------------------------------------- |
 | `userId`   | `string` | **Required.** The ID (email) of the user. |
-| `password` | `string` | **Required.** The user password. |
+| `password` | `string` | **Required.** The user password.          |
 
 Example form data
 
@@ -48,9 +48,11 @@ userId=openlawuser%2B1%40gmail.com&password=password1234
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.login('openlawuser+1@gmail.com', 'password1234');
+apiClient.login("openlawuser+1@gmail.com", "password1234");
 ```
+
 :::
 
 **Response**
@@ -80,9 +82,11 @@ GET /template/raw/Advisor%20Agreement
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getTemplate('Advisor Agreement');
+apiClient.getTemplate("Advisor Agreement");
 ```
+
 :::
 
 **Response**
@@ -122,9 +126,11 @@ GET /template/raw/Advisor%20Agreement/15
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getTemplateVersion('Advisor Agreement', '15');
+apiClient.getTemplateVersion("Advisor Agreement", "15");
 ```
+
 :::
 
 **Response**
@@ -160,9 +166,11 @@ GET /templates/version?title=Advisor%20Agreement&pageSize=10&page=1
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getTemplateVersions('Advisor Agreement', 10, 1);
+apiClient.getTemplateVersions("Advisor Agreement", 10, 1);
 ```
+
 :::
 
 **Response**
@@ -223,9 +231,11 @@ GET /templates/search?keyword=employee&page=1&pageSize=10
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.templateSearch('employee', 1, 10);
+apiClient.templateSearch("employee", 1, 10);
 ```
+
 :::
 
 **Response**
@@ -283,10 +293,13 @@ This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"
 ```
 
 ::: tip APIClient
+
 ```js
-const value = "This Advisor Agreement is entered into by and between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n";
-apiClient.saveTemplate('Advisor Agreement', value);
+const value =
+  'This Advisor Agreement is entered into by and between [[Company Name: Text]] ("Corporation") and [[Advisor Name]] ("Advisor") as of [[Effective Date: Date]] ("Effective Date"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company\'s request (the "Services"). {{No Services "Do you want to limit the advisor\'s services?"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field "What field should the advisor not participate in?"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n';
+apiClient.saveTemplate("Advisor Agreement", value);
 ```
+
 :::
 
 **Response**
@@ -326,9 +339,11 @@ GET /templates/rename?name=Advisor%20Agreement&newName=New%20Advisor%20Agreement
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.renameTemplate('Advisor Agreement', 'New Advisor Agreement');
+apiClient.renameTemplate("Advisor Agreement", "New Advisor Agreement");
 ```
+
 :::
 
 **Response**
@@ -360,9 +375,11 @@ GET /templates/delete?name=Loan%20Agreement
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.deleteTemplate('Loan Agreement');
+apiClient.deleteTemplate("Loan Agreement");
 ```
+
 :::
 
 **Response**
@@ -394,9 +411,11 @@ GET /templates/restore?name=Loan%20Agreement
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.restoreTemplate('Loan Agreement');
+apiClient.restoreTemplate("Loan Agreement");
 ```
+
 :::
 
 **Response**
@@ -430,9 +449,11 @@ GET /templates/searchDeleted?keyword=employee&page=1&pageSize=10
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.searchDeletedTemplates('employee', 1, 10);
+apiClient.searchDeletedTemplates("employee", 1, 10);
 ```
+
 :::
 
 **Response**
@@ -488,16 +509,21 @@ Example `params` payload
 ```
 
 ::: tip APIClient
+
 ```js
 const params = {
-  templateId: "29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
+  templateId:
+    "29f529e7f819fa2beb1c4a8bf258a15cfe46dad4f91538ebedbd1fb7299bbc55",
   title: "Advisor Agreement",
-  text: "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  text:
+    'This Advisor Agreement is entered into between [[Company Name: Text]] ("Corporation") and [[Advisor Name]] ("Advisor") as of [[Effective Date: Date]] ("Effective Date"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company\'s request (the "Services"). {{No Services "Do you want to limit the advisor\'s services?"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field "What field should the advisor not participate in?"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n',
   creator: "8f26427b-0853-469b-a4f1-132190b7373e",
   parameters: {
     "Company Name": "ABC, Inc.",
-    "Company Signatory Email": "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
-    "Advisor Email": "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}"
+    "Company Signatory Email":
+      '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}',
+    "Advisor Email":
+      '{"id":{"id":"38e0eb6b-0d52-4fd8-a77d-19686fd3843a"},"email":"openlawuser+2@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+2@gmail.com"}]}'
   },
   overriddenParagraphs: {},
   agreements: {},
@@ -507,6 +533,7 @@ const params = {
 };
 apiClient.uploadDraft(params);
 ```
+
 :::
 
 **Response**
@@ -541,9 +568,14 @@ GET /draft/raw/2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e/
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getDraftVersion('2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e', 1);
+apiClient.getDraftVersion(
+  "2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e",
+  1
+);
 ```
+
 :::
 
 **Response**
@@ -617,9 +649,15 @@ GET /drafts/version?draftId=84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e7
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getDraftVersions('84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7', 10, 1);
+apiClient.getDraftVersions(
+  "84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7",
+  10,
+  1
+);
 ```
+
 :::
 
 **Response**
@@ -667,9 +705,11 @@ GET /drafts/search?keyword=advisor&page=1&pageSize=10&sortBy=creationdate
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.searchDrafts('advisor', 1, 10, 'creationdate');
+apiClient.searchDrafts("advisor", 1, 10, "creationdate");
 ```
+
 :::
 
 **Response**
@@ -744,9 +784,15 @@ readonlyEmails=openlawuser%2B4%40gmail.com&readonlyEmails=openlawuser%2B5%40gmai
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.sendDraft(['openlawuser+4@gmail.com', 'openlawuser+5@gmail.com'], ['openlawuser+3@gmail.com'], 'cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca');
+apiClient.sendDraft(
+  ["openlawuser+4@gmail.com", "openlawuser+5@gmail.com"],
+  ["openlawuser+3@gmail.com"],
+  "cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca"
+);
 ```
+
 :::
 
 ### changeDraftAlias
@@ -771,9 +817,14 @@ GET /draft/alias/cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37c
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.changeDraftAlias('cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca', 'Advisor Agreement Draft Copy');
+apiClient.changeDraftAlias(
+  "cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca",
+  "Advisor Agreement Draft Copy"
+);
 ```
+
 :::
 
 **Response**
@@ -830,11 +881,14 @@ Example `params` payload
 ```
 
 ::: tip APIClient
+
 ```js
 const params = {
-  templateId: "d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
+  templateId:
+    "d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
   title: "Advisor Agreement",
-  text: "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n",
+  text:
+    'This Advisor Agreement is entered into between [[Company Name: Text]] ("Corporation") and [[Advisor Name]] ("Advisor") as of [[Effective Date: Date]] ("Effective Date"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company\'s request (the "Services"). {{No Services "Do you want to limit the advisor\'s services?"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field "What field should the advisor not participate in?"]].}}\n\n...**COMPANY:**\n[[Company Signatory Email: Identity]]\n\n___________________\nName:  [[Company Signatory]]\nAddress:  [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity]]\n\n___________________\nName [[Advisor Name]]      \nAddress: [[Advisor Address: Address]]\n',
   creator: "8f26427b-0853-469b-a4f1-132190b7373e",
   parameters: {
     "Company Name": "ABC, Inc.",
@@ -842,14 +896,18 @@ const params = {
     "Number of Shares": "1000",
     "Years Vesting": "4",
     "Unit of Vesting": "250",
-    "Company Signatory Email": "{\"id\":{\"id\":\"8f26427b-0853-469b-a4f1-132190b7373e\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}",
+    "Company Signatory Email":
+      '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}',
     "Advisor Name": "John Smith",
     "Company Signatory": "Mary Davis",
-    "Advisor Email": "{\"id\":{\"id\":\"38e0eb6b-0d52-4fd8-a77d-19686fd3843a\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}",
+    "Advisor Email":
+      '{"id":{"id":"38e0eb6b-0d52-4fd8-a77d-19686fd3843a"},"email":"openlawuser+2@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+2@gmail.com"}]}',
     "Time of Vesting": "Yearly",
     "No Services": "false",
-    "Advisor Address": "{\"placeId\":\"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB\",\"streetName\":\"Main Street\",\"streetNumber\":\"987\",\"city\":\"Brooklyn\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11201\",\"formattedAddress\":\"987 Main St, Brooklyn, NY 11201, USA\"}",
-    "Company Address": "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"
+    "Advisor Address":
+      '{"placeId":"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB","streetName":"Main Street","streetNumber":"987","city":"Brooklyn","state":"New York","country":"United States","zipCode":"11201","formattedAddress":"987 Main St, Brooklyn, NY 11201, USA"}',
+    "Company Address":
+      '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}'
   },
   overriddenParagraphs: {},
   agreements: {},
@@ -859,6 +917,7 @@ const params = {
 };
 apiClient.uploadContract(params);
 ```
+
 :::
 
 **Response**
@@ -892,9 +951,13 @@ GET /contract/raw/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd24
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getContract('8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a');
+apiClient.getContract(
+  "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
+);
 ```
+
 :::
 
 **Response**
@@ -951,9 +1014,11 @@ GET /contracts/search?keyword=advisor&page=1&pageSize=10&sortBy=creationdate
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.searchContracts('advisor', 1, 10, 'creationdate');
+apiClient.searchContracts("advisor", 1, 10, "creationdate");
 ```
+
 :::
 
 **Response**
@@ -1034,9 +1099,15 @@ readonlyEmails=openlawuser%2B4%40gmail.com&readonlyEmails=openlawuser%2B5%40gmai
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.sendContract(['openlawuser+4@gmail.com', 'openlawuser+5@gmail.com'], ['openlawuser+3@gmail.com'], '8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a');
+apiClient.sendContract(
+  ["openlawuser+4@gmail.com", "openlawuser+5@gmail.com"],
+  ["openlawuser+3@gmail.com"],
+  "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
+);
 ```
+
 :::
 
 ### changeContractAlias
@@ -1061,9 +1132,14 @@ GET /contract/alias/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.changeContractAlias('8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a', 'Advisor Agreement Final Copy');
+apiClient.changeContractAlias(
+  "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a",
+  "Advisor Agreement Final Copy"
+);
 ```
+
 :::
 
 **Response**
@@ -1091,9 +1167,13 @@ GET /contract/stop/1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b0
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.stopContract('1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b');
+apiClient.stopContract(
+  "1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b"
+);
 ```
+
 :::
 
 **Response**
@@ -1121,9 +1201,13 @@ GET /contract/resume/1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.resumeContract('1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b');
+apiClient.resumeContract(
+  "1ef233a92d01f16ec54f3330fd7783dcffbc86fac90ff75c4fae185db37b088b"
+);
 ```
+
 :::
 
 **Response**
@@ -1153,9 +1237,15 @@ GET /contract/signature/sendTxHash?contractId=703e3f8c6e91fc7ba35633974ea96acab4
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.sendTxHash('703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487', 'Rinkeby', '0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc');
+apiClient.sendTxHash(
+  "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487",
+  "Rinkeby",
+  "0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc"
+);
 ```
+
 :::
 
 **Response**
@@ -1183,9 +1273,11 @@ GET /network
 None
 
 ::: tip APIClient
+
 ```js
 apiClient.getCurrentNetwork();
 ```
+
 :::
 
 **Response**
@@ -1223,9 +1315,11 @@ GET /ethereum/changeEthereumNetwork/Rinkeby
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.changeEthereumNetwork('Rinkeby');
+apiClient.changeEthereumNetwork("Rinkeby");
 ```
+
 :::
 
 **Response**
@@ -1265,9 +1359,11 @@ GET /user/details?email=openlawuser%2B1%40gmail.com
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getUserDetails('openlawuser+1@gmail.com');
+apiClient.getUserDetails("openlawuser+1@gmail.com");
 ```
+
 :::
 
 **Response**
@@ -1317,9 +1413,11 @@ GET /users/search?keyword=john&page=1&pageSize=25
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.searchUsers('john', 1, 25);
+apiClient.searchUsers("john", 1, 25);
 ```
+
 :::
 
 **Response**
@@ -1373,9 +1471,11 @@ GET /users/toadmin?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.toAdminUser('f0bf888a-1f45-4277-a6d0-a71bb95095ed');
+apiClient.toAdminUser("f0bf888a-1f45-4277-a6d0-a71bb95095ed");
 ```
+
 :::
 
 **Response**
@@ -1413,9 +1513,11 @@ GET /users/torestricted?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.toRestricted('f0bf888a-1f45-4277-a6d0-a71bb95095ed');
+apiClient.toRestricted("f0bf888a-1f45-4277-a6d0-a71bb95095ed");
 ```
+
 :::
 
 **Response**
@@ -1453,9 +1555,11 @@ GET /users/touser?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.toStandardUser('f0bf888a-1f45-4277-a6d0-a71bb95095ed');
+apiClient.toStandardUser("f0bf888a-1f45-4277-a6d0-a71bb95095ed");
 ```
+
 :::
 
 **Response**
@@ -1493,9 +1597,11 @@ GET /users/delete?userId=f0bf888a-1f45-4277-a6d0-a71bb95095ed
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.deleteUser('f0bf888a-1f45-4277-a6d0-a71bb95095ed');
+apiClient.deleteUser("f0bf888a-1f45-4277-a6d0-a71bb95095ed");
 ```
+
 :::
 
 **Response**
@@ -1538,9 +1644,11 @@ GET /address/details?placeId=ChIJWbGLkg9gwokR76ZxzYbdnpM
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getAddressDetails('ChIJWbGLkg9gwokR76ZxzYbdnpM');
+apiClient.getAddressDetails("ChIJWbGLkg9gwokR76ZxzYbdnpM");
 ```
+
 :::
 
 **Response**
@@ -1589,9 +1697,11 @@ GET /address/search?latitude=0&longitude=0&term=123%20main%20street%2C%20new
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.searchAddress(0, 0, '123 main street new');
+apiClient.searchAddress(0, 0, "123 main street new");
 ```
+
 :::
 
 **Response**
@@ -1650,9 +1760,11 @@ GET /recentActivity?filter=TemplateCreated%2CTemplateUpdated&page=1&pageSize=5
 ```
 
 ::: tip APIClient
+
 ```js
-apiClient.getCommunityActivity(['TemplateCreated', 'TemplateUpdated'], 1, 5);
+apiClient.getCommunityActivity(["TemplateCreated", "TemplateUpdated"], 1, 5);
 ```
+
 :::
 
 **Response**
