@@ -481,8 +481,8 @@ POST /download/contract/docx
 
 **Parameters**
 
-| Name     | Type     | Description                                                                     |
-| -------- | -------- | ------------------------------------------------------------------------------- |
+| Name   | Type     | Description                                                                          |
+| ------ | -------- | ------------------------------------------------------------------------------------ |
 | `data` | `Object` | **Required.** The object containing information about the template to be downloaded. |
 
 Example form data
@@ -503,8 +503,8 @@ POST /download/contract/pdf
 
 **Parameters**
 
-| Name     | Type     | Description                                                                     |
-| -------- | -------- | ------------------------------------------------------------------------------- |
+| Name   | Type     | Description                                                                          |
+| ------ | -------- | ------------------------------------------------------------------------------------ |
 | `data` | `Object` | **Required.** The object containing information about the template to be downloaded. |
 
 Example form data
@@ -887,8 +887,8 @@ POST /download/contract/docx
 
 **Parameters**
 
-| Name     | Type     | Description                                                                     |
-| -------- | -------- | ------------------------------------------------------------------------------- |
+| Name   | Type     | Description                                                                       |
+| ------ | -------- | --------------------------------------------------------------------------------- |
 | `data` | `Object` | **Required.** The object containing information about the draft to be downloaded. |
 
 Example form data
@@ -909,8 +909,8 @@ POST /download/contract/pdf
 
 **Parameters**
 
-| Name     | Type     | Description                                                                     |
-| -------- | -------- | ------------------------------------------------------------------------------- |
+| Name   | Type     | Description                                                                       |
+| ------ | -------- | --------------------------------------------------------------------------------- |
 | `data` | `Object` | **Required.** The object containing information about the draft to be downloaded. |
 
 Example form data
@@ -1356,8 +1356,8 @@ GET /contract/docx/:contractId
 
 **Parameters**
 
-| Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
+| Name         | Type     | Description                                            |
+| ------------ | -------- | ------------------------------------------------------ |
 | `contractId` | `string` | **Required.** The ID of the contract to be downloaded. |
 
 Example
@@ -1376,8 +1376,8 @@ GET /contract/pdf/:contractId
 
 **Parameters**
 
-| Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
+| Name         | Type     | Description                                            |
+| ------------ | -------- | ------------------------------------------------------ |
 | `contractId` | `string` | **Required.** The ID of the contract to be downloaded. |
 
 Example
