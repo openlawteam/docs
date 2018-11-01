@@ -42,7 +42,7 @@ Currently, the following oracles exist:
 
 `OpenlawIdentityOracle`: This is a trait which `OpenlawSignatureOracle` extends. It contains helper functions and values such as `isSignatureValid` (for checking the validity of an incoming signature) and `providerId` (for storing the identity provider).
 
-`OpenlawSignatureOracle`:  This handles validation of events of type `SignatureEvent` to process a signature on the Ethereum blockchain once the signature and Ethereum address of the signee have been verified.
+`OpenlawSignatureOracle`: This handles validation of events of type `SignatureEvent` to process a signature on the Ethereum blockchain once the signature and Ethereum address of the signee have been verified.
 
 In addition to the seven oracles mentioned above, the `oracles` folder also contains a `CryptoService` with helper functions for sha256 checksums and validating ECS signatures.
 

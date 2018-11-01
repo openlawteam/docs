@@ -10,7 +10,7 @@ $ npm install openlaw --save
 
 ```js
 // ES2015 import both exports from module
-import {APIClient, Openlaw} from 'openlaw';
+import { APIClient, Openlaw } from "openlaw";
 ```
 
 You can find further instructions on how to use our JavaScript libraries in our [APIClient](/api-client/) and [Openlaw Object](/openlaw-object/) references.
@@ -23,7 +23,6 @@ resolvers += "https://openlaw.bintray.com/openlaw-core"
 
 //add the dependency
 libraryDependencies += "org.openlaw" % "openlaw-core" & "<last version>"
-
 ```
 
 Check out our [Markup Language docs](/markup-language/) to start creating your own dynamic legal agreements using OpenLaw as well as our [Review Tool docs](/review-tool/) to learn how to contribute to our growing library of "smart" legal agreements.
