@@ -308,6 +308,37 @@ executed and delivered by the Company pursuant to this Agreement.
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
+## Restarting Numbering and Cross References
+
+To restart the numbering of a section, simply include the following after the section heading:
+
+```
+^(Variable (numbering:1))
+```
+
+The variable be used to for purposes of establishing cross-references:
+
+
+```
+^ The Company represents and warrants that:
+
+^^(Organization) **Organization**. The Company is a corporation duly organized, validly
+existing, and in good standing under the laws of the [[State of Incorporation]],
+has corporate power to carry on its business as it is now being conducted, and
+is qualified to do business in every jurisdiction in which the character and
+location of the assets owned by it or the nature of the business transacted by
+it requires qualification or in which failure to so qualify would have a
+material adverse impact on it. No proceeding is pending, or to the knowledge of
+the Company, threatened, involving the Company, in which it is alleged that the
+nature of its business makes qualification necessary in any additional
+jurisdiction.
+
+...
+
+Unless as provided in Section [[Organization]], ...
+
+```
+
 ## Titles
 
 You can hide the template title for an agreement by including the following option at the beginning of the document. This option is useful to supress a title for letters or the downloading of Word documents.
