@@ -19,7 +19,7 @@ In order to use the APIClient method calls, a class instance will first need to 
 apiClient = new APIClient("https://app.openlaw.io");
 ```
 
-Each method below will include example usage of the APIClient library (with the `apiclient` instance) if available.
+Each method below will include example usage of the APIClient library (with the `apiClient` instance) if available.
 :::
 
 ## Authentication
