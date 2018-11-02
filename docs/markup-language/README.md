@@ -316,8 +316,7 @@ To restart the numbering of a section, simply include the following after the se
 ^(Variable (numbering:1))
 ```
 
-The variable be used to for purposes of establishing cross-references:
-
+The variable can be used for purposes of establishing cross-references:
 
 ```
 ^ The Company represents and warrants that:
@@ -336,7 +335,6 @@ jurisdiction.
 ...
 
 Unless as provided in Section [[Organization]], ...
-
 ```
 
 ## Titles
@@ -368,7 +366,7 @@ Note that the column delimiters do not have to be aligned from row to row, so th
 | Data 1 | D2 | D3 |
 ```
 
-Table cells may contain text content, variables or conditionals.
+Table cells may contain text content, variables, or conditionals.
 
 ## Conditionals and Decision Branches
 
