@@ -1,0 +1,10 @@
+# GitHub's language detection attempts to auto-ignore documentation, but since
+# the purpose of this repository is documentation, we should distinguish between
+# the meta-docs for this repo, and the "content" itself.
+
+# Disable documentation flag for /docs directory
+docs/* linguist-documentation=false
+
+# Markdown files are considered "prose" rather than "markup", and thus not
+# detectable by default
+docs/**/*.md linguist-detectable=true
