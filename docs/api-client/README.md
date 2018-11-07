@@ -8,10 +8,6 @@ For GET requests, any parameters not included as a segment in the path can be pa
 
 For POST requests, any parameters not included as a segment in the path should be data of the specified Content-Type.
 
-**Authorization**
-
-Unless otherwise specified, each of the resources can be accessed by a logged in user with a `StandardUser` role, which is the default permission for a newly-registered user, or an `Admin` role, which has greater permissions as explained in the [toAdminUser method](#toadminuser) below.
-
 ::: tip APIClient
 In order to use the APIClient method calls, a class instance will first need to be instantiated with the root URL of an OpenLaw instance. For example:
 
@@ -19,10 +15,24 @@ In order to use the APIClient method calls, a class instance will first need to 
 apiClient = new APIClient("https://app.openlaw.io");
 ```
 
+Including just the root URL as shown above will be sufficient in most cases. But in cases where basic authentication has been enabled as further protection _in addition_ to [logging into an OpenLaw instance](#authentication), you can include the appropriate user credentials:
+
+```js
+apiClient = new APIClient({
+  root: "https://openlaw-instance-with-basic-auth.openlaw.io",
+  auth: {
+    username: "<username>",
+    password: "<password>"
+  }
+});
+```
+
 Each method below will include example usage of the APIClient library (with the `apiClient` instance) if available.
 :::
 
 ## Authentication
+
+Unless otherwise specified, each of the resources can be accessed by a logged in user with a `StandardUser` role, which is the default permission for a newly-registered user, or an `Admin` role, which has greater permissions as explained in the [toAdminUser method](#toadminuser) below.
 
 We use [JSON Web Tokens (JWT)](https://jwt.io/) to handle authentication. For every call that needs authentication (user with a `StandardUser` role or an `Admin` role), you will need to pass the JWT in the headers under the value `OPENLAW_JWT`.
 
@@ -354,7 +364,7 @@ Returns `"renamed"` if template was successfully renamed.
 
 Delete a template.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
 :::
 
@@ -390,7 +400,7 @@ Returns `"Template deleted!"` if template was successfully deleted.
 
 Restore a previously deleted template.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
 :::
 
@@ -426,7 +436,7 @@ Returns `"Template restored!"` if template was successfully restored.
 
 List deleted templates based on search by title.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
 :::
 
@@ -1422,7 +1432,7 @@ Example
 
 Change the default application level Ethereum network used for all signatures and smart contract executions (if no [contract level network](/markup-language/#selecting-the-contract-level-ethereum-network) is specified in a template for the executions) performed on an OpenLaw instance.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
 :::
 
@@ -1466,7 +1476,7 @@ Example
 
 Method used as part of `IdentityVariable` to get information about a contract signatory. An [Identity variable](/markup-language/#identity-and-signatures) allows a party to electronically sign an agreement and store that electronic signature (along with the cryptographic hash of the contract) on the blockchain.
 
-::: warning Authorization
+::: warning Authentication
 This resource can be accessed without having to be a logged in user.
 :::
 
@@ -1518,7 +1528,7 @@ Example
 
 List users based on search by name and email.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
 :::
 
@@ -1578,7 +1588,7 @@ Example
 
 Change role of a user to `Admin`, which allows user to access additional features such as deleting and restoring templates, viewing the list of all other users, changing permissions of and deleting other users, loading a set of standard templates into an instance, and changing the application level Ethereum network.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role.
 :::
 
@@ -1620,7 +1630,7 @@ Example
 
 Change role of a user to restricted `NoAccessUser`, which prevents user from accessing a majority of the features of an instance, including viewing and editing templates.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
 :::
 
@@ -1662,7 +1672,7 @@ Example
 
 Change role of a user to `StandardUser`, which is the default permission for a newly-registered user.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
 :::
 
@@ -1704,7 +1714,7 @@ Example
 
 Delete a user.
 
-::: warning Authorization
+::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
 :::
 
@@ -1751,7 +1761,7 @@ Example
 
 Method used as part of `AddressVariable` to get details about a selected address. An [Address variable](/markup-language/#address) generates an address using the Google Maps API.
 
-::: warning Authorization
+::: warning Authentication
 This resource can be accessed without having to be a logged in user.
 :::
 
@@ -1802,7 +1812,7 @@ Example
 
 Method used as part of `AddressVariable` and the Google Maps API to autosuggest addresses based on user input. An [Address variable](/markup-language/#address) generates an address using the Google Maps API.
 
-::: warning Authorization
+::: warning Authentication
 This resource can be accessed without having to be a logged in user.
 :::
 
