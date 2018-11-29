@@ -263,7 +263,11 @@ We also recognize that in some instances a variable will need to be displayed in
 
 ### Centered
 
-To center text such as titles and headings, add `\centered` before the relevant text. You can also apply other formatting to the centered language. For example, `\centered**Agreement Title**` will center and bold the relevant text.
+To center text such as titles and headings, add `\centered` before the relevant text. You can also apply other formatting to the centered language. For example, `\centered **Agreement Title**` will center and bold the relevant text.
+
+### Right Align
+
+To right align text, add `\right` before the relevant text. You can also position text to be only three-quarters aligned to the right by adding `\right-three-quarters` before the relevant text. Similarly to centered text, you can apply other formatting to right or right-three-quarters aligned content. For example, `\right-three-quarters **Sign here**`.
 
 ### Page Break
 
