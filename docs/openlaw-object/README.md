@@ -101,7 +101,7 @@ Execute (load and run) a compiled template for review which includes data on con
 ```scala
 executeForReview(
   compiledTemplate: CompiledTemplate,
-  names: js.Dictionary[String],
+  proofs: js.Dictionary[String],
   jsTemplates: js.Dictionary[CompiledTemplate],
   jsParams: js.Dictionary[Any]
 ): js.Dictionary[Any]
@@ -112,7 +112,7 @@ executeForReview(
 | Name               | Type               | Description                                                                                                                                                               |
 | ------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `compiledTemplate` | `CompiledTemplate` | **Required.** The nested object returned from the [`compileTemplate` method](#compiletemplate), which includes information about a compiled template.                     |
-| `names`            | `Object`           | **Required.** The ID and name of each signatory as a key/value pair.                                                                                                      |
+| `proofs`           | `Object`           | **Required.** The ID and name of each signatory as a key/value pair.                                                                                                      |
 | `jsTemplates`      | `Object`           | **Required.** An object containing the compiled templates that are linked to a [deal](/markup-language/#deals) template. The object will be empty for non-deal templates. |
 | `jsParams`         | `Object`           | **Required.** The parameters of the template to be executed for review.                                                                                                   |
 
@@ -2242,7 +2242,7 @@ const executionResult = Openlaw.execute(
 const allVariables = Openlaw.getVariables(executionResult.executionResult, {});
 const variable = allVariables[0]; // first variable in template is a Structure type
 const structureValue = '{"First name":"John","Last name":"Smith"}';
-Openlaw.getStructureFieldValue(
+Openlaw.setStructureFieldValue(
   variable,
   "Position",
   "CTO",
