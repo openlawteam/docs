@@ -1885,11 +1885,11 @@ GET /recentActivity
 
 **Parameters**
 
-| Name       | Type                   | Description                                                                                                                                                                                                  |
-| ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name       | Type     | Description                                                                                                                                                                                                                                    |
+| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `filter`   | `string` | Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Leaving `filter` empty (an empty string for `apiClient`) will return all activity types as if no filter were applied. |
-| `page`     | `number`               | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                 |
-| `pageSize` | `number`               | **Required.** The number of community activity events to display on page.                                                                                                                                    |
+| `page`     | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                                                   |
+| `pageSize` | `number` | **Required.** The number of community activity events to display on page.                                                                                                                                                                      |
 
 Example
 
@@ -2000,9 +2000,9 @@ GET /sendEtherToInstance/:instanceAddress/:ethValue
 
 **Parameters**
 
-| Name              | Type     | Description                                                                                                                                                 |
-| ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `instanceAddress` | `string` | **Required.** The address associated with the private instance (can be retrieved using `getInstanceEthAddress`) to send the Ether to.                       |
+| Name              | Type     | Description                                                                                                                                       |
+| ----------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `instanceAddress` | `string` | **Required.** The address associated with the private instance (can be retrieved using `getInstanceEthAddress`) to send the Ether to.             |
 | `ethValue`        | `number` | **Required.** The amount of Ether to send to `instanceAddress`. (**Note**: Denominated in ether. Both partial and whole ether amounts permitted.) |
 
 Example
@@ -2023,4 +2023,3 @@ Example
   "txnHash": "0x7b70d21ef41810579ea058c5be9bd0fd22c3fb36eb4bca73760ffc1613008a30"
 }
 ```
-
