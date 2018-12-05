@@ -887,7 +887,7 @@ Returns `"name changed"` if alias was successfully changed.
 
 ### downloadAsDocx
 
-Download draft as Word file.
+Download draft as Word file. (**Note**: The POST request here to download a Word file of a draft is the same as the request above to download a Word file of a template. You'll notice from the example form data that a draft includes more parameters that have been filled in by a user.)
 
 ```
 POST /download/contract/docx
@@ -909,7 +909,7 @@ data: {"content":"This Advisor Agreement is entered into between [[Company Name]
 
 ### downloadAsPdf
 
-Download draft as PDF file.
+Download draft as PDF file. (**Note**: The POST request here to download a PDF file of a draft is the same as the request above to download a PDF file of a template. You'll notice from the example form data that a draft includes more parameters that have been filled in by a user.)
 
 ```
 POST /download/contract/pdf
