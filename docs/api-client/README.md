@@ -1314,7 +1314,7 @@ Returns `"contract resumed"` if smart contract transactions were successfully re
 
 ### sendTxHash
 
-Method used in connection with a contract signatory using own [MetaMask](https://metamask.io/) account to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract with MetaMask, the transaction hash for the contract ID is passed back to the server for validation and record-keeping.
+Method used in connection with a contract signatory using own Ethereum account (including via [MetaMask](https://metamask.io/)) to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract, the transaction hash for the contract ID is passed back to the server for validation and record-keeping.
 
 ```
 GET /contract/signature/sendTxHash
@@ -1628,7 +1628,7 @@ Example
 
 ### toRestricted
 
-Change role of a user to restricted `NoAccessUser`, which prevents user from accessing a majority of the features of an instance, including viewing and editing templates.
+Change role of a user to restricted `NoAccessUser`, which prevents user from accessing a majority of the features of an instance, including editing templates.
 
 ::: warning Authentication
 This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
@@ -1887,7 +1887,7 @@ GET /recentActivity
 
 | Name       | Type                   | Description                                                                                                                                                                                                  |
 | ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `filter`   | `Array<string> | null` | Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Leaving `filter` empty will return all activity types as if no filter were applied. |
+| `filter`   | `string` | Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Leaving `filter` empty (an empty string for `apiClient`) will return all activity types as if no filter were applied. |
 | `page`     | `number`               | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                 |
 | `pageSize` | `number`               | **Required.** The number of community activity events to display on page.                                                                                                                                    |
 
@@ -1900,7 +1900,7 @@ GET /recentActivity?filter=TemplateCreated%2CTemplateUpdated&page=1&pageSize=5
 ::: tip APIClient
 
 ```js
-apiClient.getCommunityActivity(["TemplateCreated", "TemplateUpdated"], 1, 5);
+apiClient.getCommunityActivity("TemplateCreated,TemplateUpdated", 1, 5);
 ```
 
 :::
@@ -1950,26 +1950,6 @@ Example
 ```
 
 ## Private Instances
-
-### getGithubToken
-
-Retrieve Github personal access token stored in user's environment variables. Used for automated private instance creation to push yaml files (associated with private instance user is creating) to `openlaw-infra` repo.
-
-::: warning Authorization
-This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
-:::
-
-```
-GET /getGithubToken
-```
-
-**Parameters**
-
-None
-
-**Response**
-
-Returns Github personal access token stored in your environment variables.
 
 ### getInstanceEthAddress
 
@@ -2023,7 +2003,7 @@ GET /sendEtherToInstance/:instanceAddress/:ethValue
 | Name              | Type     | Description                                                                                                                                                 |
 | ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `instanceAddress` | `string` | **Required.** The address associated with the private instance (can be retrieved using `getInstanceEthAddress`) to send the Ether to.                       |
-| `ethValue`        | `number` | **Required.** The amount of Ether to send to `instanceAddress`. (**Note**: Denominated in ether, not gwei. Both partial and whole ether amounts permitted.) |
+| `ethValue`        | `number` | **Required.** The amount of Ether to send to `instanceAddress`. (**Note**: Denominated in ether. Both partial and whole ether amounts permitted.) |
 
 Example
 
@@ -2043,3 +2023,4 @@ Example
   "txnHash": "0x7b70d21ef41810579ea058c5be9bd0fd22c3fb36eb4bca73760ffc1613008a30"
 }
 ```
+
