@@ -483,6 +483,10 @@ Example
 
 Download template as Word file.
 
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
+
 ```
 POST /download/contract/docx
 ```
@@ -493,7 +497,7 @@ POST /download/contract/docx
 
 | Name   | Type     | Description                                                                          |
 | ------ | -------- | ------------------------------------------------------------------------------------ |
-| `data` | `Object` | **Required.** The object containing information about the template to be downloaded. |
+| `params` | `Object` | **Required.** The object containing information about the template to be downloaded. |
 
 Example form data
 
@@ -501,9 +505,28 @@ Example form data
 data: {"content":"This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n\n[[Company Signatory Email: Identity | Signature]]\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n\n[[Advisor Email: Identity | Signature]]\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n","title":"Advisor Agreement","parameters":{},"paragraphs":{},"templates":{}}
 ```
 
+::: tip APIClient
+
+```js
+const params = {
+  content: "This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n\n[[Company Signatory Email: Identity | Signature]]\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n\n[[Advisor Email: Identity | Signature]]\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n",
+  title: "Advisor Agreement",
+  parameters: {},
+  paragraphs: {},
+  templates: {}
+}
+apiClient.downloadAsDocx(params);
+```
+
+:::
+
 ### downloadAsPdf
 
 Download template as PDF file.
+
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
 
 ```
 POST /download/contract/pdf
@@ -515,13 +538,28 @@ POST /download/contract/pdf
 
 | Name   | Type     | Description                                                                          |
 | ------ | -------- | ------------------------------------------------------------------------------------ |
-| `data` | `Object` | **Required.** The object containing information about the template to be downloaded. |
+| `params` | `Object` | **Required.** The object containing information about the template to be downloaded. |
 
 Example form data
 
 ```
 data: {"content":"This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n\n[[Company Signatory Email: Identity | Signature]]\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n\n[[Advisor Email: Identity | Signature]]\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n","title":"Advisor Agreement","parameters":{},"paragraphs":{},"templates":{}}
 ```
+
+::: tip APIClient
+
+```js
+const params = {
+  content: "This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n\n[[Company Signatory Email: Identity | Signature]]\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n\n[[Advisor Email: Identity | Signature]]\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n",
+  title: "Advisor Agreement",
+  parameters: {},
+  paragraphs: {},
+  templates: {}
+}
+apiClient.downloadAsPdf(params);
+```
+
+:::
 
 ## Draft
 
@@ -885,9 +923,13 @@ apiClient.changeDraftAlias(
 
 Returns `"name changed"` if alias was successfully changed.
 
-### downloadAsDocx
+### downloadDraftAsDocx
 
 Download draft as Word file. (**Note**: The POST request here to download a Word file of a draft is the same as the request above to download a Word file of a template. You'll notice from the example form data that a draft includes more parameters that have been filled in by a user.)
+
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
 
 ```
 POST /download/contract/docx
@@ -899,7 +941,7 @@ POST /download/contract/docx
 
 | Name   | Type     | Description                                                                       |
 | ------ | -------- | --------------------------------------------------------------------------------- |
-| `data` | `Object` | **Required.** The object containing information about the draft to be downloaded. |
+| `params` | `Object` | **Required.** The object containing information about the draft to be downloaded. |
 
 Example form data
 
@@ -907,9 +949,28 @@ Example form data
 data: {"content":"This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n\n[[Company Signatory Email: Identity | Signature]]\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n\n[[Advisor Email: Identity | Signature]]\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n","title":"Advisor Agreement","parameters":{"Company Name":"ABC, Inc.","Effective Date":"1539662400000","Company Signatory Email":"{\"id\":{\"id\":\"6dd138a4-b0c2-4ba3-8305-58e1de0d7465\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}","Advisor Name":"John Smith","Company Signatory":"Jane Davis","Advisor Email":"{\"id\":{\"id\":\"28e46837-c653-4e25-a6ce-7c39f05fa624\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}","No Services":"false","Advisor Address":"{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}","Company Address":"{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"},"paragraphs":{},"templates":{}}
 ```
 
-### downloadAsPdf
+::: tip APIClient
+
+```js
+const params = {
+  content: "This **Advisor Agreement** is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n\n[[Company Signatory Email: Identity | Signature]]\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n\n[[Advisor Email: Identity | Signature]]\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n",
+  title: "Advisor Agreement",
+  parameters: {"Company Name": "ABC, Inc.", "Effective Date": "1539662400000", "Company Signatory Email": "{\"id\":{\"id\":\"6dd138a4-b0c2-4ba3-8305-58e1de0d7465\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}", "Advisor Name": "John Smith", "Company Signatory": "Jane Davis", "Advisor Email": "{\"id\":{\"id\":\"28e46837-c653-4e25-a6ce-7c39f05fa624\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}", "No Services": "false", "Advisor Address": "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}", "Company Address": "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"},
+  paragraphs: {},
+  templates: {}
+}
+apiClient.downloadAsDocx(params);
+```
+
+:::
+
+### downloadDraftAsPdf
 
 Download draft as PDF file. (**Note**: The POST request here to download a PDF file of a draft is the same as the request above to download a PDF file of a template. You'll notice from the example form data that a draft includes more parameters that have been filled in by a user.)
+
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
 
 ```
 POST /download/contract/pdf
@@ -921,13 +982,28 @@ POST /download/contract/pdf
 
 | Name   | Type     | Description                                                                       |
 | ------ | -------- | --------------------------------------------------------------------------------- |
-| `data` | `Object` | **Required.** The object containing information about the draft to be downloaded. |
+| `params` | `Object` | **Required.** The object containing information about the draft to be downloaded. |
 
 Example form data
 
 ```
 data: {"content":"This Advisor Agreement is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n\n[[Company Signatory Email: Identity | Signature]]\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n\n[[Advisor Email: Identity | Signature]]\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n","title":"Advisor Agreement","parameters":{"Company Name":"ABC, Inc.","Effective Date":"1539662400000","Company Signatory Email":"{\"id\":{\"id\":\"6dd138a4-b0c2-4ba3-8305-58e1de0d7465\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}","Advisor Name":"John Smith","Company Signatory":"Jane Davis","Advisor Email":"{\"id\":{\"id\":\"28e46837-c653-4e25-a6ce-7c39f05fa624\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}","No Services":"false","Advisor Address":"{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}","Company Address":"{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"},"paragraphs":{},"templates":{}}
 ```
+
+::: tip APIClient
+
+```js
+const params = {
+  content: "This **Advisor Agreement** is entered into between [[Company Name]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n\n[[Company Signatory Email: Identity | Signature]]\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n\n[[Advisor Email: Identity | Signature]]\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n",
+  title: "Advisor Agreement",
+  parameters: {"Company Name": "ABC, Inc.", "Effective Date": "1539662400000", "Company Signatory Email": "{\"id\":{\"id\":\"6dd138a4-b0c2-4ba3-8305-58e1de0d7465\"},\"email\":\"openlawuser+1@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+1@gmail.com\"}]}", "Advisor Name": "John Smith", "Company Signatory": "Jane Davis", "Advisor Email": "{\"id\":{\"id\":\"28e46837-c653-4e25-a6ce-7c39f05fa624\"},\"email\":\"openlawuser+2@gmail.com\",\"identifiers\":[{\"identityProviderId\":\"openlaw\",\"identifier\":\"openlawuser+2@gmail.com\"}]}", "No Services": "false", "Advisor Address": "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}", "Company Address": "{\"placeId\":\"ChIJWbGLkg9gwokR76ZxzYbdnpM\",\"streetName\":\"Main Street\",\"streetNumber\":\"123\",\"city\":\"Queens\",\"state\":\"New York\",\"country\":\"United States\",\"zipCode\":\"11354\",\"formattedAddress\":\"123 Main St, Flushing, NY 11354, USA\"}"},
+  paragraphs: {},
+  templates: {}
+}
+apiClient.downloadAsPdf(params);
+```
+
+:::
 
 ## Contract
 
@@ -1360,6 +1436,10 @@ Example
 
 Download contract as Word file.
 
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
+
 ```
 GET /contract/docx/:contractId
 ```
@@ -1376,9 +1456,22 @@ Example
 GET /contract/docx/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487
 ```
 
+::: tip APIClient
+
+```js
+const contractId = '703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487'
+apiClient.downloadContractAsDocx(contractId);
+```
+
+:::
+
 ### downloadContractAsPdf
 
 Download contract as PDF file.
+
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
 
 ```
 GET /contract/pdf/:contractId
@@ -1395,6 +1488,48 @@ Example
 ```
 GET /contract/pdf/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487
 ```
+
+::: tip APIClient
+
+```js
+const contractId = '703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487'
+apiClient.downloadContractAsPdf(contractId);
+```
+
+:::
+
+### downloadContractAsJson
+
+Download contract as JSON file.
+
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
+
+```
+GET /contract/json/:contractId
+```
+
+**Parameters**
+
+| Name         | Type     | Description                                            |
+| ------------ | -------- | ------------------------------------------------------ |
+| `contractId` | `string` | **Required.** The ID of the contract to be downloaded. |
+
+Example
+
+```
+GET /contract/json/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487
+```
+
+::: tip APIClient
+
+```js
+const contractId = '703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487'
+apiClient.downloadContractAsJson(contractId);
+```
+
+:::
 
 ## Network
 
