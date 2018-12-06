@@ -240,7 +240,7 @@ A Structure type can also be used with a [Collection](#collection) as shown in t
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/3404c3dc744243988482560a3923837e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
-When defining any of these three metatypes of Collection, Choice, or Structure, the name cannot be the same as any variable or specialized type (e.g, Text, Number, Address, Choice, etc.) or an already existing variable name.
+When defining any of these four metatypes of Validation, Collection, Choice, or Structure, the name cannot be the same as any variable or specialized type (e.g, Text, Number, Address, Choice, etc.) or an already existing variable name. You can use the shortcut `ctrl` + `space` in the editor to see the complete list of variable and specialized types.
 :::
 
 ## Formatting
