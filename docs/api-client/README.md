@@ -563,6 +563,38 @@ apiClient.downloadAsPdf(params);
 
 :::
 
+### downloadTemplateAsJson
+
+Download template as JSON file.
+
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
+
+```
+GET /templates/json/:title
+```
+
+**Parameters**
+
+| Name    | Type     | Description                                               |
+| ------- | -------- | --------------------------------------------------------- |
+| `title` | `string` | **Required.** The title of the template to be downloaded. |
+
+Example
+
+```
+GET /templates/json/Advisor%20Agreement
+```
+
+::: tip APIClient
+
+```js
+apiClient.downloadTemplateAsJson("Advisor Agreement");
+```
+
+:::
+
 ## Draft
 
 ### uploadDraft
@@ -1033,6 +1065,40 @@ const params = {
   templates: {}
 };
 apiClient.downloadAsPdf(params);
+```
+
+:::
+
+### downloadDraftAsJson
+
+Download draft information in a JSON file. (**Note**: The JSON file for this request only includes information about the draft, including its ID, title, alias (private name), creation date, and signatories. The file does not include the full draft content like the JSON file downloads for a template or contract.)
+
+::: warning Browser only
+This request can be made only in a browser and not in a Node.js environment.
+:::
+
+```
+GET /draft/json/:draftId
+```
+
+**Parameters**
+
+| Name      | Type     | Description                                         |
+| --------- | -------- | --------------------------------------------------- |
+| `draftId` | `string` | **Required.** The ID of the draft to be downloaded. |
+
+Example
+
+```
+GET /draft/json/cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca
+```
+
+::: tip APIClient
+
+```js
+const draftId =
+  "cb3ba52ccd277f650859f60b9a4cf8284393827121e86861a6a79a61868f37ca";
+apiClient.downloadDraftAsJson(draftId);
 ```
 
 :::
