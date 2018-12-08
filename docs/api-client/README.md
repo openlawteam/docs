@@ -1997,10 +1997,6 @@ Example
 
 Method used as part of `AddressVariable` to get details about a selected address. An [Address variable](/markup-language/#address) generates an address using the Google Maps API.
 
-::: warning Authentication
-This resource can be accessed without having to be a logged in user.
-:::
-
 ```
 GET /address/details
 ```
@@ -2048,32 +2044,26 @@ Example
 
 Method used as part of `AddressVariable` and the Google Maps API to autosuggest addresses based on user input. An [Address variable](/markup-language/#address) generates an address using the Google Maps API.
 
-::: warning Authentication
-This resource can be accessed without having to be a logged in user.
-:::
-
 ```
 GET /address/search
 ```
 
 **Parameters**
 
-| Name        | Type     | Description                                                                |
-| ----------- | -------- | -------------------------------------------------------------------------- |
-| `term`      | `string` | **Required.** The input term to filter returned addresses.                 |
-| `latitude`  | `number` | **Required.** The latitude of the address is equal to `0` for the search.  |
-| `longitude` | `number` | **Required.** The longitude of the address is equal to `0` for the search. |
+| Name   | Type     | Description                                                |
+| ------ | -------- | ---------------------------------------------------------- |
+| `term` | `string` | **Required.** The input term to filter returned addresses. |
 
 Example
 
 ```
-GET /address/search?latitude=0&longitude=0&term=123%20main%20street%2C%20new
+GET /address/search?term=123%20main%20street%2C%20new
 ```
 
 ::: tip APIClient
 
 ```js
-apiClient.searchAddress(0, 0, "123 main street new");
+apiClient.searchAddress("123 main street new");
 ```
 
 :::
@@ -2091,20 +2081,20 @@ Example
     "placeId": "ChIJWbGLkg9gwokR76ZxzYbdnpM"
   },
   {
-    "address": "123 Main Street, Buffalo, New York, USA",
-    "placeId": "ChIJkbYDwjYS04kRbyo3qzJ5v1M"
+    "address": "123 East Main Street, Newark, DE, USA",
+    "placeId": "ChIJA3nOmjqqx4kR05lfIoFkzXU"
   },
   {
-    "address": "123 Main Street, Newport Beach, CA, USA",
-    "placeId": "EicxMjMgTWFpbiBTdHJlZXQsIE5ld3BvcnQgQmVhY2gsIENBLCBVU0EiMBIuChQKEgmTNYZsa-DcgBFFgpqM_iEQqhB7KhQKEgkXmkNua-DcgBFREQIR69IaTQ"
+    "address": "123 Main Street, Stafford, New York, USA",
+    "placeId": "EigxMjMgTWFpbiBTdHJlZXQsIFN0YWZmb3JkLCBOZXcgWW9yaywgVVNB"
   },
   {
-    "address": "123 Main Street, White Plains, New York, USA",
-    "placeId": "ChIJf1oGTTaUwokRBm9myfcYp8g"
+    "address": "123 Main Street, Lindley, New York, USA",
+    "placeId": "EicxMjMgTWFpbiBTdHJlZXQsIExpbmRsZXksIE5ldyBZb3JrLCBVU0EiMBIuChQKEgnXf-_BajLQiRES468J8OrGLhB7KhQKEgk3wvxJHAnoiRG69TsslLduoQ"
   },
   {
-    "address": "123 Main Street, Poughkeepsie, New York, USA",
-    "placeId": "ChIJ2fY6onU-3YkRO5AdRXV4nRQ"
+    "address": "123 Main Street, New York, NY, USA",
+    "placeId": "EiIxMjMgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB"
   }
 ]
 ```
