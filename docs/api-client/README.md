@@ -1540,9 +1540,10 @@ GET /contract/prepareSignature
 
 **Parameters**
 
-| Name         | Type     | Description                                                                                                                                                         |
-| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `contractId` | `string` | **Required.** The ID of the contract.                                                                                                                                                            
+| Name         | Type     | Description                           |
+| ------------ | -------- | ------------------------------------- |
+| `contractId` | `string` | **Required.** The ID of the contract. |
+
 Example
 
 ```
@@ -1553,7 +1554,7 @@ GET /contract/prepareSignature?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c
 
 ```js
 apiClient.prepareSignature(
-  "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487",
+  "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487"
 );
 ```
 
@@ -1566,7 +1567,11 @@ Returns a promise which resolves with the address, signature, and network associ
 Example
 
 ```json
-{ "address": "0x74de946322957ec5a7c4ad0f5c88e4076c65f3bb", "signature":"0x85fh946322957ec5a7c4ad0f5c88e4076c65f3bb", "network": "Rinkeby" }
+{
+  "address": "0x74de946322957ec5a7c4ad0f5c88e4076c65f3bb",
+  "signature": "0x85fh946322957ec5a7c4ad0f5c88e4076c65f3bb",
+  "network": "Rinkeby"
+}
 ```
 
 ### downloadContractAsDocx
