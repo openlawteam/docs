@@ -1530,6 +1530,50 @@ Example
 "signature + userId/contractId pair stored"
 ```
 
+### prepareSignature
+
+Method used in connection with a contract signatory using own Ethereum account (including via [MetaMask](https://metamask.io)) to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract and once the transaction hash has been sent back to the server for validation and record-keeping, the address of the smart contract that handles the signature transaction, signature, and network associated with the transaction are also sent back.
+
+```
+GET /contract/prepareSignature
+```
+
+**Parameters**
+
+| Name         | Type     | Description                           |
+| ------------ | -------- | ------------------------------------- |
+| `contractId` | `string` | **Required.** The ID of the contract. |
+
+Example
+
+```
+GET /contract/prepareSignature?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487
+```
+
+::: tip APIClient
+
+```js
+apiClient.prepareSignature(
+  "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487"
+);
+```
+
+:::
+
+**Response**
+
+Returns a promise which resolves with the address of the smart contract that handles the signature transaction, signature, and network associated with the transaction.
+
+Example
+
+```json
+{
+  "address": "0x74de946322957ec5a7c4ad0f5c88e4076c65f3bb",
+  "signature": "0x85fh946322957ec5a7c4ad0f5c88e4076c65f3bb",
+  "network": "Rinkeby"
+}
+```
+
 ### downloadContractAsDocx
 
 Download contract as Word file.
