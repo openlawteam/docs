@@ -2147,7 +2147,7 @@ Example
 
 ### getCommunityActivity
 
-List community activity events in reverse chronological order. Events include template edits, template creations, and new user registrations.
+List community activity events in reverse chronological order. Events include template edits, template creations, template comments, and new user registrations.
 
 ```
 GET /recentActivity
@@ -2155,11 +2155,11 @@ GET /recentActivity
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                                                                                                                                                    |
-| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `filter`   | `string` | Filter recent activity using a comma-separated list of event types: `TemplateCreated`, `TemplateUpdated`, `UserCreated`. Leaving `filter` empty (an empty string for `apiClient`) will return all activity types as if no filter were applied. |
-| `page`     | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                                                   |
-| `pageSize` | `number` | **Required.** The number of community activity events to display on page.                                                                                                                                                                      |
+| Name       | Type     | Description                                                                                                                                                                                                                                                                                   |
+| ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter`   | `string` | Filter recent activity using a comma-separated list of event types: `TemplateHistoryUpdated`, `TemplateHistoryCreated`, `TemplateHistoryCommentCreated`, `UserCreated`. Leaving `filter` empty (an empty string for `apiClient`) will return all activity types as if no filter were applied. |
+| `page`     | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                                                                                                  |
+| `pageSize` | `number` | **Required.** The number of community activity events to display on page.                                                                                                                                                                                                                     |
 
 Example
 
@@ -2170,7 +2170,11 @@ GET /recentActivity?filter=TemplateCreated%2CTemplateUpdated&page=1&pageSize=5
 ::: tip APIClient
 
 ```js
-apiClient.getCommunityActivity("TemplateCreated,TemplateUpdated", 1, 5);
+apiClient.getCommunityActivity(
+  "TemplateHistoryCreated,TemplateHistoryUpdated",
+  1,
+  5
+);
 ```
 
 :::
