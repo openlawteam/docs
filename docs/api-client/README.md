@@ -1568,7 +1568,7 @@ Example
 
 ```json
 {
-  "address": "0x74de946322957ec5a7c4ad0f5c88e4076c65f3bb",
+  "address": "0x9ebcfec53f74a90ec8bd9d924b20f29c02d2845e",
   "signature": "0x85fh946322957ec5a7c4ad0f5c88e4076c65f3bb",
   "network": "Rinkeby"
 }
