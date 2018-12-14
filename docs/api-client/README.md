@@ -228,11 +228,11 @@ GET /templates/search
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                     |
-| ---------- | -------- | ----------------------------------------------------------------------------------------------- |
-| `keyword`  | `string` | **Required.** The search term to filter retrieved templates.                                    |
-| `page`     | `number` | **Required.** Which group of templates to display. Each group consists of `pageSize` templates. |
-| `pageSize` | `number` | **Required.** The number of templates to display on page.                                       |
+| Name       | Type     | Description                                                                                                                                       |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved templates. Leaving `keyword` empty (an empty string for `apiClient`) will return all templates. |
+| `page`     | `number` | **Required.** Which group of templates to display. Each group consists of `pageSize` templates.                                                   |
+| `pageSize` | `number` | **Required.** The number of templates to display on page.                                                                                         |
 
 Example
 
@@ -446,11 +446,11 @@ GET /templates/searchDeleted
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                     |
-| ---------- | -------- | --------------------------------------------------------------------------------------------------------------- |
-| `keyword`  | `string` | **Required.** The search term to filter retrieved deleted templates.                                            |
-| `page`     | `number` | **Required.** Which group of deleted templates to display. Each group consists of `pageSize` deleted templates. |
-| `pageSize` | `number` | **Required.** The number of deleted templates to display on page.                                               |
+| Name       | Type     | Description                                                                                                                                                       |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved deleted templates. Leaving `keyword` empty (an empty string for `apiClient`) will return all deleted templates. |
+| `page`     | `number` | **Required.** Which group of deleted templates to display. Each group consists of `pageSize` deleted templates.                                                   |
+| `pageSize` | `number` | **Required.** The number of deleted templates to display on page.                                                                                                 |
 
 Example
 
@@ -817,12 +817,12 @@ GET /drafts/search
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                 |
-| ---------- | -------- | ----------------------------------------------------------------------------------------------------------- |
-| `keyword`  | `string` | **Required.** The search term to filter retrieved drafts.                                                   |
-| `page`     | `number` | **Required.** Which group of drafts to display. Each group consists of `pageSize` drafts.                   |
-| `pageSize` | `number` | **Required.** The number of drafts to display on page.                                                      |
-| `sortBy`   | `string` | **Required.** The way in which returned drafts are to be sorted: `creationdate`, `privatename`, or `title`. |
+| Name       | Type     | Description                                                                                                                                 |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved drafts. Leaving `keyword` empty (an empty string for `apiClient`) will return all drafts. |
+| `page`     | `number` | **Required.** Which group of drafts to display. Each group consists of `pageSize` drafts.                                                   |
+| `pageSize` | `number` | **Required.** The number of drafts to display on page.                                                                                      |
+| `sortBy`   | `string` | **Required.** The way in which returned drafts are to be sorted: `creationdate`, `privatename`, or `title`.                                 |
 
 Example
 
@@ -1272,12 +1272,12 @@ GET /contracts/search
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                    |
-| ---------- | -------- | -------------------------------------------------------------------------------------------------------------- |
-| `keyword`  | `string` | **Required.** The search term to filter retrieved contracts.                                                   |
-| `page`     | `number` | **Required.** Which group of contracts to display. Each group consists of `pageSize` contracts.                |
-| `pageSize` | `number` | **Required.** The number of contracts to display on page.                                                      |
-| `sortBy`   | `string` | **Required.** The way in which returned contracts are to be sorted: `creationdate`, `privatename`, or `title`. |
+| Name       | Type     | Description                                                                                                                                       |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved contracts. Leaving `keyword` empty (an empty string for `apiClient`) will return all contracts. |
+| `page`     | `number` | **Required.** Which group of contracts to display. Each group consists of `pageSize` contracts.                                                   |
+| `pageSize` | `number` | **Required.** The number of contracts to display on page.                                                                                         |
+| `sortBy`   | `string` | **Required.** The way in which returned contracts are to be sorted: `creationdate`, `privatename`, or `title`.                                    |
 
 Example
 
@@ -1818,11 +1818,11 @@ GET /users/search
 
 **Parameters**
 
-| Name       | Type     | Description                                                                             |
-| ---------- | -------- | --------------------------------------------------------------------------------------- |
-| `keyword`  | `string` | **Required.** The search term to filter retrieved users.                                |
-| `page`     | `number` | **Required.** Which group of users to display. Each group consists of `pageSize` users. |
-| `pageSize` | `number` | **Required.** The number of users to display on page.                                   |
+| Name       | Type     | Description                                                                                                                               |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyword`  | `string` | **Required.** The search term to filter retrieved users. Leaving `keyword` empty (an empty string for `apiClient`) will return all users. |
+| `page`     | `number` | **Required.** Which group of users to display. Each group consists of `pageSize` users.                                                   |
+| `pageSize` | `number` | **Required.** The number of users to display on page.                                                                                     |
 
 Example
 
@@ -2155,11 +2155,11 @@ GET /recentActivity
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                                                                                                                                                                                                   |
-| ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `filter`   | `string` | Filter recent activity using a comma-separated list of event types: `TemplateHistoryUpdated`, `TemplateHistoryCreated`, `TemplateHistoryCommentCreated`, `UserCreated`. Leaving `filter` empty (an empty string for `apiClient`) will return all activity types as if no filter were applied. |
-| `page`     | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                                                                                                  |
-| `pageSize` | `number` | **Required.** The number of community activity events to display on page.                                                                                                                                                                                                                     |
+| Name       | Type     | Description                                                                                                                                                                                                                                                                                                 |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter`   | `string` | **Required.** Filter recent activity using a comma-separated list of event types: `TemplateHistoryUpdated`, `TemplateHistoryCreated`, `TemplateHistoryCommentCreated`, `UserCreated`. Leaving `filter` empty (an empty string for `apiClient`) will return all activity types as if no filter were applied. |
+| `page`     | `number` | **Required.** Which group of community activity events to display. Each group consists of `pageSize` events.                                                                                                                                                                                                |
+| `pageSize` | `number` | **Required.** The number of community activity events to display on page.                                                                                                                                                                                                                                   |
 
 Example
 
