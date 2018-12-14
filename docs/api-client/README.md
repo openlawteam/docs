@@ -1562,7 +1562,7 @@ apiClient.prepareSignature(
 
 **Response**
 
-Returns a promise which resolves with the address, signature, and network associated with the transaction. The address is not the address of the smart contract used for signature. It is the address associated with the transaction, which is derived from the signature as a means of verification. 
+Returns a promise which resolves with the address, signature, and network associated with the transaction. The address is not the address of the smart contract used for signature. It is the address associated with the transaction, which is derived from the signature as a means of verification.
 
 Example
 
