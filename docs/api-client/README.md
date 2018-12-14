@@ -2225,41 +2225,6 @@ Example
 
 ## Private Instances
 
-### getInstanceEthAddress
-
-Retrieve the Ethereum address associated with a private instance - address contains Ether funds acting as gas for the execution of transactions in said instance.
-
-::: warning Authorization
-This resource can only be accessed by a logged in user with an `Admin` role as further explained in the [toAdminUser method](#toadminuser).
-:::
-
-```
-GET /getInstanceEthAddress/:instanceName/:env
-```
-
-**Parameters**
-
-| Name           | Type     | Description                                                                            |
-| -------------- | -------- | -------------------------------------------------------------------------------------- |
-| `instanceName` | `string` | **Required.** The name of the private instance to retrieve the Ethereum address for.   |
-| `env`          | `string` | **Required.** The development environment the private instance is in: `dev` or `prod`. |
-
-Example
-
-```
-GET /getInstanceEthAddress/openlaw/prod
-```
-
-**Response**
-
-Returns Ethereum address associated with desired private instance.
-
-Example
-
-```
-0x952d8a1e72c26f8d9cf64ac2b8169028e0d386d1
-```
-
 ### sendEtherToInstance
 
 Send Ether to an Ethereum address associated with a private instance to provide Ether funds acting as gas for the execution of transactions in said instance.
