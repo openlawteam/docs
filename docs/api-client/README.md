@@ -1540,21 +1540,25 @@ GET /contract/prepareSignature
 
 **Parameters**
 
-| Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
-| `contractId` | `string` | **Required.** The ID of the contract. |
+| Name          | Type     | Description                                        |
+| ------------- | -------- | -------------------------------------------------- |
+| `contractId`  | `string` | **Required.** The ID of the contract.              |
+| `fullName`    | `string` | **Required.** The full name of the person signing. |
+| `accessToken` | `string` |  The access token representing the signatory. If none are specified, it will use the current user to determine who is signing right now. |
 
 Example
 
 ```
-GET /contract/prepareSignature?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487
+GET /contract/prepareSignature?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487&fullName=SomeName&accessToken=28394728947829374823723428742389462378423874
 ```
 
 ::: tip APIClient
 
 ```js
 apiClient.prepareSignature(
-  "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487"
+  "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487",
+  "My Full Name",
+  "34897234897289472894724(some access token)"
 );
 ```
 
@@ -1562,15 +1566,60 @@ apiClient.prepareSignature(
 
 **Response**
 
-Returns a promise which resolves with the address, signature, and network associated with the transaction. The address is not the address of the smart contract used for signature. It is the address associated with the transaction, which is derived from the signature as a means of verification.
+Returns a promise which resolves with the signature. 
 
 Example
 
 ```json
 {
-  "address": "0x9ebcfec53f74a90ec8bd9d924b20f29c02d2845e",
-  "signature": "0x85fh946322957ec5a7c4ad0f5c88e4076c65f3bb",
-  "network": "Rinkeby"
+  "signature": "0x85fh946322957458934859038908903845ec5a7c4ad0f5c88e4076c65f3bb"
+}
+```
+
+### signContract
+
+Method used in to let openlaw take care of the entire signature process. This means that Openlaw will prepare the signature, create and send a transaction and keep track of its status.
+
+
+```
+GET /sign/contract/{contractId}
+```
+
+**Parameters**
+
+| Name          | Type     | Description                                        |
+| ------------- | -------- | -------------------------------------------------- |
+| `contractId`  | `string` | **Required.** The ID of the contract.              |
+| `fullName`    | `string` | **Required.** The full name of the person signing. |
+| `accessToken` | `string` |  The access token representing the signatory. If none are specified, it will use the current user to determine who is signing right now. |
+
+Example
+
+```
+GET /sign/contract/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487?fullName=SomeName&accessToken=28394728947829374823723428742389462378423874
+```
+
+::: tip APIClient
+
+```js
+apiClient.signContract(
+  "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487",
+  "My Full Name",
+  "34897234897289472894724(some access token)"
+);
+```
+
+:::
+
+**Response**
+
+Returns a promise which resolves with the signature. 
+
+Example
+
+```json
+{
+  "signature": "0x85fh946322957458934859038908903845ec5a7c4ad0f5c88e4076c65f3bb"
 }
 ```
 
