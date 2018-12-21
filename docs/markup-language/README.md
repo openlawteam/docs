@@ -376,7 +376,7 @@ Unless as provided in Section [[Organization]], ...
 
 ## Titles
 
-You can hide the template title for an agreement by including the following option at the beginning of the document. This option is useful to supress a title for letters or the downloading of Word documents.
+You can hide the template title for an agreement by including the following option at the beginning of the document. This option is useful to suppress a title for letters or the downloading of Word documents.
 
 ```
 ####
@@ -386,7 +386,7 @@ show title:false;
 
 ## Annotation
 
-Sometimes, it helps to embed annotations in your template to give context to the user.
+Sometimes it may be helpful to embed annotations in your template to give context to the user.
 The annotation is rendered only in preview and doesn't affect the docx or pdf version of the agreement.
 
 ```
