@@ -195,20 +195,31 @@ Here is an example of the syntax to define and use a Choice type:
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/b86302f4f934443ebb6701fea05a5268" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
+### options property
 
-###options property
-If your goal is not to create a type but just to define a list of possible values for a variable, you can use the property "options" in the type definition. The cool thing here is that you can also define expressions and therefore make the options dynamic. 
+If your goal is not to create a type but just to define a list of possible values for a variable, you can use the property `options` in the type definition.
 
 Here is an example:
+
 ```
 [[Country:Text(
     options: "USA", "Switzerland", "Sweden", "Germany", "India"
     )]]
 ```
 
-The main difference between options and Choice is that options is a way to define a sub set from a type instead of creating a new type.
+The options property also allows you to define expressions in the list of options and therefore make the options dynamic:
 
-If you still want a default value, you can use the property "value"
+```
+[[Another Country]]
+
+[[Country:Text(
+    options: "USA", "Switzerland", "Sweden", "Germany", "India", Another Country
+    )]]
+```
+
+The main difference between options and the Choice type is that options is a way to define a subset from a type instead of creating a new type.
+
+If you want the options to have a default value, you can use the property `value`:
 
 ```
 [[Country:Text(
@@ -262,7 +273,7 @@ A Structure type can also be used with a [Collection](#collection) as shown in t
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/3404c3dc744243988482560a3923837e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: warning
-When defining any of these four metatypes of Validation, Collection, Choice, or Structure, the name cannot be the same as any variable or specialized type (e.g, Text, Number, Address, Choice, etc.) or an already existing variable name. You can use the shortcut `ctrl` + `space` in the editor to see the complete list of variable and specialized types.
+When defining any of these specialized types, the name cannot be the same as any variable or specialized type (e.g, Text, Number, Address, Choice, etc.) or an already existing variable name. You can use the shortcut `ctrl` + `space` in the editor to see the complete list of variable and specialized types.
 :::
 
 ## Formatting
@@ -374,11 +385,11 @@ show title:false;
 ```
 
 ## Annotation
-Sometimes, it helps to embed annotations in your template to give context to the user. 
+
+Sometimes, it helps to embed annotations in your template to give context to the user.
 The annotation is rendered only in preview and doesn't affect the docx or pdf version of the agreement.
 
 ```
-
 some provision
 
 """
@@ -386,9 +397,7 @@ This is an annotation explaining the provision and why it's good to have it here
 """
 
 some other provision
-
 ```
-
 
 ## Tables
 
