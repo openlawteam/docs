@@ -1532,7 +1532,7 @@ Example
 
 ### prepareSignature
 
-Method used in connection with a contract signatory using own Ethereum account (including via [MetaMask](https://metamask.io)) to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract and once the transaction hash has been sent back to the server for validation and record-keeping, the address, signature, and network associated with the transaction are also sent back. The address is not the address of the smart contract used for signature. It is the address associated with the transaction, which is derived from the signature as a means of verification.
+Method used in connection with a contract signatory using own Ethereum account (including via [MetaMask](https://metamask.io)) to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract and once the transaction hash has been sent back to the server for validation and record-keeping, the signature associated with the transaction is also sent back.
 
 ```
 GET /contract/prepareSignature
@@ -1540,16 +1540,16 @@ GET /contract/prepareSignature
 
 **Parameters**
 
-| Name          | Type     | Description                                        |
-| ------------- | -------- | -------------------------------------------------- |
-| `contractId`  | `string` | **Required.** The ID of the contract.              |
-| `fullName`    | `string` | **Required.** The full name of the person signing. |
-| `accessToken` | `string` |  The access token representing the signatory. If none are specified, it will use the current user to determine who is signing right now. |
+| Name          | Type     | Description                                                                                                               |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `contractId`  | `string` | **Required.** The ID of the contract.                                                                                     |
+| `fullName`    | `string` | **Required.** The full name of the person signing.                                                                        |
+| `accessToken` | `string` | The access token representing the signatory. If not specified, the current user will be used to determine who is signing. |
 
 Example
 
 ```
-GET /contract/prepareSignature?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487&fullName=SomeName&accessToken=28394728947829374823723428742389462378423874
+GET /contract/prepareSignature?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487&fullName=My%20Full%20Name&accessToken=28394728947829374823723428742389462378423874
 ```
 
 ::: tip APIClient
@@ -1558,7 +1558,7 @@ GET /contract/prepareSignature?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c
 apiClient.prepareSignature(
   "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487",
   "My Full Name",
-  "34897234897289472894724(some access token)"
+  "28394728947829374823723428742389462378423874"
 );
 ```
 
@@ -1566,7 +1566,7 @@ apiClient.prepareSignature(
 
 **Response**
 
-Returns a promise which resolves with the signature. 
+Returns a promise which resolves with the signature.
 
 Example
 
@@ -1578,25 +1578,24 @@ Example
 
 ### signContract
 
-Method used in to let openlaw take care of the entire signature process. This means that Openlaw will prepare the signature, create and send a transaction and keep track of its status.
-
+Method used to let OpenLaw take care of the entire signature process. The OpenLaw protocol will prepare the signature, create and send a transaction, and keep track of its status.
 
 ```
-GET /sign/contract/{contractId}
+GET /sign/contract/:contractId
 ```
 
 **Parameters**
 
-| Name          | Type     | Description                                        |
-| ------------- | -------- | -------------------------------------------------- |
-| `contractId`  | `string` | **Required.** The ID of the contract.              |
-| `fullName`    | `string` | **Required.** The full name of the person signing. |
-| `accessToken` | `string` |  The access token representing the signatory. If none are specified, it will use the current user to determine who is signing right now. |
+| Name          | Type     | Description                                                                                                               |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `contractId`  | `string` | **Required.** The ID of the contract.                                                                                     |
+| `fullName`    | `string` | **Required.** The full name of the person signing.                                                                        |
+| `accessToken` | `string` | The access token representing the signatory. If not specified, the current user will be used to determine who is signing. |
 
 Example
 
 ```
-GET /sign/contract/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487?fullName=SomeName&accessToken=28394728947829374823723428742389462378423874
+GET /sign/contract/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487?fullName=My%20Full%20Name&accessToken=28394728947829374823723428742389462378423874
 ```
 
 ::: tip APIClient
@@ -1605,7 +1604,7 @@ GET /sign/contract/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338
 apiClient.signContract(
   "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487",
   "My Full Name",
-  "34897234897289472894724(some access token)"
+  "28394728947829374823723428742389462378423874"
 );
 ```
 
@@ -1613,13 +1612,13 @@ apiClient.signContract(
 
 **Response**
 
-Returns a promise which resolves with the signature. 
+Returns a promise which resolves with the transaction hash associated with the signature.
 
 Example
 
 ```json
 {
-  "signature": "0x85fh946322957458934859038908903845ec5a7c4ad0f5c88e4076c65f3bb"
+  "txHash": "0xd415aae656fc08c39a32bcf4eadba6d98754f94a5a1fe82d4819cfbf15238393"
 }
 ```
 
