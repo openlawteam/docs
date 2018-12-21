@@ -184,7 +184,7 @@ If you have a Collection, you can iterate on each element by using a `for each` 
 
 ### Choice
 
-The Choice metatype lets you define a list of options to choose from, such as would typically be contained in a drop-down menu.
+The Choice metatype lets you define a list of options as a type. This is useful if you want to define a type as a list of elements (enum in programming language).
 
 Here is an example of the syntax to define and use a Choice type:
 
@@ -194,6 +194,28 @@ Here is an example of the syntax to define and use a Choice type:
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/b86302f4f934443ebb6701fea05a5268" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+
+###options property
+If your goal is not to create a type but just to define a list of possible values for a variable, you can use the property "options" in the type definition. The cool thing here is that you can also define expressions and therefore make the options dynamic. 
+
+Here is an example:
+```
+[[Country:Text(
+    options: "USA", "Switzerland", "Sweden", "Germany", "India"
+    )]]
+```
+
+The main difference between options and Choice is that options is a way to define a sub set from a type instead of creating a new type.
+
+If you still want a default value, you can use the property "value"
+
+```
+[[Country:Text(
+    options: "USA", "Switzerland", "Sweden", "Germany", "India";
+    value: "USA"
+    )]]
+```
 
 ### Structure
 
@@ -350,6 +372,23 @@ You can hide the template title for an agreement by including the following opti
 show title:false;
 ####
 ```
+
+## Annotation
+Sometimes, it helps to embed annotations in your template to give context to the user. 
+The annotation is rendered only in preview and doesn't affect the docx or pdf version of the agreement.
+
+```
+
+some provision
+
+"""
+This is an annotation explaining the provision and why it's good to have it here.
+"""
+
+some other provision
+
+```
+
 
 ## Tables
 
