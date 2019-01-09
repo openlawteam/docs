@@ -99,6 +99,12 @@ Address.streetName]]
 
 Each address is also associated with a unique string identifier. Continuing the example above, this can be referenced with `[[Company Address.placeId]]`.
 
+#### LargeText
+
+The LargeText type is used when more space is required than the default `Text` variable would provide. It corresponds to a `<textarea>` tag in HTML, rather than `<input>`.
+
+To create a LargeText variable, add `:LargeText` after the variable name.
+
 #### YesNo
 
 The YesNo type is typically used together with "conditional" logic embedded into a template. It creates a binary "yes" or "no" question with radio button inputs. The value of the input can be used to output text, variables, smart contract calls, and/or trigger a conditional elsewhere in the agreement as explained below in [Conditionals and Decision Branches](#conditionals-and-decision-branches). To create a YesNo variable, add `: YesNo` after a variable name followed by the language in quotes that serves as a prompt for the user. For example, `[[Variable: YesNo "Have you included the required prompt?"]]`.
@@ -114,6 +120,8 @@ no type indicator or `: Text` - indicates that a variable is text
 `: DateTime` - generates date picker with date and time
 
 `: EthAddress` - indicates that a variable is an Ethereum address
+
+`: LargeText` - indicates that a variable is large text (corresponding to a text box where longer input is accepted)
 
 `: Number` - indicates that a variable is a number
 
@@ -441,10 +449,10 @@ Conditionals also can be grouped to create a decision tree. In other words:
 
 ```
 {{ Name of Conditional "Question to Prompt User" =>
-	Text to include in an agreement if a user selects 'yes'
-	{{Sub-Conditional-1 "Text of Sub-Question 1" => Text}}
-	{{Sub-Conditional-2 "Text of Sub-Question 2" => Text}}
-	{{Sub-Conditional-3 "Text of Sub-Question 3" => Text}}
+  Text to include in an agreement if a user selects 'yes'
+  {{Sub-Conditional-1 "Text of Sub-Question 1" => Text}}
+  {{Sub-Conditional-2 "Text of Sub-Question 2" => Text}}
+  {{Sub-Conditional-3 "Text of Sub-Question 3" => Text}}
 }}
 ```
 
@@ -1415,27 +1423,27 @@ Here is a basic example of using a Collection (of a Structure type) in a deal:
 
 ==Employees==
 [[Employee Info: Structure(
-	First name: Text;
-	Last name: Text;
-	Address: Address;
-	Position: Text;
-	Ethereum address: EthAddress;
-	Email: Identity
-	)]]
+  First name: Text;
+  Last name: Text;
+  Address: Address;
+  Position: Text;
+  Ethereum address: EthAddress;
+  Email: Identity
+  )]]
 [[Employees: Collection<Employee Info>]]
 
 # Employment Agreement for each individual Employee
 {{#for each Employee: Employees =>
-	[[_: Template(
-		name: "Employment Agreement";
-		parameters:
-			Employee Name -> (Employee.First name + " " + Employee.Last name),
-			Employee Address -> Employee.Address,
-			Employee Position -> Employee.Position,
-			Recipient Ethereum Address -> Employee.Ethereum address,
-			Employee Signatory Email -> Employee.Email;
-		path: "agreements" / (Employee.First name + " " + Employee.Last name)
-		)]]
+  [[_: Template(
+    name: "Employment Agreement";
+    parameters:
+      Employee Name -> (Employee.First name + " " + Employee.Last name),
+      Employee Address -> Employee.Address,
+      Employee Position -> Employee.Position,
+      Recipient Ethereum Address -> Employee.Ethereum address,
+      Employee Signatory Email -> Employee.Email;
+    path: "agreements" / (Employee.First name + " " + Employee.Last name)
+    )]]
 }}
 ```
 
@@ -1445,13 +1453,13 @@ Let's step through what is going on with the Collection in this example.
 
 ```
 [[Employee Info: Structure(
-	First name: Text;
-	Last name: Text;
-	Address: Address;
-	Position: Text;
-	Ethereum address: EthAddress;
-	Email: Identity
-	)]]
+  First name: Text;
+  Last name: Text;
+  Address: Address;
+  Position: Text;
+  Ethereum address: EthAddress;
+  Email: Identity
+  )]]
 ```
 
 - Then we define a new Collection type of Employee Info, `Employees`:
@@ -1464,8 +1472,8 @@ Let's step through what is going on with the Collection in this example.
 
 ```
 {{#for each Employee: Employees =>
-	[[_: Template(
-		name: "Employment Agreement";
+  [[_: Template(
+    name: "Employment Agreement";
 ```
 
 ::: warning
@@ -1476,11 +1484,11 @@ Two or more template variables using the name `_` will not cause an error. Howev
 
 ```
 parameters:
-	Employee Name -> (Employee.First name + " " + Employee.Last name),
-	Employee Address -> Employee.Address,
-	Employee Position -> Employee.Position,
-	Recipient Ethereum Address -> Employee.Ethereum address,
-	Employee Signatory Email -> Employee.Email;
+  Employee Name -> (Employee.First name + " " + Employee.Last name),
+  Employee Address -> Employee.Address,
+  Employee Position -> Employee.Position,
+  Recipient Ethereum Address -> Employee.Ethereum address,
+  Employee Signatory Email -> Employee.Email;
 ```
 
 - Finally, the `path` parameter has 2 purposes: (1) it gives a unique name to each agreement based on the parameters and (2) it defines the path that will be used if you download the agreements in the deal.
