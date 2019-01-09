@@ -682,15 +682,16 @@ GET /draft/raw/:draftId/:version
 
 **Parameters**
 
-| Name      | Type     | Description                                    |
-| --------- | -------- | ---------------------------------------------- |
-| `draftId` | `string` | **Required.** The ID of the draft.             |
-| `version` | `number` | **Required.** The version number of the draft. |
+| Name          | Type     | Description                                                                                                                     |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `draftId`     | `string` | **Required.** The ID of the draft.                                                                                              |
+| `version`     | `number` | **Required.** The version number of the draft.                                                                                  |
+| `accessToken` | `string` | The access token representing the requestor. If not specified, the current user will be used to determine who is the requestor. |
 
 Example
 
 ```
-GET /draft/raw/2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e/1
+GET /draft/raw/2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e/1?accessToken=28394728947829374823723428742389462378423874
 ```
 
 ::: tip APIClient
@@ -698,7 +699,8 @@ GET /draft/raw/2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e/
 ```js
 apiClient.getDraftVersion(
   "2dbbe1c23657f96d58de18ece4c0b311cc26fbca2551e8dc40d174af1046a00e",
-  1
+  1,
+  "28394728947829374823723428742389462378423874"
 );
 ```
 
@@ -762,16 +764,17 @@ GET /drafts/version
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                   |
-| ---------- | -------- | --------------------------------------------------------------------------------------------- |
-| `draftId`  | `string` | **Required.** The ID of the draft.                                                            |
-| `pageSize` | `number` | **Required.** The number of versions to display on page.                                      |
-| `page`     | `number` | **Required.** Which group of versions to display. Each group consists of `pageSize` versions. |
+| Name          | Type     | Description                                                                                                                     |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `draftId`     | `string` | **Required.** The ID of the draft.                                                                                              |
+| `pageSize`    | `number` | **Required.** The number of versions to display on page.                                                                        |
+| `page`        | `number` | **Required.** Which group of versions to display. Each group consists of `pageSize` versions.                                   |
+| `accessToken` | `string` | The access token representing the requestor. If not specified, the current user will be used to determine who is the requestor. |
 
 Example
 
 ```
-GET /drafts/version?draftId=84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7&pageSize=10&page=1
+GET /drafts/version?draftId=84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7&pageSize=10&page=1&accessToken=28394728947829374823723428742389462378423874
 ```
 
 ::: tip APIClient
@@ -780,7 +783,8 @@ GET /drafts/version?draftId=84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e7
 apiClient.getDraftVersions(
   "84a6b2cf1f197ffced3ec875e6e9b93246a4b0aa3be7e24ff6e718ef9fac50a7",
   10,
-  1
+  1,
+  "28394728947829374823723428742389462378423874"
 );
 ```
 
@@ -1212,21 +1216,23 @@ GET /contract/raw/:contractId
 
 **Parameters**
 
-| Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
-| `contractId` | `string` | **Required.** The ID of the contract. |
+| Name          | Type     | Description                                                                                                                     |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `contractId`  | `string` | **Required.** The ID of the contract.                                                                                           |
+| `accessToken` | `string` | The access token representing the requestor. If not specified, the current user will be used to determine who is the requestor. |
 
 Example
 
 ```
-GET /contract/raw/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a
+GET /contract/raw/8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a?accessToken=28394728947829374823723428742389462378423874
 ```
 
 ::: tip APIClient
 
 ```js
 apiClient.getContract(
-  "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
+  "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a",
+  "28394728947829374823723428742389462378423874"
 );
 ```
 
@@ -1496,16 +1502,17 @@ GET /contract/signature/sendTxHash
 
 **Parameters**
 
-| Name         | Type     | Description                                                                                                                                                         |
-| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `contractId` | `string` | **Required.** The ID of the contract.                                                                                                                               |
-| `network`    | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Ropsten`, `Kovan`, or `Rinkeby`. Support for `Mainnet` will be integrated soon. |
-| `txHash`     | `string` | **Required.** The transaction hash resulting from signing the contract with MetaMask.                                                                               |
+| Name          | Type     | Description                                                                                                                                                         |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contractId`  | `string` | **Required.** The ID of the contract.                                                                                                                               |
+| `network`     | `string` | **Required.** The name of the Ethereum network used for the signature transaction: `Ropsten`, `Kovan`, or `Rinkeby`. Support for `Mainnet` will be integrated soon. |
+| `txHash`      | `string` | **Required.** The transaction hash resulting from signing the contract with Ethereum account.                                                                       |
+| `accessToken` | `string` | The access token representing the signatory. If not specified, the current user will be used to determine who is signing.                                           |
 
 Example
 
 ```
-GET /contract/signature/sendTxHash?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487&network=Rinkeby&txHash=0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc
+GET /contract/signature/sendTxHash?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487&network=Rinkeby&txHash=0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc&accessToken=28394728947829374823723428742389462378423874
 ```
 
 ::: tip APIClient
@@ -1514,7 +1521,8 @@ GET /contract/signature/sendTxHash?contractId=703e3f8c6e91fc7ba35633974ea96acab4
 apiClient.sendTxHash(
   "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487",
   "Rinkeby",
-  "0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc"
+  "0x7128943e9d7237c8624af233594052dcd1de79fdbdb1e667883f9f2d7cb282dc",
+  "28394728947829374823723428742389462378423874"
 );
 ```
 
@@ -1619,6 +1627,82 @@ Example
 ```json
 {
   "txHash": "0xd415aae656fc08c39a32bcf4eadba6d98754f94a5a1fe82d4819cfbf15238393"
+}
+```
+
+### loadContractStatus
+
+Method used to retrieve the status of a contract, including the statuses of the contract's signature events and any smart contract executions.
+
+```
+GET /contract/sign/status
+```
+
+**Parameters**
+
+| Name          | Type     | Description                                                                                                               |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | `string` | **Required.** The ID of the contract.                                                                                     |
+| `accessToken` | `string` | The access token representing the signatory. If not specified, the current user will be used to determine who is signing. |
+
+Example
+
+```
+GET /contract/sign/status?id=873f5a548045b8407d76824d9d4a594bbed49bf7db95f9c39d6a07bce1637194&accessToken=28394728947829374823723428742389462378423874
+```
+
+::: tip APIClient
+
+```js
+apiClient.loadContractStatus(
+  "873f5a548045b8407d76824d9d4a594bbed49bf7db95f9c39d6a07bce1637194",
+  "28394728947829374823723428742389462378423874"
+);
+```
+
+:::
+
+**Response**
+
+Returns a promise which resolves with a JSON object containing information about the contract, including its signature events and any smart contract executions.
+
+Example
+
+```json
+{
+  "signatures": {
+    "openlawuser+1@gmail.com": {
+      "txHash": "0xf796c3a17a9df838bd18d434389a56574c1ef3771c4900b5b55a2b57ad8553d4",
+      "errorMsg": "",
+      "status": "success",
+      "done": true,
+      "network": "Rinkeby"
+    },
+    "openlawuser+2@gmail.com": {
+      "txHash": "0x8d00200c65f9d15c6c5e3000d7cf04cc5d573ab8f1d8e8d442a43263f74b2825",
+      "errorMsg": "",
+      "status": "success",
+      "done": true,
+      "network": "Rinkeby"
+    }
+  },
+  "ethereumCalls": [
+    {
+      "startDate": 1547060580000,
+      "endDate": 1547060760000,
+      "network": "Rinkeby",
+      "description": "Payroll call",
+      "calls": [
+        {
+          "id": 0,
+          "status": "the transaction has been added to the chain and successfully executed",
+          "scheduleDate": 1547060580000,
+          "startDate": 1547060594000,
+          "tx": "0x09b252f309343426507f9539c0ed61214e63519ce8212b5e5136663038096040"
+        }
+      ]
+    }
+  ]
 }
 ```
 
