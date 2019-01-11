@@ -497,7 +497,7 @@ Below shows how this can dynamically change the text:
 
 ### Conditionals With Else
 
-It is also possible to create an if/else conditional: a conditional is a conditional which displays one set of text when the `YesNo` variable is set to "yes" and a different set of text when the `YesNo` variable is set to "no". This feature increases the power of the OpenLaw markup language considerably.
+It is also possible to create an if/else conditional: a conditional which displays one set of text when the `YesNo` variable is set to "yes" and a different set of text when it is set to "no". This feature increases the power of conditional statements considerably. 
 
 Here is a simple example. Consider the below markup:
 
@@ -517,7 +517,7 @@ In contrast, it will display the following if `shouldShowBirthdate` is set to no
 This is my clause. John Doe. I am not showing any birthday-related information.
 ```
 
-Sections, choices, boolean expressions, and other advanced conditional features described above and below can be included in if-else conditionals just as in regular conditionals. 
+Sections, choices, boolean expressions, and other advanced conditional features described above and below can be included in if-else conditionals just as in regular conditionals.
 
 ## Reasoning with Conditionals
 
