@@ -495,6 +495,30 @@ Below shows how this can dynamically change the text:
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/614467945305465aa29840ea282aad3e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
+### Conditionals With Else
+
+It is also possible to create an if/else conditional: a conditional is a conditional which displays one set of text when the `YesNo` variable is set to "yes" and a different set of text when the `YesNo` variable is set to "no". This feature increases the power of the OpenLaw markup language considerably.
+
+Here is a simple example. Consider the below markup:
+
+```
+This is my clause. [[contractor:Text "the contractor who is going to do the job"]]. {{shouldShowBirthdate "Should we show the birthdate?" => And I am born in [[contractorBirthdate "The birthdate of the contractor"]] :: I am not showing any birthday-related information }}
+```
+
+Assuming the `contractor` variable value is John Doe and the `contractorBirthdate` variable value is 1980, the above text will display the following if `shouldShowBirthdate` is set to yes:
+
+```
+This is my clause. John Doe. And I am born in 1980.
+```
+
+In contrast, it will display the following if `shouldShowBirthdate` is set to no:
+
+```
+This is my clause. John Doe. I am not showing any birthday-related information.
+```
+
+Sections, choices, boolean expressions, and other advanced conditional features described above and below can be included in if-else conditionals just as in regular conditionals. 
+
 ## Reasoning with Conditionals
 
 OpenLaw's markup language can handle boolean expressions, outlined below:
