@@ -497,12 +497,12 @@ Below shows how this can dynamically change the text:
 
 ### Conditionals With Else
 
-It is also possible to create an if/else conditional: a conditional which displays one set of text when the `YesNo` variable is set to "yes" and a different set of text when it is set to "no". This feature increases the power of conditional statements considerably. 
+It is also possible to create an if/else conditional: a conditional which displays one set of text when the `YesNo` variable is set to "yes" and a different set of text when it is set to "no". This feature increases the power of conditional statements considerably.
 
 Here is a simple example. Consider the below markup:
 
 ```
-This is my clause. [[contractor:Text "the contractor who is going to do the job"]]. {{shouldShowBirthdate "Should we show the birthdate?" => And I am born in [[contractorBirthdate "The birthdate of the contractor"]] :: I am not showing any birthday-related information }}
+This is my clause. [[contractor: Text "the contractor who is going to do the job"]]. {{shouldShowBirthdate "Should we show the birthdate?" => And I am born in [[contractorBirthdate "The birthdate of the contractor"]]. :: I am not showing any birthday-related information.}}
 ```
 
 Assuming the `contractor` variable value is John Doe and the `contractorBirthdate` variable value is 1980, the above text will display the following if `shouldShowBirthdate` is set to yes:
