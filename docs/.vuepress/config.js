@@ -38,6 +38,8 @@ module.exports = {
     editLinks: true,
     // custom text for edit link. Defaults to "Edit this page"
     editLinkText: "Help us improve this page",
+    // Gets the UNIX timestamp(ms) of each file's last git commit, and it will also display at the bottom of each page in an appropriate format. The string will be displayed as a prefix.
+    lastUpdated: 'Last updated',
     // Enables a popup to refresh site content. The popup will be shown when the site is updated. It provides a refresh button to allow users to refresh contents immediately.
     serviceWorker: {
       updatePopup: true
