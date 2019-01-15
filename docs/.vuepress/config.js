@@ -37,6 +37,10 @@ module.exports = {
     docsDir: "docs",
     editLinks: true,
     // custom text for edit link. Defaults to "Edit this page"
-    editLinkText: "Help us improve this page"
+    editLinkText: "Help us improve this page",
+    // Enables a popup to refresh site content. The popup will be shown when the site is updated. It provides a refresh button to allow users to refresh contents immediately.
+    serviceWorker: {
+      updatePopup: true
+    }
   }
 };
