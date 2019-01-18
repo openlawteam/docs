@@ -71,6 +71,49 @@ Returns a promise which resolves with an object containing headers with the `OPE
 
 ## Template
 
+### getTemplateById
+
+Get template by its id.
+
+```
+GET /template/id/raw/:id
+```
+
+**Parameters**
+
+| Name    | Type     | Description                              |
+| ------- | -------- | ---------------------------------------- |
+| `id` | `string` | **Required.** The template id. |
+
+Example
+
+```
+GET /template/id/raw/39437de827f8374899d7f7e817193894749872394
+```
+
+::: tip APIClient
+
+```js
+apiClient.getTemplateById("39437de827f8374899d7f7e817193894749872394");
+```
+
+:::
+
+**Response**
+
+Returns a promise which resolves with a JSON object containing information about the retrieved template, including its content.
+
+Example
+
+```json
+{
+  "id": "d76ede8ca437f6da06b1e09f115393318faf29fdc5bdaaf0b2e889886136edf4",
+  "title": "Advisor Agreement",
+  "content": "This Advisor Agreement is entered into between [[Company Name: Text]] (\"Corporation\") and [[Advisor Name]] (\"Advisor\") as of [[Effective Date: Date]] (\"Effective Date\"). Company and Advisor agree as follows:  \n\n^ **Services**. Advisor agrees to consult with and advise Company from time to time, at Company's request (the \"Services\"). {{No Services \"Do you want to limit the advisor's services?\"  While this Agreement is is effect, Advisor will not provide services to any company active in the field of [[Noncompete Field \"What field should the advisor not participate in?\"]].}}\n\n**COMPANY:**\n[[Company Signatory Email: Identity | Signature]]\n\n___________________\nName: [[Company Signatory]]\nAddress: [[Company Address: Address]]\n\n\n**ADVISOR:**\n[[Advisor Email: Identity | Signature]]\n\n___________________\nName: [[Advisor Name]]\nAddress: [[Advisor Address: Address]]\n",
+  "templateType": "agreement"
+}
+```
+
 ### getTemplate
 
 Get template by its title.
