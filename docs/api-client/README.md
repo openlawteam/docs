@@ -73,7 +73,7 @@ Returns a promise which resolves with an object containing headers with the `OPE
 
 ### getTemplateById
 
-Get template by its id.
+Get template by its ID.
 
 ```
 GET /template/id/raw/:id
@@ -81,9 +81,9 @@ GET /template/id/raw/:id
 
 **Parameters**
 
-| Name    | Type     | Description                              |
-| ------- | -------- | ---------------------------------------- |
-| `id` | `string` | **Required.** The template id. |
+| Name | Type     | Description                    |
+| ---- | -------- | ------------------------------ |
+| `id` | `string` | **Required.** The template ID. |
 
 Example
 
@@ -1583,7 +1583,7 @@ Example
 
 ### getAccessToken
 
-Method used to retrieve all the access token of each signatory. Only the creator of the contract can call this.
+Method used to retrieve the access token of each signatory. Only the creator of the contract can call this.
 
 ```
 GET /contract/token/:contractId
@@ -1591,11 +1591,9 @@ GET /contract/token/:contractId
 
 **Parameters**
 
-| Name          | Type     | Description                                                                                                               |
-| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `contractId`  | `string` | **Required.** The ID of the contract.                                                                                     |
-| `fullName`    | `string` | **Required.** The full name of the person signing.                                                                        |
-| `accessToken` | `string` | The access token representing the signatory. If not specified, the current user will be used to determine who is signing. |
+| Name         | Type     | Description                           |
+| ------------ | -------- | ------------------------------------- |
+| `contractId` | `string` | **Required.** The ID of the contract. |
 
 Example
 
@@ -1615,7 +1613,7 @@ apiClient.getAccessToken(
 
 **Response**
 
-Returns a promise which resolves with the map of email -> access token
+Returns a promise which resolves with the map of email -> access token.
 
 Example
 
