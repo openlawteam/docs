@@ -1563,7 +1563,9 @@ GET /contract/token/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee5333
 ::: tip APIClient
 
 ```js
-apiClient.getAccessToken("703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487");
+apiClient.getAccessToken(
+  "703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487"
+);
 ```
 
 :::
@@ -1580,7 +1582,6 @@ Example
   "signatory2@email.com": "6ed32244238947239844edaf23"
 }
 ```
-
 
 ### prepareSignature
 
