@@ -1538,12 +1538,12 @@ Example
 "signature + userId/contractId pair stored"
 ```
 
-### prepareSignature
+### getAccessToken
 
-Method used in connection with a contract signatory using own Ethereum account (including via [MetaMask](https://metamask.io)) to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract and once the transaction hash has been sent back to the server for validation and record-keeping, the signature associated with the transaction is also sent back.
+Method used to retrieve all the access token of each signatory. Only the creator of the contract can call this.
 
 ```
-GET /contract/prepareSignature
+GET /contract/token/:contractId
 ```
 
 **Parameters**
@@ -1557,7 +1557,51 @@ GET /contract/prepareSignature
 Example
 
 ```
-GET /contract/prepareSignature?contractId=703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487&fullName=My%20Full%20Name&accessToken=28394728947829374823723428742389462378423874
+GET /contract/token/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487
+```
+
+::: tip APIClient
+
+```js
+apiClient.getAccessToken("703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487");
+```
+
+:::
+
+**Response**
+
+Returns a promise which resolves with the map of email -> access token
+
+Example
+
+```json
+{
+  "signatory1@email.com": "28942389472398472894edaf23",
+  "signatory2@email.com": "6ed32244238947239844edaf23"
+}
+```
+
+
+### prepareSignature
+
+Method used in connection with a contract signatory using own Ethereum account (including via [MetaMask](https://metamask.io)) to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract and once the transaction hash has been sent back to the server for validation and record-keeping, the signature associated with the transaction is also sent back.
+
+```
+GET /prepareSignature/contract/:contractId
+```
+
+**Parameters**
+
+| Name          | Type     | Description                                                                                                               |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `contractId`  | `string` | **Required.** The ID of the contract.                                                                                     |
+| `fullName`    | `string` | **Required.** The full name of the person signing.                                                                        |
+| `accessToken` | `string` | The access token representing the signatory. If not specified, the current user will be used to determine who is signing. |
+
+Example
+
+```
+GET /prepareSignature/contract/703e3f8c6e91fc7ba35633974ea96acab4c29c5ef17300bd6f5651ee53338487?fullName=My%20Full%20Name&accessToken=28394728947829374823723428742389462378423874
 ```
 
 ::: tip APIClient
