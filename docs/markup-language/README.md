@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document
+    content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document.
 ---
 
 # Markup Language
