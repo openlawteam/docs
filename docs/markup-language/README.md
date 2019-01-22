@@ -105,6 +105,12 @@ The LargeText type is used when more space is required than the default `Text` v
 
 To create a LargeText variable, add `:LargeText` after the variable name.
 
+
+#### Image
+
+The Image type is used to embed a graphic image in a template. The value of the variable must be a valid URL that resolves to a GIF, PNG, JPG, BMP or TIFF image.  It can be used to add a header to a template or include an image in the body of a template.
+
+
 #### YesNo
 
 The YesNo type is typically used together with "conditional" logic embedded into a template. It creates a binary "yes" or "no" question with radio button inputs. The value of the input can be used to output text, variables, smart contract calls, and/or trigger a conditional elsewhere in the agreement as explained below in [Conditionals and Decision Branches](#conditionals-and-decision-branches). To create a YesNo variable, add `: YesNo` after a variable name followed by the language in quotes that serves as a prompt for the user. For example, `[[Variable: YesNo "Have you included the required prompt?"]]`.
