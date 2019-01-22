@@ -1,7 +1,13 @@
+---
+meta:
+  - name: description
+    content: Creating and publishing high-quality "smart" legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
+---
+
 # Overview
 
 Creating and publishing high-quality "smart" legal agreements from scratch is a tough task,
-but now that you know more about OpenLaw Markup Language you can help us to automate this process.
+but now that you know more about the [OpenLaw Markup Language](/markup-language/) you can help us to automate this process.
 
 We’re converting tens of thousands of traditional “legacy” agreements into “blockchain compatible” contracts -
 which are markdown files with our markup language.
