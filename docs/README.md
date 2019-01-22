@@ -1,12 +1,12 @@
 ---
 meta:
   - name: description
-    content: Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our protocol which includes JavaScript APIs for convenient integration, our markup language, and how our application works in general.
+    content: Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our protocol with JavaScript APIs for convenient integration, our markup language, and how our application works in general.
 ---
 
 # Overview
 
-Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our protocol which includes JavaScript APIs for convenient integration, our markup language, and how our application works in general. You're welcome to help us improve our documentation through the links found at the bottom of each section or by going to our [docs repository](https://github.com/openlawteam/docs). You can also raise an issue about anything related to our application in our [issue tracker repository](https://github.com/openlawteam/openlaw-issue-tracker). If you have any general questions, email us at [hello@openlaw.io](mailto:hello@openlaw.io).
+Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our protocol with JavaScript APIs for convenient integration, our markup language, and how our application works in general. You're welcome to help us improve our documentation through the links found at the bottom of each section or by going to our [docs repository](https://github.com/openlawteam/docs). You can also raise an issue about anything related to our application in our [issue tracker repository](https://github.com/openlawteam/openlaw-issue-tracker). If you have any general questions, email us at [hello@openlaw.io](mailto:hello@openlaw.io).
 
 ## Overview of OpenLaw
 
