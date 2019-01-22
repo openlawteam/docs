@@ -1,3 +1,9 @@
+---
+meta:
+  - name: description
+    content: We're excited to provide you the resources to integrate and build on the OpenLaw protocol.
+---
+
 # Getting Started
 
 We're excited to provide you the resources to integrate and build on the OpenLaw protocol. To learn more about our shared libraries, please read the [OpenLaw core overview](/openlaw-core/).

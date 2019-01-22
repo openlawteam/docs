@@ -1,3 +1,9 @@
+---
+meta:
+  - name: description
+    content: Creating and publishing high-quality "smart" legal agreements from scratch is a tough task, but now that you know more about OpenLaw Markup Language you can help us to automate this process.
+---
+
 # Overview
 
 Creating and publishing high-quality "smart" legal agreements from scratch is a tough task,

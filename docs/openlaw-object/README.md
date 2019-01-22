@@ -1,3 +1,9 @@
+---
+meta:
+  - name: description
+    content: The "Openlaw" object is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types.
+---
+
 # Openlaw Object
 
 The `Openlaw` object defined in Openlaw.scala is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types. [Scala.js](https://www.scala-js.org/) compiles the Scala code to executable JavaScript that can run in a web browser or other JavaScript-supported environments. The object methods are categorized below.
