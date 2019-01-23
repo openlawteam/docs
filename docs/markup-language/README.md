@@ -109,7 +109,7 @@ Each address is also associated with a unique string identifier. Continuing the 
 
 The LargeText type is used when more space is required than the default `Text` variable would provide. It corresponds to a `<textarea>` tag in HTML, rather than `<input>`.
 
-To create a LargeText variable, add `:LargeText` after the variable name.
+To create a LargeText variable, add `: LargeText` after the variable name: `[[Variable: LargeText]]`.
 
 #### YesNo
 
