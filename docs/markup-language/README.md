@@ -403,11 +403,27 @@ show title:false;
 Sometimes it may be helpful to embed annotations in your template to give context to the user.
 The annotation is rendered only in preview and doesn't affect the docx or pdf version of the agreement.
 
+There are two types of annotations in the markup language currently: header and note.
+
+The header annotation appears above the rest of the template in the editor and may be used (for example) to provide a description of the template content for the reader. The syntax for a header annotation is as follows:
+
+```
+some provision
+
+'''
+This is a header annotation explaining the provision and why it's good to have it here.
+'''
+
+some other provision
+```
+
+The note annotation is collapsible in the body of the template. It can be used to add notes throughout to clarify or expand on the content. The syntax for the note annotation is as follows:
+
 ```
 some provision
 
 """
-This is an annotation explaining the provision and why it's good to have it here.
+This is a note annotation explaining the provision and why it's good to have it here.
 """
 
 some other provision
