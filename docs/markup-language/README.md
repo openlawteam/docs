@@ -111,12 +111,11 @@ The LargeText type is used when more space is required than the default `Text` v
 
 To create a LargeText variable, add `: LargeText` after the variable name: `[[Variable: LargeText]]`.
 
-
 #### Image
 
-The Image type is used to embed a graphic image in a template. The value of the variable must be a valid URL that resolves to a GIF, PNG, JPG, BMP or TIFF image.  It can be used to add a header to a template or include an image in the body of a template.  For example, `[[header:Image("http://www.example.com/header_image.png")]]`
+The Image type is used to embed a graphic image as a header or in the body of a template. To create an Image variable, add `: Image` after the variable name: `[[Variable: Image]]`. The variable will generate a clickable interface in the form to select an image file to upload. The user will have the ability to crop the image before it is embedded in the template. The interface will also allow the user to further edit or delete the image.
 
-
+You can define a default value for an Image variable by including a valid URL that resolves to a GIF, PNG, JPG, BMP, or TIFF image as a parameter when defining the variable. For example, `[[Variable: Image("http://www.example.com/header_image.png")]]`. In the case of a default value, the image will already be embedded in the template and the interface can be used to crop or delete the image.
 
 #### YesNo
 
