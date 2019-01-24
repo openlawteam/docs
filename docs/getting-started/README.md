@@ -25,7 +25,7 @@ $ npm install openlaw --save
 
 // import both modules
 import { APIClient, Openlaw } from "openlaw";
-// OR import only `Openlaw
+// OR import only `Openlaw`
 import { Openlaw } from "openlaw";
 // OR import only `APIClient`
 import { APIClient } from "openlaw";
