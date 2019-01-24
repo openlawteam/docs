@@ -17,6 +17,7 @@ $ npm install openlaw --save
 ```
 
 ### Ways to Use
+
 ```js
 /**
  * ES2015: import for bundlers like webpack
@@ -24,9 +25,9 @@ $ npm install openlaw --save
 
 // import both modules
 import { APIClient, Openlaw } from "openlaw";
-// import only `Openlaw
+// OR import only `Openlaw
 import { Openlaw } from "openlaw";
-// import only `APIClient`
+// OR import only `APIClient`
 import { APIClient } from "openlaw";
 
 
