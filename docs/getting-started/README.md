@@ -75,6 +75,7 @@ resolvers += "Openlaw core" at "https://dl.bintray.com/openlawos/openlaw-core"
 //add the dependency
 libraryDependencies += "org.openlaw" %% "openlaw-core" % "<last version>"
 ```
+
 ---
 
 Check out our [Markup Language docs](/markup-language/) to start creating your own dynamic legal agreements using OpenLaw as well as our [Review Tool docs](/review-tool/) to learn how to contribute to our growing library of "smart" legal agreements.

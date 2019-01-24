@@ -111,6 +111,12 @@ The LargeText type is used when more space is required than the default `Text` v
 
 To create a LargeText variable, add `: LargeText` after the variable name: `[[Variable: LargeText]]`.
 
+#### Image
+
+The Image type is used to embed a graphic image as a header or in the body of a template. To create an Image variable, add `: Image` after the variable name: `[[Variable: Image]]`. The variable will generate a clickable interface in the form to select an image file to upload. The user will have the ability to crop the image before it is embedded in the template. The interface will also allow the user to further edit or delete the image.
+
+You can define a default value for an Image variable by including a valid URL that resolves to a GIF, PNG, JPG, BMP, or TIFF image as a parameter when defining the variable. For example, `[[Variable: Image("http://www.example.com/header_image.png")]]`. In the case of a default value, the image will already be embedded in the template and the interface can be used to crop or delete the image.
+
 #### YesNo
 
 The YesNo type is typically used together with "conditional" logic embedded into a template. It creates a binary "yes" or "no" question with radio button inputs. The value of the input can be used to output text, variables, smart contract calls, and/or trigger a conditional elsewhere in the agreement as explained below in [Conditionals and Decision Branches](#conditionals-and-decision-branches). To create a YesNo variable, add `: YesNo` after a variable name followed by the language in quotes that serves as a prompt for the user. For example, `[[Variable: YesNo "Have you included the required prompt?"]]`.
@@ -126,6 +132,8 @@ no type indicator or `: Text` - indicates that a variable is text
 `: DateTime` - generates date picker with date and time
 
 `: EthAddress` - indicates that a variable is an Ethereum address
+
+`: Image` - generates a clickable interface to upload and edit an image
 
 `: LargeText` - indicates that a variable is large text (corresponding to a text box where longer input is accepted)
 
