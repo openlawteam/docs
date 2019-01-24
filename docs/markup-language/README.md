@@ -1,3 +1,9 @@
+---
+meta:
+  - name: description
+    content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document.
+---
+
 # Markup Language
 
 The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document (what we call a "template"). Templates can be grouped together into "deals," making it possible for parties to create and manage entire transactions on a blockchain.
@@ -103,7 +109,7 @@ Each address is also associated with a unique string identifier. Continuing the 
 
 The LargeText type is used when more space is required than the default `Text` variable would provide. It corresponds to a `<textarea>` tag in HTML, rather than `<input>`.
 
-To create a LargeText variable, add `:LargeText` after the variable name.
+To create a LargeText variable, add `: LargeText` after the variable name: `[[Variable: LargeText]]`.
 
 
 #### Image
@@ -404,11 +410,27 @@ show title:false;
 Sometimes it may be helpful to embed annotations in your template to give context to the user.
 The annotation is rendered only in preview and doesn't affect the docx or pdf version of the agreement.
 
+There are two types of annotations in the markup language currently: header and note.
+
+The header annotation appears above the rest of the template in the editor and may be used (for example) to provide a description of the template content for the reader. The syntax for a header annotation is as follows:
+
+```
+some provision
+
+'''
+This is a header annotation explaining the provision and why it's good to have it here.
+'''
+
+some other provision
+```
+
+The note annotation is collapsible in the body of the template. It can be used to add notes throughout to clarify or expand on the content. The syntax for the note annotation is as follows:
+
 ```
 some provision
 
 """
-This is an annotation explaining the provision and why it's good to have it here.
+This is a note annotation explaining the provision and why it's good to have it here.
 """
 
 some other provision

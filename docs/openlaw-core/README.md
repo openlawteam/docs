@@ -1,3 +1,9 @@
+---
+meta:
+  - name: description
+    content: Core components of the OpenLaw Scala protocol, including the markup language and the virtual machine for holding contract state.
+---
+
 # OpenLaw Core
 
 The Scala core of the OpenLaw project contains two sub-projects, `shared` and `client` (under `openlawCoreJs` subfolder). The `client` library is well documented elsewhere in our [docs](/openlaw-object/).
