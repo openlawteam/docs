@@ -133,6 +133,8 @@ no type indicator or `: Text` - indicates that a variable is text
 
 `: EthAddress` - indicates that a variable is an Ethereum address
 
+`: Image` - generates a clickable interface to upload and edit an image
+
 `: LargeText` - indicates that a variable is large text (corresponding to a text box where longer input is accepted)
 
 `: Number` - indicates that a variable is a number
