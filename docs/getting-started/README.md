@@ -46,7 +46,8 @@ const { APIClient, Openlaw } = require('openlaw');
 <script src="https://unpkg.com/openlaw/dist/umd/openlaw.js"></script>
 
 <script>
-  const { Openlaw, APIClient } = openlaw;
+  const Openlaw = openlaw.Openlaw;
+  const APIClient = openlaw.APIClient;
 </script>
 
 
