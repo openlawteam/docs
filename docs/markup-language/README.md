@@ -108,7 +108,7 @@ To create a LargeText variable, add `:LargeText` after the variable name.
 
 #### Image
 
-The Image type is used to embed a graphic image in a template. The value of the variable must be a valid URL that resolves to a GIF, PNG, JPG, BMP or TIFF image.  It can be used to add a header to a template or include an image in the body of a template.  For example, `[[header:Image("http://www.domain.test/header_image.png")]]`
+The Image type is used to embed a graphic image in a template. The value of the variable must be a valid URL that resolves to a GIF, PNG, JPG, BMP or TIFF image.  It can be used to add a header to a template or include an image in the body of a template.  For example, `[[header:Image("http://www.example.com/header_image.png")]]`
 
 
 
