@@ -1632,7 +1632,7 @@ Example
 
 ### prepareSignature
 
-Method used in connection with a contract signatory using own Ethereum account (including via [MetaMask](https://metamask.io)) to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract and once the transaction hash has been sent back to the server for validation and record-keeping, the signature associated with the transaction is also sent back.
+Method used in connection with a contract signatory using own Ethereum account (including via [MetaMask](https://metamask.io)) to record an electronic signature and a contract ID, which is a cryptographic hash of the contract, on a blockchain network. Upon completion of that transaction for signing the contract and once the transaction hash has been sent back to the server for validation and record-keeping, the signature, network, and address of the smart contract associated with the transaction are also sent back.
 
 ```
 GET /prepareSignature/contract/:contractId
@@ -1666,13 +1666,15 @@ apiClient.prepareSignature(
 
 **Response**
 
-Returns a promise which resolves with the signature.
+Returns a promise which resolves with the signature, network, and address of the smart contract associated with the signature transaction.
 
 Example
 
 ```json
 {
-  "signature": "0x85fh946322957458934859038908903845ec5a7c4ad0f5c88e4076c65f3bb"
+  "signature": "0x85fh946322957458934859038908903845ec5a7c4ad0f5c88e4076c65f3bb",
+  "network": "Rinkeby",
+  "contract": "0x481607326133f3dBC085d762dA587AE7196C63C6"
 }
 ```
 
