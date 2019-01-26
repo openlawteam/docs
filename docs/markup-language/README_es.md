@@ -128,3 +128,154 @@ sin indicador de tipo o `: Text` - señala que un variable es texto
 Al crear un nombre para un variable de entrada, no puedes usar carácteres especiales, como por ejemplo `!#.,_@`. Si los intentas usar, el analizador sintáctico hará saltar un error.
 :::
 
+## Tipos especializados
+
+Además de los tipos de variables de entrada explicados arriba, también se pueden definir algunos tipos especializados. Estos metatipos aumentan aún más el aspecto dinámico de un modelo legal.
+
+### Verificación
+
+Se puede usar un tipo Verificación para agregar una limitación sobre un variable o una dependecia entre variables para asegurar que los valores de entrada tengan sentido. Dicho de otro modo, un tipo Verificación se puede usar para asegurarse de que, dada una expresión en concreto, ciertas reglas la rijan.
+
+Un tipo Verificación acepta dos parámetros:
+
+- condition: La expresión que se ha de evaluar, la cual tiene que ser de tipo YesNo.
+- errorMessage: El mensaje que se ha de mostrar si la condición se evalúa a No (falso). El errorMessage también es una expresión de tipo Texto y puede incluir en sí otros variables.
+
+Por ejemplo:
+
+```
+[[X: Número]]
+[[Y: Número]]
+
+[[_: Verificación(
+    condition: (X + Y) < 20;
+    errorMessage: "La suma de X e Y debe ser menos de 20, pero es " + (X + Y)
+    )]]
+```
+
+::: consejo
+Si la condición no se puede resolver todavía (porque falta una entrada), no se producirá un error.
+:::
+
+### Collection
+
+Cuando quieres que el usuario entre una lista de valores, lo puedes hacer utilizando el metatipo Collection. En la parte de la entrada, el usuario podrá agregar/editar/borrar elementos. En la parte de markup, podrá iterar por cada elemento.
+
+Un Collection necesita un parámetro de tipo, lo cual especifica qué tipo de elementos tiene. Un Collection puede tener un sólo tipo de elemento. Para definir a un Collection, agrega `: Collection<Element Type>` tras el nombre del variable. Por ejemplo, `[[Employees: Collection<Text>]]`.
+
+#### Bloque for each
+
+Si tienes un Collection, puedes iterar por cada elemento al usar un bloque `for each`. Por ejemplo:
+
+```
+[[Empleados: Collection<Texto>]]
+
+{{#for each Empleado: Empleados =>
+    ^[[Empleado]]
+}}
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/2d621464a29a4628be52348e6331b0cf" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+::: aviso
+
+- El elemento que es un variable (`Employee` en el ejemplo de arriba) tiene que ser un nombre de variable nuevo. No se puede usar un nombre de variable que ya existía.
+- Tenga en cuenta que si define a un nuevo variable en el bloque `for each`, aquel variable se usará para todas las iteraciones. Un nuevo variable no se generará para cada iteración.
+- Si necesitas más que un valor en tu bloque `for each`, tendrás que usar un tipo [Structure](#structure).
+
+:::
+
+### Choice
+
+El metatipo Choice permite que definas una lista de opciones como un tipo. Esto es útil si quieres definir un tipo como una lista de elementos (enum, por su término informático).
+
+Esto es un ejemplo de la sintáxis para definir y usar un tipo Choice:
+
+```
+[[País: Choice("USA", "Suiza", "Suecia", "Alemania", "India")]] //definición del tipo
+[[País de Origen: País]] //uso del tipo
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/b86302f4f934443ebb6701fea05a5268" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+### propiedad options
+
+Si lo que buscas no es crear un tipo, sino de simplemente definir una lista de posibles valores para un variable, puedes usar la propiedad `options` en la definción del tipo.
+
+Esto es un ejemplo:
+
+
+```
+[[País:Text(
+    options: "USA", "Suiza", "Suecia", "Alemania", "India"
+    )]]
+```
+La propiedad options tamibén permite que definas expresiones en la lista de opciones y, como consecuencia, hacer que las opciones sean dinámicas:
+
+```
+[[Otro País]]
+
+[[País:Text(
+    options: "USA", "Suiza", "Suecia", "Alemania", "India", Otro País
+    )]]
+```
+
+La diferencia principal entre options y el tipo Choice es que options es una manera de definir un subgrupo dentro de un tipo, en lugar de crear un tipo nuevo.
+
+Si quieres que las opciones tengan un valor por defecto, puedes usar la propiedad `value`:
+
+```
+[[País:Text(
+    options: "USA", "Suiza", "Suecia", "Alemania", "India";
+    value: "USA"
+    )]]
+```
+
+### Structure
+
+El metatipo Structure permite que definas una lista de valores relacionados juntos en un sólo grupo. Lo siguiente es un ejemplo de la sintáxis por la cual se define y se usa un tipo Structure:
+
+```
+[[Datos del Empleado: Structure(
+    Nombre: Text;
+    Apellido: Text;
+    Dirección: Address;
+    Dirección de Ethereum: EthAddress
+    )]] //definición del tipo
+
+[[#Empleado: Información del Empleado]] //uso del tipo
+
+**Empleado del Mes**
+Nombre: [[Empleado.Nombre]] [[Empleado.Apellido]] //acceso al campo
+Ciudad: [[Empleado.Dirección.Ciudad]] //acceso a un campo de tipo complejo
+Dirección de Ethereum: [[Empleado.Dirección de Ethereum]] //acceso al campo
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5a714a36989a467dbbd7beaebf6d8752" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+Un tipo Structure también se puede usar conjuntamente con un [Collection](#collection) según se ve en el ejemplo de abajo. Esta combinación permite que incluyas y organices de manera más eficiente los datos que las partes entren al acuerdo.
+
+```
+[[Datos del Empleado: Structure(
+    Nombre: Text;
+    Apellido: Text;
+    Dirección: Address;
+    Dirección de Ethereum: EthAddress
+    )]] //definición del tipo
+
+[[#Empleados: Collection<Datos del Empleado>]] //uso del tipo con Collection
+
+**Empleados del Mes**
+{{#for each Empleado: Empleados =>
+    ^Nombre: [[Empleado.Nombre]] [[Empleado.Apellido]] //acceso al campo
+    ^^Ciudad: [[Empleado.Dirección.Ciudad]] //acceso a un campo de tipo complejo
+    ^^Dirección de Ethereum: [[Empleado.Dirección de Ethereum]] //acceso al campo
+}}
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/3404c3dc744243988482560a3923837e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+::: aviso
+Al definir uno de estos tipos especializados, el nombre no puede ser igual a ningún variable o tipo especializado (p.ej. Text, Number, Address, Choice, etc.) ni un nombre de variable ya en existencia. Se puede usar el atajo `ctrl` + `space` en el editor para ver la lista completa de tipos de variables y tipos especializados.
+:::
+
