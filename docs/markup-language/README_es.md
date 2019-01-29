@@ -200,7 +200,7 @@ Esto es un ejemplo de la sintáxis para definir y usar un tipo Choice:
 
 ### propiedad options
 
-Si lo que buscas no es crear un tipo, sino de simplemente definir una lista de posibles valores para un variable, puedes usar la propiedad `options` en la definción del tipo.
+Si lo que buscas no es crear un tipo, sino simplemente definir una lista de posibles valores para un variable, puedes usar la propiedad `options` en la definción del tipo.
 
 Esto es un ejemplo:
 
@@ -278,4 +278,74 @@ Un tipo Structure también se puede usar conjuntamente con un [Collection](#coll
 ::: aviso
 Al definir uno de estos tipos especializados, el nombre no puede ser igual a ningún variable o tipo especializado (p.ej. Text, Number, Address, Choice, etc.) ni un nombre de variable ya en existencia. Se puede usar el atajo `ctrl` + `space` en el editor para ver la lista completa de tipos de variables y tipos especializados.
 :::
+
+## Formato del Texto
+
+### Negrita
+
+Para poner el texto en negrita, agrega `**` antes y despu'es del lenguaje pertinente. Por ejemplo, `**Este Acuerdo**` pondrá al texto correspondiente en negrita. También se puede poner a variables en negrita, `**[[Variable]]**`.
+
+### Cursiva
+
+Poner el texto en letra cusiva funciona de manera parecida. Si quieres ponerlo en cursiva, simplemente agrega `*` antes y después del lenguaje pertinente. Por ejemplo, "ParteA acuerda en entregar a ParteB 10 dispositivos; `*reservando sin embargo,*` que la ParteB no tendrá que entregar dispositivos a Parte B ...."
+
+### Cusiva y Negrita
+
+También puedes poner al texto en negrita y cursiva. Para este tipo de formato, simplemente rodéale al texto pertinente con `***`, o sea `***[[Nombre del Variable]]***`.
+
+### Mayúscula
+
+También reconocemos que en algunas instancias, habrá que mostrar un variable en mayúsculas, en particular en el contexto de títulos y bloques de firmas. Para facilitar este requisito, se puede señalar instancias en las cuales un variable debe de mostrarse en mayúsculas al agregar el texto siguiente tras el nombre de un variable `| Uppercase`. O sea, `[[Variable Name | Uppercase]]`.
+
+### Centrado
+
+Para centrar a un texto como por ejemplo los títulos y membretes, agreaga `\centered` antes del texto pertinente. También se pueden aplicar otros formatos al lenguaje que se ha centrado. Por ejemplo, `\centered **Título del Acuerdo**` hará que el texto correspondiente esté en el centro y en negrita.
+
+### Alineado a la derecha
+
+Para alinear el texto a la derecha, agrega `\right` antes del texto pertinente. También se puede posicionar el texto a estar tan sólo tres cuartos alineados a la derecha al agregar `\right-three-quarters` antes del texto pertinente. De manera parecida al texto centrado, se puede aplicar otros formatos al contenido alineado a la derecha o tres cuartos alineado a la derecha. Por ejemplo, `\right-three-quarters **Firma aquí**`.
+
+### Salto de Página
+
+Si quieres agregar un salto de página, como por ejemplo separar a un elemento del cuerpo principal del documento, simplemente agrega `\pagebreak` donde tiene que estar el salto.
+
+## Secciones y Subsecciones
+
+Organizar a un acuerdo en secciones y subsecciones es algo sencillo. Actualmente, ofrecemos cuatro nieveles de sección, los cuales se pueden invocar usando la sintáxis siguiente:
+
+`^` - Primer Nivel
+
+`^^` - Segundo Nivel
+
+`^^^` - Tercer Nivel
+
+`^^^^` - Cuarto Nivel
+
+Por ejemplo, este texto marcado tendría el resultado como se ve en el vídeo siguiente.
+
+```
+^ La Empresa declara y hace garantía de que:
+
+^^ **Organización**. La Empresa es una sociedad limitada debidamente constitutida,
+con existencia válida, y vigente conforme con las leyes del [[Estado de Constitución]],
+tiene el poder social para llevar a cabo los negocios según se hace actualmente, y
+reúne los requisitos para hacer negocios en toda jurisdicción en la cual el tipo y la
+ubicación de los bienes de los cuales es el dueño, o el tipo de negocio que hace exige
+calificación, o en el cual el no así calificar le ocasionaría un efecto material adverso.
+No hay procesos pendientes, ni al conocimiento de la Empresa, se ha amenazado con abrir uno,
+en el cual se le acusa de que el tipo de su negocio hace que la calificación sea
+necesaria en ninguna otra jurisdicción.
+
+^^ **Autoridad**. La Empresa tiene pleno derecho, poder, y autoridad de celebrar este
+Acuerdo y todo acuerdo, documento, e instrumento que se ha de firmar y entregar por la
+Empresa conforme con este Acuerdo, y de llevar a cabo las transacciones que se contemplan
+por medio del presente y por medio de aquel. Ninguna renuncia ni reconocimiento de
+concentimiento por parte de ninguna persona hace falta en conexión con la firma, entrega,
+y realización por la Empresa de este Acuerdo y todo acuerdo, documento, e instrumento que
+se han de firmar y entregar por la Empresa conforme con este Acuerdo.
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+
 
