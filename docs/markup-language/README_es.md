@@ -4,9 +4,9 @@ meta:
     content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document.
 ---
 
-# Lenguaje Markup
+# Lenguaje Marcado
 
-El protocolo OpenLaw se basa en un lenguaje de markup para transformar a los acuerdos hechos en idiomas naturales en objetos procesables por máquina con variables y lógica pertinentes, definidos dentro de un documento específico (lo que llamamos un "modelo"). Los modelos se pueden agrupar en "acuerdos", lo cual permite que se crean y se gerencien transacciones enteras en una cadena de bloques.
+El protocolo OpenLaw se basa en un lenguaje de marcado para transformar a los acuerdos hechos en idiomas naturales en objetos procesables por máquina con variables y lógica pertinentes, definidos dentro de un documento específico (lo que llamamos un "modelo"). Los modelos se pueden agrupar en "acuerdos", lo cual permite que se crean y se gerencien transacciones enteras en una cadena de bloques.
 
 ## Variables
 
@@ -46,7 +46,7 @@ variable se auto-rellena como el marcador del formato para ayudarle al usuario q
 
 Si es que, sin embargo, el nombre del variable no sea muy descriptivo, se puede hacer variar el texto que sale generado automáticamente en el formato al incluir una cadena de caracteres tras el nombre del variable. Por ejemplo, `[[Nombre de la Empresa "¿Cuál es el nombre de la empresa?"]]` o `[[Nombre de la Empresa "¿Cuál es el nombre de la contraparte?"]]`.
 
-Para un variable de Texto, OpenLaw también admite varios otros tipos de variable de entrada, como Date (Fecha), DateTime (FechaHora), Number (Número), EthAddress (Dirección de Eth), Address (Dirección), y Period (Periodo). Estos variables brindan funcionalidad adicional, y a lo largo del tiempo, pensamos aumentar nuestro lenguaje de markup para incluir otros tipos.
+Para un variable de Texto, OpenLaw también admite varios otros tipos de variable de entrada, como Date (Fecha), DateTime (FechaHora), Number (Número), EthAddress (Dirección de Eth), Address (Dirección), y Period (Periodo). Estos variables brindan funcionalidad adicional, y a lo largo del tiempo, pensamos aumentar nuestro lenguaje de marcado para incluir otros tipos.
 
 #### Number (Número)
 
@@ -159,7 +159,7 @@ Si la condición no se puede resolver todavía (porque falta una entrada), no se
 
 ### Collection
 
-Cuando quieres que el usuario entre una lista de valores, lo puedes hacer utilizando el metatipo Collection. En la parte de la entrada, el usuario podrá agregar/editar/borrar elementos. En la parte de markup, podrá iterar por cada elemento.
+Cuando quieres que el usuario entre una lista de valores, lo puedes hacer utilizando el metatipo Collection. En la parte de la entrada, el usuario podrá agregar/editar/borrar elementos. En la parte de marcado, podrá iterar por cada elemento.
 
 Un Collection necesita un parámetro de tipo, lo cual especifica qué tipo de elementos tiene. Un Collection puede tener un sólo tipo de elemento. Para definir a un Collection, agrega `: Collection<Element Type>` tras el nombre del variable. Por ejemplo, `[[Employees: Collection<Text>]]`.
 
