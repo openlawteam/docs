@@ -4,7 +4,7 @@ meta:
     content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document.
 ---
 
-# Lenguaje Marcado
+# Lenguaje en marcado
 
 El protocolo OpenLaw se basa en un lenguaje de marcado para transformar a los acuerdos hechos en idiomas naturales en objetos procesables por máquina con variables y lógica pertinentes, definidos dentro de un documento específico (lo que llamamos un "modelo"). Los modelos se pueden agrupar en "acuerdos", lo cual permite que se crean y se gerencien transacciones enteras en una cadena de bloques.
 
