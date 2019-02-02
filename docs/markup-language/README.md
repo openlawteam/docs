@@ -74,6 +74,16 @@ The Date type is a basic input variable. This type transforms an input in an eas
 
 You can define a default value for a Date variable by including a date as a parameter (in the "YYYY-MM-DD" format) when defining the variable. For example, `[[Effective Date: Date("2018-08-01")]]`. The value of the variable will result in a date of "August 1, 2018" if no other date is set.
 
+There are several formatting options for Date values. They are specified by including the format at the end of the variable like so: `[[Effective Date: Date | year]]`.
+
+The available formatting options are:
+
+- `year` - displays only the year of the Date with 4 digits, ex. `2019`
+- `day` - displays the day of the month in 2 digits, ex. `14` or `02`
+- `day_name` - displays the full name of the day of the week, ex. `Saturday`
+- `month` - displays the month of the year in 1 or 2 digits, ex. `1` or `11`
+- `month_name` - displays the full month name, ex. `December`
+
 #### DateTime
 
 OpenLaw has created a variation of the Date type, called DateTime. The DateTime type allows a user to set not only a specified date, but also a specified time. To create a DateTime variable, add the words `: DateTime` after the variable name: `[[Variable: DateTime]]`. The DateTime type is useful when [triggering or calling an Ethereum smart contract](#smart-contracts).
