@@ -74,7 +74,7 @@ The Date type is a basic input variable. This type transforms an input in an eas
 
 You can define a default value for a Date variable by including a date as a parameter (in the "YYYY-MM-DD" format) when defining the variable. For example, `[[Effective Date: Date("2018-08-01")]]`. The value of the variable will result in a date of "August 1, 2018" if no other date is set.
 
-There are several formatting options for Date values.  They are specified by including the format at the end of the variable like so: `[[Effective Date: Date | year]]`
+There are several formatting options for Date values. They are specified by including the format at the end of the variable like so: `[[Effective Date: Date | year]]`.
 
 The available formatting options are:
 
