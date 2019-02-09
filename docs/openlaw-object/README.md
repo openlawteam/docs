@@ -531,7 +531,19 @@ Returns the HTML contents of the agreement as a string.
 Example
 
 ```html
-<p class='no-section'>This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:</p><ul class='list-lvl-1'><li><p>1.  <strong>Services</strong>. Advisor agrees to consult with and advise Company from time to time, at Company's request (the "Services"). </p></li>
+<p class="no-section">
+  This Advisor Agreement is entered into between [[Company Name]]
+  ("Corporation") and John Smith ("Advisor") as of September 19, 2018
+  ("Effective Date"). The parties agree as follows:
+</p>
+<ul class="list-lvl-1">
+  <li>
+    <p>
+      1. <strong>Services</strong>. Advisor agrees to consult with and advise
+      Company from time to time, at Company's request (the "Services").
+    </p>
+  </li>
+</ul>
 ```
 
 ### renderForPreview
@@ -574,7 +586,23 @@ Returns the HTML contents of the agreement as a string.
 Example
 
 ```html
-<div class='openlaw-paragraph paragraph-1'><p class='no-section'>This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:</p></div><ul class='list-lvl-1'><li><div class='openlaw-paragraph paragraph-2'><p>1.  <strong>Services</strong>. Advisor agrees to consult with and advise Company from time to time, at Company's request (the "Services"). </p></div></li>
+<div class="openlaw-paragraph paragraph-1">
+  <p class="no-section">
+    This Advisor Agreement is entered into between [[Company Name]]
+    ("Corporation") and John Smith ("Advisor") as of September 19, 2018
+    ("Effective Date"). The parties agree as follows:
+  </p>
+</div>
+<ul class="list-lvl-1">
+  <li>
+    <div class="openlaw-paragraph paragraph-2">
+      <p>
+        1. <strong>Services</strong>. Advisor agrees to consult with and advise
+        Company from time to time, at Company's request (the "Services").
+      </p>
+    </div>
+  </li>
+</ul>
 ```
 
 ### parseMarkdown
@@ -608,7 +636,11 @@ Returns selected paragraph text parsed to HTML.
 Example
 
 ```html
-<p class='no-section'>This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:</p>
+<p class="no-section">
+  This Advisor Agreement is entered into between [[Company Name]]
+  ("Corporation") and John Smith ("Advisor") as of September 19, 2018
+  ("Effective Date"). The parties agree as follows:
+</p>
 ```
 
 ### renderParagraphForEdit
@@ -649,7 +681,11 @@ Returns the HTML contents of the paragraph to be rendered for edit as a string.
 Example
 
 ```html
-<p class='no-section'>This Advisor Agreement is entered into between [[Company Name]] ("Corporation") and John Smith ("Advisor") as of September 19, 2018 ("Effective Date"). The parties agree as follows:</p>
+<p class="no-section">
+  This Advisor Agreement is entered into between [[Company Name]]
+  ("Corporation") and John Smith ("Advisor") as of September 19, 2018
+  ("Effective Date"). The parties agree as follows:
+</p>
 ```
 
 ### getTypes
