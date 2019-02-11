@@ -12,8 +12,8 @@
   "author": "OpenLaw Team <opensource@openlaw.io>",
   "license": "CC-BY-4.0",
   "devDependencies": {
-    "prettier": "^1.14.2",
+    "prettier": "^1.16.4",
     "prettier-check": "^2.0.0",
-    "vuepress": "^0.14.2"
+    "vuepress": "^0.14.8"
   }
 }
