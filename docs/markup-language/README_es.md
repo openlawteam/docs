@@ -340,12 +340,78 @@ necesaria en ninguna otra jurisdicción.
 Acuerdo y todo acuerdo, documento, e instrumento que se ha de firmar y entregar por la
 Empresa conforme con este Acuerdo, y de llevar a cabo las transacciones que se contemplan
 por medio del presente y por medio de aquel. Ninguna renuncia ni reconocimiento de
-concentimiento por parte de ninguna persona hace falta en conexión con la firma, entrega,
+consentimiento por parte de ninguna persona hace falta en conexión con la firma, entrega,
 y realización por la Empresa de este Acuerdo y todo acuerdo, documento, e instrumento que
 se han de firmar y entregar por la Empresa conforme con este Acuerdo.
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
+## Reiniciar la numeración y las referencias
 
+Para reiniciar la numeración en una sección, sólo hay que incluir lo siguiente después del epígrafe:
 
+```
+^(Variable (numeración:1))
+```
+
+El variable se puede usar para el propósito de establecer referencias:
+
+```
+^ La Empresa declara y asegura que:
+
+^^(Organización) **Organización**. La Empresa es una sociedad limitada debidamente constitutida,
+con existencia válida, y vigente conforme con las leyes del [[Estado de Constitución]],
+tiene el poder social para llevar a cabo los negocios según se hace actualmente, y
+reúne los requisitos para hacer negocios en toda jurisdicción en la cual el tipo y la
+ubicación de los bienes de los cuales es el dueño, o el tipo de negocio que hace exige
+calificación, o en el cual el no así calificar le ocasionaría un efecto material adverso.
+No hay procesos pendientes, ni al conocimiento de la Empresa, se ha amenazado con abrir uno,
+en el cual se le acusa de que el tipo de su negocio hace que la calificación sea
+necesaria en ninguna otra jurisdicción.
+
+...
+
+Salvo por disposición en la Sección [[Organización]], ...
+```
+
+## Títulos
+
+Puedes esconder el títlo de un modelo de un acuerdo al incluir la opción siguiente al principio del documento. Esta opción es útil para suprimir un título para cartas o al descargar un documento tipo Word.
+
+```
+####
+show title:false;
+####
+```
+
+## Anotación
+
+A veces puede ser útil incrustar anotaciones en tu modelo para darle contexto al usuario.
+La anotación se rinde sólo en vista previa y no afecta a la versión docx o pdf del acuerdo.
+
+Existen dos tipos de anotaciones en el lenguaje de marcado actualmente: el membrete y la nota.
+
+La anotación de membrete se coloca por encima del resto del modelo en el editor y se puede usar (por ejemplo) para brindar una descripción del contenido del modelo para el lector. La sintáxis para la anotación de un membrete es lo siguiente:
+
+```
+una disposición
+
+'''
+Esto es una anotación de membrete para explicar la disposicón, y por qué viene bien tenerlo aquí.
+'''
+
+otra disposición
+```
+
+La anotación de notas se puede colapsar dentro del cuerpo del modelo. Se puede usar para añadir notas notas a lo largo de ello para aclarar o comentar sobre el contenido. La sintáxis para la anotación de notas es lo siguiente:
+
+```
+una disposición
+
+"""
+Esto es una anotación de membrete para explicar la disposicón, y por qué viene bien tenerlo aquí.
+"""
+
+otra disposición
+```
