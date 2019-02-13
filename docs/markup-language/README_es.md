@@ -415,3 +415,110 @@ Esto es una anotación de membrete para explicar la disposicón, y por qué vien
 
 otra disposición
 ```
+## Tablas
+
+Los datos tabulares se muestran fácilmente usando tablas. Una tabla se define con el uso de carácteres de pleca (`|`) como separadores de columna, y rayas (`-`) para separar el membrete de la tabla de las filas de datos.
+
+```
+| Membrete 1 | Membrete 2 | Membrete 3 |
+| ---------- | ---------- | ---------- |
+| Datos 1    | Datos 2    | Datos 3    |
+| {{var1}}   | {{var2}}   | {{var3}}   |
+```
+
+Observa que los separadores de columna no tienen que alinearse de fila a fila, así que lo siguiente también es una definición válida para una tabla.
+
+```
+| H1 | Membrete 2 | H3 |
+| - | - | - |
+| Datos 1 | D2 | D3 |
+```
+
+Las células de una tabla pueden contener contenido en texto, variables, o condicionales.
+
+## Condicionales y Ramos de Decisión
+
+Puedes poner en marcado un acuerdo con "condicionales" para incrustar lógica avanzada en un acuerdo, lo cual le ayudará a crear acuerdos legales más dinámicos y personalizables.
+
+### Condicionales Básicas
+
+Actualmente, las condicionales crean preguntas de "si" o "no" en nuestra aplicación de generación de formularios. Cuando un usuario entra un "si", la condicional producirá texto, variables, llamadas a un contrato inteligente, y/o invocará otra condicional. La construcción básica deuna condicional es lo siguiente:
+
+```
+{{Nombre de la Condicional "Pregunta que se hace al Usuario" =>
+Texto que se incluirá en un acuerdo si el usuario elige 'si'}}
+```
+
+Observa que hay requisitos firmes que se han de cumplir al crear una condicional. Primeramente, tiene que iniciar a la condicional con `{{` y acabarla con `}}`. Por segundo, tiene que nombrarle a la condiional e incluir algo escrito entre comillas que sirve como impulso para el usuario.
+
+### Condicionales Anidadas
+
+Las condicionales también se pueden agrupar para crear a un árbol de decisiones. Dicho de otro modo:
+
+```
+{{ Nombre de la Condicional "Pregunta que se hace al Usuario" =>
+  Texto que se incluirá en un acuerdo si el usuario elige 'si'
+  {{Sub-Condicional-1 "Texto de Sub-Pregunta 1" => Texto}}
+  {{Sub-Condicional-2 "Texto de Sub-Pregunta 2" => Texto}}
+  {{Sub-Condicional-3 "Texto de Sub-Pregunta 3" => Texto}}
+}}
+```
+
+Para verle a esto en acción, tome como ejemplo el lenguaje estándar siguiente que se encuentra al principio de un acuerdo mutuo de confidencialidad estándar :
+
+```
+Este Acuerdo Mutuo de Confidencialidad  (este "Acuerdo") se hace a partir de [[Fecha de Vigencia: Fecha]], por y entre [[ParteA]] ("[[ParteA Abreviatura]]")
+{{ParteAEntidad "Es la primera parte una persona legal?" => {{ParteASociedad
+"Una Sociedad?" =>, una [[ParteAEstadoDeFundación]] sociedad, }}{{ParteASL
+"Una SL?" =>, una [[ParteAEstadoDeFundación]] sociedad limitada, }}
+{{ParteASB "Una Sociedad Benéfica?" =>, una [[ParteAEstadoDeFundación]]
+una sociedad benéfica,}}}} y [[ParteB]]{{ParteBEntidad "¿Es la contraparte una persona legal?"=>{{ParteBEmpresa "¿Una Sociedad?"=>, una
+[[ParteBEstadoDeFundación]] sociedad }}{{ParteBSL "¿Una SL?" =>, una
+[[ParteBEstadoDeFundación]] sociedad limitada}}{{ParteBSB "¿Una sociedad benéfica?" =>, una [[ParteBEstadoDeFundación]] sociedad limitada benéfica}}}}("Contraparte").
+```
+
+El texto de arriba genera el siguiente "árbol de decisiones" en nuestra aplicación de generación de formularios:
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/dd9b4a7e13244c3bbd2c7385737c6369" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+### Usos Avanzados de las Condicionales
+
+Entendemos que a con frecuencia los acuerdos son complejos, y de que si incluye una disposición en una parte del acuerdo, eso puede afectar a otras disposiciones. Para adaptarse a ello, si creas una condicional, puedes hacer incluir texto adicional en otra parte si aquella condicional se programa a "si" (verdad) o "no" (no verdad).
+
+Por ejemplo, partiendo del ejemplo anterior, si quisieramos modificar el bloque de firmas de un acuerdo basado en si el acuerdo se celebra con una persona legal o una persona física, se hace fácilmente haciendo referencia al nombre de la condicional.
+
+```
+**[[ParteA | Mayúscula]]**
+
+_______________________
+{{ParteAEntidad => Por: [[ParteA Firmante Primer Nombre]] [[ParteA Firmante Apellido]]
+Título: [[ParteA Título del Firmante]]}}
+```
+
+A continuación se puede ver cómo se puede cambiar, dinámicamente, al texto:
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/614467945305465aa29840ea282aad3e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+### Condicionales con Else
+
+También es posible crear una condicional 'if/else' (si/entonces): una condicional que rinde un texto concreto cuando se programa el variable `YesNo` a "si", y otro texto concreto cuando se programa a "no". Esto potencia de manera importante a las declaraciones condicionales.
+
+Aquí hay un ejemplo sencillo. Observa el marcado siguiente:
+
+```
+Esta es mi cláusula. [[contratista: Texto "el contratista que va a hacer el trabajo"]]. {{mostrarFechaDeNacimiento "¿Deberíamos mostrar la fecha de nacimiento?" => Y yo nací en [[fechaDeNacimientoDelContratista "La fecha de nacimiento del contratista"]]. :: No muestro datos relacionados con la fecha de nacimiento.}}
+```
+
+Suponiendo que el valor del variable `contractor` es de Fulano de Tal, y el valor del variable `contractorBirthdate` es de 1980, el texto de arriba mostrará lo siguiente si `shouldShowBirthdate` está programado a sí:
+
+```
+Esta es mi cláusula. John Doe. Y nací en 1980.
+```
+
+Por otro lado, mostrará lo siguiente si `shouldShowBirthdate` está programado en no:
+
+```
+Esta es mi cláusula. John Doe. No muestro datos relacionados con la fecha de nacimiento.
+```
+
+Las secciones, las opciones, expresiones booleanas, y otros componentes avanzados descritos arriba y abajo se pueden incluir en condicionales if-else, igual que en condicionales normales.
