@@ -29,15 +29,17 @@ Cualquiera de las palabras en este texto se puede volver un variable. Si decidie
 
 ```
 Este Acuerdo Mutuo de Confidencialidad (este "Acuerdo") se considera celebrado
-el [[Fecha de Entrada en Vigor: Fecha]], por y entre [[Nombre de la Empresa]] (la "Empresa"), y [[Contraparte]] ("Contraparte").
-Cada parte ha divulgado y/o divulgará su Información Confidencial a la otra (según la definición
-siguiente) a la otra en conexión con la Relación (según la definición siguiente) conforme con
-las cláusulas y condiciones de este Acuerdo. Según su uso en lo siguiente, el término "Divulgante"
-referirá a la Empresa siempre que el contexto corresponde a la divulgación de la Información
-Confidencial de la Empresa a la Contraparte, que se conoce como "Destinatario" en aquel contexto.
-En cambio, el término "Divulgante" se referirá a la Contraparte siempre que el contexto corresponde
-a la divulgación de la Información Confidencial de la Contraparte a la Empresa, a quien se
-referirá como "Destinatario" en aquel contexto.
+el [[Fecha de Entrada en Vigor: Fecha]], por y entre [[Nombre de la Empresa]] (la
+"Empresa"), y [[Contraparte]] ("Contraparte"). Cada parte ha divulgado y/o
+divulgará su Información Confidencial a la otra (según la definición siguiente) a
+la otra en conexión con la Relación (según la definición siguiente) conforme con
+las cláusulas y condiciones de este Acuerdo. Según su uso en lo siguiente, el
+término "Divulgante" referirá a la Empresa siempre que el contexto corresponde a la
+divulgación de la Información Confidencial de la Empresa a la Contraparte, que se
+conoce como "Destinatario" en aquel contexto. En cambio, el término "Divulgante" se
+referirá a la Contraparte siempre que el contexto corresponde a la divulgación de
+la Información Confidencial de la Contraparte a la Empresa, a quien se referirá
+como "Destinatario" en aquel contexto.
 ```
 Una vez que se identifique, el variable se puede volver un elemento de formato en nuestra aplicación de generación de contratos, al que se accede a través de la aplicación de creación de contratos de OpenLaw, "DraftView". Como notarás en lo de arriba, por defecto, el nombre del
 variable se auto-rellena como el marcador del formato para ayudarle al usuario que pretende generar un contrato.
@@ -46,7 +48,11 @@ variable se auto-rellena como el marcador del formato para ayudarle al usuario q
 
 Si es que, sin embargo, el nombre del variable no sea muy descriptivo, se puede hacer variar el texto que sale generado automáticamente en el formato al incluir una cadena de caracteres tras el nombre del variable. Por ejemplo, `[[Nombre de la Empresa "¿Cuál es el nombre de la empresa?"]]` o `[[Nombre de la Empresa "¿Cuál es el nombre de la contraparte?"]]`.
 
-Para un variable de Texto, OpenLaw también admite varios otros tipos de variable de entrada, como Date (Fecha), DateTime (FechaHora), Number (Número), EthAddress (Dirección de Eth), Address (Dirección), y Period (Periodo). Estos variables brindan funcionalidad adicional, y a lo largo del tiempo, pensamos aumentar nuestro lenguaje de marcado para incluir otros tipos.
+Para un variable de Texto, también se puede definir un valor por defecto al incluir una cadena de carácteres al definir al variable. Por ejemplo, `[[Company Name: Text("ABC, Inc.")]]`. El valor del variable seguirá siendo "ABC, SL." si no se proporciona otros datos para entrar.
+
+### Other Input Variable Types
+
+Además de los variables de texto, OpenLaw también admite varios otros tipos de variable de entrada, como Date (Fecha), DateTime (FechaHora), Number (Número), EthAddress (Dirección de Eth), Address (Dirección), y Period (Periodo). Estos variables brindan funcionalidad adicional, y a lo largo del tiempo, pensamos aumentar nuestro lenguaje de marcado para incluir otros tipos.
 
 #### Number (Número)
 
@@ -84,12 +90,17 @@ Según descrito más abajo, puedes usar el tipo Period conjuntamente con los tip
 
 El tipo Ethereum Address señala a un variable que tiene que ser una dirección de Ethereum. Este tipo se hace pertinente en particular si usas OpenLaw para mandar ether o tokens a una dirección de Ethereum específico. La sintaxis para este tipo es `: EthAddress`. En el contexto de un variable sería `[[Variable: EthAddress]]`.
 
+#### Dirección
+
+El tipo Dirección es un variable de entrada más avanzado. Este tipo transforma a la entrada de datos en una caja de dirección en el cual se puede buscar a una dirección pertinente al usar el API de Google Maps. Crear un tipo Dirección es algo bastante sencillo; simplemente agrega `: Dirección` tras el nombre de un variable. Dicho de otra manera, `[[Variable: Address]]`.
+
 Una vez que se haya fijado una dirección, se puede acceder a varios aspectos de la dirección, incluso el número de calle, ciudad, estado, código postal, y país. Lo siguiente es un ejemplo de cómo se hace referencia a estos elementos:
 
 ```
-[[#Nombre de Empresa: Address]][[Dirección de Empresa.streetNumber]] [[Dirección de Empresa.streetName]]
-[[Dirección de Empresa.city]], [[Dirección de Empresa.state]] [[Dirección de Empresa.zipCode]]
-[[Dirección de Empresa.country]]
+[[#Nombre de Empresa: Address]][[Dirección de Empresa.streetNumber]] [[Dirección de
+Empresa.streetName]]
+[[Dirección de Empresa.city]], [[Dirección de Empresa.state]] [[Dirección de
+Empresa.zipCode]] [[Dirección de Empresa.country]]
 ```
 
 Toda dirección también se asocia con una cadena de carácteres que sirve como identificador único. Al continuar con el ejemplo de arriba, a esto se puede hacer referencia con `[[Company Address.placeId]]`.
@@ -327,22 +338,24 @@ Por ejemplo, este texto marcado tendría el resultado como se ve en el vídeo si
 ^ La Empresa declara y hace garantía de que:
 
 ^^ **Organización**. La Empresa es una sociedad limitada debidamente constitutida,
-con existencia válida, y vigente conforme con las leyes del [[Estado de Constitución]],
-tiene el poder social para llevar a cabo los negocios según se hace actualmente, y
-reúne los requisitos para hacer negocios en toda jurisdicción en la cual el tipo y la
-ubicación de los bienes de los cuales es el dueño, o el tipo de negocio que hace exige
-calificación, o en el cual el no así calificar le ocasionaría un efecto material adverso.
-No hay procesos pendientes, ni al conocimiento de la Empresa, se ha amenazado con abrir uno,
-en el cual se le acusa de que el tipo de su negocio hace que la calificación sea
-necesaria en ninguna otra jurisdicción.
+con existencia válida, y vigente conforme con las leyes del [[Estado de
+Constitución]], tiene el poder social para llevar a cabo los negocios según se hace
+actualmente, y reúne los requisitos para hacer negocios en toda jurisdicción en la
+cual el tipo y la ubicación de los bienes de los cuales es el dueño, o el tipo de
+negocio que hace exige calificación, o en el cual el no así calificar le
+ocasionaría un efecto material adverso. No hay procesos pendientes, ni al
+conocimiento de la Empresa, se ha amenazado con abrir uno, en el cual se le acusa
+de que el tipo de su negocio hace que la calificación sea necesaria en ninguna otra
+jurisdicción.
 
-^^ **Autoridad**. La Empresa tiene pleno derecho, poder, y autoridad de celebrar este
-Acuerdo y todo acuerdo, documento, e instrumento que se ha de firmar y entregar por la
-Empresa conforme con este Acuerdo, y de llevar a cabo las transacciones que se contemplan
-por medio del presente y por medio de aquel. Ninguna renuncia ni reconocimiento de
-consentimiento por parte de ninguna persona hace falta en conexión con la firma, entrega,
-y realización por la Empresa de este Acuerdo y todo acuerdo, documento, e instrumento que
-se han de firmar y entregar por la Empresa conforme con este Acuerdo.
+^^ **Autoridad**. La Empresa tiene pleno derecho, poder, y autoridad de celebrar
+este Acuerdo y todo acuerdo, documento, e instrumento que se ha de firmar y
+entregar por la Empresa conforme con este Acuerdo, y de llevar a cabo las
+transacciones que se contemplan por medio del presente y por medio de aquel.
+Ninguna renuncia ni reconocimiento de consentimiento por parte de ninguna persona
+hace falta en conexión con la firma, entrega, y realización por la Empresa de este
+Acuerdo y todo acuerdo, documento, e instrumento que se han de firmar y entregar
+por la Empresa conforme con este Acuerdo.
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -360,15 +373,16 @@ El variable se puede usar para el propósito de establecer referencias:
 ```
 ^ La Empresa declara y asegura que:
 
-^^(Organización) **Organización**. La Empresa es una sociedad limitada debidamente constitutida,
-con existencia válida, y vigente conforme con las leyes del [[Estado de Constitución]],
-tiene el poder social para llevar a cabo los negocios según se hace actualmente, y
-reúne los requisitos para hacer negocios en toda jurisdicción en la cual el tipo y la
-ubicación de los bienes de los cuales es el dueño, o el tipo de negocio que hace exige
-calificación, o en el cual el no así calificar le ocasionaría un efecto material adverso.
-No hay procesos pendientes, ni al conocimiento de la Empresa, se ha amenazado con abrir uno,
-en el cual se le acusa de que el tipo de su negocio hace que la calificación sea
-necesaria en ninguna otra jurisdicción.
+^^(Organización) **Organización**. La Empresa es una sociedad limitada debidamente
+constitutida, con existencia válida, y vigente conforme con las leyes del [[Estado
+de Constitución]], tiene el poder social para llevar a cabo los negocios según se
+hace actualmente, y reúne los requisitos para hacer negocios en toda jurisdicción
+en la cual el tipo y la ubicación de los bienes de los cuales es el dueño, o el
+tipo de negocio que hace exige calificación, o en el cual el no así calificar le
+ocasionaría un efecto material adverso. No hay procesos pendientes, ni al
+conocimiento de la Empresa, se ha amenazado con abrir uno, en el cual se le acusa
+de que el tipo de su negocio hace que la calificación sea necesaria en ninguna otra
+jurisdicción.
 
 ...
 
@@ -467,14 +481,17 @@ Las condicionales también se pueden agrupar para crear a un árbol de decisione
 Para verle a esto en acción, tome como ejemplo el lenguaje estándar siguiente que se encuentra al principio de un acuerdo mutuo de confidencialidad estándar :
 
 ```
-Este Acuerdo Mutuo de Confidencialidad  (este "Acuerdo") se hace a partir de [[Fecha de Vigencia: Fecha]], por y entre [[ParteA]] ("[[ParteA Abreviatura]]")
+Este Acuerdo Mutuo de Confidencialidad  (este "Acuerdo") se hace a partir de
+[[Fecha de Vigencia: Fecha]], por y entre [[ParteA]] ("[[ParteA Abreviatura]]")
 {{ParteAEntidad "Es la primera parte una persona legal?" => {{ParteASociedad
 "Una Sociedad?" =>, una [[ParteAEstadoDeFundación]] sociedad, }}{{ParteASL
 "Una SL?" =>, una [[ParteAEstadoDeFundación]] sociedad limitada, }}
 {{ParteASB "Una Sociedad Benéfica?" =>, una [[ParteAEstadoDeFundación]]
-una sociedad benéfica,}}}} y [[ParteB]]{{ParteBEntidad "¿Es la contraparte una persona legal?"=>{{ParteBEmpresa "¿Una Sociedad?"=>, una
+una sociedad benéfica,}}}} y [[ParteB]]{{ParteBEntidad "¿Es la contraparte una
+persona legal?"=>{{ParteBEmpresa "¿Una Sociedad?"=>, una
 [[ParteBEstadoDeFundación]] sociedad }}{{ParteBSL "¿Una SL?" =>, una
-[[ParteBEstadoDeFundación]] sociedad limitada}}{{ParteBSB "¿Una sociedad benéfica?" =>, una [[ParteBEstadoDeFundación]] sociedad limitada benéfica}}}}("Contraparte").
+[[ParteBEstadoDeFundación]] sociedad limitada}}{{ParteBSB "¿Una sociedad benéfica?"
+=>, una [[ParteBEstadoDeFundación]] sociedad limitada benéfica}}}}("Contraparte").
 ```
 
 El texto de arriba genera el siguiente "árbol de decisiones" en nuestra aplicación de generación de formularios:
@@ -506,7 +523,10 @@ También es posible crear una condicional 'if/else' (si/entonces): una condicion
 Aquí hay un ejemplo sencillo. Observa el marcado siguiente:
 
 ```
-Esta es mi cláusula. [[contratista: Texto "el contratista que va a hacer el trabajo"]]. {{mostrarFechaDeNacimiento "¿Deberíamos mostrar la fecha de nacimiento?" => Y yo nací en [[fechaDeNacimientoDelContratista "La fecha de nacimiento del contratista"]]. :: No muestro datos relacionados con la fecha de nacimiento.}}
+Esta es mi cláusula. [[contratista: Texto "el contratista que va a hacer el
+trabajo"]]. {{mostrarFechaDeNacimiento "¿Deberíamos mostrar la fecha de nacimiento?
+" => Y yo nací en [[fechaDeNacimientoDelContratista "La fecha de nacimiento del
+contratista"]]. :: No muestro datos relacionados con la fecha de nacimiento.}}
 ```
 
 Suponiendo que el valor del variable `contractor` es de Fulano de Tal, y el valor del variable `contractorBirthdate` es de 1980, el texto de arriba mostrará lo siguiente si `shouldShowBirthdate` está programado a sí:
@@ -546,17 +566,23 @@ El lenguaje de marcado
 Cuando las condicionales se combinan con las expresiones booleanas indicadas anteriormente, la potencia expresiva del lenguaje en marcado de OpenLaw se empieza a apreciar. Por ejemplo, imagina que quieres incluir una disposición adicional en un acuerdo--digamos, obligar a las partes a conseguir una póliza de seguro--si el valor total del acuerdo excede a cierta cantidad en dólares; se podría hacer fácilmente como lo siguiente:
 
 ```
-[[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según el acuerdo: Número]].
+[[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según el acuerdo: Number]].
 
 ....
 
 {{Cobros totales por pagar según el Acuerdo>20000 => ^**Póliza de seguro**.
 
-^^*Seguro Mutuo*. Cada parte mantendrá los tipos de seguro normales y apropriados para tales acuerdos, en la cantidad necesaria para saldar sus obligaciones y responsabilidades conforme con este acuerdo o según la Ley, en la cantidad que sea menor.
+^^*Seguro Mutuo*. Cada parte mantendrá los tipos de seguro normales y apropriados
+para tales acuerdos, en la cantidad necesaria para saldar sus obligaciones y
+responsabilidades conforme con este acuerdo o según la Ley, en la cantidad que sea
+menor.
 
-^^*Comprobante del seguro*. A la petición de la otra parte, cada parte entregará a la otra un certificado u otro comprobante de su propio seguro, el cual describe la cantidad y condiciones de su cobertura.
+^^*Comprobante del seguro*. A la petición de la otra parte, cada parte entregará a
+la otra un certificado u otro comprobante de su propio seguro, el cual describe la
+cantidad y condiciones de su cobertura.
 
-^^*Aviso de Cambio Sustancial*. Si ha habido un cambio sustancial en el seguro de alguna de las partes, aquella parte notificará en breve a la otra parte.}}
+^^*Aviso de Cambio Sustancial*. Si ha habido un cambio sustancial en el seguro de
+alguna de las partes, aquella parte notificará en breve a la otra parte.}}
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7bdab586eb004349b6736c07b7e28484" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -564,7 +590,8 @@ Cuando las condicionales se combinan con las expresiones booleanas indicadas ant
 De igual manera, en muchos casos, puede que quieres modificar sólamente el lenguaje del acuerdo si se materializan una o más situaciones fácticas. Con el uso de expresiones booleanas y condicionales, lo podrá hacer.
 
 ```
-[[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según un Acuerdo: Número]].
+[[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según un
+Acuerdo: Number]].
 
 {{Cobros totales por pagar según un Acuerdo>20000 =>
     {{Seguro "¿Quiere incluir a una disposición de una póliza de seguro?" =>
@@ -575,25 +602,45 @@ De igual manera, en muchos casos, puede que quieres modificar sólamente el leng
 
 {{(Cobros totales por pagar según un Acuerdo>20000&&Neutra) => ^**Seguro**.
 
-^^*Seguro Mutuo*. Cada parte mantendrá los tipos de seguro normales y apropriados para tales acuerdos, en la cantidad necesaria para saldar sus obligaciones y responsabilidades conforme con este acuerdo o según la Ley, en la cantidad que sea menor.
+^^*Seguro Mutuo*. Cada parte mantendrá los tipos de seguro normales y apropriados
+para tales acuerdos, en la cantidad necesaria para saldar sus obligaciones y
+responsabilidades conforme con este acuerdo o según la Ley, en la cantidad que sea
+menor.
 
-^^*Comprobante del seguro*. A la petición de la otra parte, cada parte entregará a la otra un certificado u otro comprobante de su propio seguro, el cual describe la cantidad y condiciones de su cobertura.
+^^*Comprobante del seguro*. A la petición de la otra parte, cada parte entregará a
+la otra un certificado u otro comprobante de su propio seguro, el cual describe la
+cantidad y condiciones de su cobertura.
 
-^^*Aviso de Cambio Sustancial*. Si ha habido un cambio sustancial en el seguro de alguna de las partes, aquella parte notificará en breve a la otra parte.}}
+^^*Aviso de Cambio Sustancial*. Si ha habido un cambio sustancial en el seguro de
+alguna de las partes, aquella parte notificará en breve a la otra parte.}}
 
 {{(Cobros totales por pagar según un Acuerdo>20000&&FavorProveedor) => ^**Seguro**.
 
-^^*Obligación de seguro*. [[ParteB]] mantendrá el seguro necesario para saldar sus obligaciones y responsabilidades según este acuerdo, o de toda cantida que rija la Ley, en la cantidad que sea menor.
+^^*Obligación de seguro*. [[ParteB]] mantendrá el seguro necesario para saldar sus
+obligaciones y responsabilidades según este acuerdo, o de toda cantida que rija la
+Ley, en la cantidad que sea menor.
 
-^^*Comprobante del seguro*. A la petición de [[ParteA]], [[ParteB]] entregará a [[ParteA]] un certificado u otro comprobante de su propio seguro, el cual describe las condiciones del seguro, y aviso de todo cambio sustancial al seguro.
+^^*Comprobante del seguro*. A la petición de [[ParteA]], [[ParteB]] entregará a
+[[ParteA]] un certificado u otro comprobante de su propio seguro, el cual describe
+las condiciones del seguro, y aviso de todo cambio sustancial al seguro.
 
-^^*Seguro Adicional*. [[ParteB]] puede obligar a [[ParteA]] que obtengan una póliza de seguro de una cantidad adicional razonable, al proporcionar a [[ParteB]] con motivo fundado para el seguro adicional, y requisitos para el seguro adicional.
+^^*Seguro Adicional*. [[ParteB]] puede obligar a [[ParteA]] que obtengan una póliza
+de seguro de una cantidad adicional razonable, al proporcionar a [[ParteB]] con
+motivo fundado para el seguro adicional, y requisitos para el seguro adicional.
 
-^^*Asegurados Adicionales*. [[ParteA]] Una vez agregada a la póliza de [[ParteB]], la [[ParteB]] dentro de [[Cantidad de días laborables: Número]] dias laborables a partir de la Fecha de Entrada en Vigor, su asegurador debe de agreagar a [[ParteA]] como asegurado adicional en su póliza.
+^^*Asegurados Adicionales*. [[ParteA]] Una vez agregada a la póliza de [[ParteB]],
+la [[ParteB]] dentro de [[Cantidad de días laborables: Number]] dias laborables a
+partir de la Fecha de Entrada en Vigor, su asegurador debe de agreagar a [[ParteA]]
+como asegurado adicional en su póliza.
 
-^^*Certificado de Seguro*. [[ParteB]] hará que su asegurador mande un certificado a [[ParteA]], como comprobante de que a [[ParteA]] se le ha agregado a la póliza de [[ParteB]], y que confirma que el asegurador dará a [[ParteB]] aviso previo por escrito por lo menos [[Número de días laborables: Número]] días laborables antes de cancelar, modificar, o reducir la cantidad de cobertura en la póliza de [[ParteB]].
+^^*Certificado de Seguro*. [[ParteB]] hará que su asegurador mande un certificado a
+[[ParteA]], como comprobante de que a [[ParteA]] se le ha agregado a la póliza de
+[[ParteB]], y que confirma que el asegurador dará a [[ParteB]] aviso previo por
+escrito por lo menos [[Cantidad de días laborables: Number]] días laborables antes
+de cancelar, modificar, o reducir la cantidad de cobertura en la póliza de [[ParteB].
 
-^^Sin Contribución de [[ParteA]]. Todo seguro que tiene [[ParteA]] no será sujeto a contribución.}}
+^^Sin Contribución de [[ParteA]]. Todo seguro que tiene [[ParteA]] no será sujeto a
+contribución.}}
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -601,3 +648,57 @@ De igual manera, en muchos casos, puede que quieres modificar sólamente el leng
 ::: consejo
 al usar "agrupados" ("groupings") y las etiquetas `<% %>`, es posible esconder los variables y las condicionales. Al hacerlo, los espacios que se ven en el vídeo de arriba se pueden quitar. Hablamos de estos componentes avanzados del lenguaje en marcado [abajo](#groupings).
 :::
+
+### Tipo Choice con Condicionales
+
+También se puede combinar las condicionales y el operador `=` con un [Choice type](#choice) para incluir a texto, variables, llamadas a contratos inteligentes, y/o provocar a una condicional en otra parte del acuerdo, dependiendo de la opción que haya seleccionado en el Choice.
+
+```
+[[País: Choice("EEUU", "Suiza", "Alemania")]]
+[[País de Origen: País]]
+
+**Colores de bandera del país:**
+{{
+    {{País de Origen = "EEUU" => rojo, blanco, y azul}}
+    {{País de Origen = "Suiza" => rojo y blanco}}
+    {{País de Origen = "Alemania" => negro, rojo, y oro}}
+}}
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/c952fcf870684fd68694e7de44a31009" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+## Cálculos y Aliases
+
+Con el uso del lenguaje en marcado, también se puede hacer cálculos básicos. Con el uso de esta funcionalidad, se puede producir valores generados dinamicamente a base de otros datos entrados, lo cual se puede incluir automáticamente en el texto de un acuerdo.
+
+`*` - Multiplicación
+
+`+` - Adición
+
+`-` - Subtracción
+
+`/` - División
+
+`@` - Crear a un alias
+
+**Ejemplo**
+
+Para hacer un cálculo, primero tiene que crear a un alias al incluir un `@` antes del nombre de un variable. Una vez montado, el alias puede llevar a cabo cualquier cálculo, incluso un cálculo que depende de otro variable que se ha programado a un tipo Number. Por ejemplo, como en lo siguiente, podemos programar a un variable para hacer un pago mensual y calcular automáticamente un pago anual.
+
+```
+<%
+
+==Partes==
+[[ParteA]]
+[[ParteB]]
+
+==Pago==
+[[Pago mensual: Number]]
+[[@Pago Anual = Pago Mensual * 12]]
+
+%>
+
+[[ParteA]] pagará a [[ParteB]] $[[Pago Mensual]] mensualmente, o $[[Pago Anual]] anualmente, pagadero a partir de los treinta (30) días tras la facturación.
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
