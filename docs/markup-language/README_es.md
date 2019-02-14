@@ -4,7 +4,7 @@ meta:
     content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document.
 ---
 
-# Lenguaje en marcado
+# Lenguaje de marcado
 
 El protocolo OpenLaw se basa en un lenguaje de marcado para transformar a los acuerdos hechos en idiomas naturales en objetos procesables por máquina con variables y lógica pertinentes, definidos dentro de un documento específico (lo que llamamos un "modelo"). Los modelos se pueden agrupar en "acuerdos", lo cual permite que se crean y se gerencien transacciones enteras en una cadena de bloques.
 
@@ -522,3 +522,82 @@ Esta es mi cláusula. John Doe. No muestro datos relacionados con la fecha de na
 ```
 
 Las secciones, las opciones, expresiones booleanas, y otros componentes avanzados descritos arriba y abajo se pueden incluir en condicionales if-else, igual que en condicionales normales.
+
+## Lógica con Condicionales
+
+El lenguaje de marcado
+
+`&&` - Y
+
+`||` - O
+
+`!` - No
+
+`=` - Igual a
+
+`>` - Mayor que
+
+`<` - Menor que
+
+`>=` - Mayor que o igual a
+
+`<=` - Menor que o igual a
+
+Cuando las condicionales se combinan con las expresiones booleanas indicadas anteriormente, la potencia expresiva del lenguaje en marcado de OpenLaw se empieza a apreciar. Por ejemplo, imagina que quieres incluir una disposición adicional en un acuerdo--digamos, obligar a las partes a conseguir una póliza de seguro--si el valor total del acuerdo excede a cierta cantidad en dólares; se podría hacer fácilmente como lo siguiente:
+
+```
+[[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según el acuerdo: Número]].
+
+....
+
+{{Cobros totales por pagar según el Acuerdo>20000 => ^**Póliza de seguro**.
+
+^^*Seguro Mutuo*. Cada parte mantendrá los tipos de seguro normales y apropriados para tales acuerdos, en la cantidad necesaria para saldar sus obligaciones y responsabilidades conforme con este acuerdo o según la Ley, en la cantidad que sea menor.
+
+^^*Comprobante del seguro*. A la petición de la otra parte, cada parte entregará a la otra un certificado u otro comprobante de su propio seguro, el cual describe la cantidad y condiciones de su cobertura.
+
+^^*Aviso de Cambio Sustancial*. Si ha habido un cambio sustancial en el seguro de alguna de las partes, aquella parte notificará en breve a la otra parte.}}
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7bdab586eb004349b6736c07b7e28484" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+De igual manera, en muchos casos, puede que quieres modificar sólamente el lenguaje del acuerdo si se materializan una o más situaciones fácticas. Con el uso de expresiones booleanas y condicionales, lo podrá hacer.
+
+```
+[[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según un Acuerdo: Número]].
+
+{{Cobros totales por pagar según un Acuerdo>20000 =>
+    {{Seguro "¿Quiere incluir a una disposición de una póliza de seguro?" =>
+        {{Neutra "¿Quiere que la disposición sea neutra?" =>}}
+        {{FavorProveedor "¿Quiere que la disposición sea a favor del proveedor?" =>}}
+    }}
+}}
+
+{{(Cobros totales por pagar según un Acuerdo>20000&&Neutra) => ^**Seguro**.
+
+^^*Seguro Mutuo*. Cada parte mantendrá los tipos de seguro normales y apropriados para tales acuerdos, en la cantidad necesaria para saldar sus obligaciones y responsabilidades conforme con este acuerdo o según la Ley, en la cantidad que sea menor.
+
+^^*Comprobante del seguro*. A la petición de la otra parte, cada parte entregará a la otra un certificado u otro comprobante de su propio seguro, el cual describe la cantidad y condiciones de su cobertura.
+
+^^*Aviso de Cambio Sustancial*. Si ha habido un cambio sustancial en el seguro de alguna de las partes, aquella parte notificará en breve a la otra parte.}}
+
+{{(Cobros totales por pagar según un Acuerdo>20000&&FavorProveedor) => ^**Seguro**.
+
+^^*Obligación de seguro*. [[ParteB]] mantendrá el seguro necesario para saldar sus obligaciones y responsabilidades según este acuerdo, o de toda cantida que rija la Ley, en la cantidad que sea menor.
+
+^^*Comprobante del seguro*. A la petición de [[ParteA]], [[ParteB]] entregará a [[ParteA]] un certificado u otro comprobante de su propio seguro, el cual describe las condiciones del seguro, y aviso de todo cambio sustancial al seguro.
+
+^^*Seguro Adicional*. [[ParteB]] puede obligar a [[ParteA]] que obtengan una póliza de seguro de una cantidad adicional razonable, al proporcionar a [[ParteB]] con motivo fundado para el seguro adicional, y requisitos para el seguro adicional.
+
+^^*Asegurados Adicionales*. [[ParteA]] Una vez agregada a la póliza de [[ParteB]], la [[ParteB]] dentro de [[Cantidad de días laborables: Número]] dias laborables a partir de la Fecha de Entrada en Vigor, su asegurador debe de agreagar a [[ParteA]] como asegurado adicional en su póliza.
+
+^^*Certificado de Seguro*. [[ParteB]] hará que su asegurador mande un certificado a [[ParteA]], como comprobante de que a [[ParteA]] se le ha agregado a la póliza de [[ParteB]], y que confirma que el asegurador dará a [[ParteB]] aviso previo por escrito por lo menos [[Número de días laborables: Número]] días laborables antes de cancelar, modificar, o reducir la cantidad de cobertura en la póliza de [[ParteB]].
+
+^^Sin Contribución de [[ParteA]]. Todo seguro que tiene [[ParteA]] no será sujeto a contribución.}}
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+::: consejo
+al usar "agrupados" ("groupings") y las etiquetas `<% %>`, es posible esconder los variables y las condicionales. Al hacerlo, los espacios que se ven en el vídeo de arriba se pueden quitar. Hablamos de estos componentes avanzados del lenguaje en marcado [abajo](#groupings).
+:::
