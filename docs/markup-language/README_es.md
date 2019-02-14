@@ -1,7 +1,7 @@
 ---
 meta:
-  - name: descripción
-    content: El protocolo OpenLaw se basa en un lenguaje en marcado para convertir a los acuerdos de lengua natural en objetos legibles por máquina con variables y lógica pertinentes definidos dentro de un documento en concreto.
+  - nombre: descripción
+    contenido: El protocolo OpenLaw se basa en un lenguaje de marcado para convertir a los acuerdos de lengua natural en objetos legibles por máquina con variables y lógica pertinentes definidos dentro de un documento en concreto.
 ---
 
 # Lenguaje de marcado
@@ -563,7 +563,7 @@ El lenguaje de marcado
 
 `<=` - Menor que o igual a
 
-Cuando las condicionales se combinan con las expresiones booleanas indicadas anteriormente, la potencia expresiva del lenguaje en marcado de OpenLaw se empieza a apreciar. Por ejemplo, imagina que quieres incluir una disposición adicional en un acuerdo--digamos, obligar a las partes a conseguir una póliza de seguro--si el valor total del acuerdo excede a cierta cantidad en dólares; se podría hacer fácilmente como lo siguiente:
+Cuando las condicionales se combinan con las expresiones booleanas indicadas anteriormente, la potencia expresiva del lenguaje de marcado de OpenLaw se empieza a apreciar. Por ejemplo, imagina que quieres incluir una disposición adicional en un acuerdo--digamos, obligar a las partes a conseguir una póliza de seguro--si el valor total del acuerdo excede a cierta cantidad en dólares; se podría hacer fácilmente como lo siguiente:
 
 ```
 [[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según el acuerdo: Number]].
@@ -646,7 +646,7 @@ contribución.}}
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ::: consejo
-al usar "agrupados" ("groupings") y las etiquetas `<% %>`, es posible esconder los variables y las condicionales. Al hacerlo, los espacios que se ven en el vídeo de arriba se pueden quitar. Hablamos de estos componentes avanzados del lenguaje en marcado [abajo](#groupings).
+al usar "agrupados" ("groupings") y las etiquetas `<% %>`, es posible esconder los variables y las condicionales. Al hacerlo, los espacios que se ven en el vídeo de arriba se pueden quitar. Hablamos de estos componentes avanzados del lenguaje de marcado [abajo](#groupings).
 :::
 
 ### Tipo Choice con Condicionales
@@ -669,7 +669,7 @@ También se puede combinar las condicionales y el operador `=` con un [Choice ty
 
 ## Cálculos y Aliases
 
-Con el uso del lenguaje en marcado, también se puede hacer cálculos básicos. Con el uso de esta funcionalidad, se puede producir valores generados dinamicamente a base de otros datos entrados, lo cual se puede incluir automáticamente en el texto de un acuerdo.
+Con el uso del lenguaje de marcado, también se puede hacer cálculos básicos. Con el uso de esta funcionalidad, se puede producir valores generados dinamicamente a base de otros datos entrados, lo cual se puede incluir automáticamente en el texto de un acuerdo.
 
 `*` - Multiplicación
 
