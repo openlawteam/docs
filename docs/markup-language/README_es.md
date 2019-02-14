@@ -1,7 +1,7 @@
 ---
 meta:
-  - name: description
-    content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document.
+  - name: descripción
+    content: El protocolo OpenLaw se basa en un lenguaje en marcado para convertir a los acuerdos de lengua natural en objetos legibles por máquina con variables y lógica pertinentes definidos dentro de un documento en concreto.
 ---
 
 # Lenguaje de marcado
@@ -50,7 +50,7 @@ Si es que, sin embargo, el nombre del variable no sea muy descriptivo, se puede 
 
 Para un variable de Texto, también se puede definir un valor por defecto al incluir una cadena de carácteres al definir al variable. Por ejemplo, `[[Company Name: Text("ABC, Inc.")]]`. El valor del variable seguirá siendo "ABC, SL." si no se proporciona otros datos para entrar.
 
-### Other Input Variable Types
+### Otros tipos de Variables de Entrada
 
 Además de los variables de texto, OpenLaw también admite varios otros tipos de variable de entrada, como Date (Fecha), DateTime (FechaHora), Number (Número), EthAddress (Dirección de Eth), Address (Dirección), y Period (Periodo). Estos variables brindan funcionalidad adicional, y a lo largo del tiempo, pensamos aumentar nuestro lenguaje de marcado para incluir otros tipos.
 
@@ -702,3 +702,101 @@ Para hacer un cálculo, primero tiene que crear a un alias al incluir un `@` ant
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+::: aviso
+Al usar aliases y variables para llevar a cabo cálculos, el alias tiene que definirse _antes_ de su uso en el modelo. Lo siguiente resultará en un error:
+
+```
+[[ParteA]] pagará a [[ParteB]] $[[Pago Mensual]] mensualmente, o $[[Pago Anual]] anualmente, pagadero a partir de los treinta (30) días tras la facturación.
+[[@Pago Anual = Pago Mensual * 12]]
+```
+
+Además, un variable se ha de definir _antes_ de usarse en una expresión de alias. Lo siguiente también resultará en un error:
+
+```
+[[@Pago Anual = Pago Mensual * 12]]
+[[ParteA]] pagará a [[ParteB]] $[[Pago Mensual: Number]] mensualmente, o $[[Pago Anual]] anualmente, pagadero a partir de los treinta (30) días tras la facturación.
+```
+
+Igual que en el ejemplo correcto de arriba, el uso de "agrupados" `<% %>` para definir aliases y variables hará que sea más fácil llevar a cabo correctamente los cálculos. Hablaremos de estos métodos avanzados del lenguage en marcado [abajo](#groupings).
+:::
+
+La misma lógica se puede usar para ampliar sobre el ejemplo del seguro que se detalló arriba:
+
+```
+<%
+
+==Partes==
+[[ParteA]]
+[[ParteB]]
+
+==Payment==
+[[Pago Mensual: Number]]
+[[@Pago Anual = Pago Mensual * 12]]
+
+==Disposicón de Seguro==
+[[Seguro]]
+[[Neutra]]
+[[FavorProveedor]]
+[[Número de Días: Number]]
+[[Número de Días Laborables : Number]]
+
+%>
+
+[[ParteA]] pagará a [[ParteB]] $[[Pago Mensual]] mensualmente, o $[[Pago Anual]] anualmente, pagadero a partir de los treinta (30) días tras la facturación.
+
+{{Pago Anual > 20000 =>
+    {{Seguro "¿Quiere incluir a una disposición de una póliza de seguro?" =>
+        {{Neutra "¿Quiere que la disposición sea neutra?" =>}}
+        {{FavorProveedor "¿Quiere que la disposición sea a favor del proveedor?"
+    }}
+}}
+
+{{(Pago Anual > 20000 && Neutra) => ^**Seguro**.
+
+^^*Seguro Mutuo*. Cada parte mantendrá los tipos de seguro normales y apropriados
+para tales acuerdos, en la cantidad necesaria para saldar sus obligaciones y
+responsabilidades conforme con este acuerdo o según la Ley, en la cantidad que sea
+menor.^^*Comprobante del seguro*. A la petición de la otra parte, cada parte
+entregará a la otra un certificado u otro comprobante de su propio seguro, el cual
+describe la cantidad y condiciones de su cobertura.
+
+^^*Aviso de Cambio Sustancial*. Si ha habido un cambio sustancial en el seguro de
+alguna de las partes, aquella parte notificará en breve a la otra parte.}}
+
+}}
+
+{{(Pago Anual > 20000 && FavorProveedor) => ^**Seguro**.
+
+^^*Obligación de Seguro*. [[ParteB]] mantendrá la cantidad de seguro necesaria para
+saldar sus obligaciones y responsabilidades conforme con este acuerdo o según la Ley,
+en la cantidad que sea menor.
+
+^^*Comprobante del seguro*. A la petición de [[ParteA]], [[ParteB]] entregará a
+[[ParteA]] con un certificado u otro comprobante aceptable de su propio seguro, el cual
+describe la cantidad y condiciones de su cobertura.
+
+^^*Seguro Adicional*. [[ParteB]] puede obligar a [[ParteA]] que obtengan una póliza
+de seguro de una cantidad adicional razonable, al proporcionar a [[ParteB]] con
+motivo fundado para el seguro adicional, y requisitos para el seguro adicional.
+
+^^*Asegurados Adicionales*. [[ParteA]] Una vez agregada a la póliza de [[ParteB]],
+[[ParteB]], dentro de [[Cantidad de días]] dias laborables a partir de la Fecha de
+Entrada en Vigor, su asegurador debe de agreagar a [[ParteA]] como asegurado adicional
+en su póliza. ^^*Certificado de Seguro*. [[ParteB]] hará que su asegurador mande un
+certificado a [[ParteA]], como comprobante de que a [[ParteA]] se le ha agregado a la
+póliza de [[ParteB]], y que confirma que el asegurador dará a [[ParteB]] aviso previo
+por escrito por lo menos [[Cantidad de días laborables: Number]] días laborables antes
+de cancelar, modificar, o reducir la cantidad de cobertura en la póliza de [[ParteB].
+
+^^Sin Contribución de [[ParteA]]. Todo seguro que tiene [[ParteA]] no será sujeto a
+contribución.
+
+}}
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/b297b61c9f884e5eb01b4ee247e6d239" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+::: consejo
+Observa la nota de arriba sobre los espacios en el video de arriba.
+:::
