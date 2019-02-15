@@ -48,7 +48,7 @@ variable se auto-rellena como el marcador del formato para ayudarle al usuario q
 
 Si es que, sin embargo, el nombre del variable no sea muy descriptivo, se puede hacer variar el texto que sale generado automáticamente en el formato al incluir una cadena de caracteres tras el nombre del variable. Por ejemplo, `[[Nombre de la Empresa "¿Cuál es el nombre de la empresa?"]]` o `[[Nombre de la Empresa "¿Cuál es el nombre de la contraparte?"]]`.
 
-Para un variable de Texto, también se puede definir un valor por defecto al incluir una cadena de carácteres al definir al variable. Por ejemplo, `[[Company Name: Text("ABC, Inc.")]]`. El valor del variable seguirá siendo "ABC, SL." si no se proporciona otros datos para entrar.
+Para un variable de Texto, también se puede definir un valor por defecto al incluir una cadena de carácteres al definir al variable. Por ejemplo, `[[Empresa Name: Text("ABC, Inc.")]]`. El valor del variable seguirá siendo "ABC, SL." si no se proporciona otros datos para entrar.
 
 ### Otros tipos de Variables de Entrada
 
@@ -103,7 +103,7 @@ Empresa.streetName]]
 Empresa.zipCode]] [[Dirección de Empresa.country]]
 ```
 
-Toda dirección también se asocia con una cadena de carácteres que sirve como identificador único. Al continuar con el ejemplo de arriba, a esto se puede hacer referencia con `[[Company Address.placeId]]`.
+Toda dirección también se asocia con una cadena de carácteres que sirve como identificador único. Al continuar con el ejemplo de arriba, a esto se puede hacer referencia con `[[Dirección de la Empresa.placeId]]`.
 
 #### LargeText
 
@@ -306,7 +306,7 @@ También puedes poner al texto en negrita y cursiva. Para este tipo de formato, 
 
 ### Mayúscula
 
-También reconocemos que en algunas instancias, habrá que mostrar un variable en mayúsculas, en particular en el contexto de títulos y bloques de firmas. Para facilitar este requisito, se puede señalar instancias en las cuales un variable debe de mostrarse en mayúsculas al agregar el texto siguiente tras el nombre de un variable `| Uppercase`. O sea, `[[Variable Name | Uppercase]]`.
+También reconocemos que en algunas instancias, habrá que mostrar un variable en mayúsculas, en particular en el contexto de títulos y bloques de firmas. Para facilitar este requisito, se puede señalar instancias en las cuales un variable debe de mostrarse en mayúsculas al agregar el texto siguiente tras el nombre de un variable `| Mayúscula`. O sea, `[[Variable Name | Mayúscula]]`.
 
 ### Centrado
 
@@ -389,7 +389,7 @@ jurisdicción.
 Salvo por disposición en la Sección [[Organización]], ...
 ```
 
-## Títulos
+## Titles ("Títulos")
 
 Puedes esconder el títlo de un modelo de un acuerdo al incluir la opción siguiente al principio del documento. Esta opción es útil para suprimir un título para cartas o al descargar un documento tipo Word.
 
@@ -509,7 +509,7 @@ Por ejemplo, partiendo del ejemplo anterior, si quisieramos modificar el bloque 
 
 _______________________
 {{ParteAEntidad => Por: [[ParteA Firmante Primer Nombre]] [[ParteA Firmante Apellido]]
-Título: [[ParteA Título del Firmante]]}}
+Title: [[ParteA Título del Firmante]]}}
 ```
 
 A continuación se puede ver cómo se puede cambiar, dinámicamente, al texto:
@@ -800,3 +800,256 @@ contribución.
 ::: consejo
 Observa la nota de arriba sobre los espacios en el video de arriba.
 :::
+
+#### Variables Escondidos
+
+También se puede esconder a un variable, si hace falta, para llevar a cabo cálculos básicos. Para esconder a un variable, nada más agrega `#` antes del nombre del variable: `[[#Variable]]`. Cada variables escondido se muestra a un usuario final, pero no se muestra dentro del texto del modelo o del acuerdo.
+
+### Calculating Date and Time Periods
+
+También puedes usar aliases juntamente con tipos de variable Period, Date, y DateTime para calcular fechas en el pasado y el futuro.
+
+```
+<%
+
+[[Fecha de Entrada en Vigor: Date]]
+[[Plazo 1: Period]]
+
+%>
+
+[[@Fecha en el Pasado = Fecha de Entrada en Vigor - Plazo 1]]
+Fecha en el Pasado: [[Fecha en el Pasado]]
+
+[[@Fecha en el Futuro = Fecha de Entrada en Vigor + Plazo 1]]
+Fecha en el Futuro: [[Fecha en el Futuro]]
+
+<%
+
+[[Tiempo en Vigor: DateTime]]
+[[Plazo 2: Period]]
+
+%>
+
+[[@Tiempo en el Pasado = Tiempo en Vigor - Plazo 2]]
+Tiempo en el Pasado: [[Tiempo en el Pasado]]
+
+[[@Tiempo en el Futuro = Tiempo en Vigor + Plazo 2]]
+Tiempo en el Futuro: [[Tiempo en el Futuro]]
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/79aef047b243475c9d83cec01b13edfb" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+Constantes también puede usarse con aliases y tipos de variable Date y DateTime para calcular fechas y horas en el futuro:
+
+```
+[[Hora de Entrada en Vigor: DateTime]]
+[[@Tiempo en el Futuro = Hora de Entrada en Vigor + "1 día 12 horas 30 minutos 15 segundos"]]
+```
+
+### Usos Avanzados de Condicionales con Cálculos y Aliases
+
+Los componentes de condicionales que tienen expresiones booleanas se pueden combinar con cálculos y aliases para ayudarte a crear acuerdos legales aún más dinámicos y personalizables en los cuales la asignación de un variable puede depender de varios cálculos y otros variables dentro del acuerdo. Según se muestra en el ejemplo siguiente, que se tomó de [Explicación de Impuestos de Empleo Federal](https://www.youtube.com/watch?v=HPbgR4gG_4E), se puede usar todos estos conceptos juntamente para crear árboles de decisión con lógica avanzada que se parecen declaraciones "if else" o "switch case" en lenguajes de programación comunes.
+
+```
+^**Retención de Impuestos Federales (con el uso del método Porcentaje).**
+
+La cantidad de impuestos federales sobre los ingresos que se ha de retener del sueldo semanal del empleado se calcula a partir del Sueldo Semanal Sujeto a Retención de Impuestos sobre los Ingresos y
+el estado del empleado en su declaración. El Empleado elige que se le retenga a la
+{{Estado Soltero "Estado del Empleado en su declaración: ¿'Soltero'?" => Tasa de soltero(a)}}{{Estado casado "¿'Casado(a)'?" => Tasa de casado(a)}}{{Estado Casado con Retención por Separado "'Casado(a),
+pero con una tasa de retención mayor, de Soltero'?" => Casado(a), pero con tasa mayor de Soltero(a)}}.
+
+{{Estado Soltero(a) || Estado Casado con Retención por Separado || !Estado Casado =>
+    {{
+        {{Sueldo Semanal Sujeto a Retenciones Federales <= 71 => [[@Cantidad
+        de Impuesto sobre los Ingresos Retenida = 0]]}}
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 71) && (Sueldo
+        Semanal Sujeto a Retenciones Federales <= 254) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 71) * 0.10]]}}
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 254) && (Sueldo Semanal Sujeto a Retenciones Federales <= 815) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 254) * 0.12 +
+        18.30]]}}
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 815) && (Sueldo Semanal Sujeto a Retenciones Federales <= 1658) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 815) * 0.22 +
+        85.62]]}}
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 1658) && (Sueldo Semanal Sujeto a Retenciones Federales <= 3100) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 1658) * 0.24
+        + 271.08]]}}
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 3100) && (Sueldo Semanal Sujeto a Retenciones Federales <= 3917) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 3100) * 0.32
+        + 617.16]]}}
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 3917) && (Sueldo Semanal Sujeto a Retenciones Federales <= 9687) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 3917) * 0.35
+        + 878.60]]}}
+        {{Sueldo Semanal Sujeto a Retenciones Federales > 9687 => [[@Cantidad de Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales -
+        9687) * 0.37 + 2898.10]]}}
+    }}
+}}
+
+La cantidad del impuesto federal sobre los ingreso que se ha de retener del sueldo semanal del Empleado es de **$[[Cantidad de Impuesto sobre los Ingreso Retenida]]**.
+```
+
+## Identidad y Firmas
+
+OpenLaw también dispone de herramientas que te permite firmar electrónicamente a un acuerdo, y luego guardar aquellas firmas electrónicas en el blockchain de Ethereum. Si piensas crear un modelo para aprovecharse de esta capacidad, tendrás que incluir un variable especializado tipo Identity ("Identidad") en el texto del modelo. El variable Identity indica que una parte tiene que firmar el acuerdo y te permitirá mandar una notificación por correo electrónico a la parte para que repasen y firmen el acuerdo.
+
+### Identidad Básica
+
+Para crear un variable Identity para una firma, lo único que hay que hacer es agregar `: Identity` tras el nombre de un variable: `[[Correo del Firmante: Identity]]`.
+
+```
+**[[ParteA | Mayúscula]]**
+
+[[ParteA Correo del Firmante: Identity]]
+_______________________
+{{ParteAEntidad => Por: [[ParteA Firmante Nombre]] [[ParteA Firmante Apellido]]
+Title: [[ParteA Firmante Título]]}}
+
+**CONTRAPARTE**
+
+[[ParteB Correo del Firmante: Identity]]
+_______________________
+{{ParteBEntidad => Por: [[ParteB Firmante Nombre]] [[ParteB Firmante Apellido]]
+Title: [[ParteB Firmante Título]]}}
+```
+
+Una vez que un usuario indique que el modelo este listo para su firma, OpenLaw generará una ventana, en la cual el usuario puede introducir las direcciones de correo electrónico y mandará el acuerdo para las firmas.
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7041f79616a74974bf8fd73f3a0a231c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+### Incrustación de Firmas
+
+También se puede incrustar una firma en el documento al agregar `| Signature` al final de un variable Identity. Por ejemplo, partiendo del ejemplo anterior:
+
+```
+**[[ParteA | Mayúscula]]**
+
+[[ParteA Correo del Firmante: Identity | Signature]]
+_______________________
+{{ParteAEntidad => Por: [[ParteA Firmante Nombre]] [[ParteA Firmante Apellido]]
+Title: [[ParteA Firmante Título]]}}
+
+**CONTRAPARTE**
+
+[[ParteB Correo del Firmante: Identity | Signature]]
+_______________________
+{{ParteBEntidad => Por: [[ParteB Firmante Nombre]] [[ParteB Firmante Apellido]]
+Title: [[ParteB Firmante Título]]}}
+```
+
+Al utilizar esta opción, la versión final ejecutada de un acuerdo (y la versión word) se incrustará con una firma electrónica de cada firmante. Dicho de otro modo, "/s" más el nombre del firmante asociado con la cuenta OpenLaw.
+
+# Groupings (Agrupados)
+
+Para acuerdos complejos con múltiples variables y condicionales, puedes crear "agrupados" para organizar los variables y condicionales de un modelo. Los variables y condicionales figurarán debajo de un membrete y según la orden de su enumeración. La sintáxis básica de un agrupado es lo siguiente:
+
+```
+<%
+
+==Nombre del Agrupado==
+[[Variable 1]]
+[[Variable 2]]
+[[Variable 3]]
+...
+
+%>
+```
+
+::: aviso
+No coloques dos variables en un sólo renglón. El segundo variable no se procesará.
+:::
+
+Por ejemplo, podrías organizar información de ambas partes usando agrupoados.
+
+```
+<%
+
+==Empresa==
+[[Nombre de la Empresa]]
+[[Dirección de la Empresa: Address]]
+
+==Firmante de la Empresa==
+[[Firmante de la Empresa Nombre]]
+[[Firmante de la Empresa Apellido]]
+[[Firmante de la Empresa Título]]
+
+==Vendedor==
+[[Nombre del Vendedor]]
+[[Dirección del Vendedor: Address]]
+
+==Firmante del Vendedor==
+[[Firmante del Vendedor Nombre]]
+[[Firmante del Vendedor Apellido]]
+[[Firmante del Vendedor Título]]
+
+%>
+
+[[Nombre de la Empresa | Mayúscula]]
+
+___________________________
+[[Firmante de la Empresa Nombre]] [[Firmante de la Empresa Apellido]]
+Title:  [[Firmante de la Empresa Título]]
+Address:
+[[#Dirección de la Empresa: Address]][[Dirección de la Empresa.streetNumber]] [[Empresa
+Address.streetName]]
+[[Dirección de la Empresa.city]], [[Dirección de la Empresa.state]] [[Dirección de la Empresa.zipCode]]
+
+[[Nombre del Vendedor | Mayúscula]]
+
+___________________________
+[[Firmante del Vendedor Nombre]] [[Firmante del Vendedor Apellido]]
+Title:  [[Firmante del Vendedor Título]]
+Address:
+[[#Vendedor Address: Address]][[Vendedor Address.streetNumber]] [[Vendedor
+Address.streetName]]
+[[Vendedor Address.city]], [[Vendedor Address.state]] [[Vendedor Address.zipCode]]
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/ddd995d833f242bda2f644c1c9e99771" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+You can also include references to conditionals in a grouping. An example of this functionality is shown below.
+
+```
+<%
+
+==Empresa==
+[[Empresa Name]]
+[[Dirección de la Empresa: Address]]
+
+==Firmante de la Empresa==
+[[Firmante de la Empresa Nombre]]
+[[Firmante de la Empresa Apellido]]
+[[Firmante de la Empresa Título]]
+
+==Vendedor==
+[[Nombre del Vendedor]]
+[[Dirección del Vendedor: Address]]
+
+==Firmante del Vendedor==
+[[EntidadDelVendedor]]
+[[Firmante del Vendedor Nombre]]
+[[Firmante del Vendedor Apellido]]
+[[Firmante del Vendedor Título]]
+
+%>
+
+[[Empresa Name | Mayúscula]]
+
+___________________________
+[[Firmante de la Empresa Nombre]] [[Firmante de la Empresa Apellido]]
+Title:  [[Firmante de la Empresa Título]]
+Address:
+[[#Dirección de la Empresa: Address]][[Dirección de la Empresa.streetNumber]] [[Empresa
+Address.streetName]]
+[[Dirección de la Empresa.city]], [[Dirección de la Empresa.state]] [[Dirección de la Empresa.zipCode]]
+
+{{EntidadDelVendedor "¿Es el vendedor una persona jurídica?" => [[Nombre del Vendedor | Mayúscula]]}}
+{{!EntidadDelVendedor => VENDEDOR}}
+
+___________________________
+{{EntidadDelVendedor => [[Firmante del Vendedor Nombre]] [[Firmante del Vendedor Apellido]]
+Title:  [[Firmante del Vendedor Título]]}}{{!EntidadDelVendedor => [[Nombre del Vendedor]]}}
+Address:
+[[#Vendedor Address: Address]][[Vendedor Address.streetNumber]] [[Vendedor
+Address.streetName]]
+[[Vendedor Address.city]], [[Vendedor Address.state]] [[Vendedor Address.zipCode]]
+```
