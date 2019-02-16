@@ -1081,38 +1081,38 @@ repeatEvery:"1 minute")]]
 
 %>
 
-This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective
-Date: Date]].
+Este acuerdo lo celebra [[Parte A]] y [[Parte B]] en el día [[Fecha de Entrada en Vigor: Date]].
 
-**WHEREAS**, [[Party B]] seeks [[Party A]]'s programming services; and
+**EN CONSIDERACIÓN DE QUE**, [[Parte B]] desea los servicios de programación de [[Parte A]]; y
 
-**WHEREAS**, [[Party A]] seeks to be paid in ether;
+**EN CONSIDERACIÓN DE QUE**, [[Parte A]] desea que se le paga en ether;
 
-**NOW, THEREFORE**, in consideration of the premises and the mutual covenants
-set forth herein and for other good and valuable consideration, the receipt and
-sufficiency of which are hereby acknowledged, the parties hereto covenant and
-agree as follows:
+**AHORA, COMO CONSECUENCIA**, tomando en cuenta lo establecido y los acuerdos
+mutuos establecidos y en concepto de título oneroso, se reconoce por medio del
+recibo y la idoneidad de lo mismo, las partes por medio del presente acuerdan lo
+siguiente:
 
-^ [[Party A]] agrees to pay [[Party B]] [[Payment in Ether: Number]] ether,
-every minute, starting on [[Payment Start Date: DateTime]] and ending on
-[[Payment End Date: DateTime]] for programming services.
+^ [[Parte A]] acuerda en pagar a [[Parte B]] [[Pago en Ether: Number]] ether,
+cada minuto, comenzando en [[Fecha de Inicio de Pago: DateTime]] y finalizando en
+[[Fecha de Finalización de Pago: DateTime]] para servicios de programación.
 
-^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient
-Ethereum Address: EthAddress]], using the Ethereum smart contract found at
-"0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference
-herein.
+^ Se efectuará el pago a la dirección de ethereum de [[Parte B]], en [[Dirección
+de Ethereum del Destinatario: EthAddress]], con el uso del contrato inteligente de
+Etherum en
+"0xe532d1d1147ab40d0a245283f4457c733b5e3d41," el cual se incorpora por referencía
+en el presente.
 
 [[Pay Vendor]]
 
-**[[Party A | Uppercase]]**
+**[[Parte A | Uppercase]]**
 
-[[Party A Email: Identity | Signature]]
+[[Parte A Email: Identity | Signature]]
 _________________________
 (signature)
 
-**[[Party B | Uppercase]]**
+**[[Parte B | Uppercase]]**
 
-[[Party B Email: Identity | Signature]]
+[[Parte B Email: Identity | Signature]]
 _________________________
 (signature)
 ```
