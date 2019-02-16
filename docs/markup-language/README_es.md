@@ -1053,3 +1053,131 @@ Address:
 Address.streetName]]
 [[Vendedor Address.city]], [[Vendedor Address.state]] [[Vendedor Address.zipCode]]
 ```
+
+## Contratos Inteligentes
+
+Con el uso de OpenLaw, puedes incrustar y ejecutar código de contratos inteligentes sobre el blockchain de Ethereum. Para poder hacerlo, tienes que crear una llamada a un contrato inteligente, la cual se puede incrustar en un modelo y ejecutar cuando todas las partes pertinentes hayan firmado el acuerdo. Un ejemplo de una llamada a un contrato inteligente se incluye en lo siguiente.
+
+Según se explica en lo siguiente, el contrato inteligente contiene una función que se llama "makePayment" ("hacerPago"). El contrato inteligente llama al contrato inteligente que se encuentra en la siguiente dirección de Ethereum [0xe532d1d1147ab40d0a245283f4457c733b5e3d41](https://rinkeby.etherscan.io/address/0xe532d1d1147ab40d0a245283f4457c733b5e3d41), (actualmente en la red de prueba Rinkeby) el cual facilita el pago periódico de ether. Esta función admite varios argumentos, como "Recipient Address" ("Dirección del Destinatario"), y "Payment in Wei" ("Pago en Wei") (wei, la unidad más pequeña de ether, es la moneda nativa de la red Ethereum), junto con "Payment Start Date" ("Fecha de Inicio de Pagos") y "Payment End Date" ("Fecha de Finalización de Pagos"). Como parte de la llamada, puedes programar la frecuencia con la cual el contrato inteligente manda un mensaje para ejecutar su función "makePayment" dentro del periodo definido por "Payment Start Date" y "Payment End Date." La frecuencia se puede programar en `seconds` (segundos), `minutes` (minutos), `hours` (horas), `days` (días), `weeks` (semanas), `months` (meses), y `years` (años) (p.ej., `30 seconds`, `1 minute`, `5 hours`, `7 days`, `2 weeks`, `6 months`, `1 year`). También se pueden combinar las unidades temporales al programar la frecuencia (p.ej., `2 minutes 30 seconds`, `1 week 3 days`).
+
+El contrato inteligente se puede llamar como parte de un acuerdo sencillo o complejo. Para dar como ejemplo, lo siguiente demuestra cómo se podría incluir en un acuerdo bastante sencillo.
+
+```
+<%
+
+#Smart Contract to Pay Employee
+[[@Payment in Wei = Payment in Ether * 1000000000000000000]]
+
+[[Pay Vendor:EthereumCall(
+contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
+interface:[{"name":"makePayment", "type":"function","inputs":
+[{"name":"RecipientAddress", "type":"address"},
+{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
+function:"makePayment";
+arguments:Recipient Ethereum Address,Payment in Wei;
+startDate:Payment Start Date;
+endDate:Payment End Date;
+repeatEvery:"1 minute")]]
+
+%>
+
+This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective
+Date: Date]].
+
+**WHEREAS**, [[Party B]] seeks [[Party A]]'s programming services; and
+
+**WHEREAS**, [[Party A]] seeks to be paid in ether;
+
+**NOW, THEREFORE**, in consideration of the premises and the mutual covenants
+set forth herein and for other good and valuable consideration, the receipt and
+sufficiency of which are hereby acknowledged, the parties hereto covenant and
+agree as follows:
+
+^ [[Party A]] agrees to pay [[Party B]] [[Payment in Ether: Number]] ether,
+every minute, starting on [[Payment Start Date: DateTime]] and ending on
+[[Payment End Date: DateTime]] for programming services.
+
+^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient
+Ethereum Address: EthAddress]], using the Ethereum smart contract found at
+"0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference
+herein.
+
+[[Pay Vendor]]
+
+**[[Party A | Uppercase]]**
+
+[[Party A Email: Identity | Signature]]
+_________________________
+(signature)
+
+**[[Party B | Uppercase]]**
+
+[[Party B Email: Identity | Signature]]
+_________________________
+(signature)
+```
+
+Once the agreement is signed, the smart contract will execute as shown in the video below. OpenLaw sends the smart contract a message to trigger its execution and pass along the relevant values.
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/20f8fc1a2dfe4616a0fd08f0f87267b7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+The solidity code for the smart contract found at [0xe532d1d1147ab40d0a245283f4457c733b5e3d41](https://rinkeby.etherscan.io/address/0xe532d1d1147ab40d0a245283f4457c733b5e3d41) is as follows:
+
+```
+pragma solidity ^0.4.10;
+
+contract salary {
+
+    address owner;
+
+    modifier ownerOnly {
+        if(owner != msg.sender) throw;
+        _;
+    }
+
+    function salary() {
+        owner = msg.sender;
+    }
+
+    function makePayment(address target, uint amountInWei) ownerOnly {
+        target.transfer(amountInWei);
+    }
+
+    function() payable {}
+}
+```
+
+There are several things to note in the example agreement above.
+
+- The smart contract must first be set as below:
+
+```
+#Smart Contract to Pay Employee
+[[@Payment in Wei = Payment in Ether * 1000000000000000000]]
+
+[[Pay Vendor:EthereumCall(
+contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
+interface:[{"name":"makePayment", "type":"function","inputs":
+[{"name":"RecipientAddress", "type":"address"},
+{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
+function:"makePayment";
+arguments:Recipient Ethereum Address,Payment in Wei;
+startDate:Payment Start Date;
+endDate:Payment End Date;
+repeatEvery:"1 minute")]]
+```
+
+and then separately called:
+
+```
+[[Pay Vendor]]
+```
+
+- The interface for the smart contract is needed for the smart contract application binary interface ("ABI") and can be generated from the solidity compiler. The ABI is basically how you call functions in a smart contract and get data back.
+
+::: warning
+
+- The smart contract will not be executed unless there are one or more [Identities (or signatories set for the agreement)](#identity-and-signatures).
+- If the template does not set the appropriate arguments or if the values of those arguments do not align with the underlying smart contract, the smart contract will not execute.
+
+:::
