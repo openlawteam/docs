@@ -72,7 +72,7 @@ Puedes definir un valor por defecto para un variable Number al incluir un númer
 
 El tipo date es un variable de entrada básico. Este tipo transforma la entrada en una entrada de fechas facil de usar. Para crear a un variable de Date, nada más hay que agregar `: Date` después del nombre de un variable. Para decirlo de otro modo, `[[Variable: Date]]`.
 
-Puedes definir un valor por defecto para un variable Date al incluir una fecha como parámetro (en el formato "AAAA-MM-DD") al definir al variable. Por ejemplo, `[[Effective Date: Date("2018-08-01")]]`. El valor del variable resultará en una fecha de "1 de Agosto, 2018" si no se fija ninguna otra fecha.
+Puedes definir un valor por defecto para un variable Date al incluir una fecha como parámetro (en el formato "AAAA-MM-DD") al definir al variable. Por ejemplo, `[[Fecha de Entrada en Vigor: Date("2018-08-01")]]`. El valor del variable resultará en una fecha de "1 de Agosto, 2018" si no se fija ninguna otra fecha.
 
 #### DateTime
 
@@ -566,7 +566,7 @@ El lenguaje de marcado
 Cuando las condicionales se combinan con las expresiones booleanas indicadas anteriormente, la potencia expresiva del lenguaje de marcado de OpenLaw se empieza a apreciar. Por ejemplo, imagina que quieres incluir una disposición adicional en un acuerdo--digamos, obligar a las partes a conseguir una póliza de seguro--si el valor total del acuerdo excede a cierta cantidad en dólares; se podría hacer fácilmente como lo siguiente:
 
 ```
-[[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según el acuerdo: Number]].
+[[ParteA]] pagará a [[ParteB]] los honorarios de $[[Cobros totales por pagar según el acuerdo: Number]].
 
 ....
 
@@ -590,13 +590,13 @@ alguna de las partes, aquella parte notificará en breve a la otra parte.}}
 De igual manera, en muchos casos, puede que quieres modificar sólamente el lenguaje del acuerdo si se materializan una o más situaciones fácticas. Con el uso de expresiones booleanas y condicionales, lo podrá hacer.
 
 ```
-[[ParteA]] pagará a [[ParteB]] la cuota de $[[Cobros totales por pagar según un
-Acuerdo: Number]].
+[[ParteA]] pagará a [[ParteB]] los honorarios de $[[Cobros totales por pagar
+según un Acuerdo: Number]].
 
 {{Cobros totales por pagar según un Acuerdo>20000 =>
     {{Seguro "¿Quiere incluir a una disposición de una póliza de seguro?" =>
         {{Neutra "¿Quiere que la disposición sea neutra?" =>}}
-        {{FavorProveedor "¿Quiere que la disposición sea a favor del proveedor?" =>}}
+        {{FavorProveedor "¿Quiere que la disposición sea a favor del proveedor? =>}}
     }}
 }}
 
@@ -624,23 +624,24 @@ Ley, en la cantidad que sea menor.
 [[ParteA]] un certificado u otro comprobante de su propio seguro, el cual describe
 las condiciones del seguro, y aviso de todo cambio sustancial al seguro.
 
-^^*Seguro Adicional*. [[ParteB]] puede obligar a [[ParteA]] que obtengan una póliza
-de seguro de una cantidad adicional razonable, al proporcionar a [[ParteB]] con
-motivo fundado para el seguro adicional, y requisitos para el seguro adicional.
+^^*Seguro Adicional*. [[ParteB]] puede obligar a [[ParteA]] que obtengan una
+póliza de seguro de una cantidad adicional razonable, al proporcionar a [[ParteB]]
+con motivo fundado para el seguro adicional, y requisitos para el seguro
+adicional.
 
 ^^*Asegurados Adicionales*. [[ParteA]] Una vez agregada a la póliza de [[ParteB]],
 la [[ParteB]] dentro de [[Cantidad de días laborables: Number]] dias laborables a
-partir de la Fecha de Entrada en Vigor, su asegurador debe de agreagar a [[ParteA]]
-como asegurado adicional en su póliza.
+partir de la Fecha de Entrada en Vigor, su asegurador debe de agreagar a [[ParteA]
+] como asegurado adicional en su póliza.
 
-^^*Certificado de Seguro*. [[ParteB]] hará que su asegurador mande un certificado a
-[[ParteA]], como comprobante de que a [[ParteA]] se le ha agregado a la póliza de
-[[ParteB]], y que confirma que el asegurador dará a [[ParteB]] aviso previo por
+^^*Certificado de Seguro*. [[ParteB]] hará que su asegurador mande un certificado
+a [[ParteA]], como comprobante de que a [[ParteA]] se le ha agregado a la póliza
+de [[ParteB]], y que confirma que el asegurador dará a [[ParteB]] aviso previo por
 escrito por lo menos [[Cantidad de días laborables: Number]] días laborables antes
 de cancelar, modificar, o reducir la cantidad de cobertura en la póliza de [[ParteB].
 
-^^Sin Contribución de [[ParteA]]. Todo seguro que tiene [[ParteA]] no será sujeto a
-contribución.}}
+^^Sin Contribución de [[ParteA]]. Todo seguro que tiene [[ParteA]] no será sujeto
+a contribución.}}
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -698,7 +699,8 @@ Para hacer un cálculo, primero tiene que crear a un alias al incluir un `@` ant
 
 %>
 
-[[ParteA]] pagará a [[ParteB]] $[[Pago Mensual]] mensualmente, o $[[Pago Anual]] anualmente, pagadero a partir de los treinta (30) días tras la facturación.
+[[ParteA]] pagará a [[ParteB]] $[[Pago Mensual]] mensualmente, o $[[Pago Anual]]
+anualmente, pagadero a partir de los treinta (30) días tras la facturación.
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -743,7 +745,8 @@ La misma lógica se puede usar para ampliar sobre el ejemplo del seguro que se d
 
 %>
 
-[[ParteA]] pagará a [[ParteB]] $[[Pago Mensual]] mensualmente, o $[[Pago Anual]] anualmente, pagadero a partir de los treinta (30) días tras la facturación.
+[[ParteA]] pagará a [[ParteB]] $[[Pago Mensual]] mensualmente, o $[[Pago Anual]]
+anualmente, pagadero a partir de los treinta (30) días tras la facturación.
 
 {{Pago Anual > 20000 =>
     {{Seguro "¿Quiere incluir a una disposición de una póliza de seguro?" =>
@@ -768,26 +771,29 @@ alguna de las partes, aquella parte notificará en breve a la otra parte.}}
 
 {{(Pago Anual > 20000 && FavorProveedor) => ^**Seguro**.
 
-^^*Obligación de Seguro*. [[ParteB]] mantendrá la cantidad de seguro necesaria para
-saldar sus obligaciones y responsabilidades conforme con este acuerdo o según la Ley,
-en la cantidad que sea menor.
+^^*Obligación de Seguro*. [[ParteB]] mantendrá la cantidad de seguro necesaria
+para saldar sus obligaciones y responsabilidades conforme con este acuerdo o
+según la Ley, en la cantidad que sea menor.
 
 ^^*Comprobante del seguro*. A la petición de [[ParteA]], [[ParteB]] entregará a
-[[ParteA]] con un certificado u otro comprobante aceptable de su propio seguro, el cual
-describe la cantidad y condiciones de su cobertura.
+[[ParteA]] con un certificado u otro comprobante aceptable de su propio seguro,
+el cual describe la cantidad y condiciones de su cobertura.
 
-^^*Seguro Adicional*. [[ParteB]] puede obligar a [[ParteA]] que obtengan una póliza
-de seguro de una cantidad adicional razonable, al proporcionar a [[ParteB]] con
-motivo fundado para el seguro adicional, y requisitos para el seguro adicional.
+^^*Seguro Adicional*. [[ParteB]] puede obligar a [[ParteA]] que obtengan una
+póliza de seguro de una cantidad adicional razonable, al proporcionar a [[ParteB]]
+con motivo fundado para el seguro adicional, y requisitos para el seguro
+adicional.
 
 ^^*Asegurados Adicionales*. [[ParteA]] Una vez agregada a la póliza de [[ParteB]],
 [[ParteB]], dentro de [[Cantidad de días]] dias laborables a partir de la Fecha de
-Entrada en Vigor, su asegurador debe de agreagar a [[ParteA]] como asegurado adicional
-en su póliza. ^^*Certificado de Seguro*. [[ParteB]] hará que su asegurador mande un
-certificado a [[ParteA]], como comprobante de que a [[ParteA]] se le ha agregado a la
-póliza de [[ParteB]], y que confirma que el asegurador dará a [[ParteB]] aviso previo
-por escrito por lo menos [[Cantidad de días laborables: Number]] días laborables antes
-de cancelar, modificar, o reducir la cantidad de cobertura en la póliza de [[ParteB].
+Entrada en Vigor, su asegurador debe de agreagar a [[ParteA]] como asegurado
+adicional en su póliza. ^^*Certificado de Seguro*. [[ParteB]] hará que su
+asegurador mande un certificado a [[ParteA]], como comprobante de que a [[ParteA]]
+se le ha agregado a la póliza de [[ParteB]], y que confirma que el asegurador
+dará a [[ParteB]] aviso previo por escrito por lo menos [[Cantidad de días
+laborables: Number]] días laborables antes de cancelar, modificar, o reducir la
+
+Wcantidad de cobertura en la póliza de [[ParteB].
 
 ^^Sin Contribución de [[ParteA]]. Todo seguro que tiene [[ParteA]] no será sujeto a
 contribución.
@@ -853,10 +859,15 @@ Los componentes de condicionales que tienen expresiones booleanas se pueden comb
 ```
 ^**Retención de Impuestos Federales (con el uso del método Porcentaje).**
 
-La cantidad de impuestos federales sobre los ingresos que se ha de retener del sueldo semanal del empleado se calcula a partir del Sueldo Semanal Sujeto a Retención de Impuestos sobre los Ingresos y
+La cantidad de impuestos federales sobre los ingresos que se ha de retener del
+sueldo semanal del empleado se calcula a partir del Sueldo Semanal Sujeto a
+Retención de Impuestos sobre los Ingresos y
 el estado del empleado en su declaración. El Empleado elige que se le retenga a la
-{{Estado Soltero "Estado del Empleado en su declaración: ¿'Soltero'?" => Tasa de soltero(a)}}{{Estado casado "¿'Casado(a)'?" => Tasa de casado(a)}}{{Estado Casado con Retención por Separado "'Casado(a),
-pero con una tasa de retención mayor, de Soltero'?" => Casado(a), pero con tasa mayor de Soltero(a)}}.
+{{Estado Soltero "Estado del Empleado en su declaración: ¿'Soltero'?" => Tasa de
+soltero(a)}}{{Estado casado "¿'Casado(a)'?" => Tasa de casado(a)}}{{Estado Casado
+con Retención por Separado "'Casado(a),
+pero con una tasa de retención mayor, de Soltero'?" => Casado(a), pero con tasa
+mayor de Soltero(a)}}.
 
 {{Estado Soltero(a) || Estado Casado con Retención por Separado || !Estado Casado =>
     {{
@@ -864,23 +875,36 @@ pero con una tasa de retención mayor, de Soltero'?" => Casado(a), pero con tasa
         de Impuesto sobre los Ingresos Retenida = 0]]}}
         {{(Sueldo Semanal Sujeto a Retenciones Federales > 71) && (Sueldo
         Semanal Sujeto a Retenciones Federales <= 254) => [[@Cantidad de
-        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 71) * 0.10]]}}
-        {{(Sueldo Semanal Sujeto a Retenciones Federales > 254) && (Sueldo Semanal Sujeto a Retenciones Federales <= 815) => [[@Cantidad de
-        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 254) * 0.12 +
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a
+        Retenciones Federales - 71) * 0.10]]}}
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 254) && (Sueldo
+        Semanal Sujeto a Retenciones Federales <= 815) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a
+        Retenciones Federales - 254) * 0.12 +
         18.30]]}}
-        {{(Sueldo Semanal Sujeto a Retenciones Federales > 815) && (Sueldo Semanal Sujeto a Retenciones Federales <= 1658) => [[@Cantidad de
-        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 815) * 0.22 +
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 815) && (Sueldo
+        Semanal Sujeto a Retenciones Federales <= 1658) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a
+        Retenciones Federales - 815) * 0.22 +
         85.62]]}}
-        {{(Sueldo Semanal Sujeto a Retenciones Federales > 1658) && (Sueldo Semanal Sujeto a Retenciones Federales <= 3100) => [[@Cantidad de
-        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 1658) * 0.24
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 1658) && (Sueldo
+        Semanal Sujeto a Retenciones Federales <= 3100) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a
+        Retenciones Federales - 1658) * 0.24
         + 271.08]]}}
-        {{(Sueldo Semanal Sujeto a Retenciones Federales > 3100) && (Sueldo Semanal Sujeto a Retenciones Federales <= 3917) => [[@Cantidad de
-        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 3100) * 0.32
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 3100) && (Sueldo
+        Semanal Sujeto a Retenciones Federales <= 3917) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a
+        Retenciones Federales - 3100) * 0.32
         + 617.16]]}}
-        {{(Sueldo Semanal Sujeto a Retenciones Federales > 3917) && (Sueldo Semanal Sujeto a Retenciones Federales <= 9687) => [[@Cantidad de
-        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales - 3917) * 0.35
+        {{(Sueldo Semanal Sujeto a Retenciones Federales > 3917) && (Sueldo
+        Semanal Sujeto a Retenciones Federales <= 9687) => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a
+        Retenciones Federales - 3917) * 0.35
         + 878.60]]}}
-        {{Sueldo Semanal Sujeto a Retenciones Federales > 9687 => [[@Cantidad de Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a Retenciones Federales -
+        {{Sueldo Semanal Sujeto a Retenciones Federales > 9687 => [[@Cantidad de
+        Impuesto sobre los Ingresos Retenida = (Sueldo Semanal Sujeto a
+        Retenciones Federales -
         9687) * 0.37 + 2898.10]]}}
     }}
 }}
@@ -888,7 +912,7 @@ pero con una tasa de retención mayor, de Soltero'?" => Casado(a), pero con tasa
 La cantidad del impuesto federal sobre los ingreso que se ha de retener del sueldo semanal del Empleado es de **$[[Cantidad de Impuesto sobre los Ingreso Retenida]]**.
 ```
 
-## Identidad y Firmas
+## Identity ("Identidad") y Signatures ("Firmas")
 
 OpenLaw también dispone de herramientas que te permite firmar electrónicamente a un acuerdo, y luego guardar aquellas firmas electrónicas en el blockchain de Ethereum. Si piensas crear un modelo para aprovecharse de esta capacidad, tendrás que incluir un variable especializado tipo Identity ("Identidad") en el texto del modelo. El variable Identity indica que una parte tiene que firmar el acuerdo y te permitirá mandar una notificación por correo electrónico a la parte para que repasen y firmen el acuerdo.
 
@@ -918,7 +942,7 @@ Una vez que un usuario indique que el modelo este listo para su firma, OpenLaw g
 
 ### Incrustación de Firmas
 
-También se puede incrustar una firma en el documento al agregar `| Signature` al final de un variable Identity. Por ejemplo, partiendo del ejemplo anterior:
+También se puede incrustar una firma en el documento al agregar `| Signature` ("Firma") al final de un variable Identity. Por ejemplo, partiendo del ejemplo anterior:
 
 ```
 **[[ParteA | Mayúscula]]**
@@ -989,9 +1013,11 @@ ___________________________
 [[Firmante de la Empresa Nombre]] [[Firmante de la Empresa Apellido]]
 Title:  [[Firmante de la Empresa Título]]
 Address:
-[[#Dirección de la Empresa: Address]][[Dirección de la Empresa.streetNumber]] [[Empresa
+[[#Dirección de la Empresa: Address]][[Dirección de la Empresa.streetNumber]]
+[[Empresa
 Address.streetName]]
-[[Dirección de la Empresa.city]], [[Dirección de la Empresa.state]] [[Dirección de la Empresa.zipCode]]
+[[Dirección de la Empresa.city]], [[Dirección de la Empresa.state]] [[Dirección
+de la Empresa.zipCode]]
 
 [[Nombre del Vendedor | Mayúscula]]
 
@@ -1006,7 +1032,7 @@ Address.streetName]]
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/ddd995d833f242bda2f644c1c9e99771" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
-You can also include references to conditionals in a grouping. An example of this functionality is shown below.
+También se puede incluir referencias a condicionales en un agrupado. Un ejemplo de esta capacidad es lo siguiente.
 
 ```
 <%
@@ -1038,16 +1064,21 @@ ___________________________
 [[Firmante de la Empresa Nombre]] [[Firmante de la Empresa Apellido]]
 Title:  [[Firmante de la Empresa Título]]
 Address:
-[[#Dirección de la Empresa: Address]][[Dirección de la Empresa.streetNumber]] [[Empresa
+[[#Dirección de la Empresa: Address]][[Dirección de la Empresa.streetNumber]]
+[[Empresa
 Address.streetName]]
-[[Dirección de la Empresa.city]], [[Dirección de la Empresa.state]] [[Dirección de la Empresa.zipCode]]
+[[Dirección de la Empresa.city]], [[Dirección de la Empresa.state]] [[Dirección
+de la Empresa.zipCode]]
 
-{{EntidadDelVendedor "¿Es el vendedor una persona jurídica?" => [[Nombre del Vendedor | Mayúscula]]}}
+{{EntidadDelVendedor "¿Es el vendedor una persona jurídica?" => [[Nombre del
+Vendedor | Mayúscula]]}}
 {{!EntidadDelVendedor => VENDEDOR}}
 
 ___________________________
-{{EntidadDelVendedor => [[Firmante del Vendedor Nombre]] [[Firmante del Vendedor Apellido]]
-Title:  [[Firmante del Vendedor Título]]}}{{!EntidadDelVendedor => [[Nombre del Vendedor]]}}
+{{EntidadDelVendedor => [[Firmante del Vendedor Nombre]] [[Firmante del Vendedor
+Apellido]]
+Title:  [[Firmante del Vendedor Título]]}}{{!EntidadDelVendedor => [[Nombre del
+Vendedor]]}}
 Address:
 [[#Vendedor Address: Address]][[Vendedor Address.streetNumber]] [[Vendedor
 Address.streetName]]
@@ -1068,7 +1099,7 @@ El contrato inteligente se puede llamar como parte de un acuerdo sencillo o comp
 #Smart Contract to Pay Employee
 [[@Payment in Wei = Payment in Ether * 1000000000000000000]]
 
-[[Pay Vendor:EthereumCall(
+[[Pagar al Vendedor:EthereumCall(
 contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
 interface:[{"name":"makePayment", "type":"function","inputs":
 [{"name":"RecipientAddress", "type":"address"},
@@ -1081,9 +1112,11 @@ repeatEvery:"1 minute")]]
 
 %>
 
-Este acuerdo lo celebra [[Parte A]] y [[Parte B]] en el día [[Fecha de Entrada en Vigor: Date]].
+Este acuerdo lo celebra [[Parte A]] y [[Parte B]] en el día [[Fecha de Entrada en
+Vigor: Date]].
 
-**EN CONSIDERACIÓN DE QUE**, [[Parte B]] desea los servicios de programación de [[Parte A]]; y
+**EN CONSIDERACIÓN DE QUE**, [[Parte B]] desea los servicios de programación de
+[[Parte A]]; y
 
 **EN CONSIDERACIÓN DE QUE**, [[Parte A]] desea que se le paga en ether;
 
@@ -1102,26 +1135,26 @@ Etherum en
 "0xe532d1d1147ab40d0a245283f4457c733b5e3d41," el cual se incorpora por referencía
 en el presente.
 
-[[Pay Vendor]]
+[[Pagar al Vendedor]]
 
-**[[Parte A | Uppercase]]**
+**[[Parte A | Mayúscula]]**
 
-[[Parte A Email: Identity | Signature]]
+[[Parte A Correo Electrónico: Identity | Signature]]
 _________________________
 (signature)
 
-**[[Parte B | Uppercase]]**
+**[[Parte B | Mayúscula]]**
 
-[[Parte B Email: Identity | Signature]]
+[[Parte B Correo Electrónico: Identity | Signature]]
 _________________________
 (signature)
 ```
 
-Once the agreement is signed, the smart contract will execute as shown in the video below. OpenLaw sends the smart contract a message to trigger its execution and pass along the relevant values.
+Una vez firmado el contrato, el contrato inteligente se ejecutará según lo visto en el vídeo siguiente. OpenLaw manda un mensaje al contrato inteligente para hacer que se ejecute y para pasarle los valores pertinentes.
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/20f8fc1a2dfe4616a0fd08f0f87267b7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
-The solidity code for the smart contract found at [0xe532d1d1147ab40d0a245283f4457c733b5e3d41](https://rinkeby.etherscan.io/address/0xe532d1d1147ab40d0a245283f4457c733b5e3d41) is as follows:
+El código de solidity para el contrato inteligente que se encuentra en  [0xe532d1d1147ab40d0a245283f4457c733b5e3d41](https://rinkeby.etherscan.io/address/0xe532d1d1147ab40d0a245283f4457c733b5e3d41) es lo siguiente:
 
 ```
 pragma solidity ^0.4.10;
@@ -1147,37 +1180,395 @@ contract salary {
 }
 ```
 
-There are several things to note in the example agreement above.
+Hay varias cosas que señalar en el acuerdo ejemplar anterior.
 
-- The smart contract must first be set as below:
+- El contrato inteligente primero se tiene que programar según lo siguiente:
 
 ```
-#Smart Contract to Pay Employee
+#Contrato Inteligente para Pagar a un Empleado
 [[@Payment in Wei = Payment in Ether * 1000000000000000000]]
 
-[[Pay Vendor:EthereumCall(
+[[Pagar al Vendedor:EthereumCall(
 contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
 interface:[{"name":"makePayment", "type":"function","inputs":
 [{"name":"RecipientAddress", "type":"address"},
 {"type":"uint","name":"PaymentInWei"}],"outputs": []}];
 function:"makePayment";
-arguments:Recipient Ethereum Address,Payment in Wei;
-startDate:Payment Start Date;
-endDate:Payment End Date;
+arguments:Dirección de Ethereum del Destinatario,Pago en Wei;
+startDate:Fecha de Inicio del Pago;
+endDate:Fecha de Finalización del Pago;
 repeatEvery:"1 minute")]]
 ```
 
-and then separately called:
+y luego se llama por separado:
 
 ```
-[[Pay Vendor]]
+[[Pagar al Vendedor]]
 ```
 
-- The interface for the smart contract is needed for the smart contract application binary interface ("ABI") and can be generated from the solidity compiler. The ABI is basically how you call functions in a smart contract and get data back.
+- El interfaz para el contrato inteligente se necesita para la interfaz binaria de aplicación ("ABI") del contrato inteligente, y se puede generar a partir del compilador solidity. La ABI es básicamente la manera de llamar una función en un contrato inteligente y recibir datos de vuelta.
 
-::: warning
+::: aviso
 
-- The smart contract will not be executed unless there are one or more [Identities (or signatories set for the agreement)](#identity-and-signatures).
-- If the template does not set the appropriate arguments or if the values of those arguments do not align with the underlying smart contract, the smart contract will not execute.
+- El contrato inteligente no se ejecutará a no ser que haya una o más [Identities (o firmantes programados para el acuerdo)](#identity-y-signatures).
+- Si el modelo no programa los argumentos apropriados o si los valores de aquellos argumentos no están conformes con el contrato inteligente subyacente, el contrato inteligente no se ejecutará.
 
 :::
+
+### Seleccionar a la Red Ethereum a Nivel del Contrato
+
+Como una opción para incrustar a un contrato inteligente para que se ejecute como parte de un acuerdo, puedes seleccionar a la red de Ethereum usada para la ejecución de contratos inteligentes al especificar la `network` ("red") con `"Ropsten"`, `"Kovan"`, o `"Rinkeby"` según lo visto a continuación. Se integrará dentro de poco apoyo para la `"Mainnet"`.
+
+```
+[[Pagar al Vendedor:EthereumCall(
+contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
+interface:[{"name":"makePayment", "type":"function","inputs":
+[{"name":"RecipientAddress", "type":"address"},
+{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
+function:"makePayment";
+arguments:Dirección de Ethereum del Destinatario,Pago en Wei;
+startDate:Fecha de Inicio del Pago;
+endDate:Fecha de Finalización del Pago;
+repeatEvery:"1 minute")]]
+```
+
+La red programada para el nivel del contrato en la `EthereumCall` es específico a solamente las ejecuciones para aquel acuerdo particular. Una transacción de firma que viene tras la firma de un acuerdo en una instancia de OpenLaw usará la [application level network](/api-Cliente/#getcurrentnetwork) programado por un usuario `Admin` para aquella instancia. Así que es posible usar una red para la firma de un acuerdo y otra red para ejecutar cualquier transacción de contrato inteligente como parte de aquel mismo acuerdo.
+
+::: consejo
+Si omites el parámetro `network` del nivel de la red, y su valor, de la llamada `EthereumCall`, la red que se usa por defecto para la ejecución de los contratos inteligentes será la [application level network](/api-Cliente/#getcurrentnetwork) que este programado en el momento de iniciación de las ejecuciones.
+:::
+
+## Negocios
+
+Con el uso de OpenLaw, se puede conectar a varios modelos en lo que llamamos un "negocio". Un negocio es simplemente una colección de modelos.
+
+```
+[[Nombre del Variable: Modelo("Nombre del Modelo")]]
+```
+
+Cuando creas un negocio y llamas uno o más modelos, tendrás la oportunidad de recopilar datos pertinentes en una pantalla de apertura, la cual se puede pre-cargar en múltiples modelos a la vez.
+
+### Negocio Básico
+
+Por medio de explicación, supongamos que tienes dos modelos muy simplificados:
+
+**Acuerdo de Consultoría**
+
+```
+Este Acuerdo de Consultoría (el "Acuerdo") se celebra el día [[Fecha de Vigencia:
+Fecha]] por y entre [[Part A]] ("Cliente") y la [[Parte B]] ("Consultor").
+
+^ **Contratación de Servicios**. El Cliente puede emitir Encargos de Proyecto al
+Consultor en el formulario adjunto a este Acuerdo y señalado como Elemento A
+("Encargo de Proyecto"). Sujeto a las condiciones de este Acuerdo, el Consultor
+llevará a cabo los servicios que vienen indicados en los Engcargos de Proyectos
+aceptados por el Consultor (los "Servicios") antes de la fechas de finalización
+indicadas en lo mismo.
+
+^**Compensación**.  El Cliente pagará al Consultor los honorarios que consta en
+cada Encargo de Proyecto para Servicios proporcionados conforme con este Acuerdo
+como la única compensación para tales Servicios.
+
+
+**CLIENTE**
+
+[[ Parte A Correo Electrónico del Firmante: Identity]]
+_______________________
+[[ Parte A Firmante Nombre]] [[ Parte A Firmante Apellido]]
+
+**CONSULTOR**
+
+[[Parte B Firmante Correo Electrónico: Identity]]
+_______________________
+[[Parte B Firmante Nombre]] [[Parte B Firmante Apellido]]
+```
+
+**Encargo de Proyecto**
+
+```
+**Encargo de Proyecto [[Encargo de Proyecto Número]] Según Acuerdo de Consultoría**
+Con fecha de: [[Fecha de Entrada en Vigor: Date]]
+
+Este Encargo de Proyecto ("Encargo de Proyecto"), acepta e incorpora por
+referencia las condiciones del Acuerdo de Consultoría (el "Acuerdo"), celebrado
+en el [[Fecha de Entrada en Vigor: Date]], [[Parte A]] ("Cliente") y [[Parte B]]
+("Consultor").  Los servicios que se llevan a cabo según este Encargo de Proyecto
+se llevarán a cabo conforme con y serán sujetos a las condiciones de este Encargo
+de Proyecto, el Acuerdo. Los términos con mayúscula inicial que se usan pero que
+no se definen en este Encargo de Proyecto tendrán los significados que rezan en
+el Acuerdo.
+
+**Proyecto:** [[Descripción del Proyecto]]
+
+**Horario de Trabajo:** [[Descripción del Calendario del Trabajo]]
+
+**Honorarios:** Para los servicios proporcionados, el Cliente pagará al Consultor
+[[Descripción de Honorarios]] al finalizarse el Proyecto. Los honorarios no se
+pagarán hasta que el trabajo que se lleva a cabo basado en este Encargo de
+Proyecto lo haya aprobado el Cliente, lo cual no le será retenido sin motivo
+fundado.
+
+
+**CLIENTE**
+
+[[ Parte A Correo Electronico Firmante: Identity]]
+_______________________
+[[ Parte A Firmante Nombre]] [[ Firmante Apellido]]
+
+**Consultor**
+
+[[Parte B Correo Electronico Firmante: Identity]]
+_______________________
+[[Parte B Firmante Nombre]] [[Parte B Firmante Apellido]]
+```
+
+Se puede combinar estos dos documentos en un negocio simplemente al crear el siguiente modelo:
+
+**Integración de Consultores**
+
+```
+==Fecha de Entrada en Vigor==
+[[Fecha de Entrada en Vigor: Date]]
+
+==Cliente==
+[[Parte A]]
+[[Parte A Firmante Nombre]]
+[[Parte A Firmante Apellido]]
+
+==Consultor==
+[[Parte B]]
+[[Parte B Firmante Nombre]]
+[[Parte B Firmante Apellido]]
+
+==Encargo de Proyecto==
+[[Encargo de Proyecto Número]]
+[[Descripción Honorarios]]
+[[Descripción Proyecto]]
+[[Descripción Calendario de Trabajo]]
+
+
+[[Acuerdo de Consultoría: Modelo("Acuerdo de Consultoría")]]
+[[Encargo de Proyecto: Modelo("Encargo de Proyecto")]]
+```
+
+Lo anterior generará una página de apertura de variables comunes compartidos entre estos modelos. Una vez que se rellenan estos variables, los dos acuerdos se pueden ejecutar según lo visto en lo siguiente:
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+::: aviso
+
+- La página de apertura de un negocio no se reproducirá correctamente si no programa uno o más de los variables en un agrupado.
+- Todo variable que se incluya en un agrupado, que no se encuentra en un modelo subyacente no se reproducirá.
+
+:::
+
+### Negocios Avanzados con el Uso de Condicionales
+
+Los negocios también se pueden programar para aceptar condicionales presentes en múltiples acuerdos. Supongamos para explicación que los dos acuerdos se modificaron para incluir una condicional que especifique que al consultor le pagará en ether.
+
+**Acuerdo de Consultoría**
+
+```
+Este Acuerdo de Consultoría (el "Acuerdo") se celebra el día [[Fecha de Vigencia:
+Fecha]] por y entre [[Part A]] ("Cliente") y la [[Parte B]] ("Consultor").
+
+^ **Contratación de Servicios**. El Cliente puede emitir Encargos de Proyecto al
+Consultor en el formulario adjunto a este Acuerdo y señalado como Elemento A
+("Encargo de Proyecto"). Sujeto a las condiciones de este Acuerdo, el Consultor
+llevará a cabo los servicios que vienen indicados en los Engcargos de Proyectos
+aceptados por el Consultor (los "Servicios") antes de la fechas de finalización
+indicadas en lo mismo.
+
+^**Compensación**.  El Cliente pagará al Consultor los honorarios que consta en
+cada Encargo de Proyecto para Servicios proporcionados conforme con este Acuerdo
+como la única compensación para tales Servicios. {{El pago en Ether "Pagarás al
+consultor en ether?" => Pago se tiene que efectuar en ether.}}
+
+
+**CLIENTE**
+
+[[Parte A Correo Electrónico del Firmante: Identity]]
+_______________________
+[[Parte A Firmante Nombre]] [[Parte A Firmante Apellido]]
+
+**CONSULTOR**
+
+[[Parte B Firmante Correo Electrónico: Identity]]
+_______________________
+[[Parte B Firmante Nombre]] [[Parte B Firmante Apellido]]
+```
+
+**Encargo de Proyecto**
+
+```
+**Encargo de Proyecto [[Encargo de Proyecto Número]] Según Acuerdo de Consultoría**
+Con fecha de: [[Fecha de Entrada en Vigor: Date]]
+
+Este Encargo de Proyecto ("Encargo de Proyecto"), acepta e incorpora por
+referencia las condiciones del Acuerdo de Consultoría (el "Acuerdo"), celebrado
+en el [[Fecha de Entrada en Vigor: Date]], [[Parte A]] ("Cliente") y [[Parte B]]
+("Consultor").  Los servicios que se llevan a cabo según este Encargo de Proyecto
+se llevarán a cabo conforme con y serán sujetos a las condiciones de este Encargo
+de Proyecto, el Acuerdo. Los términos con mayúscula inicial que se usan pero que
+no se definen en este Encargo de Proyecto tendrán los significados que rezan en
+el Acuerdo.
+
+**Proyecto:** [[Descripción del Proyecto]]
+
+**Horario de Trabajo:** [[Descripción del Calendario del Trabajo]]
+
+**Honorarios:** Para los servicios proporcionados, el Cliente pagará al Consultor
+[[Descripción de Honorarios]] al finalizarse el Proyecto. Los honorarios no se
+pagarán hasta que el trabajo que se lleva a cabo basado en este Encargo de
+Proyecto lo haya aprobado el Cliente, lo cual no le será retenido sin motivo
+fundado.
+
+**CLIENTE**
+
+[[Parte A Correo Electronico Firmante: Identity]]
+_______________________
+[[Parte A Firmante Nombre]] [[Firmante Apellido]]
+
+**CONSULTOR**
+
+[[Parte B Correo Electronico Firmante: Identity]]
+_______________________
+[[Parte B Firmante Nombre]] [[Parte B Firmante Apellido]]
+```
+
+**Integración de Consultores**
+
+```
+==Fecha de Entrada en Vigor==
+[[Fecha de Entrada en Vigor: Date]]
+
+==Cliente==
+[[Parte A]]
+[[Parte A Firmante Nombre]]
+[[Parte A Firmante Apellido]]
+
+==Consultor==
+[[Parte B]]
+[[Parte B Firmante Nombre]]
+[[Parte B Firmante Apellido]]
+
+==Encargo de Proyecto==
+[[Encargo de Proyecto Número]]
+[[Descripción Honorarios]]
+[[Descripción Proyecto]]
+[[Descripción Calendario de Trabajo]]
+[[Pago en Ether]]
+[[Dirección del Destinatario]]
+
+
+[[Acuerdo de Consultoría: Modelo("Acuerdo de Consultoría")]]
+[[Encargo de Proyecto: Modelo("Encargo de Proyecto")]]
+{{Pago en Ether "Pagarás al consultor en ether?" => [[Dirección del Destinatario]]}}
+```
+
+A la página de apertura del negocio, al usuario se le presentará la condicional. A base de la respuesta, al usuario se le dará un variable adicional y se modificará el texto del acuerdo subyacente.
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+### El uso de Collections y Path en un Negocio
+
+El tipo Collection usado conjuntamente con un negocio hace posible que se genere un conjunto de acuerdos para cada artículo que se agregue a una Collection. Esto puede ser especialmente útil cuando surge la necesidad de crear un contrato con el uso del mismo modelo de acuerdo pero con un conjunto único de valores de entrada para cada parte que se d identifique en un tipo Collection.
+
+Esto es un ejemplo básico del uso de un Collection (del tipo Structure) en un negocio:
+
+```
+==Fecha de Entrada en Vigor==
+[[Fecha de Entrada en Vigor: Date]]
+
+==Empresa==
+[[Empresa Nombre]]
+[[Empresa Dirección: Address]]
+[[Empresa Firmante Nombre]]
+[[Empresa Firmante Cargo]]
+[[Empresa Firmante Correo Electrónico: Identity]]
+
+==Empleados==
+[[Datos del Empleado: Structure(
+  Nombre: Text;
+  Apellido: Text;
+  Dirección: Address;
+  Cargo: Text;
+  Dirección de Ethereum: EthAddress;
+  Correo Electrónico: Identity
+  )]]
+[[Empleados: Collection<Datos del Empleado>]]
+
+# Acuerdo de Empleo para cada Empleado indivíduo
+{{#for each Empleado: Empleados =>
+  [[_: Template(
+    name: "Acuerdo de Empleo";
+    parameters:
+      Nombre del Empleado -> (Empleado.Nombre + " " + Empleado.Apellido),
+      Dirección del Empleado -> Empleado.Dirección,
+      Cargo del Empleado -> Empleado.Cargo,
+      Dirección de Ethereum del Destinatario -> Empleado.Dirección de Ethereum,
+      Correo Electrónico del Empleado Firmante -> Empleado.Correo electrónico;
+    path: "acuerdos" / (Employee.First name + " " + Empleado.Apellido)
+    )]]
+}}
+```
+
+Vamos paso a paso por lo que está pasando con la Collection en este ejemplo.
+
+- Primeramente, definimos un nuevo tipo Structure, `Employee Info`, agrupando toda la información pertinente para un empleado:
+
+```
+[[Datos del Empleado: Structure(
+  Nombre: Text;
+  Apellido: Text;
+  Dirección: Address;
+  Cargo: Text;
+  Dirección de Ethereum: EthAddress;
+  Correo electrónico: Identity
+  )]]
+```
+
+- Luego definimos un nuevo tipo Collection de Datos de Empleados, `Empleados`:
+
+```
+[[Empleados: Collection<Datos del Empleado>]]
+```
+
+- Para cada elemento en la Collection (cada `Employee`), queremos generar un modelo para el `Acuerdo de Empleo`. Fijamos el nombre del modelo en `_` porque no tiene que definirse y podemos hacer que el nombre del variable sea anónimo.
+
+```
+{{#for each Empleado: Empleados =>
+  [[_: Template(
+    name: "Acuerdo de Empleo";
+```
+
+::: aviso
+Dos o más variables de modelo usando el nombre `_` no causarán un error. Sin embargo, nunca se debe de usar un variable anónimo para [variables de entrada](#variables) como Text, Number, o Address porque esto sí resultará con un error.
+:::
+
+- Luego conectamos los parametros en el modelo `Acuerdo de Empleo` con los parámetros asociados para un `Empleado` individual en el modelo del negocio. Esto hace que sea posible generar acuerdos basado en el mismo modelo pero con valores de entrada distintos. Cada uno de los variables `Nombre del Empleado`, `Dirección del Empleado`, `Cargo del Empleado`, `Dirección Ethereum del Destinatario`, y `Correo Electrónico del Empleado Firmante` tiene que definirse en el modelo `Acuerdo de Empleo` y tiene que ser del mismo tipo de variable como el parámetro con el cual se ha conectado desde el modelo del negocio.
+
+```
+parameters:
+    Nombre del Empleado -> (Empleado.Nombre + " " + Empleado.Apellido),
+    Dirección del Empleado -> Empleado.Dirección,
+    Cargo del Empleado -> Empleado.Cargo,
+    Dirección de Ethereum del Destinatario -> Empleado.Dirección de Ethereum,
+    Correo Electrónico del Empleado Firmante -> Empleado.Correo electrónico;
+```
+
+- Finalmente, el parámetro `path` tiene 2 propósitos: (1) proporciona un nombre único a cada acuerdo basado en los parámetros y (2) define a la ruta que se usará si bajas los acuerdos en el negocio.
+
+```
+path: "acuerdos" / (Empleado.Nombre + " " + Empleado.Nombre)
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/f55c822761e249d0ae7437fe23854590" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+## Otras Etiquetas
+
+Para poder redactar en lenguaje de marcado legible, el lenguaje de marcado contiene varias etiquetas adicionales, las cuales permiten que los usuarios agreguen comentarios y escondan variables del texto subyacente. La sintáxis para estas etiquetas se ve en lo siguiente:
+
+`#` - agregar un comentario
+
+`<% ... %>` - las etiquetas de apertura y cierre para bloques de código (p.ej., usa con "agrupados", llamadas a contratos inteligentes, y para esconder a variables y condicionales)
