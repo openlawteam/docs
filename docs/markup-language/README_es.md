@@ -1,7 +1,11 @@
 ---
 meta:
   - nombre: descripción
-    contenido: El protocolo OpenLaw se basa en un lenguaje de marcado para convertir a los acuerdos de lengua natural en objetos legibles por máquina con variables y lógica pertinentes definidos dentro de un documento en concreto.
+    contenido: >-
+      El protocolo OpenLaw se basa en un lenguaje de marcado para convertir a
+      los acuerdos de lengua natural en objetos legibles por máquina con
+      variables y lógica pertinentes definidos dentro de un documento en
+      concreto.
 ---
 
 # Lenguaje de marcado
@@ -41,10 +45,13 @@ referirá a la Contraparte siempre que el contexto corresponde a la divulgación
 la Información Confidencial de la Contraparte a la Empresa, a quien se referirá
 como "Destinatario" en aquel contexto.
 ```
-Una vez que se identifique, el variable se puede volver un elemento de formato en nuestra aplicación de generación de contratos, al que se accede a través de la aplicación de creación de contratos de OpenLaw, "DraftView". Como notarás en lo de arriba, por defecto, el nombre del
-variable se auto-rellena como el marcador del formato para ayudarle al usuario que pretende generar un contrato.
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/a1c20c3aa1494e22aa36e12cef947fe3" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+Una vez que se identifique, el variable se puede volver un elemento de formato en nuestra aplicación de generación de contratos, al que se accede a través de la aplicación de creación de contratos de OpenLaw, "DraftView". Como notarás en lo de arriba, por defecto, el nombre del variable se auto-rellena como el marcador del formato para ayudarle al usuario que pretende generar un contrato.
+
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/a1c20c3aa1494e22aa36e12cef947fe3" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 Si es que, sin embargo, el nombre del variable no sea muy descriptivo, se puede hacer variar el texto que sale generado automáticamente en el formato al incluir una cadena de caracteres tras el nombre del variable. Por ejemplo, `[[Nombre de la Empresa "¿Cuál es el nombre de la empresa?"]]` o `[[Nombre de la Empresa "¿Cuál es el nombre de la contraparte?"]]`.
 
@@ -62,9 +69,7 @@ El valor de la entrada de un número entero se mostrará como un número separad
 
 Tras la definición de un variable Number, también se puede mostrar la entrada correspondiente a aquel variable como un número redondeado ("rounding", en inglés), permitiendo especificar la precisión. Por ejemplo, `[[Variable | rounding(2)]]`.
 
-::: consejo
-El redondeado es una herramienta de formatos para mostrar el variable Number, y no redefine el valor del variable. Por ejemplo, si el variable `Num` se define como `[[Num: Number]]` y luego el usuario entra `1.23456` para aquel variable, `[[Num | rounding(2)]]` mostrará `1.23` pero el valor de `Num` seguirá igual a `1.23456`.
-:::
+::: consejo El redondeado es una herramienta de formatos para mostrar el variable Number, y no redefine el valor del variable. Por ejemplo, si el variable `Num` se define como `[[Num: Number]]` y luego el usuario entra `1.23456` para aquel variable, `[[Num | rounding(2)]]` mostrará `1.23` pero el valor de `Num` seguirá igual a `1.23456`. :::
 
 Puedes definir un valor por defecto para un variable Number al incluir un número entero o décimo como parámetro al definir al variable. Por ejemplo, `[[Num: Number(10)]]`. El valor del variable será de `10` si no se usa ningún otra entrada.
 
@@ -135,9 +140,7 @@ sin indicador de tipo o `: Text` - señala que un variable es texto
 
 `: YesNo "<user prompt>"` - genera a una pregunta binaria con entradas de botones de opción
 
-::: aviso
-Al crear un nombre para un variable de entrada, no puedes usar carácteres especiales, como por ejemplo `!#.,_@`. Si los intentas usar, el analizador sintáctico hará saltar un error.
-:::
+::: aviso Al crear un nombre para un variable de entrada, no puedes usar carácteres especiales, como por ejemplo `!#.,_@`. Si los intentas usar, el analizador sintáctico hará saltar un error. :::
 
 ## Tipos especializados
 
@@ -164,9 +167,7 @@ Por ejemplo:
     )]]
 ```
 
-::: consejo
-Si la condición no se puede resolver todavía (porque falta una entrada), no se producirá un error.
-:::
+::: consejo Si la condición no se puede resolver todavía (porque falta una entrada), no se producirá un error. :::
 
 ### Collection
 
@@ -186,7 +187,10 @@ Si tienes un Collection, puedes iterar por cada elemento al usar un bloque `for 
 }}
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/2d621464a29a4628be52348e6331b0cf" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/2d621464a29a4628be52348e6331b0cf" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ::: aviso
 
@@ -207,7 +211,10 @@ Esto es un ejemplo de la sintáxis para definir y usar un tipo Choice:
 [[País de Origen: País]] //uso del tipo
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/b86302f4f934443ebb6701fea05a5268" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/b86302f4f934443ebb6701fea05a5268" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ### propiedad options
 
@@ -215,12 +222,12 @@ Si lo que buscas no es crear un tipo, sino simplemente definir una lista de posi
 
 Esto es un ejemplo:
 
-
 ```
 [[País:Text(
     options: "USA", "Suiza", "Suecia", "Alemania", "India"
     )]]
 ```
+
 La propiedad options tamibén permite que definas expresiones en la lista de opciones y, como consecuencia, hacer que las opciones sean dinámicas:
 
 ```
@@ -262,7 +269,10 @@ Ciudad: [[Empleado.Dirección.Ciudad]] //acceso a un campo de tipo complejo
 Dirección de Ethereum: [[Empleado.Dirección de Ethereum]] //acceso al campo
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5a714a36989a467dbbd7beaebf6d8752" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/5a714a36989a467dbbd7beaebf6d8752" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 Un tipo Structure también se puede usar conjuntamente con un [Collection](#collection) según se ve en el ejemplo de abajo. Esta combinación permite que incluyas y organices de manera más eficiente los datos que las partes entren al acuerdo.
 
@@ -284,11 +294,12 @@ Un tipo Structure también se puede usar conjuntamente con un [Collection](#coll
 }}
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/3404c3dc744243988482560a3923837e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/3404c3dc744243988482560a3923837e" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
-::: aviso
-Al definir uno de estos tipos especializados, el nombre no puede ser igual a ningún variable o tipo especializado (p.ej. Text, Number, Address, Choice, etc.) ni un nombre de variable ya en existencia. Se puede usar el atajo `ctrl` + `space` en el editor para ver la lista completa de tipos de variables y tipos especializados.
-:::
+::: aviso Al definir uno de estos tipos especializados, el nombre no puede ser igual a ningún variable o tipo especializado (p.ej. Text, Number, Address, Choice, etc.) ni un nombre de variable ya en existencia. Se puede usar el atajo `ctrl` + `space` en el editor para ver la lista completa de tipos de variables y tipos especializados. :::
 
 ## Formato del Texto
 
@@ -358,7 +369,10 @@ Acuerdo y todo acuerdo, documento, e instrumento que se han de firmar y entregar
 por la Empresa conforme con este Acuerdo.
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/5ee1dd398d454f0d8fca57714ec9939c" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ## Reiniciar la numeración y las referencias
 
@@ -401,8 +415,7 @@ show title:false;
 
 ## Anotación
 
-A veces puede ser útil incrustar anotaciones en tu modelo para darle contexto al usuario.
-La anotación se rinde sólo en vista previa y no afecta a la versión docx o pdf del acuerdo.
+A veces puede ser útil incrustar anotaciones en tu modelo para darle contexto al usuario. La anotación se rinde sólo en vista previa y no afecta a la versión docx o pdf del acuerdo.
 
 Existen dos tipos de anotaciones en el lenguaje de marcado actualmente: el membrete y la nota.
 
@@ -429,6 +442,7 @@ Esto es una anotación de membrete para explicar la disposicón, y por qué vien
 
 otra disposición
 ```
+
 ## Tablas
 
 Los datos tabulares se muestran fácilmente usando tablas. Una tabla se define con el uso de carácteres de pleca (`|`) como separadores de columna, y rayas (`-`) para separar el membrete de la tabla de las filas de datos.
@@ -496,7 +510,10 @@ persona legal?"=>{{ParteBEmpresa "¿Una Sociedad?"=>, una
 
 El texto de arriba genera el siguiente "árbol de decisiones" en nuestra aplicación de generación de formularios:
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/dd9b4a7e13244c3bbd2c7385737c6369" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/dd9b4a7e13244c3bbd2c7385737c6369" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ### Usos Avanzados de las Condicionales
 
@@ -514,7 +531,10 @@ Title: [[ParteA Título del Firmante]]}}
 
 A continuación se puede ver cómo se puede cambiar, dinámicamente, al texto:
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/614467945305465aa29840ea282aad3e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/614467945305465aa29840ea282aad3e" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ### Condicionales con Else
 
@@ -585,7 +605,10 @@ cantidad y condiciones de su cobertura.
 alguna de las partes, aquella parte notificará en breve a la otra parte.}}
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7bdab586eb004349b6736c07b7e28484" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/7bdab586eb004349b6736c07b7e28484" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 De igual manera, en muchos casos, puede que quieres modificar sólamente el lenguaje del acuerdo si se materializan una o más situaciones fácticas. Con el uso de expresiones booleanas y condicionales, lo podrá hacer.
 
@@ -644,11 +667,12 @@ de cancelar, modificar, o reducir la cantidad de cobertura en la póliza de [[Pa
 a contribución.}}
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/439353d8d4024d46912e6533aba71783" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
-::: consejo
-al usar "agrupados" ("groupings") y las etiquetas `<% %>`, es posible esconder los variables y las condicionales. Al hacerlo, los espacios que se ven en el vídeo de arriba se pueden quitar. Hablamos de estos componentes avanzados del lenguaje de marcado [abajo](#groupings).
-:::
+::: consejo al usar "agrupados" ("groupings") y las etiquetas `<% %>`, es posible esconder los variables y las condicionales. Al hacerlo, los espacios que se ven en el vídeo de arriba se pueden quitar. Hablamos de estos componentes avanzados del lenguaje de marcado [abajo](#groupings). :::
 
 ### Tipo Choice con Condicionales
 
@@ -666,7 +690,10 @@ También se puede combinar las condicionales y el operador `=` con un [Choice ty
 }}
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/c952fcf870684fd68694e7de44a31009" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/c952fcf870684fd68694e7de44a31009" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ## Cálculos y Aliases
 
@@ -703,10 +730,12 @@ Para hacer un cálculo, primero tiene que crear a un alias al incluir un `@` ant
 anualmente, pagadero a partir de los treinta (30) días tras la facturación.
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
-::: aviso
-Al usar aliases y variables para llevar a cabo cálculos, el alias tiene que definirse _antes_ de su uso en el modelo. Lo siguiente resultará en un error:
+::: aviso Al usar aliases y variables para llevar a cabo cálculos, el alias tiene que definirse _antes_ de su uso en el modelo. Lo siguiente resultará en un error:
 
 ```
 [[ParteA]] pagará a [[ParteB]] $[[Pago Mensual]] mensualmente, o $[[Pago Anual]] anualmente, pagadero a partir de los treinta (30) días tras la facturación.
@@ -720,8 +749,7 @@ Además, un variable se ha de definir _antes_ de usarse en una expresión de ali
 [[ParteA]] pagará a [[ParteB]] $[[Pago Mensual: Number]] mensualmente, o $[[Pago Anual]] anualmente, pagadero a partir de los treinta (30) días tras la facturación.
 ```
 
-Igual que en el ejemplo correcto de arriba, el uso de "agrupados" `<% %>` para definir aliases y variables hará que sea más fácil llevar a cabo correctamente los cálculos. Hablaremos de estos métodos avanzados del lenguage en marcado [abajo](#groupings).
-:::
+Igual que en el ejemplo correcto de arriba, el uso de "agrupados" `<% %>` para definir aliases y variables hará que sea más fácil llevar a cabo correctamente los cálculos. Hablaremos de estos métodos avanzados del lenguage en marcado [abajo](#groupings). :::
 
 La misma lógica se puede usar para ampliar sobre el ejemplo del seguro que se detalló arriba:
 
@@ -801,13 +829,14 @@ contribución.
 }}
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/b297b61c9f884e5eb01b4ee247e6d239" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/b297b61c9f884e5eb01b4ee247e6d239" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
-::: consejo
-Observa la nota de arriba sobre los espacios en el video de arriba.
-:::
+::: consejo Observa la nota de arriba sobre los espacios en el video de arriba. :::
 
-#### Variables Escondidos
+### Variables Escondidos
 
 También se puede esconder a un variable, si hace falta, para llevar a cabo cálculos básicos. Para esconder a un variable, nada más agrega `#` antes del nombre del variable: `[[#Variable]]`. Cada variables escondido se muestra a un usuario final, pero no se muestra dentro del texto del modelo o del acuerdo.
 
@@ -843,7 +872,10 @@ Tiempo en el Pasado: [[Tiempo en el Pasado]]
 Tiempo en el Futuro: [[Tiempo en el Futuro]]
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/79aef047b243475c9d83cec01b13edfb" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/79aef047b243475c9d83cec01b13edfb" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 Constantes también puede usarse con aliases y tipos de variable Date y DateTime para calcular fechas y horas en el futuro:
 
@@ -938,7 +970,10 @@ Title: [[ParteB Firmante Título]]}}
 
 Una vez que un usuario indique que el modelo este listo para su firma, OpenLaw generará una ventana, en la cual el usuario puede introducir las direcciones de correo electrónico y mandará el acuerdo para las firmas.
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7041f79616a74974bf8fd73f3a0a231c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/7041f79616a74974bf8fd73f3a0a231c" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ### Incrustación de Firmas
 
@@ -978,9 +1013,7 @@ Para acuerdos complejos con múltiples variables y condicionales, puedes crear "
 %>
 ```
 
-::: aviso
-No coloques dos variables en un sólo renglón. El segundo variable no se procesará.
-:::
+::: aviso No coloques dos variables en un sólo renglón. El segundo variable no se procesará. :::
 
 Por ejemplo, podrías organizar información de ambas partes usando agrupoados.
 
@@ -1030,7 +1063,10 @@ Address.streetName]]
 [[Vendedor Address.city]], [[Vendedor Address.state]] [[Vendedor Address.zipCode]]
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/ddd995d833f242bda2f644c1c9e99771" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/ddd995d833f242bda2f644c1c9e99771" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 También se puede incluir referencias a condicionales en un agrupado. Un ejemplo de esta capacidad es lo siguiente.
 
@@ -1152,9 +1188,12 @@ _________________________
 
 Una vez firmado el contrato, el contrato inteligente se ejecutará según lo visto en el vídeo siguiente. OpenLaw manda un mensaje al contrato inteligente para hacer que se ejecute y para pasarle los valores pertinentes.
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/20f8fc1a2dfe4616a0fd08f0f87267b7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/20f8fc1a2dfe4616a0fd08f0f87267b7" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
-El código de solidity para el contrato inteligente que se encuentra en  [0xe532d1d1147ab40d0a245283f4457c733b5e3d41](https://rinkeby.etherscan.io/address/0xe532d1d1147ab40d0a245283f4457c733b5e3d41) es lo siguiente:
+El código de solidity para el contrato inteligente que se encuentra en [0xe532d1d1147ab40d0a245283f4457c733b5e3d41](https://rinkeby.etherscan.io/address/0xe532d1d1147ab40d0a245283f4457c733b5e3d41) es lo siguiente:
 
 ```
 pragma solidity ^0.4.10;
@@ -1234,9 +1273,7 @@ repeatEvery:"1 minute")]]
 
 La red programada para el nivel del contrato en la `EthereumCall` es específico a solamente las ejecuciones para aquel acuerdo particular. Una transacción de firma que viene tras la firma de un acuerdo en una instancia de OpenLaw usará la [application level network](/api-Cliente/#getcurrentnetwork) programado por un usuario `Admin` para aquella instancia. Así que es posible usar una red para la firma de un acuerdo y otra red para ejecutar cualquier transacción de contrato inteligente como parte de aquel mismo acuerdo.
 
-::: consejo
-Si omites el parámetro `network` del nivel de la red, y su valor, de la llamada `EthereumCall`, la red que se usa por defecto para la ejecución de los contratos inteligentes será la [application level network](/api-Cliente/#getcurrentnetwork) que este programado en el momento de iniciación de las ejecuciones.
-:::
+::: consejo Si omites el parámetro `network` del nivel de la red, y su valor, de la llamada `EthereumCall`, la red que se usa por defecto para la ejecución de los contratos inteligentes será la [application level network](/api-Cliente/#getcurrentnetwork) que este programado en el momento de iniciación de las ejecuciones. :::
 
 ## Negocios
 
@@ -1353,7 +1390,10 @@ Se puede combinar estos dos documentos en un negocio simplemente al crear el sig
 
 Lo anterior generará una página de apertura de variables comunes compartidos entre estos modelos. Una vez que se rellenan estos variables, los dos acuerdos se pueden ejecutar según lo visto en lo siguiente:
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ::: aviso
 
@@ -1468,7 +1508,10 @@ _______________________
 
 A la página de apertura del negocio, al usuario se le presentará la condicional. A base de la respuesta, al usuario se le dará un variable adicional y se modificará el texto del acuerdo subyacente.
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ### El uso de Collections y Path en un Negocio
 
@@ -1542,9 +1585,7 @@ Vamos paso a paso por lo que está pasando con la Collection en este ejemplo.
     name: "Acuerdo de Empleo";
 ```
 
-::: aviso
-Dos o más variables de modelo usando el nombre `_` no causarán un error. Sin embargo, nunca se debe de usar un variable anónimo para [variables de entrada](#variables) como Text, Number, o Address porque esto sí resultará con un error.
-:::
+::: aviso Dos o más variables de modelo usando el nombre `_` no causarán un error. Sin embargo, nunca se debe de usar un variable anónimo para [variables de entrada](#variables) como Text, Number, o Address porque esto sí resultará con un error. :::
 
 - Luego conectamos los parametros en el modelo `Acuerdo de Empleo` con los parámetros asociados para un `Empleado` individual en el modelo del negocio. Esto hace que sea posible generar acuerdos basado en el mismo modelo pero con valores de entrada distintos. Cada uno de los variables `Nombre del Empleado`, `Dirección del Empleado`, `Cargo del Empleado`, `Dirección Ethereum del Destinatario`, y `Correo Electrónico del Empleado Firmante` tiene que definirse en el modelo `Acuerdo de Empleo` y tiene que ser del mismo tipo de variable como el parámetro con el cual se ha conectado desde el modelo del negocio.
 
@@ -1563,7 +1604,10 @@ parameters:
 path: "acuerdos" / (Empleado.Nombre + " " + Empleado.Nombre)
 ```
 
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/f55c822761e249d0ae7437fe23854590" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<div style="text-align: center">
+  <iframe width="630" height="394" src="https://www.useloom.com/embed/f55c822761e249d0ae7437fe23854590" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+</iframe>
+</div>
 
 ## Otras Etiquetas
 
