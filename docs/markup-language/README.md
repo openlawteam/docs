@@ -74,6 +74,16 @@ The Date type is a basic input variable. This type transforms an input in an eas
 
 You can define a default value for a Date variable by including a date as a parameter (in the "YYYY-MM-DD" format) when defining the variable. For example, `[[Effective Date: Date("2018-08-01")]]`. The value of the variable will result in a date of "August 1, 2018" if no other date is set.
 
+There are several formatting options for Date values. They are specified by including the format at the end of the variable like so: `[[Effective Date: Date | year]]`.
+
+The available formatting options are:
+
+- `year` - displays only the year of the Date with 4 digits, ex. `2019`
+- `day` - displays the day of the month in 2 digits, ex. `14` or `02`
+- `day_name` - displays the full name of the day of the week, ex. `Saturday`
+- `month` - displays the month of the year in 1 or 2 digits, ex. `1` or `11`
+- `month_name` - displays the full month name, ex. `December`
+
 #### DateTime
 
 OpenLaw has created a variation of the Date type, called DateTime. The DateTime type allows a user to set not only a specified date, but also a specified time. To create a DateTime variable, add the words `: DateTime` after the variable name: `[[Variable: DateTime]]`. The DateTime type is useful when [triggering or calling an Ethereum smart contract](#smart-contracts).
@@ -111,6 +121,12 @@ The LargeText type is used when more space is required than the default `Text` v
 
 To create a LargeText variable, add `: LargeText` after the variable name: `[[Variable: LargeText]]`.
 
+#### Image
+
+The Image type is used to embed a graphic image as a header or in the body of a template. To create an Image variable, add `: Image` after the variable name: `[[Variable: Image]]`. The variable will generate a clickable interface in the form to select an image file (GIF, PNG, JPG, BMP, or TIFF) to upload. The user will have the ability to crop the image before it is embedded in the template. The interface will also allow the user to further edit or delete the image.
+
+You can define a default value for an Image variable by including a valid URL that resolves to a GIF, PNG, JPG, BMP, or TIFF image as a parameter when defining the variable. For example, `[[Variable: Image("http://www.example.com/header_image.png")]]`. In the case of a default value, the remote image will already be embedded in the template but the interface to edit the image will be disabled.
+
 #### YesNo
 
 The YesNo type is typically used together with "conditional" logic embedded into a template. It creates a binary "yes" or "no" question with radio button inputs. The value of the input can be used to output text, variables, smart contract calls, and/or trigger a conditional elsewhere in the agreement as explained below in [Conditionals and Decision Branches](#conditionals-and-decision-branches). To create a YesNo variable, add `: YesNo` after a variable name followed by the language in quotes that serves as a prompt for the user. For example, `[[Variable: YesNo "Have you included the required prompt?"]]`.
@@ -126,6 +142,8 @@ no type indicator or `: Text` - indicates that a variable is text
 `: DateTime` - generates date picker with date and time
 
 `: EthAddress` - indicates that a variable is an Ethereum address
+
+`: Image` - generates a clickable interface to upload and edit an image
 
 `: LargeText` - indicates that a variable is large text (corresponding to a text box where longer input is accepted)
 
