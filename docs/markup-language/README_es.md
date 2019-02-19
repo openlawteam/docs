@@ -10,7 +10,7 @@ meta:
 
 # Lenguaje de marcado
 
-El protocolo OpenLaw se basa en un lenguaje de marcado para transformar a los acuerdos hechos en idiomas naturales en objetos procesables por máquina con variables y lógica pertinentes, definidos dentro de un documento específico (lo que llamamos un "modelo"). Los modelos se pueden agrupar en "acuerdos", lo cual permite que se crean y se gerencien transacciones enteras en una cadena de bloques.
+El protocolo OpenLaw se basa en un lenguaje de marcado para transformar a los acuerdos hechos en idiomas naturales en objetos procesables por máquina con variables y lógica pertinentes, definidos dentro de un documento específico (lo que llamamos un "modelo"). Los modelos se pueden agrupar en "acuerdos", lo cual permite que se crean y se gerencien transacciones enteras en una blockchain.
 
 ## Variables
 
@@ -462,7 +462,7 @@ Observa que los separadores de columna no tienen que alinearse de fila a fila, a
 | Datos 1 | D2 | D3 |
 ```
 
-Las células de una tabla pueden contener contenido en texto, variables, o condicionales.
+Las células de una tabla pueden llevar contenido en texto, variables, o condicionales.
 
 ## Condicionales y Ramos de Decisión
 
@@ -496,7 +496,7 @@ Para verle a esto en acción, tome como ejemplo el lenguaje estándar siguiente 
 
 ```
 Este Acuerdo Mutuo de Confidencialidad  (este "Acuerdo") se hace a partir de
-[[Fecha de Vigencia: Fecha]], por y entre [[ParteA]] ("[[ParteA Abreviatura]]")
+[[Fecha de Vigencia: Date]], por y entre [[ParteA]] ("[[ParteA Abreviatura]]")
 {{ParteAEntidad "Es la primera parte una persona legal?" => {{ParteASociedad
 "Una Sociedad?" =>, una [[ParteAEstadoDeFundación]] sociedad, }}{{ParteASL
 "Una SL?" =>, una [[ParteAEstadoDeFundación]] sociedad limitada, }}
