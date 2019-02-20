@@ -29,11 +29,11 @@ a la divulgación de la Información Confidencial de la Contraparte a la Empresa
 referirá como "Destinatario" en aquel contexto.
 ```
 
-Cualquiera de las palabras en este texto se puede volver un variable. Si decidieramos identificar a las partes en el acuerdo como variables podríamos, por ejemplo, reemplazar "ABC, SL" con `[[Nombre de la Empresa]]`, "Fulano de Tal" con `[[Contraparte]]`, y "17 de mayo, 2017" con `[[Fecha de Entrada en Vigor: Fecha]]`.
+Cualquiera de las palabras en este texto se puede volver un variable. Si decidieramos identificar a las partes en el acuerdo como variables podríamos, por ejemplo, reemplazar "ABC, SL" con `[[Nombre de la Empresa]]`, "Fulano de Tal" con `[[Contraparte]]`, y "17 de mayo, 2017" con `[[Fecha de Entrada en Vigor: Date]]`.
 
 ```
 Este Acuerdo Mutuo de Confidencialidad (este "Acuerdo") se considera celebrado
-el [[Fecha de Entrada en Vigor: Fecha]], por y entre [[Nombre de la Empresa]] (la
+el [[Fecha de Entrada en Vigor: Date]], por y entre [[Nombre de la Empresa]] (la
 "Empresa"), y [[Contraparte]] ("Contraparte"). Cada parte ha divulgado y/o
 divulgará su Información Confidencial a la otra (según la definición siguiente) a
 la otra en conexión con la Relación (según la definición siguiente) conforme con
@@ -73,50 +73,48 @@ Tras la definición de un variable Number, también se puede mostrar la entrada 
 
 Puedes definir un valor por defecto para un variable Number al incluir un número entero o décimo como parámetro al definir al variable. Por ejemplo, `[[Num: Number(10)]]`. El valor del variable será de `10` si no se usa ningún otra entrada.
 
-#### Date
+#### Date (Fecha)
 
 El tipo date es un variable de entrada básico. Este tipo transforma la entrada en una entrada de fechas facil de usar. Para crear a un variable de Date, nada más hay que agregar `: Date` después del nombre de un variable. Para decirlo de otro modo, `[[Variable: Date]]`.
 
 Puedes definir un valor por defecto para un variable Date al incluir una fecha como parámetro (en el formato "AAAA-MM-DD") al definir al variable. Por ejemplo, `[[Fecha de Entrada en Vigor: Date("2018-08-01")]]`. El valor del variable resultará en una fecha de "1 de Agosto, 2018" si no se fija ninguna otra fecha.
 
-#### DateTime
+#### DateTime (FechaHora)
 
 OpenLaw ha creado una variación del tipo Date, que se llama DateTime. El tipo DateTime permite que un usuario fija no solamente una fecha específica, sino también una hora específica. Para crear un variable DateTime, agrega las palabras `: DateTime` después del nombre del variable: `[[Variable: DateTime]]`. El tipo DateTime es útil al [activar o llamar a un contrato inteligente de Ethereum](#smart-contracts).
 
 De manera parecida a los variables Date, también se puede definir un valor por defecto para un variable DateTime al incluir la fecha y hora como parámetro (en el formato `AAAA-MM-DD hh:mm:ss`) al definir al variable. Por ejemplo, `[[Effective Time: DateTime("2018-08-01 13:45:00")]]`. El valor del variable resultará en una fecha y hora de "1 de Agosto, 2018 13:45:00" si no se entran otros datos.
 
-#### Period
+#### Period (Periodo)
 
 El tipo Periodo permite que un usuario fije un periodo de tiempo específico en `seconds` (segundos), `minutes` (minutos), `hours` (horas), `days` (días), `weeks` (semanas), `months` (meses), y `years` (años) (p.ej., `30 seconds`, `1 minute`, `5 hours`, `7 days`, `2 weeks`, `6 months`, `1 year`). El variable Period también admite una mezcla de unidades temporales para esta entrada (p. ej., `2 minutes 30 seconds`, `1 week 3 days`). Para crear a un variable Period, agrega las palabras: `: Period` después del nombre del variable: `[[Variable: Period]]`.
 
 Según descrito más abajo, puedes usar el tipo Period conjuntamente con los tipos Date y DateTime para poder [calcular fechas y horas en el pasado o el futuro](#calculating-date-and-time-periods).
 
-#### Ethereum Address
+#### Ethereum Address (Dirección de Ethereum)
 
 El tipo Ethereum Address señala a un variable que tiene que ser una dirección de Ethereum. Este tipo se hace pertinente en particular si usas OpenLaw para mandar ether o tokens a una dirección de Ethereum específico. La sintaxis para este tipo es `: EthAddress`. En el contexto de un variable sería `[[Variable: EthAddress]]`.
 
-#### Dirección
+#### Address (Dirección)
 
-El tipo Dirección es un variable de entrada más avanzado. Este tipo transforma a la entrada de datos en una caja de dirección en el cual se puede buscar a una dirección pertinente al usar el API de Google Maps. Crear un tipo Dirección es algo bastante sencillo; simplemente agrega `: Dirección` tras el nombre de un variable. Dicho de otra manera, `[[Variable: Address]]`.
+El tipo Address es un variable de entrada más avanzado. Este tipo transforma a la entrada de datos en una caja de dirección en el cual se puede buscar a una dirección pertinente al usar el API de Google Maps. Crear un tipo Dirección es algo bastante sencillo; simplemente agrega `: Address` tras el nombre de un variable. Dicho de otra manera, `[[Variable: Address]]`.
 
 Una vez que se haya fijado una dirección, se puede acceder a varios aspectos de la dirección, incluso el número de calle, ciudad, estado, código postal, y país. Lo siguiente es un ejemplo de cómo se hace referencia a estos elementos:
 
 ```
-[[#Nombre de Empresa: Address]][[Dirección de Empresa.streetNumber]] [[Dirección de
-Empresa.streetName]]
-[[Dirección de Empresa.city]], [[Dirección de Empresa.state]] [[Dirección de
-Empresa.zipCode]] [[Dirección de Empresa.country]]
+[[#Nombre de Empresa: Address]][[Empresa Address.streetNumber]] [[Empresa Address.streetName]]
+[[Empresa Address.city]], [[Empresa Address.state]] [[Empresa Address.zipCode]] [[Empresa Address.country]]
 ```
 
-Toda dirección también se asocia con una cadena de carácteres que sirve como identificador único. Al continuar con el ejemplo de arriba, a esto se puede hacer referencia con `[[Dirección de la Empresa.placeId]]`.
+Toda dirección también se asocia con una cadena de carácteres que sirve como identificador único. Al continuar con el ejemplo de arriba, a esto se puede hacer referencia con `[[Empresa Address.placeId]]`.
 
-#### LargeText
+#### LargeText (TextoGrande)
 
 El tipo LargeText se usa cuando hace falta más espacio que lo que daría el variable por defecto `Text`. Esto corresponde a una etiqueta HTML de `<textarea>`, en lugar de `<input>`.
 
 Para crear a un variable LargeText, agrega `: LargeText` tras el nombre del variable: `[[Variable: LargeText]]`.
 
-#### YesNo
+#### YesNo (SíNo)
 
 El tipo YesNo típicamente se usa conjuntamente con lógica "condicional", insertado en un modelo. Esto crea una pregunta binaria de "sí" o "no" con entradas en forma de botón de opción. [Condicionales y Flechas de Decisión](#conditionals-and-decision-branches). Para crear a un variable YesNo, agrega `: YesNo` tras el nombre de un variable, seguido por el lenguaje entre comillas que sirve como impulso para el usuario. Por ejemplo, `[[Variable: YesNo "Has incluido la pregunta necesaria?"]]`.
 
@@ -158,8 +156,8 @@ Un tipo Verificación acepta dos parámetros:
 Por ejemplo:
 
 ```
-[[X: Número]]
-[[Y: Número]]
+[[X: Number]]
+[[Y: Number]]
 
 [[_: Verificación(
     condition: (X + Y) < 20;
@@ -1410,7 +1408,7 @@ Los negocios también se pueden programar para aceptar condicionales presentes e
 
 ```
 Este Acuerdo de Consultoría (el "Acuerdo") se celebra el día [[Fecha de Vigencia:
-Fecha]] por y entre [[Part A]] ("Cliente") y la [[Parte B]] ("Consultor").
+Date]] por y entre [[Part A]] ("Cliente") y la [[Parte B]] ("Consultor").
 
 ^ **Contratación de Servicios**. El Cliente puede emitir Encargos de Proyecto al
 Consultor en el formulario adjunto a este Acuerdo y señalado como Elemento A
