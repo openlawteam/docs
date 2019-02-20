@@ -50,6 +50,8 @@ The class APIClient handles setting the token in the headers automatically for c
 POST /app/login
 ```
 
+**Content-Type:** `application/x-www-form-urlencoded`
+
 **Parameters**
 
 | Name       | Type     | Description                               |
