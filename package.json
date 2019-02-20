@@ -21,23 +21,5 @@
     "prettier": "^1.16.4",
     "prettier-check": "^2.0.0",
     "vuepress": "^0.14.9"
-  },
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "dependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mapachurro/docs.git"
-  },
-  "keywords": [
-    "i18n",
-    "markup",
-    "spanish"
-  ],
-  "bugs": {
-    "url": "https://github.com/mapachurro/docs/issues"
-  },
-  "homepage": "https://github.com/mapachurro/docs#readme"
+  }
 }
