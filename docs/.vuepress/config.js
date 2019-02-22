@@ -40,5 +40,22 @@ module.exports = {
     editLinkText: "Help us improve this page",
     // Gets the UNIX timestamp(ms) of each file's last git commit, and it will also display at the bottom of each page in an appropriate format. The string will be displayed as a prefix.
     lastUpdated: "Last updated"
+  },
+  locales: {
+    // The key is the path for the locale to be nested under.
+    // As a special case, the default locale can use '/' as its path.
+    '/': {
+      lang: 'en-US', // this will be set as the lang attribute on <html>
+      title: 'Readme',
+      description: 'English version of Readme'
+    },
+    '/es/': {
+      lang: 'es-ES',
+      title: 'Readme',
+      description: 'Versión en español del Readme'
+    }
   }
 };
+
+
+
