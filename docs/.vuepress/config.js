@@ -41,7 +41,7 @@ module.exports = {
     // Gets the UNIX timestamp(ms) of each file's last git commit, and it will also display at the bottom of each page in an appropriate format. The string will be displayed as a prefix.
     lastUpdated: "Last updated"
   },
-  locales: {
+  /* locales: {
     // The key is the path for the locale to be nested under.
     // As a special case, the default locale can use '/' as its path.
     '/': {
@@ -54,7 +54,7 @@ module.exports = {
       title: 'Documentación OpenLaw',
       description: 'Versión en español de la documentación de OpenLaw'
     }
-  }
+  } */
 };
 
 
