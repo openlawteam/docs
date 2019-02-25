@@ -46,13 +46,13 @@ module.exports = {
     // As a special case, the default locale can use '/' as its path.
     '/': {
       lang: 'en-US', // this will be set as the lang attribute on <html>
-      title: 'Readme',
-      description: 'English version of Readme'
+      title: 'OpenLaw Documentation',
+      description: 'English version of OpenLaw Documentation'
     },
     '/es/': {
       lang: 'es-ES',
-      title: 'Readme',
-      description: 'Versión en español del Readme'
+      title: 'Documentación OpenLaw',
+      description: 'Versión en español de la documentación de OpenLaw'
     }
   }
 };
