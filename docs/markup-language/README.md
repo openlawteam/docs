@@ -104,12 +104,16 @@ The Ethereum Address type indicates a variable that should be an Ethereum addres
 
 The Address type is a more advanced input variable. This type transforms an input in an address box where you can search for a relevant address using the Google Maps API. Creating an Address type is fairly straightforward, simply add `: Address` after a variable name. In other words, `[[Variable: Address]]`.
 
-Once an address is set you can access different aspects of the address, including the street number, street name, city, state, zip code, and country. Below is an example of how you would reference these elements:
+Once an address is defined, in addition to displaying the entire formatted address, you can access different aspects of the address, including the street number, street name, city, state, zip code, and country. Below is an example of how you would reference these elements:
 
 ```
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company Address.streetName]]
-[[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]]
-[[Company Address.country]]
+Formatted Address: [[Company Address: Address]]
+Street Number: [[Company Address.streetNumber]]
+Street Name: [[Company Address.streetName]]
+City: [[Company Address.city]]
+State: [[Company Address.state]]
+Zip Code: [[Company Address.zipCode]]
+Country: [[Company Address.country]]
 ```
 
 Each address is also associated with a unique string identifier. Continuing the example above, this can be referenced with `[[Company Address.placeId]]`.
@@ -153,7 +157,7 @@ no type indicator or `: Text` - indicates that a variable is text
 `: YesNo "<user prompt>"` - generates binary question with radio button inputs
 
 ::: warning
-When creating an input variable name, you cannot use any special characters, such as `!#.,_@`. If you attempt to do so, the parser will pop an error.
+When creating an input variable name, you cannot use any special characters, such as `!#.,_@-`. If you attempt to do so, the parser will pop an error.
 :::
 
 ## Specialized Types
@@ -233,7 +237,7 @@ If your goal is not to create a type but just to define a list of possible value
 Here is an example:
 
 ```
-[[Country:Text(
+[[Country: Text(
     options: "USA", "Switzerland", "Sweden", "Germany", "India"
     )]]
 ```
@@ -243,7 +247,7 @@ The options property also allows you to define expressions in the list of option
 ```
 [[Another Country]]
 
-[[Country:Text(
+[[Country: Text(
     options: "USA", "Switzerland", "Sweden", "Germany", "India", Another Country
     )]]
 ```
@@ -253,7 +257,7 @@ The main difference between options and the Choice type is that options is a way
 If you want the options to have a default value, you can use the property `value`:
 
 ```
-[[Country:Text(
+[[Country: Text(
     options: "USA", "Switzerland", "Sweden", "Germany", "India";
     value: "USA"
     )]]
@@ -489,9 +493,9 @@ Conditionals also can be grouped to create a decision tree. In other words:
 ```
 {{ Name of Conditional "Question to Prompt User" =>
   Text to include in an agreement if a user selects 'yes'
-  {{Sub-Conditional-1 "Text of Sub-Question 1" => Text}}
-  {{Sub-Conditional-2 "Text of Sub-Question 2" => Text}}
-  {{Sub-Conditional-3 "Text of Sub-Question 3" => Text}}
+  {{Subconditional 1 "Text of Sub-Question 1" => Text}}
+  {{Subconditional 2 "Text of Sub-Question 2" => Text}}
+  {{Subconditional 3 "Text of Sub-Question 3" => Text}}
 }}
 ```
 
