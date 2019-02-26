@@ -1207,6 +1207,15 @@ Example `params` payload
 }
 ```
 
+You can also include the following optional param to disable email notifications that would normally be sent when the contract is ready to be signed and when signatures are confirmed:
+
+```json
+{
+  ...
+  "options": {"sendNotification": "false"}
+}
+```
+
 ::: tip APIClient
 
 ```js
@@ -1243,6 +1252,15 @@ const params = {
   draftId: "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
 };
 apiClient.uploadContract(params);
+```
+
+You can also include the following optional param to disable email notifications that would normally be sent when the contract is ready to be signed and when signatures are confirmed:
+
+```js
+const params = {
+  ...
+  options: {sendNotification: false}
+}
 ```
 
 :::
