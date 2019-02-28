@@ -722,8 +722,8 @@ To perform a calculation, you must first create an alias by including an `@` bef
 
 %>
 
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual
-Payment]] annually, payable within thirty (30) days of invoice.
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual Payment]]
+annually, payable within thirty (30) days of invoice.
 ```
 
 <div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/6fd85cbf4aee4682ae58c6a33a8dc7a9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -770,8 +770,8 @@ The same logic can be applied to extend the insurance example outlined above:
 
 %>
 
-[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual
-Payment]] annually, payable within thirty (30) days of invoice.
+[[PartyA]] shall pay [[PartyB]] $[[Monthly Payment]] monthly, or $[[Annual Payment]]
+annually, payable within thirty (30) days of invoice.
 
 {{Annual Payment > 20000 =>
     {{Insurance "Do you want to include an insurance provision?" =>
@@ -988,7 +988,6 @@ For complex agreements with multiple variables and conditionals, you can create 
 [[Variable 1]]
 [[Variable 2]]
 [[Variable 3]]
-...
 
 %>
 ```
@@ -1028,8 +1027,7 @@ ___________________________
 [[Company Signatory First Name]] [[Company Signatory Last Name]]
 Title:  [[Company Signatory Title]]
 Address:
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company
-Address.streetName]]
+[[#Company Address: Address]][[Company Address.streetNumber]] [[Company Address.streetName]]
 [[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]]
 
 [[Vendor Name | Uppercase]]
@@ -1038,8 +1036,7 @@ ___________________________
 [[Vendor Signatory First Name]] [[Vendor Signatory Last Name]]
 Title:  [[Vendor Signatory Title]]
 Address:
-[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor
-Address.streetName]]
+[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor Address.streetName]]
 [[Vendor Address.city]], [[Vendor Address.state]] [[Vendor Address.zipCode]]
 ```
 
@@ -1077,8 +1074,7 @@ ___________________________
 [[Company Signatory First Name]] [[Company Signatory Last Name]]
 Title:  [[Company Signatory Title]]
 Address:
-[[#Company Address: Address]][[Company Address.streetNumber]] [[Company
-Address.streetName]]
+[[#Company Address: Address]][[Company Address.streetNumber]] [[Company Address.streetName]]
 [[Company Address.city]], [[Company Address.state]] [[Company Address.zipCode]]
 
 {{VendorEntity "Is the vendor a legal entity?" => [[Vendor Name | Uppercase]]}}
@@ -1088,8 +1084,7 @@ ___________________________
 {{VendorEntity => [[Vendor Signatory First Name]] [[Vendor Signatory Last Name]]
 Title:  [[Vendor Signatory Title]]}}{{!VendorEntity => [[Vendor Name]]}}
 Address:
-[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor
-Address.streetName]]
+[[#Vendor Address: Address]][[Vendor Address.streetNumber]] [[Vendor Address.streetName]]
 [[Vendor Address.city]], [[Vendor Address.state]] [[Vendor Address.zipCode]]
 ```
 
@@ -1120,8 +1115,7 @@ repeatEvery:"1 minute")]]
 
 %>
 
-This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective
-Date: Date]].
+This agreement is entered into by [[Party A]] and [[Party B]] on [[Effective Date: Date]].
 
 **WHEREAS**, [[Party B]] seeks [[Party A]]'s programming services; and
 
@@ -1136,10 +1130,10 @@ agree as follows:
 every minute, starting on [[Payment Start Date: DateTime]] and ending on
 [[Payment End Date: DateTime]] for programming services.
 
-^ Payment will be paid to [[Party B]]'s ethereum address located at [[Recipient
-Ethereum Address: EthAddress]], using the Ethereum smart contract found at
-"0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by reference
-herein.
+^ Payment will be paid to [[Party B]]'s ethereum address located at
+[[Recipient Ethereum Address: EthAddress]], using the Ethereum smart contract
+found at "0xe532d1d1147ab40d0a245283f4457c733b5e3d41," which is incorporated by
+reference herein.
 
 [[Pay Vendor]]
 
@@ -1262,8 +1256,8 @@ To illustrate, assume that you create two highly simplified templates:
 **Consulting Agreement**
 
 ```
-This Consulting Agreement (the "Agreement") is made as of [[Effective Date:
-Date]] by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
+This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]]
+by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
 
 ^ **Engagement of Services**. Client may issue Project Assignments to Consultant
 in the form attached to this Agreement as Exhibit A ("Project Assignment").
@@ -1374,8 +1368,8 @@ Deals can also be set up to handle conditionals present in multiple agreements. 
 **Consulting Agreement**
 
 ```
-This Consulting Agreement (the "Agreement") is made as of [[Effective Date:
-Date]] by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
+This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]]
+by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
 
 ^ **Engagement of Services**. Client may issue Project Assignments to Consultant
 in the form attached to this Agreement as Exhibit A ("Project Assignment").
@@ -1575,4 +1569,4 @@ In order to draft readable markup language, the markup language contains several
 
 `#` - add a comment
 
-`<% ... %>` - opening and closing tags for code blocks (e.g., use with "groupings," smart contract calls, and to hide variables and conditionals)
+`<%  %>` - opening and closing tags for code blocks (e.g., use with "groupings," smart contract calls, and to hide variables and conditionals)
