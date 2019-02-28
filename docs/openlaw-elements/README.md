@@ -12,9 +12,9 @@ OpenLaw elements is a project to help accelerate development for projects using 
 
 - Node (and npm)
 - React
-- [OpenLaw APIClient](/api-client/) and [OpenLaw Object](/openlaw-object/) 
-   - [Github Page](https://github.com/openlawteam/openlaw-client)
-   - [npm package](https://www.npmjs.com/package/openlaw)
+- [OpenLaw APIClient](/api-client/) and [OpenLaw Object](/openlaw-object/)
+  - [Github Page](https://github.com/openlawteam/openlaw-client)
+  - [npm package](https://www.npmjs.com/package/openlaw)
 
 ## Installation
 
@@ -146,7 +146,15 @@ This is a custom renderer for changing the look and feel of sections generated w
 renderSections: ({
  children: React.Node,
  section: string,
-}) => React.Node,
+}) => React.Node
+```
+
+#### sections
+
+If you have already iterated over your sections, you may pass these as a parameter for the form to use.
+
+```
+sections: []
 ```
 
 #### sectionTransform
@@ -154,7 +162,15 @@ renderSections: ({
 If you need to apply transformations to section data on render, this parameter can be used to do so. The transformed data will be passed to `renderSections`.
 
 ```
-sectionTransform: (any, number) => {},
+sectionTransform: (any, number) => {}
+```
+
+#### sectionVariablesMap
+
+In order to map sections with their respective variables, you'll need to supply a function that returns the expected section variable formatted as in the sample below.
+
+```
+sectionVariablesMap: (any, number) => { [string]: Array<string> }
 ```
 
 #### textLikeInputClass
@@ -162,7 +178,7 @@ sectionTransform: (any, number) => {},
 This will apply a class to all elements that are text-input like including text, email, number, and textarea.
 
 ```
-textLikeInputClass: "any-valid-class",
+textLikeInputClass: "any-valid-class"
 ```
 
 #### unsectionedTitle
@@ -170,5 +186,5 @@ textLikeInputClass: "any-valid-class",
 This will apply the title to generated sections that have none. If an empty string is provided the title will be unset. The default title is "Miscellaneous".
 
 ```
-unsectionedTitle: "My Unsectioned Title",
+unsectionedTitle: "My Unsectioned Title"
 ```
