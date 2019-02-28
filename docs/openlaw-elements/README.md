@@ -6,7 +6,7 @@ meta:
 
 # OpenLaw Elements
 
-OpenLaw elements is a project to help accelerate development for projects using OpenLaw. The main component of OpenLaw elements is `OpenLawForm`. This component will render all other required form elements for a passed in template and its associated variable data.
+OpenLaw Elements is a project to help accelerate development for projects using OpenLaw. The main component of OpenLaw Elements is `OpenLawForm`. This component will render all other required form elements for a passed in template and its associated variable data.
 
 ## Requirements
 
@@ -82,7 +82,7 @@ const App = () => (
 ReactDOM.render(<App />, document.getElementById("your-id-here"));
 ```
 
-## Required Params
+## Required Parameters
 
 We'll give more detailed information on the OpenLawForm parameters here.
 
