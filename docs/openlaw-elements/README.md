@@ -6,7 +6,7 @@ meta:
 
 # OpenLaw Elements
 
-OpenLaw elements is a project to help accelerate development for projects using OpenLaw. The main component of OpenLaw elements is `OpenLawForm`. This component will then render all other required form elements for a passed in template and associated variable data.
+OpenLaw elements is a project to help accelerate development for projects using OpenLaw. The main component of OpenLaw elements is `OpenLawForm`. This component will render all other required form elements for a passed in template and its associated variable data.
 
 ## Requirements
 
