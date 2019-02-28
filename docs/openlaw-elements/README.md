@@ -12,7 +12,9 @@ OpenLaw elements is a project to help accelerate development for projects using 
 
 - Node (and npm)
 - React
-- The [OpenLaw APIClient](/api-client/), and [OpenLaw Object](/openlaw-object/) [Github Page](https://github.com/openlawteam/openlaw-client)
+- [OpenLaw APIClient](/api-client/) and [OpenLaw Object](/openlaw-object/) 
+   - [Github Page](https://github.com/openlawteam/openlaw-client)
+   - [npm package](https://www.npmjs.com/package/openlaw)
 
 ## Installation
 
