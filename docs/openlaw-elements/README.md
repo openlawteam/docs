@@ -136,7 +136,7 @@ variables={variables}
 
 ## Optional Parameters
 
-In addition to our regular parameters, we offer support for the following additional parameters.
+In addition to the required parameters, we offer support for the following additional parameters.
 
 #### renderSections
 
