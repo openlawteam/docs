@@ -120,7 +120,7 @@ onChangeFunction={onChange}
 
 #### openlaw
 
-This should be an instance of the Openlaw object imported from our js client tools. You can get information on how to install the library at its [github page](https://github.com/openlawteam/openlaw-client) or find more info on its usage at the [Openlaw Object](/openlaw-object/) section here in the docs.
+This should be an instance of the Openlaw Object imported from our JavaScript client tools. You can get information on how to install the library at its [github page](https://github.com/openlawteam/openlaw-client) or find more info on its usage at the [Openlaw Object](/openlaw-object/) section here in the docs.
 
 ```
 openlaw={openlaw}
