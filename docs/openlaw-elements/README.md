@@ -29,7 +29,7 @@ Below is a sample on how one might setup a quick form for their application. The
 1. Import OpenLaw tools
 2. Optionally import our styles
 3. Authenticate the client
-4. Compile your template, variables, and parameters (For additional information on this, and the open law object in general, see the [OpenLaw Object](/openlaw-object/) section)
+4. Compile your template, variables, and parameters (for additional information on this, and the OpenLaw Object in general, see the [OpenLaw Object](/openlaw-object/) section).
 5. Define your `onChange` function
 6. Render the OpenLawForm component in your React application
 
