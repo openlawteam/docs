@@ -112,7 +112,7 @@ parameters={parameters}
 
 #### onChangeFunction
 
-This is the method through which you'll handle form changes, as a user types into form fields or makes value changes, the event will fire.
+This is the method through which you'll handle form changes. As a user types into form fields or makes value changes, the event will fire.
 
 ```
 onChangeFunction={onChange}
