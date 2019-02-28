@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: Openlaw Elements is a react component that will render a basic form for your templates.
+    content: OpenLaw Elements is a React component that will dynamically render a basic form for an OpenLaw template.
 ---
 
 # OpenLaw Elements
