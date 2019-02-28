@@ -167,7 +167,7 @@ textLikeInputClass: "any-valid-class",
 
 #### unsectionedTitle
 
-This will apply the title to generated sections that have none. If an empty string is provided the title will be unset. The dedfault title is "Miscellaneous".
+This will apply the title to generated sections that have none. If an empty string is provided the title will be unset. The default title is "Miscellaneous".
 
 ```
 unsectionedTitle: "My Unsectioned Title",
