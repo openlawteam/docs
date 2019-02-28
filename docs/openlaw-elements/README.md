@@ -36,7 +36,7 @@ Below is a sample on how one might setup a quick form for their application. The
 6. Render the OpenLawForm component in your React application
 
 ```js
-// ** Import Open Law Tools **
+// ** Import OpenLaw Tools **
 import React from "react";
 import ReactDOM from "react-dom";
 import { APIClient, Openlaw } from "openlaw";
@@ -49,7 +49,7 @@ import "openlaw-elements/dist/openlaw-elements.min.css";
 // To run against your own private OpenLaw instance, simply pass in the host for it
 // IE: 'https://[YOUR.INSTANCE.URL]'
 const apiClient = new APIClient("https://app.openlaw.io");
-// we strongly recommend using environment variables, not hard-coded strings.
+// We strongly recommend using environment variables, not hard-coded strings
 apiClient.login("[YOUR_OPENLAW_EMAIL]", "[YOUR_OPENLAW_PASSWORD]");
 
 // ** Compile your template, variables, and parameters
