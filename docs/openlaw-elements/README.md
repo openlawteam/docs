@@ -96,7 +96,7 @@ apiClient={apiClient}
 
 #### executionResult
 
-You will have to pass in the executionResult from a template compiled with the OpenLaw object. See the [Openlaw Object - execute](/openlaw-object/#template) section of the docs for more details.
+You will have to pass in the `executionResult` from a template compiled with the OpenLaw Object. See the [Openlaw Object - execute](/openlaw-object/#template) section of the docs for more details.
 
 ```
 executionResult={executionResult}
