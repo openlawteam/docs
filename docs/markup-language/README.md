@@ -1569,4 +1569,4 @@ In order to draft readable markup language, the markup language contains several
 
 `#` - add a comment
 
-`<%  %>` - opening and closing tags for code blocks (e.g., use with "groupings," smart contract calls, and to hide variables and conditionals)
+`<% %>` - opening and closing tags for code blocks (e.g., use with "groupings," smart contract calls, and to hide variables and conditionals)
