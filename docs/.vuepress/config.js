@@ -14,7 +14,7 @@ module.exports = {
       {
         title: "Reference",
         collapsable: false,
-        children: ["/api-client/", "/openlaw-object/"]
+        children: ["/api-client/", "/openlaw-object/", "/openlaw-elements/"]
       },
       {
         title: "Using OpenLaw",
@@ -56,6 +56,3 @@ module.exports = {
     }
   } */
 };
-
-
-
