@@ -18,7 +18,7 @@ OpenLaw elements is a project to help accelerate development for projects using 
 
 ## Installation
 
-To install, simply run the following in the terminal within the root directory of your react project:
+To install, simply run the following in the terminal within the root directory of your React project:
 
 ```
 npm install --save openlaw-elements@beta
