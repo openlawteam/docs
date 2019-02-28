@@ -104,7 +104,7 @@ executionResult={executionResult}
 
 #### parameters
 
-These are the parameters for values that correlate to template variables. Generally you'll manage these in an onChange function throughout the lifecycle of your app.
+These are the parameters for values that correlate to template variables. Generally you'll manage these in state via an onChange function throughout the lifecycle of your app.
 
 ```
 parameters={parameters}
