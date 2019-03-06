@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: Creating and publishing high-quality smart legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
+    content: Creating and publishing high-quality smart legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language, you can help us to automate this process.
 ---
 
 # Review Tool
@@ -28,7 +28,7 @@ There are five main steps that compose this process to build up our library:
 With these steps we have a feedback loop that leverages a new flow of information and raises the standards
 of the converted files.
 
-The Review Tool is an important piece of this puzzle and now our community can [sign up](https://conversion.openlaw.io/register)
+The Review Tool is an important piece of our ecosystem and now the community can [sign up](https://conversion.openlaw.io/register)
 to join forces with us and help to build up this library of agreements.
 Or [login](https://conversion.openlaw.io/login) if you already have an account.
 

@@ -53,7 +53,7 @@ Try(provider.convertAgreement(htmlFile)) match {
 
 > It uses the `LawInsiderProvider` which has custom rules to curate the HTML files collected from their platform.
 
-The result of both calls are exact the same, a markdown file with `.txt` extension.
+The result of both calls are exactly the same, a markdown file with `.txt` extension.
 
 ## Typed variable identification and conversion
 
