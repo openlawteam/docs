@@ -1,13 +1,13 @@
 ---
 meta:
   - name: description
-    content: TODO update as necessary. Creating and publishing high-quality "smart" legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
+    content: Creating and publishing high-quality smart legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
 ---
 
 # Review Tool
 
 ## Overview
-   
+
 Creating and publishing high-quality "smart" legal agreements from scratch is a tough task,
 but now that you know more about the [OpenLaw Markup Language](/markup-language/) you can help us to automate this process.
 
@@ -28,9 +28,9 @@ There are five main steps that compose this process to build up our library:
 With these steps we have a feedback loop that leverages a new flow of information and raises the standards
 of the converted files.
 
-The Review Tool is an important piece of this puzzle and now our community can [sign up](https://conversion.openlaw.io/register) 
-to join forces with us and help to build up this library of agreements. 
-Or [login](https://conversion.openlaw.io/login) if you already have an account. 
+The Review Tool is an important piece of this puzzle and now our community can [sign up](https://conversion.openlaw.io/register)
+to join forces with us and help to build up this library of agreements.
+Or [login](https://conversion.openlaw.io/login) if you already have an account.
 
 ## Review
 
@@ -176,12 +176,11 @@ Hit **Save** and all the changes you have suggested will be applied to the conte
 
 ## Editor
 
-### Edit 
+### Edit
 
 The text editor allows you to fix typos, add/fix variables that were not identified at [Variable Classification](#variable-classification) or
 [Variable Renaming](#variable-renaming) stages.
 You can also add or remove clauses that you might need.
-
 
 <center>
     <img src="./img/editor.png" alt="Editor" />
@@ -191,13 +190,12 @@ After you finish your edits you have a template - which is ready to be [uploaded
 
 ---
 
-
 ### Upload
 
 The upload process sends to our servers all the decisions you have made along the way plus the final version of
 the reviewed markdown.
 
-Click on button **Upload Review** to upload the review. The button becomes available only if you have completed 
+Click on button **Upload Review** to upload the review. The button becomes available only if you have completed
 the stage 1 [Variable Classification](#variable-classification) at least.
 
 After the review is uploaded the editor changes the state to read only mode. So you will not be able to
@@ -242,7 +240,7 @@ The **Next** button finds the next agreement available for review. You can navig
 queue until find an agreement that you want to review.
 
 ::: warning
-Every time you open a new agreement you lock that content for 30 minutes. 
-As mentioned before, this is the maximum time it holds the file for your review. 
+Every time you open a new agreement you lock that content for 30 minutes.
+As mentioned before, this is the maximum time it holds the file for your review.
 Usually the review does not take more than 10 minutes.
 :::
