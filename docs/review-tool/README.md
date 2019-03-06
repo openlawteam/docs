@@ -123,7 +123,7 @@ With the variables updated in the editor the Review Tool starts the next stage a
 ### Variable Renaming
 
 After reviewing the entity matches and types it is time to give a proper name to the variables.
-Each one of entities you have classified in the previous step is now a Markup Variable.
+Each one of the entities you have classified in the previous step is now a Markup Variable.
 Variables need to be properlly named for better comprehension.
 
 Some of the variables we already named for you, such as dates and addresses, but you might want to rename them.
