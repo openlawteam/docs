@@ -72,4 +72,4 @@ In order to identify the parties of a contract we use our own Natural Language P
 
 The conversion tool is used internally to populate a library of agreements.
 With 1000+ collected agreements from LawInsider, converted to the OpenLaw Markup Language and uploaded to the [Review Tool](/review-tool/), the files are ready to be reviewed.
-The files are ready to be reviewed. Once the review phase is completed, the templates can be uploaded Openlaw.io public library.
+Once the review phase is completed, the templates can be uploaded to the openlaw.io public library.
