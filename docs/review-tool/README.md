@@ -178,7 +178,7 @@ Hit **Save** and all the changes you have suggested will be applied to the conte
 
 ### Edit
 
-The text editor allows you to fix typos, add/fix variables that were not identified at [Variable Classification](#variable-classification) or
+The text editor allows you to fix typos, add/fix variables that were not identified at the [Variable Classification](#variable-classification) or
 [Variable Renaming](#variable-renaming) stages.
 You can also add or remove clauses that you might need.
 
