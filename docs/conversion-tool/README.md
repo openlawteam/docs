@@ -71,5 +71,5 @@ Apart from `Parties` variables all the identification and creation is based on [
 In order to identify the parties of a contract we use our own Natural Language Processing Model.
 
 The conversion tool is used internally to populate a library of agreements.
-With +1000 collected agreements from lawinsider.com, converted to Openlaw Markup Language and uploaded to [Review Tool](../review-tool/#review-tool).
+With 1000+ collected agreements from LawInsider, converted to the OpenLaw Markup Language and uploaded to the [Review Tool](/review-tool/), the files are ready to be reviewed.
 The files are ready to be reviewed. Once the review phase is completed, the templates can be uploaded Openlaw.io public library.
