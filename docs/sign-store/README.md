@@ -8,6 +8,8 @@ meta:
 
 ## Overview and How it Works
 
+Signature Algorithm might be best here?
+
 ## Creating E-Signatures
 
 ## Incorporating Third Party Providers
