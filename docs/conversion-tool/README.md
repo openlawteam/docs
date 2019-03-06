@@ -58,7 +58,7 @@ The result of both calls are exact the same, a markdown file with `.txt` extensi
 ## Typed variable identification and conversion
 
 It is important to mention that the conversion process handles not just the transformation
-from HTML to Openlaw Markup Language but also it identifies and creates the Typed Variables, such as:
+from HTML to OpenLaw Markup Language but also it identifies and creates the Typed Variables, such as:
 
 - Parties
 - Address
