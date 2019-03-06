@@ -67,7 +67,7 @@ with the interactive labeling tool we can review and fix this sort of informatio
 
 ### Variable Classification
 
-The picture bellow shows a partial match of an Organization name, the same might happen for Person names:
+The picture below shows a partial match of an Organization name, and the same might happen for Person names:
 
 <center>
     <img src="./img/review-popup-partial-match.png" alt="Partial Match" />
