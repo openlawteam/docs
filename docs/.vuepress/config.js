@@ -6,29 +6,6 @@ module.exports = {
     //   { text: 'OpenLaw.io', link: 'https://openlaw.io' },
     // ],
     sidebar: [
-      // {
-      //   title: "Guide",
-      //   collapsable: false,
-      //   children: ["/", "/getting-started/", "/openlaw-core/"]
-      // },
-      // {
-      //   title: "Reference",
-      //   collapsable: false,
-      //   children: ["/api-client/", "/openlaw-object/", "/openlaw-elements/"]
-      // },
-      // {
-      //   title: "Using OpenLaw",
-      //   collapsable: false,
-      //   children: ["/markup-language/"]
-      // },
-      // {
-      //   title: "Review Tool",
-      //   collapsable: false,
-      //   children: ["/review-tool/"]
-      // }
-      // add new top level sections here...
-
-
       {
         title: "Overview of OpenLaw",
         collapsable: false,

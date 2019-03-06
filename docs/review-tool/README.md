@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: [TODO update as necessary] Creating and publishing high-quality "smart" legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
+    content: TODO update as necessary. Creating and publishing high-quality "smart" legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
 ---
 
 # Review Tool

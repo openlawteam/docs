@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: [TODO update as necessary] Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our protocol with JavaScript APIs for convenient integration, our markup language, and how our application works in general.
+    content: TODO update as necessary. Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our protocol with JavaScript APIs for convenient integration, our markup language, and how our application works in general.
 ---
 
 # What is OpenLaw?

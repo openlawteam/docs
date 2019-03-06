@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: [TODO update as necessary] We're excited to provide you the resources to integrate and build on the OpenLaw protocol.
+    content: TODO update as necessary. We're excited to provide you the resources to integrate and build on the OpenLaw protocol.
 ---
 
 # Overview of Rest API, JavaScript and Scala Library
