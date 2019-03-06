@@ -1,8 +1,10 @@
 ---
 meta:
   - name: description
-    content: The Openlaw object is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types.
+    content: [TODO update as necessary] The Openlaw object is an interface in the OpenLaw protocol to interact directly with an agreement and its contents, including its various variable types.
 ---
+
+_Everything below is existing content._
 
 # Openlaw Object
 

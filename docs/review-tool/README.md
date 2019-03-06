@@ -1,8 +1,22 @@
 ---
 meta:
   - name: description
-    content: Creating and publishing high-quality "smart" legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
+    content: [TODO update as necessary] Creating and publishing high-quality "smart" legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
 ---
+
+# Review Tool
+
+## Interactive labeling tool
+
+## Content review of converted HTML agreements
+
+## Variable classification based on OL variable types
+
+## Text Editor for agreements in OL Markup Language
+
+---
+
+_Everything below is existing content._
 
 # Overview
 

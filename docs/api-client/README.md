@@ -1,8 +1,10 @@
 ---
 meta:
   - name: description
-    content: The OpenLaw REST API is an interface in the OpenLaw protocol for querying, saving, and changing data in an OpenLaw instance. The class APIClient library in APIClient.js serves as a convenient wrapper to the REST API and can be used for many of the method calls.
+    content: [TODO update as necessary] The OpenLaw REST API is an interface in the OpenLaw protocol for querying, saving, and changing data in an OpenLaw instance. The class APIClient library in APIClient.js serves as a convenient wrapper to the REST API and can be used for many of the method calls.
 ---
+
+_Everything below is existing content._
 
 # REST API and APIClient
 

@@ -6,27 +6,69 @@ module.exports = {
     //   { text: 'OpenLaw.io', link: 'https://openlaw.io' },
     // ],
     sidebar: [
-      {
-        title: "Guide",
-        collapsable: false,
-        children: ["/", "/getting-started/", "/openlaw-core/"]
-      },
-      {
-        title: "Reference",
-        collapsable: false,
-        children: ["/api-client/", "/openlaw-object/", "/openlaw-elements/"]
-      },
-      {
-        title: "Using OpenLaw",
-        collapsable: false,
-        children: ["/markup-language/"]
-      },
-      {
-        title: "Review Tool",
-        collapsable: false,
-        children: ["/review-tool/"]
-      }
+      // {
+      //   title: "Guide",
+      //   collapsable: false,
+      //   children: ["/", "/getting-started/", "/openlaw-core/"]
+      // },
+      // {
+      //   title: "Reference",
+      //   collapsable: false,
+      //   children: ["/api-client/", "/openlaw-object/", "/openlaw-elements/"]
+      // },
+      // {
+      //   title: "Using OpenLaw",
+      //   collapsable: false,
+      //   children: ["/markup-language/"]
+      // },
+      // {
+      //   title: "Review Tool",
+      //   collapsable: false,
+      //   children: ["/review-tool/"]
+      // }
       // add new top level sections here...
+
+
+      {
+        title: "Overview of OpenLaw",
+        collapsable: false,
+        children: ["/", "/openlaw-products/", "/private-self-hosted-instances/", "/hosting-kaleido/"]
+      },
+      {
+        title: "Getting Started",
+        collapsable: false,
+        children: ["/quickstart/", "/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/scala-library/", "/openlaw-elements/"]
+      },
+      {
+        title: "First Draft",
+        collapsable: false,
+        children: ["/first-draft-overview/", "/markup-language/", "/basic-functions/", "/other-functions/"]
+      },
+      {
+        title: "Sign & Store",
+        collapsable: false,
+        children: ["/sign-store/"]
+      },
+      {
+        title: "Forms & Flows",
+        collapsable: false,
+        children: ["/forms-flows/"]
+      },
+      {
+        title: "Token Forge & Components",
+        collapsable: false,
+        children: ["/token-forge-components/"]
+      },
+      {
+        title: "Relayer",
+        collapsable: false,
+        children: ["/relayer/"]
+      },
+      {
+        title: "Agreements Library",
+        collapsable: false,
+        children: ["/open-source-library/", "/conversion-tool/", "/natural-language-processing/", "/review-tool/"]
+      },
     ],
     algolia: {
       apiKey: "68c3c0d36676a3acce1cd3c7087bc7c9",
