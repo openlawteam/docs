@@ -27,11 +27,6 @@ module.exports = {
         children: ["/sign-store/"]
       },
       {
-        title: "Forms & Flows",
-        collapsable: false,
-        children: ["/forms-flows/"]
-      },
-      {
         title: "Token Forge & Components",
         collapsable: false,
         children: ["/token-forge-components/"]
@@ -44,7 +39,7 @@ module.exports = {
       {
         title: "Agreements Library",
         collapsable: false,
-        children: ["/open-source-library/", "/conversion-tool/", "/natural-language-processing/", "/review-tool/"]
+        children: ["/conversion-tool/", "/review-tool/"]
       },
     ],
     algolia: {
