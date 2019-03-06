@@ -14,7 +14,7 @@ Signature Algorithm might be best here?
 
 ## Incorporating Third Party Providers
 
-## Accessing Signed Documents from Site/Private ## Instance
+## Accessing Signed Documents from Site/Private Instance
 
 ## Signing Agreements Through the API
 
