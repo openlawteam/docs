@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: A library to convert HTML agreements into [OpenLaw Markdown format](https://docs.openlaw.io/markdown/index.html), based on [Scala HTML-to-Markdown project](https://github.com/tkqubo/scala-html-to-markdown).
+    content: A library to convert HTML agreements into [OpenLaw Markdown format](https://docs.openlaw.io/markup-language), based on [Scala HTML-to-Markdown project](https://github.com/tkqubo/scala-html-to-markdown).
 ---
 
 # Conversion Tool
