@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: Description of the OpenLaw signature protocols and algorithms.
+    content: Description of the OpenLaw signature protocols and algorithm, as well as ways of signing and storing documents via the API. 
 ---
 
 # Sign & Store
