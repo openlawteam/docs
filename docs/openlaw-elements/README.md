@@ -1,41 +1,39 @@
 ---
 meta:
   - name: description
-    content: TODO update as necessary. OpenLaw Elements is a React component that will dynamically render a basic form for an OpenLaw template.
+    content: OpenLaw Elements is a React component that will dynamically render a basic form for an OpenLaw template.
 ---
-
-_Everything below is existing content._
 
 # OpenLaw Elements
 
-OpenLaw Elements is a project to help accelerate development for projects using OpenLaw. The main component of OpenLaw Elements is `OpenLawForm`. This component will render all other required form elements for a passed in template and its associated variable data.
+[OpenLaw Elements](https://github.com/openlawteam/openlaw-elements) is a project to help accelerate development for projects using OpenLaw. The main component of OpenLaw Elements is `OpenLawForm`. This component will render all other required form elements for a passed in template and its associated variable data.
 
 ## Requirements
 
 - Node (and npm)
 - React
-- [OpenLaw APIClient](/api-client/) and [OpenLaw Object](/openlaw-object/)
+- OpenLaw's [APIClient](/api-client/) and [Openlaw Object](/openlaw-object/)
   - [Github Page](https://github.com/openlawteam/openlaw-client)
   - [npm package](https://www.npmjs.com/package/openlaw)
 
 ## Installation
 
-To install, simply run the following in the terminal within the root directory of your React project:
+To install the [openlaw-elements npm package](https://www.npmjs.com/package/openlaw-elements), simply run the following in the terminal within the root directory of your React project:
 
-```
+```sh
 npm install --save openlaw-elements@beta
 ```
 
 ## Sample Usage
 
-Below is a sample on how one might setup a quick form for their application. The breakdown of steps is as follows:
+Below is a sample on how you might quickly setup a rendered form for an OpenLaw template in your bundled app (e.g., using Webpack) or [create-react-app](https://github.com/facebook/create-react-app). The breakdown of steps is as follows:
 
-1. Import OpenLaw tools
-2. Optionally import our styles
-3. Authenticate the client
-4. Compile your template, variables, and parameters (for additional information on this, and the OpenLaw Object in general, see the [OpenLaw Object](/openlaw-object/) section).
-5. Define your `onChange` function
-6. Render the OpenLawForm component in your React application
+1. Import OpenLaw tools.
+2. Optionally import our styles.
+3. Authenticate the client.
+4. Compile your template, variables, and parameters (for additional information on this, see the [Openlaw Object](/openlaw-object/) section).
+5. Define your `onChange` function.
+6. Render the OpenLawForm component in your React application.
 
 ```js
 // ** Import OpenLaw Tools **
@@ -47,14 +45,14 @@ import OpenLawForm from "openlaw-elements";
 // ** OPTIONAL: Import our base styles - feel free to use them!
 import "openlaw-elements/dist/openlaw-elements.min.css";
 
-// ** Authenticate the client, this is used primarily to handle address fields
-// To run against your own private OpenLaw instance, simply pass in the host for it
-// IE: 'https://[YOUR.INSTANCE.URL]'
+// ** Authenticate the client, this is used primarily to handle address fields.
+// To run against your own private OpenLaw instance, simply pass in the hostname
+// for it: 'https://[HOSTNAME].openlaw.io'
 const apiClient = new APIClient("https://app.openlaw.io");
-// We strongly recommend using environment variables, not hard-coded strings
+// We strongly recommend using environment variables, not hard-coded strings.
 apiClient.login("[YOUR_OPENLAW_EMAIL]", "[YOUR_OPENLAW_PASSWORD]");
 
-// ** Compile your template, variables, and parameters
+// ** Compile your template, variables, and parameters.
 const { compiledTemplate } = Openlaw.compileTemplate(
   "**Name**: [[First Name]] [[Last Name]]"
 );
@@ -66,7 +64,12 @@ const { executionResult, errorMessage } = Openlaw.execute(
 );
 const variables = Openlaw.getExecutedVariables(executionResult, {});
 
-// ** You'll need to have an onChange function to handle variable changes in the form
+// ** This is helpful for logging in development, or throwing exceptions at runtime.
+if (errorMessage) {
+  console.error('Openlaw Execution Error:', errorMessage);
+}
+
+// ** You'll need to have an onChange function to handle variable changes in the form.
 const onChange = (key, value) => console.log("KEY:", key, "VALUE:", value);
 
 // ** Render the OpenLawForm component as you would any other in your app!
@@ -86,33 +89,31 @@ ReactDOM.render(<App />, document.getElementById("your-id-here"));
 
 ## Required Parameters
 
-We'll give more detailed information on the OpenLawForm parameters here.
+### apiClient
 
-#### apiClient
-
-You will need to authenticate an instance of the apiClient and pass it in to the component to work. For more information on how to do that, see the [REST API and APIClient](/api-client/) portion of the docs.
+You will need to authenticate an instance of the apiClient object and pass it into the component to work. For more information on how to do that, see the [REST API and APIClient](/api-client/) portion of the docs.
 
 ```
 apiClient={apiClient}
 ```
 
-#### executionResult
+### executionResult
 
-You will have to pass in the `executionResult` from a template compiled with the OpenLaw Object. See the [Openlaw Object - execute](/openlaw-object/#template) section of the docs for more details.
+You will have to pass in the `executionResult` object from a template compiled with the Openlaw Object. See the [template](/openlaw-object/#template) section of the Openlaw Object docs for more details.
 
 ```
 executionResult={executionResult}
 ```
 
-#### parameters
+### parameters
 
-These are the parameters for values that correlate to template variables. Generally you'll manage these in state via an onChange function throughout the lifecycle of your app.
+These are the parameters for values that correlate to template variables. Generally you'll manage the parameters object in state via an onChange function handler (or in a state manager like Redux or MobX) throughout the lifecycle of your app.
 
 ```
 parameters={parameters}
 ```
 
-#### onChangeFunction
+### onChangeFunction
 
 This is the method through which you'll handle form changes. As a user types into form fields or makes value changes, the event will fire.
 
@@ -120,17 +121,17 @@ This is the method through which you'll handle form changes. As a user types int
 onChangeFunction={onChange}
 ```
 
-#### openlaw
+### openLaw
 
-This should be an instance of the Openlaw Object imported from our JavaScript client tools. You can get information on how to install the library at its [github page](https://github.com/openlawteam/openlaw-client) or find more info on its usage at the [Openlaw Object](/openlaw-object/) section here in the docs.
+This should be the Openlaw Object imported from our JavaScript client tools. You can get information on how to install the library at its [github page](https://github.com/openlawteam/openlaw-client) or find more info on its usage at the [Openlaw Object](/openlaw-object/) section here in the docs.
 
 ```
-openlaw={openlaw}
+openLaw={Openlaw}
 ```
 
-#### variables
+### variables
 
-These are the executed variables retrieved from the compiled template. You can find more information on generating these from the [getExecutedVariables](/openlaw-object/#getexecutedvariables) section of our docs.
+These are the executed variables retrieved from the compiled template. You can find more information on generating the array of variables from the [getExecutedVariables](/openlaw-object/#getexecutedvariables) section of our Openlaw Object docs.
 
 ```
 variables={variables}
@@ -140,9 +141,17 @@ variables={variables}
 
 In addition to the required parameters, we offer support for the following additional parameters.
 
-#### renderSections
+### sections
 
-This is a custom renderer for changing the look and feel of sections generated with the Openlaw client.
+If you have organized the template variables into custom sections (overriding how they are organized in the template source itself), you may pass these as a parameter for the form to use.
+
+```
+sections: Array<any>
+```
+
+### renderSections
+
+This is a custom renderer for changing the look and feel of the default sections generated with the OpenLawForm component.
 
 ```
 renderSections: ({
@@ -151,15 +160,7 @@ renderSections: ({
 }) => React.Node
 ```
 
-#### sections
-
-If you have already iterated over your sections, you may pass these as a parameter for the form to use.
-
-```
-sections: []
-```
-
-#### sectionTransform
+### sectionTransform
 
 If you need to apply transformations to section data on render, this parameter can be used to do so. The transformed data will be passed to `renderSections`.
 
@@ -167,15 +168,15 @@ If you need to apply transformations to section data on render, this parameter c
 sectionTransform: (any, number) => {}
 ```
 
-#### sectionVariablesMap
+### sectionVariablesMap
 
-In order to map sections with their respective variables, you'll need to supply a function that returns the expected section variable formatted as in the sample below.
+In order to map custom sections with their respective variables, you'll need to supply a function that returns the expected section variable formatted as in the sample below.
 
 ```
 sectionVariablesMap: (any, number) => { [string]: Array<string> }
 ```
 
-#### textLikeInputClass
+### textLikeInputClass
 
 This will apply a class to all elements that are text-input like including text, email, number, and textarea.
 
@@ -183,10 +184,37 @@ This will apply a class to all elements that are text-input like including text,
 textLikeInputClass: "any-valid-class"
 ```
 
-#### unsectionedTitle
+### unsectionedTitle
 
-This will apply the title to generated sections that have none. If an empty string is provided the title will be unset. The default title is "Miscellaneous".
+This will apply a title to the generated section for variables that have not been explicitly included in another section (e.g., the use of [groupings](/markup-language/#groupings) to organize a template's variables and conditionals). If an empty string is provided the title will be unset. The default title is "Miscellaneous".
 
 ```
 unsectionedTitle: "My Unsectioned Title"
 ```
+
+## Using our default styles
+
+Our component comes with a separate file of base styles which you can include in your app JS (via an `import`) or HTML. If you decide to import the styles into your JS, be sure to add a way to import CSS into your bundle. As an example, using Webpack's [css-loader](https://github.com/webpack-contrib/css-loader) + [style-loader](https://github.com/webpack-contrib/style-loader). If you are using [create-react-app](https://github.com/facebook/create-react-app) this is already done for you.
+
+### Including the styles
+
+Via JavaScript `import`:
+
+```js
+import 'openlaw-elements/dist/openlaw-elements.min.css';
+```
+
+If you'd like to load the styles via an HTML file, you can copy the path (or file):
+
+```html
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="node_modules/openlaw-elements/dist/openlaw-elements.min.css"
+  <!-- or your path -->
+>
+```
+
+### Overriding our styles
+
+If you want to leave out our styles, that's completely fine. We've set up our components with simple classnames so you can target what you need to, easily. Just add your own stylesheet and take a look at what classes and elements you can style. We find the simplest way to prototype can be using browser developer tools.
