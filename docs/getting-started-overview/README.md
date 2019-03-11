@@ -1,20 +1,16 @@
 ---
 meta:
   - name: description
-    content: TODO update as necessary. We're excited to provide you the resources to integrate and build on the OpenLaw protocol.
+    content: We're excited to provide you the resources to integrate and build on the OpenLaw protocol.
 ---
-
-# Overview of Rest API, JavaScript and Scala Library
-
-_Everything below is existing content._
 
 # Getting Started
 
-We're excited to provide you the resources to integrate and build on the OpenLaw protocol. To learn more about our shared libraries, please read the [OpenLaw core overview](/openlaw-core/).
+We're excited to provide you the open source resources to integrate and build on the OpenLaw protocol. To learn more about the technical details of our shared libraries, please read the [OpenLaw core overview](/openlaw-core/).
 
-## JavaScript
+## JavaScript (openlaw-client)
 
-To use OpenLaw core and our APIClient library in your JavaScript project, you can use our [npm package](https://www.npmjs.com/package/openlaw).
+To use OpenLaw core and our APIClient library in your JavaScript project, you can use our [openlaw npm package](https://www.npmjs.com/package/openlaw).
 
 ```sh
 $ npm install openlaw --save
@@ -68,9 +64,9 @@ import { Openlaw, APIClient } from './path/to/openlaw/index.esm.js';
 
 You can find further instructions on how to use our JavaScript libraries in our [APIClient](/api-client/) and [Openlaw Object](/openlaw-object/) references.
 
-## Scala
+## Scala (openlaw-core)
 
-If you want to use OpenLaw core in your Scala project, here is how to add it to your sbt project:
+If you want to use OpenLaw core in your Scala project, here is how to add [the library](https://bintray.com/openlawos/openlaw-core) to your sbt project:
 
 ```scala
 // First add our repository
@@ -80,6 +76,22 @@ resolvers += "Openlaw core" at "https://dl.bintray.com/openlawos/openlaw-core"
 libraryDependencies += "org.openlaw" %% "openlaw-core" % "<last version>"
 ```
 
----
+## OpenLaw Elements (openlaw-elements)
 
-Check out our [Markup Language docs](/markup-language/) to start creating your own dynamic legal agreements using OpenLaw as well as our [Review Tool docs](/review-tool/) to learn how to contribute to our growing library of "smart" legal agreements.
+If you are using React as part of your project, you can use our [openlaw-elements npm package](https://www.npmjs.com/package/openlaw-elements) to dynamically render the form fields for the variables in an OpenLaw template.
+
+```sh
+npm install --save openlaw-elements@beta
+```
+
+You can find more information about how to use the OpenLawForm import in our [OpenLaw Elements](/openlaw-elements/) guide.
+
+## Contributing to OpenLaw
+
+We're always looking for ways to improve these open source libraries and would love to hear your feedback and ideas. If you would like to report any bugs or suggest enhancements to these OpenLaw projects, check out the Contributing Guidelines for each. There you'll find information on how best to connect with us including joining our [OpenLaw Community Slack Team](https://join.slack.com/t/openlaw-community/shared_invite/enQtMzY1MTA2ODY3ODg5LTc0ZGQ4OTEwMDEyMGUxMzJmMDVmNzM1ODRmNTdkNDIyNDkyOGU0NmRkMmRlMmY3ZTMwYzNlOTFiMzUwZjJkOTk).
+
+Contributing Guidelines:
+
+- [openlaw-client](https://github.com/openlawteam/openlaw-client/blob/develop/CONTRIBUTING.md)
+- [openlaw-core](https://github.com/openlawteam/openlaw-core/blob/develop/CONTRIBUTING.md)
+- [openlaw-elements](https://github.com/openlawteam/openlaw-elements/blob/master/CONTRIBUTING.md)
