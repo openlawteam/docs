@@ -66,7 +66,7 @@ const variables = Openlaw.getExecutedVariables(executionResult, {});
 
 // ** This is helpful for logging in development, or throwing exceptions at runtime.
 if (errorMessage) {
-  console.error('Openlaw Execution Error:', errorMessage);
+  console.error("Openlaw Execution Error:", errorMessage);
 }
 
 // ** You'll need to have an onChange function to handle variable changes in the form.
@@ -201,18 +201,17 @@ Our component comes with a separate file of base styles which you can include in
 Via JavaScript `import`:
 
 ```js
-import 'openlaw-elements/dist/openlaw-elements.min.css';
+import "openlaw-elements/dist/openlaw-elements.min.css";
 ```
 
-If you'd like to load the styles via an HTML file, you can copy the path (or file):
+If you'd like to load the styles via an HTML file, you can copy the path (or file). For example:
 
 ```html
 <link
   rel="stylesheet"
   type="text/css"
   href="node_modules/openlaw-elements/dist/openlaw-elements.min.css"
-  <!-- or your path -->
->
+/>
 ```
 
 ### Overriding our styles
