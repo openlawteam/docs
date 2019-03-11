@@ -47,7 +47,7 @@ import "openlaw-elements/dist/openlaw-elements.min.css";
 
 // ** Authenticate the client, this is used primarily to handle address fields.
 // To run against your own private OpenLaw instance, simply pass in the hostname
-// for it: 'https://[HOSTNAME].openlaw.io'
+// for it: 'https://[instance-name].openlaw.io'
 const apiClient = new APIClient("https://app.openlaw.io");
 // We strongly recommend using environment variables, not hard-coded strings.
 apiClient.login("[YOUR_OPENLAW_EMAIL]", "[YOUR_OPENLAW_PASSWORD]");
