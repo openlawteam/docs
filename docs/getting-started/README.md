@@ -12,6 +12,9 @@ We're excited to provide you the resources to integrate and build on the OpenLaw
 
 To use OpenLaw core and our APIClient library in your JavaScript project, you can use our [npm package](https://www.npmjs.com/package/openlaw).
 
+A complete tutorial to build a DApp with OpenLaw on Medium:
+[Get Started with OpenLaw in Minutes](https://medium.com/@OpenLawOfficial/openlaw-api-tutorial-build-a-complete-dapp-with-the-openlaw-api-truffle-react-js-d064717ad41d)
+
 ```sh
 $ npm install openlaw --save
 ```
