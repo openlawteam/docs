@@ -7,26 +7,30 @@ module.exports = {
     // ],
     sidebar: [
       {
-        title: "Guide",
+        title: "Overview of OpenLaw",
         collapsable: false,
-        children: ["/", "/getting-started/", "/openlaw-core/"]
+        children: ["/"]
       },
       {
-        title: "Reference",
+        title: "Getting Started",
         collapsable: false,
-        children: ["/api-client/", "/openlaw-object/", "/openlaw-elements/"]
+        children: ["/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/openlaw-elements/"]
       },
       {
-        title: "Using OpenLaw",
+        title: "First Draft",
         collapsable: false,
         children: ["/markup-language/"]
       },
       {
-        title: "Review Tool",
+        title: "Sign & Store",
         collapsable: false,
-        children: ["/review-tool/"]
-      }
-      // add new top level sections here...
+        children: ["/sign-store/"]
+      },
+      {
+        title: "Agreements Library",
+        collapsable: false,
+        children: ["/conversion-tool/", "/review-tool/"]
+      },
     ],
     algolia: {
       apiKey: "68c3c0d36676a3acce1cd3c7087bc7c9",

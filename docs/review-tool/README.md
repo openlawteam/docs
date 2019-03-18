@@ -1,10 +1,12 @@
 ---
 meta:
   - name: description
-    content: Creating and publishing high-quality "smart" legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language you can help us to automate this process.
+    content: Creating and publishing high-quality smart legal agreements from scratch is a tough task, but now that you know more about the OpenLaw Markup Language, you can help us to automate this process.
 ---
 
-# Overview
+# Review Tool
+
+## Overview
 
 Creating and publishing high-quality "smart" legal agreements from scratch is a tough task,
 but now that you know more about the [OpenLaw Markup Language](/markup-language/) you can help us to automate this process.
@@ -17,7 +19,7 @@ your own version without converting a real world contract into markdown format.
 
 There are five main steps that compose this process to build up our library:
 
-1.  Collecting HTML agreements from various sources, such as [LawInsider.com](https://www.lawinsider.com/education);
+1.  Collecting HTML agreements from various sources, such as [LawInsider](https://www.lawinsider.com/education);
 2.  Parsing and Converting HTML files into OpenLaw Markdown format using Natural Language Processing (NLP);
 3.  Uploading markdown files to the Review Tool;
 4.  Reviewing all the files to make sure they were properly converted;
@@ -26,22 +28,13 @@ There are five main steps that compose this process to build up our library:
 With these steps we have a feedback loop that leverages a new flow of information and raises the standards
 of the converted files.
 
-The Review Tool is an important piece of this puzzle and now our community can join forces with us and help
-to build up this library of agreements.
-
-# How-To
-
-## Sign Up
-
-- [Register](https://conversion.openlaw.io/register)
-
-## Sign In
-
-- [Login](https://conversion.openlaw.io/login)
+The Review Tool is an important piece of our ecosystem and now the community can [sign up](https://conversion.openlaw.io/register)
+to join forces with us and help to build up this library of agreements.
+Or [login](https://conversion.openlaw.io/login) if you already have an account.
 
 ## Review
 
-### Modes
+#### Modes
 
 The Review Tool allows you to decide whether to review a particular agreement or start from where you left off.
 
@@ -67,13 +60,14 @@ The Review Tool allows you to decide whether to review a particular agreement or
   the agreement to review it again.
   :::
 
-### Entity Classification
+## Interactive Labeling
 
-The Review Tool identifies different types of entities and converts them into markdown variables. The first
-version detects Organization and Person names. However we often see invalid or partial matches, and that's
-why we need to review this information.
+The Review Tool identifies different types of entities and variables. However we often see invalid or partial matches, and
+with the interactive labeling tool we can review and fix this sort of information.
 
-The picture bellow shows a partial match of an Organization name, the same might happen for Person names:
+### Variable Classification
+
+The picture below shows a partial match of an Organization name, and the same might happen for Person names:
 
 <center>
     <img src="./img/review-popup-partial-match.png" alt="Partial Match" />
@@ -103,7 +97,7 @@ an Organization or a Person name. See bellow:
     <img src="./img/review-popup-entity-none.png" alt="Entity None" />
 </center>
 
-It will indicate that you have found an invalid match its type is not relevant.
+It will indicate that you have found an invalid match and its type is not relevant.
 
 The third case happens when the tool finds a proper match but suggests the wrong entity type:
 
@@ -117,37 +111,38 @@ Clearly `David V. Singer` is not an Organization name. Fix the entity type by cl
     <img src="./img/review-popup-fix-entity.png" alt="Fix Entity" />
 </center>
 
-And set correct entity type (`Person`), it will be applied to the text and move to the next item.
+And set correct entity type to (`Person`), it will be applied to the text and move to the next item if available.
 
 At this stage of the review all classified entities will be converted into OpenLaw Markdown variables and applied to
 the background text in the editor.
 
-With the variables updated in the editor the Review Tool starts the next task automatically: Variable Renaming.
+With the variables updated in the editor the Review Tool starts the next stage automatically: [Variable Renaming](#variable-renaming).
 
 ---
 
 ### Variable Renaming
 
 After reviewing the entity matches and types it is time to give a proper name to the variables.
-Remember that each entity you have classified in the previous step is converted into a markup variable.
-Some of the variables we already converted for you, such as dates and addresses. That's why do not need to classify
-these two types.
+Each one of the entities you have classified in the previous step is now a Markup Variable.
+Variables need to be properlly named for better comprehension.
 
-There are several types of variables to rename. Currently these are the types that are available:
+Some of the variables we already named for you, such as dates and addresses, but you might want to rename them.
 
-Variable type `Date`:
+There are several types of existing variables. Currently the available types for renaming are:
+
+`Date`
 
 <center>
     <img src="./img/renaming-popup-date-var.png" alt="Date Var" />
 </center>
 
-Variable type `Organization`:
+`Organization`
 
 <center>
     <img src="./img/renaming-popup-org-var.png" alt="Organization Var" />
 </center>
 
-Variable type `Person`:
+`Person`
 
 <center>
     <img src="./img/renaming-popup-person-var.png" alt="Person Var" />
@@ -155,60 +150,60 @@ Variable type `Person`:
 
 Just fill out the input text with a proper name and it will replace the highlighted in the original
 markdown content at the end of this step. If you need more context to choose a name you can simply look at the editor
-in the background which surfaces the current variable in review:
+in the background which surfaces the current variable in review. Leave it blank to keep the default name.
 
 <center>
     <img src="./img/review-editor-background-var-highlight.png" alt="Highlight Var" />
 </center>
 
-Leave it blank to keep the default name.
-
-After all variables were renamed the tool will move to the next step: Title Suggestion.
+After all variables are renamed the tool will move to the next step automatically: [Title Suggestion](#title-suggestion).
 
 ---
 
 ### Title Suggestion
 
-At this step it asks for title suggestion to the agreement in review.
-We often see odd names for these markdown files and in order to improve that we can simply fill out the
-input text with a suitable name. Leave it blank to keep the default name.
+At this step it asks for a title suggestion to the agreement that is being reviewed.
+We often see odd names for these markdown files, so in order to improve that we can fill out the
+input text with a suitable name. Leave it blank to keep the default.
 
 <center>
     <img src="./img/title-suggestion-popup.png" alt="Title Suggestion" />
 </center>
 
-Hit **Save** and all the changes you have suggested will be applied to the editor.
+Hit **Save** and all the changes you have suggested will be applied to the content displayed in the text [editor](#editor).
 
 ---
 
-### Editor
+## Editor
 
-The text editor allows the option of adding/fixing variables that were not identified during Entity Classification
-and Variable Renaming steps.
+### Edit
+
+The text editor allows you to fix typos, add/fix variables that were not identified at the [Variable Classification](#variable-classification) or
+[Variable Renaming](#variable-renaming) stages.
+You can also add or remove clauses that you might need.
 
 <center>
     <img src="./img/editor.png" alt="Editor" />
 </center>
 
-You can add new variables, remove lines and fix variables names in the text. After you finish your
-edits the review is ready to be uploaded.
+After you finish your edits you have a template - which is ready to be [uploaded](#upload) to our template storage.
 
 ---
 
-### Uploading
+### Upload
 
-The upload process sends to our servers all the decisions you have made along the way and the final version of
+The upload process sends to our servers all the decisions you have made along the way plus the final version of
 the reviewed markdown.
 
-In order to upload the content click on button **Upload Review**. Note: this button becomes available
-only if you have completed the task 1 (Entity Classification) at least.
+Click on button **Upload Review** to upload the review. The button becomes available only if you have completed
+the stage 1 [Variable Classification](#variable-classification) at least.
 
 After the review is uploaded the editor changes the state to read only mode. So you will not be able to
-edit the text anymore. Make sure you do all the edits before publishing the review.
+edit the content anymore. Make sure you perform all the edits before uploading the review.
 
-If you have to add anything else after you have submitted, go back to home page and select the exact same
-agreement to start a new review round. The new review round will start with your latest changes, so you
-can edit the file and upload it again.
+If you do have to change the content after your review was uploaded, go back to home page and select the exact same
+agreement to start a new review round. The new review round will fetch your latest changes for that template, so you
+can edit the content and upload it again.
 
 ---
 
@@ -227,9 +222,9 @@ You can also submit feedback at anytime by clicking on the **Star** icon in the 
 
 ### Blacklist
 
-We often see markdowns with content that are not useful for us: missing important information,
+We often see markdowns with invalid or not useful content, i.e: missing important information,
 the text is confusing, lots of invalid characters, etc. For these cases we can add the markdown to a
-blacklist by clicking on **Blacklist** button.
+black list by clicking on **Blacklist** button.
 
 Once the markdown is blacklisted, you won't be able to edit and review it anymore. Just move to **Next**.
 
@@ -241,8 +236,11 @@ Once the markdown is blacklisted, you won't be able to edit and review it anymor
 
 ### Next
 
-The **Next** button finds the next file available for review. You can navigate through the files
-queue using it until you get an agreement that you want to analyze.
+The **Next** button finds the next agreement available for review. You can navigate through the files
+queue until find an agreement that you want to review.
 
-Every time you open a new file you lock that file for 30 minutes, as mentioned before, this is the maximum time
-it holds the file for your review. Usually the review does not take more than 10 minutes.
+::: warning
+Every time you open a new agreement you lock that content for 30 minutes.
+As mentioned before, this is the maximum time it holds the file for your review.
+Usually the review does not take more than 10 minutes.
+:::
