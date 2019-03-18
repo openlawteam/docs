@@ -68,13 +68,3 @@ This is why future versions of our signature will use the same concept. The firs
 This way, all the points discussed earlier are still valid.
 
 In the future, we are considering adding ERC-712 so that we can sign not only the document but certain values from the variables that can be used in a smart contract.
-
-## Accessing Signed Documents from Site/Private Instance
-
-## Signing Agreements Through the API
-
-## Accessing Stored Agreements Through the API
-
-### Accessing Data from the Agreements
-
-### Generating Word / PDF Files

@@ -9,32 +9,22 @@ module.exports = {
       {
         title: "Overview of OpenLaw",
         collapsable: false,
-        children: ["/", "/openlaw-products/", "/private-self-hosted-instances/", "/hosting-kaleido/"]
+        children: ["/"]
       },
       {
         title: "Getting Started",
         collapsable: false,
-        children: ["/quickstart/", "/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/scala-library/", "/openlaw-elements/"]
+        children: ["/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/openlaw-elements/"]
       },
       {
         title: "First Draft",
         collapsable: false,
-        children: ["/first-draft-overview/", "/markup-language/", "/basic-functions/", "/other-functions/"]
+        children: ["/markup-language/"]
       },
       {
         title: "Sign & Store",
         collapsable: false,
         children: ["/sign-store/"]
-      },
-      {
-        title: "Token Forge & Components",
-        collapsable: false,
-        children: ["/token-forge-components/"]
-      },
-      {
-        title: "Relayer",
-        collapsable: false,
-        children: ["/relayer/"]
       },
       {
         title: "Agreements Library",

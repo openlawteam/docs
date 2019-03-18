@@ -1,10 +1,8 @@
 ---
 meta:
   - name: description
-    content: TODO update as necessary. Core components of the OpenLaw Scala protocol, including the markup language and the virtual machine for holding contract state.
+    content: Core components of the OpenLaw Scala protocol, including the markup language and the virtual machine for holding contract state.
 ---
-
-_Everything below is existing content._
 
 # OpenLaw Core
 

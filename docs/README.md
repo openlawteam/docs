@@ -1,26 +1,8 @@
 ---
 meta:
   - name: description
-    content: TODO update as necessary. Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our protocol with JavaScript APIs for convenient integration, our markup language, and how our application works in general.
+    content: Welcome to OpenLaw's documentation. Here you'll learn more about OpenLaw, including our protocol with JavaScript APIs for convenient integration, our markup language, and how our application works in general.
 ---
-
-# What is OpenLaw?
-
-## General Concepts
-
-## OpenLaw Virtual Machine
-
-## Oracles
-
-## Parser
-
-## Values
-
-## API/Scala Library
-
----
-
-_Everything below is existing content on landing page in case helpful for the new content._
 
 # Overview
 
