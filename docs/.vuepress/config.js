@@ -9,7 +9,7 @@ module.exports = {
       {
         title: "Overview of OpenLaw",
         collapsable: false,
-        children: ["/"]
+        children: ["/", "/private-self-hosted-instances/"]
       },
       {
         title: "Getting Started",
