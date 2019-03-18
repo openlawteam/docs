@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: information about private and self hosted instances of OpenLaw
+    content: information about private and self-hosted instances of OpenLaw
 ---
 
 # Private and Self-Hosted Instances
