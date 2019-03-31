@@ -1,14 +1,16 @@
 ---
 meta:
   - name: description
-    content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document.
+    content: The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a template.
 ---
 
 # Markup Language
 
-The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document (what we call a "template"). Templates can be grouped together into "deals," making it possible for parties to create and manage entire transactions on a blockchain.
+The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document (what we call a "template"). Templates can be grouped together into "deals," making it possible for parties to create and manage entire transactions on a blockchain. If this is your first time visiting our site, please see the [Beginner’s Guide](/beginners-guide/) for creating a First Draft.
 
 ## Variables
+
+### Generally
 
 To identify a variable in an OpenLaw template, all that is required is to surround text with a set of double brackets. For example, consider the following basic contractual language from a mutual non-disclosure agreement (NDA):
 
@@ -134,7 +136,7 @@ You can define a default value for an Image variable by including a valid URL th
 
 The YesNo type is typically used together with "conditional" logic embedded into a template. It creates a binary "yes" or "no" question with radio button inputs. The value of the input can be used to output text, variables, smart contract calls, and/or trigger a conditional elsewhere in the agreement as explained below in [Conditionals and Decision Branches](#conditionals-and-decision-branches). To create a YesNo variable, add `: YesNo` after a variable name followed by the language in quotes that serves as a prompt for the user. For example, `[[Variable: YesNo "Have you included the required prompt?"]]`.
 
-**Summary of Input Variable Types**
+### Summary of Input Variable Types
 
 no type indicator or `: Text` - indicates that a variable is text
 
@@ -411,15 +413,15 @@ Unless as provided in Section [[Organization]], ...
 
 ## Titles
 
-You can hide the template title for an agreement by including the following option at the beginning of the document. This option is useful to suppress a title for letters or the downloading of Word documents.
+You can hide the template title for an agreement by including the following option at the beginning of the document. This option is useful to suppress a title when generating documents with agreement text that already includes a custom title.
 
 ```
 ####
-show title:false;
+show title: false;
 ####
 ```
 
-## Annotation
+## Annotations
 
 Sometimes it may be helpful to embed annotations in your template to give context to the user.
 The annotation is rendered only in preview and doesn't affect the docx or pdf version of the agreement.
@@ -566,6 +568,8 @@ This is my clause. John Doe. I am not showing any birthday-related information.
 Sections, choices, boolean expressions, and other advanced conditional features described above and below can be included in if-else conditionals just as in regular conditionals.
 
 ## Reasoning with Conditionals
+
+### Generally
 
 OpenLaw's markup language can handle boolean expressions, outlined below:
 
@@ -831,7 +835,7 @@ be subject to contribution.
 See the note above about the spacing in the above video.
 :::
 
-#### Hidden Variables
+### Hidden Variables
 
 You can also hide a variable if needed to perform basic calculations. To hide a variable, just add a `#` before the variable name: `[[#Variable]]`. Each hidden variable is displayed to an end user, but is not displayed within the text of the template or agreement.
 
@@ -1088,6 +1092,349 @@ Address:
 [[Vendor Address.city]], [[Vendor Address.state]] [[Vendor Address.zipCode]]
 ```
 
+## Deals
+
+Using OpenLaw, you can link together multiple templates into what we call a "deal." A deal is simply a collection of templates. To create a deal, you need to call a template. You can do so using the following syntax:
+
+```
+[[Variable Name: Template("Template Name")]]
+```
+
+When you create a deal and call one or more templates, you'll have the opportunity to collect relevant information on an opening screen, which can be pre-populated in multiple templates at the same time.
+
+### Basic Deal
+
+To illustrate, assume that you create two highly simplified templates:
+
+**Consulting Agreement**
+
+```
+This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]]
+by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
+
+^ **Engagement of Services**. Client may issue Project Assignments to Consultant
+in the form attached to this Agreement as Exhibit A ("Project Assignment").
+Subject to the terms of this Agreement, Consultant will render the services set
+forth in Project Assignment(s) accepted by Consultant (the "Services") by the
+completion dates set forth therein.
+
+^**Compensation**.  Client will pay Consultant the fee set forth in each Project
+Assignment for Services rendered pursuant to this Agreement as Consultant’s sole
+compensation for such Services.
+
+
+**CLIENT**
+
+[[Party A Signatory Email: Identity]]
+_______________________
+[[Party A Signatory First Name]] [[Party A Signatory Last Name]]
+
+**CONSULTANT**
+
+[[Party B Signatory Email: Identity]]
+_______________________
+[[Party B Signatory First Name]] [[Party B Signatory Last Name]]
+```
+
+**Project Assignment**
+
+```
+**Project Assignment [[Project Assignment Number]] Under Consulting Agreement**
+Dated: [[Effective Date: Date]]
+
+This Project Assignment ("Project Assignment"), adopts and incorporates by
+reference the terms and conditions of the Consulting Agreement (the
+"Agreement"), entered into on [[Effective Date: Date]], [[Party A]] ("Client")
+and [[Party B]] ("Consultant").  Services performed under this Project
+Assignment will be conducted in accordance with and be subject to the terms and
+conditions of this Project Assignment, the Agreement.  Capitalized terms used
+but not defined in this Project Assignment shall have the meanings set out in
+the Agreement.
+
+**Project:** [[Describe Project]]
+
+**Schedule Of Work:** [[Describe Schedule of Work]]
+
+**Fees:** For services provided, Client shall pay Consultant [[Describe Fees]]
+upon completion of the Project.  Fees shall not be paid until the work performed
+pursuant to this Project Assignment has been approved by the Client, which will
+not be unreasonably withheld.
+
+
+**CLIENT**
+
+[[Party A Signatory Email: Identity]]
+_______________________
+[[Party A Signatory First Name]] [[Party A Signatory Last Name]]
+
+**CONSULTANT**
+
+[[Party B Signatory Email: Identity]]
+_______________________
+[[Party B Signatory First Name]] [[Party B Signatory Last Name]]
+```
+
+You can combine these two documents into a deal by simply creating the following template:
+
+**Consulting Onboarding**
+
+```
+<%
+
+==Effective Date==
+[[Effective Date: Date]]
+
+==Client==
+[[Party A]]
+[[Party A Signatory First Name]]
+[[Party A Signatory Last Name]]
+
+==Consultant==
+[[Party B]]
+[[Party B Signatory First Name]]
+[[Party B Signatory Last Name]]
+
+==Project Assignment==
+[[Project Assignment Number]]
+[[Describe Fees]]
+[[Describe Project]]
+[[Describe Schedule of Work]]
+
+%>
+
+[[Consulting Agreement: Template("Consulting Agreement")]]
+[[Project Assignment: Template("Project Assignment")]]
+```
+
+The above will generate an opening page of common variables shared by these templates. Once these variables are filled in, both agreements can be executed as shown in the below video:
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+::: warning
+
+- The opening page of a deal will not render properly unless you set one or more variables in a grouping.
+- Any variable included in a grouping, which is not found in an underlying template will not render.
+
+:::
+
+### Advanced Deals Using Conditionals
+
+Deals can also be set up to handle conditionals present in multiple agreements. Assume for the sake of illustration that the two agreements were modified to include a conditional outlining that the consultant will be paid in ether.
+
+**Consulting Agreement**
+
+```
+This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]]
+by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
+
+^ **Engagement of Services**. Client may issue Project Assignments to Consultant
+in the form attached to this Agreement as Exhibit A ("Project Assignment").
+Subject to the terms of this Agreement, Consultant will render the services set
+forth in Project Assignment(s) accepted by Consultant (the "Services") by the
+completion dates set forth therein.
+
+^**Compensation**.  Client will pay Consultant the fee set forth in each Project
+Assignment for Services rendered pursuant to this Agreement as Consultant’s sole
+compensation for such Services.  {{Payment in Ether "Will you pay the consultant
+in ether?" => Payment shall be made in ether.}}
+
+
+**CLIENT**
+
+[[Party A Signatory Email: Identity]]
+_______________________
+[[Party A Signatory First Name]] [[Party A Signatory Last Name]]
+
+**CONSULTANT**
+
+[[Party B Signatory Email: Identity]]
+_______________________
+[[Party B Signatory First Name]] [[Party B Signatory Last Name]]
+```
+
+**Project Assignment**
+
+```
+**Project Assignment [[Project Assignment Number]] Under Consulting Agreement**
+Dated: [[Effective Date: Date]]
+
+This Project Assignment ("Project Assignment"), adopts and incorporates by
+reference the terms and conditions of the Consulting Agreement (the
+"Agreement"), entered into on [[Effective Date: Date]], [[Party A]] ("Client")
+and [[Party B]] ("Consultant").  Services performed under this Project
+Assignment will be conducted in accordance with and be subject to the terms and
+conditions of this Project Assignment, the Agreement.  Capitalized terms used
+but not defined in this Project Assignment shall have the meanings set out in
+the Agreement.
+
+**Project:** [[Describe Project]]
+
+**Schedule Of Work:** [[Describe Schedule of Work]]
+
+**Fees:** For services provided, Client shall pay Consultant [[Describe Fees]]
+upon completion of the Project.  Fees shall not be paid until the work performed
+pursuant to this Project Assignment has been approved by the Client, which will
+not be unreasonably withheld.  {{Payment in Ether "Will you pay the consultant
+in ether?" => Payment shall be made in ether to the Consultant Ethereum address
+found at [[Recipient Address]]}}.
+
+**CLIENT**
+
+[[Party A Signatory Email: Identity]]
+_______________________
+[[Party A Signatory First Name]] [[Party A Signatory Last Name]]
+
+**CONSULTANT**
+
+[[Party B Signatory Email: Identity]]
+_______________________
+[[Party B Signatory First Name]] [[Party B Signatory Last Name]]
+```
+
+**Consulting Onboarding**
+
+```
+<%
+
+==Effective Date==
+[[Effective Date: Date]]
+
+==Client==
+[[Party A]]
+[[Party A Signatory First Name]]
+[[Party A Signatory Last Name]]
+
+==Consultant==
+[[Party B]]
+[[Party B Signatory First Name]]
+[[Party B Signatory Last Name]]
+
+==Project Assignment==
+[[Project Assignment Number]]
+[[Describe Fees]]
+[[Describe Project]]
+[[Describe Schedule of Work]]
+[[Payment in Ether]]
+[[Recipient Address]]
+
+%>
+
+[[Consulting Agreement: Template("Consulting Agreement")]]
+[[Project Assignment: Template("Project Assignment")]]
+{{Payment in Ether "Will you pay the consultant in ether?" => [[Recipient Address]]}}
+```
+
+On the opening page of the deal, the user will be presented with the conditional. Depending on the answer, the user will be prompted with an additional variable and the text of the underlying agreements will be modified.
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/ba6d97095a22497cadc8c6a85e1742f9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+### Using Collections and Paths in a Deal
+
+The Collection type used in conjunction with a deal makes it possible to generate a set of agreements for each item added to a Collection. This can be especially useful when the need arises in a deal to create a contract using the same agreement template but with a unique set of input values for each party identified in a Collection type.
+
+Here is a basic example of using a Collection (of a Structure type) in a deal:
+
+```
+<%
+
+==Effective Date==
+[[Effective Date: Date]]
+
+==Company==
+[[Company Name]]
+[[Company Address: Address]]
+[[Company Signatory Name]]
+[[Company Signatory Position]]
+[[Company Signatory Email: Identity]]
+
+==Employees==
+[[Employee Info: Structure(
+  First name: Text;
+  Last name: Text;
+  Address: Address;
+  Position: Text;
+  Ethereum address: EthAddress;
+  Email: Identity
+  )]]
+[[Employees: Collection<Employee Info>]]
+
+%>
+
+# Employment Agreement for each individual Employee
+{{#for each Employee: Employees =>
+  [[_: Template(
+    name: "Employment Agreement";
+    parameters:
+      Employee Name -> (Employee.First name + " " + Employee.Last name),
+      Employee Address -> Employee.Address,
+      Employee Position -> Employee.Position,
+      Recipient Ethereum Address -> Employee.Ethereum address,
+      Employee Signatory Email -> Employee.Email;
+    path: "agreements" / (Employee.First name + " " + Employee.Last name)
+    )]]
+}}
+```
+
+Let's step through what is going on with the Collection in this example.
+
+- First, we define a new Structure type, `Employee Info`, bundling all the relevant info for an employee:
+
+```
+[[Employee Info: Structure(
+  First name: Text;
+  Last name: Text;
+  Address: Address;
+  Position: Text;
+  Ethereum address: EthAddress;
+  Email: Identity
+  )]]
+```
+
+- Then we define a new Collection type of Employee Info, `Employees`:
+
+```
+[[Employees: Collection<Employee Info>]]
+```
+
+- For each element in the Collection (an individual `Employee`), we want to generate an `Employment Agreement` template. We set the template name as `_` because it does not need to be defined and we can make the variable name anonymous.
+
+```
+{{#for each Employee: Employees =>
+  [[_: Template(
+    name: "Employment Agreement";
+```
+
+::: warning
+Two or more template variables using the name `_` will not cause an error. However, never use an anonymous variable for [input variables](#variables) such as Text, Number, or Address because this will result in an error.
+:::
+
+- We then link the parameters in the `Employment Agreement` template with the associated parameters for an individual `Employee` in the deal template. This makes it possible to generate agreements based on the same template but with different input values. Each of the variables `Employee Name`, `Employee Address`, `Employee Position`, `Recipient Ethereum Address`, and `Employee Signatory Email` needs to be defined in the `Employment Agreement` template and of the same variable type as the parameter it has been linked with from the deal template.
+
+```
+parameters:
+  Employee Name -> (Employee.First name + " " + Employee.Last name),
+  Employee Address -> Employee.Address,
+  Employee Position -> Employee.Position,
+  Recipient Ethereum Address -> Employee.Ethereum address,
+  Employee Signatory Email -> Employee.Email;
+```
+
+- Finally, the `path` parameter has 2 purposes: (1) it gives a unique name to each agreement based on the parameters and (2) it defines the path that will be used if you download the agreements in the deal.
+
+```
+path: "agreements" / (Employee.First name + " " + Employee.Last name)
+```
+
+<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/f55c822761e249d0ae7437fe23854590" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
+## Other Tags
+
+In order to draft readable markup language, the markup language contains several additional tags, which allows users to add comments in code blocks and hide variables from the underlying text. The syntax for these tags can be found below:
+
+`#` - add a comment (within a code block)
+
+`<% %>` - opening and closing tags for code blocks (e.g., use with "groupings," smart contract calls, and to hide variables and conditionals)
+
 ## Smart Contracts
 
 Using OpenLaw, you can embed and execute smart contract code running on the Ethereum blockchain. In order to do so, you need to create a smart contract call, which can be embedded in a template and executed when all of the relevant parties sign the agreement. An example smart contract call is included below.
@@ -1238,335 +1585,3 @@ The contract level network set in the `EthereumCall` is specific to only the sma
 ::: tip
 If you omit the contract level `network` parameter and value from the `EthereumCall`, the network used for the smart contract executions will default to the [application level network](/api-client/#getcurrentnetwork) set at the time the executions are initiated.
 :::
-
-## Deals
-
-Using OpenLaw, you can link together multiple templates into what we call a "deal." A deal is simply a collection of templates. To create a deal, you need to call a template. You can do so using the following syntax:
-
-```
-[[Variable Name: Template("Template Name")]]
-```
-
-When you create a deal and call one or more templates, you'll have the opportunity to collect relevant information on an opening screen, which can be pre-populated in multiple templates at the same time.
-
-### Basic Deal
-
-To illustrate, assume that you create two highly simplified templates:
-
-**Consulting Agreement**
-
-```
-This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]]
-by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
-
-^ **Engagement of Services**. Client may issue Project Assignments to Consultant
-in the form attached to this Agreement as Exhibit A ("Project Assignment").
-Subject to the terms of this Agreement, Consultant will render the services set
-forth in Project Assignment(s) accepted by Consultant (the "Services") by the
-completion dates set forth therein.
-
-^**Compensation**.  Client will pay Consultant the fee set forth in each Project
-Assignment for Services rendered pursuant to this Agreement as Consultant’s sole
-compensation for such Services.
-
-
-**CLIENT**
-
-[[Party A Signatory Email: Identity]]
-_______________________
-[[Party A Signatory First Name]] [[Party A Signatory Last Name]]
-
-**CONSULTANT**
-
-[[Party B Signatory Email: Identity]]
-_______________________
-[[Party B Signatory First Name]] [[Party B Signatory Last Name]]
-```
-
-**Project Assignment**
-
-```
-**Project Assignment [[Project Assignment Number]] Under Consulting Agreement**
-Dated: [[Effective Date: Date]]
-
-This Project Assignment ("Project Assignment"), adopts and incorporates by
-reference the terms and conditions of the Consulting Agreement (the
-"Agreement"), entered into on [[Effective Date: Date]], [[Party A]] ("Client")
-and [[Party B]] ("Consultant").  Services performed under this Project
-Assignment will be conducted in accordance with and be subject to the terms and
-conditions of this Project Assignment, the Agreement.  Capitalized terms used
-but not defined in this Project Assignment shall have the meanings set out in
-the Agreement.
-
-**Project:** [[Describe Project]]
-
-**Schedule Of Work:** [[Describe Schedule of Work]]
-
-**Fees:** For services provided, Client shall pay Consultant [[Describe Fees]]
-upon completion of the Project.  Fees shall not be paid until the work performed
-pursuant to this Project Assignment has been approved by the Client, which will
-not be unreasonably withheld.
-
-
-**CLIENT**
-
-[[Party A Signatory Email: Identity]]
-_______________________
-[[Party A Signatory First Name]] [[Party A Signatory Last Name]]
-
-**CONSULTANT**
-
-[[Party B Signatory Email: Identity]]
-_______________________
-[[Party B Signatory First Name]] [[Party B Signatory Last Name]]
-```
-
-You can combine these two documents into a deal by simply creating the following template:
-
-**Consulting Onboarding**
-
-```
-==Effective Date==
-[[Effective Date: Date]]
-
-==Client==
-[[Party A]]
-[[Party A Signatory First Name]]
-[[Party A Signatory Last Name]]
-
-==Consultant==
-[[Party B]]
-[[Party B Signatory First Name]]
-[[Party B Signatory Last Name]]
-
-==Project Assignment==
-[[Project Assignment Number]]
-[[Describe Fees]]
-[[Describe Project]]
-[[Describe Schedule of Work]]
-
-
-[[Consulting Agreement: Template("Consulting Agreement")]]
-[[Project Assignment: Template("Project Assignment")]]
-```
-
-The above will generate an opening page of common variables shared by these templates. Once these variables are filled in, both agreements can be executed as shown in the below video:
-
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/7b317fc04a8b44b79112ae9b8b6e9c4b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
-
-::: warning
-
-- The opening page of a deal will not render properly unless you set one or more variables in a grouping.
-- Any variable included in a grouping, which is not found in an underlying template will not render.
-
-:::
-
-### Advanced Deals Using Conditionals
-
-Deals can also be set up to handle conditionals present in multiple agreements. Assume for the sake of illustration that the two agreements were modified to include a conditional outlining that the consultant will be paid in ether.
-
-**Consulting Agreement**
-
-```
-This Consulting Agreement (the "Agreement") is made as of [[Effective Date: Date]]
-by and between [[Party A]] ("Client") and the [[Party B]] ("Consultant").
-
-^ **Engagement of Services**. Client may issue Project Assignments to Consultant
-in the form attached to this Agreement as Exhibit A ("Project Assignment").
-Subject to the terms of this Agreement, Consultant will render the services set
-forth in Project Assignment(s) accepted by Consultant (the "Services") by the
-completion dates set forth therein.
-
-^**Compensation**.  Client will pay Consultant the fee set forth in each Project
-Assignment for Services rendered pursuant to this Agreement as Consultant’s sole
-compensation for such Services.  {{Payment in Ether "Will you pay the consultant
-in ether?" => Payment shall be made in ether.}}
-
-
-**CLIENT**
-
-[[Party A Signatory Email: Identity]]
-_______________________
-[[Party A Signatory First Name]] [[Party A Signatory Last Name]]
-
-**CONSULTANT**
-
-[[Party B Signatory Email: Identity]]
-_______________________
-[[Party B Signatory First Name]] [[Party B Signatory Last Name]]
-```
-
-**Project Assignment**
-
-```
-**Project Assignment [[Project Assignment Number]] Under Consulting Agreement**
-Dated: [[Effective Date: Date]]
-
-This Project Assignment ("Project Assignment"), adopts and incorporates by
-reference the terms and conditions of the Consulting Agreement (the
-"Agreement"), entered into on [[Effective Date: Date]], [[Party A]] ("Client")
-and [[Party B]] ("Consultant").  Services performed under this Project
-Assignment will be conducted in accordance with and be subject to the terms and
-conditions of this Project Assignment, the Agreement.  Capitalized terms used
-but not defined in this Project Assignment shall have the meanings set out in
-the Agreement.
-
-**Project:** [[Describe Project]]
-
-**Schedule Of Work:** [[Describe Schedule of Work]]
-
-**Fees:** For services provided, Client shall pay Consultant [[Describe Fees]]
-upon completion of the Project.  Fees shall not be paid until the work performed
-pursuant to this Project Assignment has been approved by the Client, which will
-not be unreasonably withheld.  {{Payment in Ether "Will you pay the consultant
-in ether?" => Payment shall be made in ether to the Consultant Ethereum address
-found at [[Recipient Address]]}}.
-
-**CLIENT**
-
-[[Party A Signatory Email: Identity]]
-_______________________
-[[Party A Signatory First Name]] [[Party A Signatory Last Name]]
-
-**CONSULTANT**
-
-[[Party B Signatory Email: Identity]]
-_______________________
-[[Party B Signatory First Name]] [[Party B Signatory Last Name]]
-```
-
-**Consulting Onboarding**
-
-```
-==Effective Date==
-[[Effective Date: Date]]
-
-==Client==
-[[Party A]]
-[[Party A Signatory First Name]]
-[[Party A Signatory Last Name]]
-
-==Consultant==
-[[Party B]]
-[[Party B Signatory First Name]]
-[[Party B Signatory Last Name]]
-
-==Project Assignment==
-[[Project Assignment Number]]
-[[Describe Fees]]
-[[Describe Project]]
-[[Describe Schedule of Work]]
-[[Payment in Ether]]
-[[Recipient Address]]
-
-[[Consulting Agreement: Template("Consulting Agreement")]]
-[[Project Assignment: Template("Project Assignment")]]
-{{Payment in Ether "Will you pay the consultant in ether?" => [[Recipient Address]]}}
-```
-
-On the opening page of the deal, the user will be presented with the conditional. Depending on the answer, the user will be prompted with an additional variable and the text of the underlying agreements will be modified.
-
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/ba6d97095a22497cadc8c6a85e1742f9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
-
-### Using Collections and Paths in a Deal
-
-The Collection type used in conjunction with a deal makes it possible to generate a set of agreements for each item added to a Collection. This can be especially useful when the need arises in a deal to create a contract using the same agreement template but with a unique set of input values for each party identified in a Collection type.
-
-Here is a basic example of using a Collection (of a Structure type) in a deal:
-
-```
-==Effective Date==
-[[Effective Date: Date]]
-
-==Company==
-[[Company Name]]
-[[Company Address: Address]]
-[[Company Signatory Name]]
-[[Company Signatory Position]]
-[[Company Signatory Email: Identity]]
-
-==Employees==
-[[Employee Info: Structure(
-  First name: Text;
-  Last name: Text;
-  Address: Address;
-  Position: Text;
-  Ethereum address: EthAddress;
-  Email: Identity
-  )]]
-[[Employees: Collection<Employee Info>]]
-
-# Employment Agreement for each individual Employee
-{{#for each Employee: Employees =>
-  [[_: Template(
-    name: "Employment Agreement";
-    parameters:
-      Employee Name -> (Employee.First name + " " + Employee.Last name),
-      Employee Address -> Employee.Address,
-      Employee Position -> Employee.Position,
-      Recipient Ethereum Address -> Employee.Ethereum address,
-      Employee Signatory Email -> Employee.Email;
-    path: "agreements" / (Employee.First name + " " + Employee.Last name)
-    )]]
-}}
-```
-
-Let's step through what is going on with the Collection in this example.
-
-- First, we define a new Structure type, `Employee Info`, bundling all the relevant info for an employee:
-
-```
-[[Employee Info: Structure(
-  First name: Text;
-  Last name: Text;
-  Address: Address;
-  Position: Text;
-  Ethereum address: EthAddress;
-  Email: Identity
-  )]]
-```
-
-- Then we define a new Collection type of Employee Info, `Employees`:
-
-```
-[[Employees: Collection<Employee Info>]]
-```
-
-- For each element in the Collection (an individual `Employee`), we want to generate an `Employment Agreement` template. We set the template name as `_` because it does not need to be defined and we can make the variable name anonymous.
-
-```
-{{#for each Employee: Employees =>
-  [[_: Template(
-    name: "Employment Agreement";
-```
-
-::: warning
-Two or more template variables using the name `_` will not cause an error. However, never use an anonymous variable for [input variables](#variables) such as Text, Number, or Address because this will result in an error.
-:::
-
-- We then link the parameters in the `Employment Agreement` template with the associated parameters for an individual `Employee` in the deal template. This makes it possible to generate agreements based on the same template but with different input values. Each of the variables `Employee Name`, `Employee Address`, `Employee Position`, `Recipient Ethereum Address`, and `Employee Signatory Email` needs to be defined in the `Employment Agreement` template and of the same variable type as the parameter it has been linked with from the deal template.
-
-```
-parameters:
-  Employee Name -> (Employee.First name + " " + Employee.Last name),
-  Employee Address -> Employee.Address,
-  Employee Position -> Employee.Position,
-  Recipient Ethereum Address -> Employee.Ethereum address,
-  Employee Signatory Email -> Employee.Email;
-```
-
-- Finally, the `path` parameter has 2 purposes: (1) it gives a unique name to each agreement based on the parameters and (2) it defines the path that will be used if you download the agreements in the deal.
-
-```
-path: "agreements" / (Employee.First name + " " + Employee.Last name)
-```
-
-<div style="text-align: center"><iframe width="630" height="394" src="https://www.useloom.com/embed/f55c822761e249d0ae7437fe23854590" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
-
-## Other Tags
-
-In order to draft readable markup language, the markup language contains several additional tags, which allows users to add comments and hide variables from the underlying text. The syntax for these tags can be found below:
-
-`#` - add a comment
-
-`<% %>` - opening and closing tags for code blocks (e.g., use with "groupings," smart contract calls, and to hide variables and conditionals)
