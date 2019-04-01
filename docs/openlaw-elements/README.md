@@ -129,6 +129,10 @@ This should be the Openlaw Object imported from our JavaScript client tools. You
 openLaw={Openlaw}
 ```
 
+::: tip
+As OpenLaw Elements depends on the [openlaw](https://www.npmjs.com/package/openlaw) package for the [apiClient](#apiclient) and [openLaw](#openlaw) parameters, we recommend always using the [latest](https://www.npmjs.com/package/openlaw/v/latest) version.
+:::
+
 ### variables
 
 These are the executed variables retrieved from the compiled template. You can find more information on generating the array of variables from the [getExecutedVariables](/openlaw-object/#getexecutedvariables) section of our Openlaw Object docs.
@@ -192,7 +196,7 @@ This will apply a title to the generated section for variables that have not bee
 unsectionedTitle: "My Unsectioned Title"
 ```
 
-## Using our default styles
+## Using our Default Styles
 
 Our component comes with a separate file of base styles which you can include in your app JS (via an `import`) or HTML. If you decide to import the styles into your JS, be sure to add a way to import CSS into your bundle. As an example, using Webpack's [css-loader](https://github.com/webpack-contrib/css-loader) + [style-loader](https://github.com/webpack-contrib/style-loader). If you are using [create-react-app](https://github.com/facebook/create-react-app) this is already done for you.
 
