@@ -129,6 +129,10 @@ This should be the Openlaw Object imported from our JavaScript client tools. You
 openLaw={Openlaw}
 ```
 
+::: tip
+As OpenLaw Elements depends on the [openlaw](https://www.npmjs.com/package/openlaw) package for the [apiClient](#apiclient) and [openLaw](#openlaw) parameters, we recommend always using the [latest](https://www.npmjs.com/package/openlaw/v/latest) version.
+:::
+
 ### variables
 
 These are the executed variables retrieved from the compiled template. You can find more information on generating the array of variables from the [getExecutedVariables](/openlaw-object/#getexecutedvariables) section of our Openlaw Object docs.
