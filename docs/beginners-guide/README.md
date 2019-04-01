@@ -28,7 +28,7 @@ _or_ by going to an existing template's "Edit" view, which is accessible in the 
 
 ### Step 2: Bracket Desired Text
 
-Easily transform any word or phrase in your legal agreement into a fill-in field by surrounding the text with a set of double brackets. Adding double brackets around legal prose transforms natural language into machine-readable objects called variables.  Consider the following basic contractual language from a mutual non-disclosure agreement (NDA):
+Easily transform any word or phrase in your legal agreement into a fill-in field by surrounding the text with a set of double brackets. Adding double brackets around legal prose transforms natural language into machine-readable objects called variables. Consider the following basic contractual language from a mutual non-disclosure agreement (NDA):
 
 ```
 This Mutual Non-disclosure Agreement (this “Agreement”) is entered into as of
@@ -65,7 +65,7 @@ One can vary the text that appears in the automatically generated form by includ
 
 ## Creating Fill-in Fields that Contain More Text Space
 
-If you would like to create a fill-in field that appears as a large text box, simply add `: LargeText` after the defined term.  For example, `[[Type Information Here: LargeText]]` results in the following:
+If you would like to create a fill-in field that appears as a large text box, simply add `: LargeText` after the defined term. For example, `[[Type Information Here: LargeText]]` results in the following:
 
 <center>
   <img src="./img/large-text.png" alt="Large Text example" />
