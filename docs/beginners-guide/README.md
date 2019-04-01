@@ -4,7 +4,7 @@ meta:
     content: Create a First Draft and make the most out of your client relationships by adding our open source markup language to your legal agreements.
 ---
 
-# Beginner’s Guide
+# Beginner's Guide
 
 ## Creating a First Draft
 
