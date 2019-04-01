@@ -196,7 +196,7 @@ This will apply a title to the generated section for variables that have not bee
 unsectionedTitle: "My Unsectioned Title"
 ```
 
-## Using our default styles
+## Using our Default Styles
 
 Our component comes with a separate file of base styles which you can include in your app JS (via an `import`) or HTML. If you decide to import the styles into your JS, be sure to add a way to import CSS into your bundle. As an example, using Webpack's [css-loader](https://github.com/webpack-contrib/css-loader) + [style-loader](https://github.com/webpack-contrib/style-loader). If you are using [create-react-app](https://github.com/facebook/create-react-app) this is already done for you.
 
