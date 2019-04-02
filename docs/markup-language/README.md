@@ -415,11 +415,11 @@ Unless as provided in Section [[Organization]], ...
 
 ## Titles
 
-You can hide the template title for an agreement by including the following option at the beginning of the document. This option is useful to suppress a title when generating documents with agreement text that already includes a custom title.
+You can show the template title for an agreement by including the following option at the beginning of the document. A template title is hidden by default. Not rendering the template title is useful when generating documents with agreement text that already includes a custom title.
 
 ```
 ####
-show title: false;
+show title: true;
 ####
 ```
 
