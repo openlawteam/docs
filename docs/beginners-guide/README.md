@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: Create a First Draft and make the most out of your client relationships by adding our open source markup language to your legal agreements.
+    content: Create a First Draft and make the most out of your client relationships by adding some of our basic markup language features to your legal agreements.
 ---
 
 # Beginner's Guide
