@@ -10,25 +10,25 @@ meta:
 
 This section describes how OpenLaw handles digital signature: what the challenges are and how we tackle them.
 
-### Challenge
+## Challenges
 
 Digital signatures and blockchain bring several challenges that we need to take into consideration.
 
-#### Tamper proof
+### Tamper proof
 
 We need to make sure that the signature is tamper proof, i.e. nobody should be able to sign on your behalf unless they have control of your identity. (i.e., password stolen, private key stolen, etc.)
 
-#### Data & metadata leak
+### Data & metadata leak
 
 Because we want to use the blockchain to “notarize” the signature, we need to avoid data & metadata leak because the data is public on chain.
 
-#### Verifiability
+### Verifiability
 
 The signature needs to be easily verifiable and done in such a way that it doesn't necessarily need to go through OpenLaw or any third party to validate the signature.
 
-### General Signature Algorithm
+## General Signature Algorithm
 
-How does one sign a document conceptually, regardless of the mean of signature (OpenLaw, Metamask, e-citizen, etc …)
+How does one sign a document conceptually, regardless of the mean of signature (OpenLaw, MetaMask, e-citizen, etc …)
 
 The signature is not only used for e-signature but also to allow actions on the contract.
 The structure for signing actions is the following: `contractId + “_” + action name`.
@@ -36,7 +36,7 @@ For example, in order to stop a contract, a signatory has to submit a signature 
 
 The user id is the way the contract identifies someone. It is important to note that it is OpenLaw’s job to make sure that the signature will be triggered by the right person. It will usually use external ways to do this: for example, by using a user session or by using a token to identify the person.
 
-### OpenLaw Signature Algorithm
+## OpenLaw Signature Algorithm
 
 Because the signature could be done through OpenLaw, anyone signing the document will have a `userId`. The `userId` is a random UUID that is being generated when the user is created.
 
@@ -47,11 +47,11 @@ The algorithm is the following:
 In words, we sign the hash of the hashes of `contractId` & `userId`.
 Let’s discuss the three points we’ve defined earlier to see how well we are doing here.
 
-#### Tamper proof
+### Tamper proof
 
 Because OpenLaw private key is signing that, only our service will be able to create it. The only way for someone to tamper with this kind of signature is to steal our private key.
 
-#### Data & Metadata leak
+### Data & Metadata leak
 
 Because we hash `contractId` & `userId`, we can think of it as salting in a password.
 
@@ -59,7 +59,7 @@ The only data leak that can happen here is _if you know someone’s userId and a
 
 It is impossible to analyze the signatures to know how many parties are in a `contractId` or how many contracts someone has signed because the `contractId` and `userId` are mixed.
 
-### Ethereum signature (Metamask)
+## Ethereum signature (MetaMask)
 
 [The idea of meta-transaction becomes more and more popular in the Ethereum world](https://medium.com/@austin_48503/ethereum-meta-transactions-90ccf0859e84).
 

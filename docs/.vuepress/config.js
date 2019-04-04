@@ -12,14 +12,14 @@ module.exports = {
         children: ["/", "/private-self-hosted-instances/"]
       },
       {
-        title: "Getting Started",
+        title: "Develop with OpenLaw",
         collapsable: false,
         children: ["/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/openlaw-elements/"]
       },
       {
         title: "First Draft",
         collapsable: false,
-        children: ["/markup-language/"]
+        children: ["/beginners-guide/", "/markup-language/"]
       },
       {
         title: "Sign & Store",

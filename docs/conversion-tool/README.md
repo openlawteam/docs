@@ -14,7 +14,7 @@ The Conversion Tool uses the OpenLaw Markup Language, which has a variety of mar
 We currently support agreements from only one provider: [LawInsider](https://www.lawinsider.com/). Most of the agreements collected from their platform
 are in HTML format. In the future we plan to add support to other formats, such as: .doc, .pdf, .json and more.
 
-## HTML agreement conversion
+## HTML Agreement Conversion
 
 There are two alternatives to use the conversion tool command line or embedded in a Scala/Java project, i.e:
 
@@ -55,7 +55,7 @@ Try(provider.convertAgreement(htmlFile)) match {
 
 The result of both calls are exactly the same, a markdown file with `.txt` extension.
 
-## Typed variable identification and conversion
+## Typed Variable Identification and Conversion
 
 It is important to mention that the conversion process handles not just the transformation
 from HTML to OpenLaw Markup Language but also it identifies and creates the Typed Variables, such as:
