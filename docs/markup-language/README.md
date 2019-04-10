@@ -995,20 +995,32 @@ weekly wages is **$[[Amount of Income Tax Withheld]]**.
 
 ## Clauses
 
-The `Clause` type in OpenLaw is equivalent to an embedded template. It is used to insert commonly used legal logic (whether simple or complex) into existing templates.
+The `Clause` type in OpenLaw is equivalent to an embedded template. It is used to insert commonly used legal logic (boilerplate) - whether simple or complex - into existing templates.
 
-For example, assuming you have created a new template called clause, you could reference it in a second template as below:
+For example, assuming you have created a new template called tester, you could reference it in a second template as below:
 
 ```
 [[var]]
 [[var 2]]
-[[clause:Clause(name: "clause"; parameters: sub var -> var)]]
+[[clause:Clause(name: "tester"; parameters: sub var -> var)]]
 ```
 
-Note that since a clause is a type of template, you must create the `clause` template separately before you do the above, or else you will receive the below error:
+Note that since a clause is a type of template, you must create the `tester` template separately before you do the above, or else you will receive the below error:
 
 ```
-The template clause could not be found on the server
+The template tester could not be found on the server
+```
+
+You can reference the same clause in multiple templates with different parameters. For example, the reference to `tester` clause below will also compile:
+
+```
+<%
+        [[My Variable:Text]]
+        [[Other one:Number]]
+%>
+        
+        [[My Variable]] - [[Other one]]
+        [[_:Clause("tester")]]
 ```
 
 ## Identity and Signatures
