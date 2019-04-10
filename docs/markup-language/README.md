@@ -993,6 +993,24 @@ The amount of federal income tax that must be withheld from the Employee's
 weekly wages is **$[[Amount of Income Tax Withheld]]**.
 ```
 
+## Clauses
+
+The `Clause` type in OpenLaw is equivalent to an embedded template. It is used to insert commonly used legal logic (whether simple or complex) into existing templates.
+
+For example, assuming you have created a new template called clause, you could reference it in a second template as below:
+
+```
+[[var]]
+[[var 2]]
+[[clause:Clause(name: "clause"; parameters: sub var -> var)]]
+```
+
+Note that since a clause is a type of template, you must create the `clause` template separately before you do the above, or else you will receive the below error:
+
+```
+The template clause could not be found on the server
+```
+
 ## Identity and Signatures
 
 OpenLaw also provides tools that enable you to electronically sign an agreement and store those electronic signatures on the Ethereum blockchain. If you intend to build a template to leverage this functionality, you will need to include a specialized Identity variable in the text of the template. The Identity variable indicates that a party should sign the agreement and will enable you to send an email notification to the party to review and sign the agreement.
