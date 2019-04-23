@@ -266,6 +266,10 @@ If you would like to italicize text, you can simply add one asterisks `*` both b
 
 For this type of formatting, simply surround the relevant text with three asterisks `***` both before and after the relevant language. For example, `***emphasized text***` becomes "_**emphasized text**_" in the agreement text.
 
+### Underline
+
+To underline text, just add `__` (two underscores) before and after the desired content. For example, `__This text is underlined for emphasis__` becomes "<u>This text is underlined for emphasis</u>" in the agreement text. If you would like to apply multiple formatting styles, just apply the relevant syntax around the text. For example, `__**This text is underlined and bold for more emphasis**__` become "**<u>This text is underlined and bold for more emphasis</u>**" in the agreement text.
+
 ### Uppercase
 
 To display text in all caps, simply add `| Uppercase` after the defined text. For example, `[[Party A | Uppercase]]` becomes "PARTY A" in the agreement text.
