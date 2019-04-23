@@ -319,7 +319,7 @@ When defining any of these specialized types, the name cannot be the same as any
 
 ### Bold
 
-To bold text simply add `**` before and after the relevant language. For example, `**This Agreement**` will bold the relevant text. You can also bold variables, `**[[Variable]]**`.
+To bold text, simply add `**` before and after the relevant language. For example, `**This Agreement**` will bold the relevant text. You can also bold variables, `**[[Variable]]**`.
 
 ### Italic
 
@@ -328,6 +328,10 @@ Italicizing text works in much the same way. If you would like to italicize text
 ### Bold and Italic
 
 You can also bold and italicize text. For this type of formatting, simply surround the relevant text with `***`, in other words `***[[Variable Name]]***`.
+
+### Underline
+
+To underline text, just add `__` (two underscores) before and after the desired content. For example, `__This text is underlined for emphasis__`. You can also underline variables, `__[[Variable]]__`. If you would like to apply multiple formatting styles, just apply the relevant syntax around the text. For example, `__**This text is underlined and bold for more emphasis**__`.
 
 ### Uppercase
 
