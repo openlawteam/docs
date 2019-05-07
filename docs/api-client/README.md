@@ -1998,58 +1998,6 @@ Example
 
 ## User
 
-### getUserDetails
-
-Method used as part of `IdentityVariable` to get information about a contract signatory. An [Identity variable](/markup-language/#identity-and-signatures) allows a party to electronically sign an agreement and store that electronic signature (along with the cryptographic hash of the contract) on the blockchain.
-
-::: warning Authentication
-This resource can be accessed without having to be a logged in user.
-:::
-
-```
-GET /user/details
-```
-
-**Parameters**
-
-| Name    | Type     | Description                          |
-| ------- | -------- | ------------------------------------ |
-| `email` | `string` | **Required.** The email of the user. |
-
-Example
-
-```
-GET /user/details?email=openlawuser%2B1%40gmail.com
-```
-
-::: tip APIClient
-
-```js
-apiClient.getUserDetails("openlawuser+1@gmail.com");
-```
-
-:::
-
-**Response**
-
-Returns a JSON object containing information about a contract signatory.
-
-Example
-
-```json
-{
-  "id": "8f26427b-0853-469b-a4f1-132190b7373e",
-  "name": "openlawuser+1",
-  "email": "openlawuser+1@gmail.com",
-  "identifiers": [
-    {
-      "provider": "openlaw",
-      "id": "openlawuser+1@gmail.com"
-    }
-  ]
-}
-```
-
 ### searchUsers
 
 List users based on search by name and email.
