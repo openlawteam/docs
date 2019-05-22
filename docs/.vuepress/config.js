@@ -27,6 +27,11 @@ module.exports = {
         children: ["/sign-store/"]
       },
       {
+        title: "Relayer",
+        collapsable: false,
+        children: ["/relayer/"]
+      },
+      {
         title: "Agreements Library",
         collapsable: false,
         children: ["/conversion-tool/", "/review-tool/"]
