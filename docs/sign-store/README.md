@@ -4,9 +4,7 @@ meta:
     content: Description of the OpenLaw signature protocols and algorithm, as well as ways of signing and storing documents via the API.
 ---
 
-# Sign & Store
-
-## Overview and How It Works
+# Sign & Store Overview
 
 This section describes how OpenLaw handles digital signature: what the challenges are and how we tackle them.
 
