@@ -315,6 +315,25 @@ A Structure type can also be used with a [Collection](#collection) as shown in t
 When defining any of these specialized types, the name cannot be the same as any variable or specialized type (e.g, Text, Number, Address, Choice, etc.) or an already existing variable name. You can use the shortcut `ctrl` + `space` in the editor to see the complete list of variable and specialized types.
 :::
 
+### EthereumEventFilter
+
+The EthereumEventFilter type is used to register an event listener that responds to events generated from a particular Ethereum contract. A conditional expression may be used to filter out unwanted events and select only events of interest. Events that are selected by this filter may then be referenced in the agreement or used in other expressions by referencing the filter variable.
+
+The conditional filter may use any of the event fields that are defined in the ABI provided in the filter definition as well as other variables in this agreement.
+
+A simple example of listening for an filtering events of an Ethereum contract is below:
+
+```
+[[Employer Ethereum Address:EthAddress]]
+[[Signature Event: EthereumEventFilter(
+  contract address: "0x531E0957391dAbF46f8a9609d799fFD067bDbbC0";
+  interface: [{"constant":false,"inputs":[{"name":"value","type":"uint256"}],"name":"OpenlawSignatureEvent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"registerTokenLaunch","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"}];
+  event type name: "OpenlawSignatureEvent";
+  conditional filter: this.owner = Employer Ethereum Address)]]
+
+This event value is: {{Signature Event.value}}
+```
+
 ## Formatting
 
 ### Bold
