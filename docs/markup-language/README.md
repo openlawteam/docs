@@ -1664,11 +1664,11 @@ An ERC-712 implementation needs two things:
 The domain is defined as follows (important to prepare the hash function in your smart contract):
 
 ```
-name: 'OpenLaw'
-version: '2'
-chainId: the chain id of the network
-verifyingContract: the contract address
-salt: '0x10c9ae80dfd02ab6c80d11e5db1ca058b347eb26d86fa832cb1fbb68964323e7'
+name: 'OpenLaw' // Name of the domain
+version: '2' // Version identifier for this domain
+chainId: 4 // EIP-155 Chain id associated with this domain (4 for Rinkeby)
+verifyingContract: '0x1C56346CD2A2Bf3202F771f50d3D14a367B48070' // Address of smart contract associated with this domain
+salt: '0x10c9ae80dfd02ab6c80d11e5db1ca058b347eb26d86fa832cb1fbb68964323e7' // Random string to differentiate domain
 ```
 
 Once you've signed the data and registered it to the Ethereum call, OpenLaw will do the call for you. The call will be prepared as follows:
