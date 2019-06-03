@@ -335,18 +335,23 @@ This event value is: {{Signature Event.value}}
 ```
 
 ### EthereumFilter properties
+
 Each EthereumFilter type has properties you can use in your template. It will be resolved only once you get an event and only for the first event received.
 
 #### received
+
 returns true if an event has been received, false otherwise
 
 #### executionDate
+
 returns the date when the event has been triggered (block timestamp). It doesn't resolve if no event has been triggered
 
 #### tx
+
 returns the transaction hash where the event has been triggered. It doesn't resolve if no event has been triggered
 
 #### event
+
 This represents the event object. from there you can access any event property. it doesn't resolve if no event has been triggered.
 For example: if you have an Event MyEvent(address owner), you will be able to access it like this:
 
@@ -1702,20 +1707,24 @@ repeatEvery:"1 minute")]]
 
 _Important Note_: ERC-712 doesn't protect you from replay attacks out of the box. You will need to take it into account when you develop your smart contract. The fact that it doesn't protect is useful if you need to do recurring calls.
 
-The reason is that because it doesn't protect you from recurring calls, you can re-use the same signature for every call. The idea being that you need to implement some kind of limit within the smart contract to make sure you can limit the number of times it's being run. 
+The reason is that because it doesn't protect you from recurring calls, you can re-use the same signature for every call. The idea being that you need to implement some kind of limit within the smart contract to make sure you can limit the number of times it's being run.
 
 ### EthereumCall Properties
+
 EthereumCall type gives you access to some properties. Those properties are only resolved once the first call is being done (and works only on the first call for now).
 
 #### isSuccessful
+
 Returns true if the call has been successful. false otherwise
 
 #### isFailure
+
 Returns true if the call has failed. false otherwise
 
-
 #### executionDate
+
 DateTime of when the call has been triggered. It doesn't resolve if it hasn't executed yet
 
 #### tx
+
 The ethereum transaction hash of the call. It doesn't resolve if it hasn't executed yet
