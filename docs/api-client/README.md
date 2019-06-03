@@ -1816,18 +1816,18 @@ Example
         },
         {
           "pendingCall": {
-            "from" : "from address in the call",
-            "to" : "contract address",
-            "data" : "the transaction data (used to sign and send the transaction from metamask or other means)",
-            "erc712":  {
-              "type" : "the type definition from the function signature",
-              "typeName" : "the type name. i.e. MyFunctionNameCall",
-              "message" : "the data to sign (values for the type)",
-              "signature" : "if available, the signature"
+            "from": "from address in the call",
+            "to": "contract address",
+            "data": "the transaction data (used to sign and send the transaction from metamask or other means)",
+            "erc712": {
+              "type": "the type definition from the function signature",
+              "typeName": "the type name. i.e. MyFunctionNameCall",
+              "message": "the data to sign (values for the type)",
+              "signature": "if available, the signature"
             }
           }
         }
-      ],
+      ]
     }
   ]
 }
