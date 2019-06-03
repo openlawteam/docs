@@ -1813,12 +1813,29 @@ Example
           "scheduleDate": 1547060580000,
           "startDate": 1547060594000,
           "tx": "0x09b252f309343426507f9539c0ed61214e63519ce8212b5e5136663038096040"
+        },
+        {
+          "pendingCall": {
+            "from": "[from address in the call]",
+            "to": "[contract address]",
+            "data": "[the transaction data (used to sign and send the transaction from MetaMask or other means)]",
+            "erc712": {
+              "type": "[the type definition from the function signature]",
+              "typeName": "[the type name - e.g., MyFunctionNameCall]",
+              "message": "[the data to sign (values for the type)]",
+              "signature": "[if available, the signature]"
+            }
+          }
         }
       ]
     }
   ]
 }
 ```
+
+If the contract includes a smart contract execution that involves a [delegated call](/markup-language/#delegating-the-call), the object `pendingCall` will include data of the type described in the example above. If the call is not a delegated call, the object `pendingCall` is null.
+
+If the call is delegated but not an [ERC-712 call](/markup-language/#erc-712-integration), the object `erc712` is null.
 
 ### downloadContractAsDocx
 
