@@ -1835,7 +1835,7 @@ Example
 
 If the contract includes a smart contract execution that involves a [delegated call](/markup-language/#delegating-the-call), the object `pendingCall` will include data of the type described in the example above. If the call is not a delegated call, the object `pendingCall` is null.
 
-If the call is delegated but not an ERC-712 call, the object `erc712` is null.
+If the call is delegated but not an [ERC-712 call](/markup-language/#erc-712-integration), the object `erc712` is null.
 
 ### downloadContractAsDocx
 
