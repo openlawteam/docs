@@ -319,9 +319,9 @@ When defining any of these specialized types, the name cannot be the same as any
 
 The EthereumEventFilter type is used to register an event listener that responds to events generated from a particular Ethereum contract. A conditional expression may be used to filter out unwanted events and select only events of interest. The first event that is matched by this filter may then be referenced in the agreement or used in other expressions by referencing the filter variable.
 
-The conditional filter may use any of the event fields that are defined in the ABI provided in the filter definition as well as other variables in this agreement.
+The conditional filter may use any of the event fields that are defined in the ABI provided in the filter definition as well as other variables in the agreement.
 
-A simple example of listening for an filtering events of an Ethereum contract is below:
+A simple example of listening for filtering events of an Ethereum contract is below:
 
 ```
 [[Employer Ethereum Address:EthAddress]]
@@ -334,28 +334,17 @@ A simple example of listening for an filtering events of an Ethereum contract is
 This event value is: {{Signature Event.value}}
 ```
 
-### EthereumFilter properties
+#### EthereumEventFilter properties
 
-Each EthereumFilter type has properties you can use in your template. It will be resolved only once you get an event and only for the first event received.
+Each EthereumEventFilter type has properties you can use in your template. It will be resolved only once you get an event and only for the first event received.
 
-#### received
+`received` - Returns true if an event has been received, false otherwise.
 
-returns true if an event has been received, false otherwise
+`executionDate` - Returns the date when the event has been triggered (block timestamp). It doesn't resolve if no event has been triggered.
 
-#### executionDate
+`tx` - Returns the transaction hash where the event has been triggered. It doesn't resolve if no event has been triggered.
 
-returns the date when the event has been triggered (block timestamp). It doesn't resolve if no event has been triggered
-
-#### tx
-
-returns the transaction hash where the event has been triggered. It doesn't resolve if no event has been triggered
-
-#### event
-
-This represents the event object. from there you can access any event property. it doesn't resolve if no event has been triggered.
-For example: if you have an Event MyEvent(address owner), you will be able to access it like this:
-
-[[event filter.event.owner]] will return the address set in the event
+`event` - This represents the event object, from which you can access any event property. It doesn't resolve if no event has been triggered. For example, if you have an event `MyEvent(address owner)`, you will be able to access it and return the address set in the event like this: `[[Event Filter Name.event.owner]]`.
 
 ## Formatting
 
@@ -1634,12 +1623,11 @@ The contract level network set in the `EthereumCall` is specific to only the sma
 If you omit the contract level `network` parameter and value from the `EthereumCall`, the network used for the smart contract executions will default to the [application level network](/api-client/#getcurrentnetwork) set at the time the executions are initiated.
 :::
 
-### Delegate the call
+### Delegating the Call
 
-Sometimes, you don't want Openlaw to do the call for you but instead you want someone else to do it instead.
-To do that, all you need is to specify which address you're expecting the call to be from.
+If you don't want OpenLaw to handle the smart contract call (by default, the Ethereum address initiating the call to the smart contract is an OpenLaw account), you can delegate the call to another Ethereum address, such as one owned by a contract signatory. To do that, all you need is to specify in the `from` property which address you're expecting to handle the call.
 
-To do that, just specify the property "from"
+For example:
 
 ```
 [[Pay Vendor:EthereumCall(
@@ -1656,38 +1644,39 @@ endDate:Payment End Date;
 repeatEvery:"1 minute")]]
 ```
 
-If you specify "from", Openlaw won't make the call but will expect a transaction hash instead. Like when you sign with metamask, an API call will be made to register the transaction hash that has been added to the chain so Openlaw can know what is going on with the call.
+If you include the `from` property with a valid Ethereum address, the default OpenLaw account won't initiate the call. Instead, the OpenLaw smart contract execution process will expect a transaction hash. Like when you sign with MetaMask, an API call will be made to register the transaction hash that has been added to the chain so OpenLaw can know what is going on with the call.
 
-### ERC-712 integration
+### ERC-712 Integration
 
-Sometimes you want Openlaw to do the call but you still want to keep the security of each user having its own key.
-If this is the case, you can use ERC-712 to implement meta-transactions.
+Sometimes you want OpenLaw to handle the smart contract call but you still want to keep the security of each user having its own key. If this is the case, you can use ERC-712 to implement meta-transactions.
 
-ERC-712 is a standard for signing structured data. This is very useful when you want to pass data and make it easy for the person signing to review the data. for more information, you can read the specification [here](http://eips.ethereum.org/EIPS/eip-712)
+ERC-712 is a standard for signing structured data. This is very useful when you want to pass data and make it easy for the person signing to review the data. For more information, you can read the specification [here](http://eips.ethereum.org/EIPS/eip-712).
 
-#### How is ERC-712 used ?
+#### How is ERC-712 used?
 
-The idea is to validate a call by signing its parameters. If you specify the properties "from" and "Signature parameter", the call will expect an ERC-712 signature to be provided before being able to do the call.
+The idea is to validate a smart contract call by signing its parameters. If you specify the properties `from` and `Signature parameter` in the EthereumCall, the call will expect an ERC-712 signature to be provided before being able to do the call.
 
-ERC-712 needs 2 things:
+An ERC-712 implementation needs two things:
 
-- A type definition. This is generated by taking all the parameters from the function minus the signature parameter.
-- A type name. This is generated by taking the function name, capitilize the first character and adding "Call" at the end. I.e. makePayment becomes MakePaymentCall
+- **A type definition**. This is generated by taking all the parameters from the function minus the signature parameter.
+- **A type name**. This is generated by taking the function name, capitalizing the first character, and adding "Call" at the end. For example, `makePayment` becomes `MakePaymentCall`.
 
-The domain is defined as follows: (important to prepare the hash function in your smart contract)
+The domain is defined as follows (important to prepare the hash function in your smart contract):
+
+```
 name: 'OpenLaw'
 version: '2'
 chainId: the chain id of the network
 verifyingContract: the contract address
 salt: '0x10c9ae80dfd02ab6c80d11e5db1ca058b347eb26d86fa832cb1fbb68964323e7'
+```
 
-Once you've signed the data and registered it to the ethereum call, Openlaw will do the call for you.
-The call will be prepared as follows:
+Once you've signed the data and registered it to the Ethereum call, OpenLaw will do the call for you. The call will be prepared as follows:
 
-- All the parameters (except signature) will be pased based on the definition.
+- All the parameters (except signature) will be passed based on the definition.
 - ERC-712 signature will be passed to "signature" parameter.
 
-The call will look something like that:
+For example:
 
 ```
 [[Pay Vendor:EthereumCall(
@@ -1705,26 +1694,18 @@ endDate:Payment End Date;
 repeatEvery:"1 minute")]]
 ```
 
-_Important Note_: ERC-712 doesn't protect you from replay attacks out of the box. You will need to take it into account when you develop your smart contract. The fact that it doesn't protect is useful if you need to do recurring calls.
-
-The reason is that because it doesn't protect you from recurring calls, you can re-use the same signature for every call. The idea being that you need to implement some kind of limit within the smart contract to make sure you can limit the number of times it's being run.
+::: warning
+The ERC-712 implementation doesn't protect you from replay attacks out of the box. You will need to take that into account when you develop your smart contract. However, the fact that it doesn't restrict replay attacks is useful if you need to do recurring calls because you can re-use the same signature for every call. In that case, you should consider implementing some kind of limit within the smart contract to make sure you can limit the number of times it's being run.
+:::
 
 ### EthereumCall Properties
 
-EthereumCall type gives you access to some properties. Those properties are only resolved once the first call is being done (and works only on the first call for now).
+The EthereumCall type gives you access to some properties you can use in an agreement template. Those properties are only resolved once the first call is completed (and works only on the first call for now).
 
-#### isSuccessful
+`isSuccessful` - Returns true if the call has been successful, false otherwise.
 
-Returns true if the call has been successful. false otherwise
+`isFailure` - Returns true if the call has failed, false otherwise.
 
-#### isFailure
+`executionDate` - Returns DateTime of when the call has been triggered. It doesn't resolve if the call hasn't executed yet.
 
-Returns true if the call has failed. false otherwise
-
-#### executionDate
-
-DateTime of when the call has been triggered. It doesn't resolve if it hasn't executed yet
-
-#### tx
-
-The ethereum transaction hash of the call. It doesn't resolve if it hasn't executed yet
+`tx` - Returns the Ethereum transaction hash of the call. It doesn't resolve if the call hasn't executed yet.
