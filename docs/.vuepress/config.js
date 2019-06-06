@@ -36,6 +36,11 @@ module.exports = {
         collapsable: false,
         children: ["/conversion-tool/", "/review-tool/"]
       },
+      {
+        title: "Forms & Flows",
+        collapsable: false,
+        children: ["/forms-flows/"]
+      },
     ],
     algolia: {
       apiKey: "68c3c0d36676a3acce1cd3c7087bc7c9",
