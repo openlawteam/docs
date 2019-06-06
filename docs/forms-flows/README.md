@@ -354,7 +354,7 @@ If you would like to allow unregistered users to view and fill out the form (wit
   <img src="./img/access-permissions.png" alt="Access Permissions" />
 </center>
 
-## Viewing and Filling out of Form
+## Viewing and Filling out a Form
 
 To see the list of forms that you have access to, click on "Forms & Flows" in the nav menu. Check out some examples of created flows at https://app.openlaw.io/flows.
 
