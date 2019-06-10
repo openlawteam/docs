@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: With OpenLaw’s Forms & Flows, you can take any legal agreement and turn it into a questionnaire or simple form. Entire workflows can be created to manage the life cycle of a commercial agreement.
+    content: With OpenLaw's Forms & Flows, you can take any legal agreement and turn it into a questionnaire or simple form. Entire workflows can be created to manage the life cycle of a commercial agreement.
 ---
 
 # Forms & Flows Overview
