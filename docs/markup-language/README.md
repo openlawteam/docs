@@ -338,7 +338,7 @@ hello `your_contract_id`. Your address is `your_ethereum_address`.
 
 If either value is blank, a default value will be filled in.
 
-The OLInfo type will be populated with additional values in future.
+The OLInfo type will be populated with additional sub-fields in future.
 
 ### EthereumEventFilter
 
