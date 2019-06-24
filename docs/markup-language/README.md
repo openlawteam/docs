@@ -315,6 +315,31 @@ A Structure type can also be used with a [Collection](#collection) as shown in t
 When defining any of these specialized types, the name cannot be the same as any variable or specialized type (e.g, Text, Number, Address, Choice, etc.) or an already existing variable name. You can use the shortcut `ctrl` + `space` in the editor to see the complete list of variable and specialized types.
 :::
 
+### OLInfo
+
+The OLInfo type is used for making general information available to the user within a template, which might be difficult to fetch any other way.
+
+Currently, the OLInfo type has two fields: `id` and `profileAddress`.
+
+`id` pulls the contract ID for the contract linked with a particular iteration of a template, while `profileAddress` pulls the Ethereum Address associated with the user's profile. (You can set this default Ethereum address by selecting "Link Metamask Account" from the user profile page).
+
+Take the example below. Assuming that a) there is a corresponding contract ID `your_contract_id` and b) the user has linked the Ethereum address `your_ethereum_address` to the profile, inputting the below:
+
+```
+[[info:OLInfo]]
+hello [[info.id]]. Your address is [[info.profileAddress]].
+```
+
+should output:
+
+```
+hello `your_contract_id`. Your address is `your_ethereum_address`.
+```
+
+If either value is blank, a default value will be filled in.
+
+The OLInfo type will be populated with additional values in future.
+
 ### EthereumEventFilter
 
 The EthereumEventFilter type is used to register an event listener that responds to events generated from a particular Ethereum contract. A conditional expression may be used to filter out unwanted events and select only events of interest. The first event that is matched by this filter may then be referenced in the agreement or used in other expressions by referencing the filter variable.
