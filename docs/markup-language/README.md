@@ -995,7 +995,7 @@ weekly wages is **$[[Amount of Income Tax Withheld]]**.
 
 ## Clauses
 
-The Clause type in OpenLaw is equivalent to an embedded template. It can be used to insert pre-formed clauses, such as commonly used legal provisions (boilerplate)—whether simple or complex—into existing templates. The clause to be embedded in a template is technically a saved template itself and can include variables. When the clause is embedded in a template, those variables would render as part of the agreement text and have their own form fields as if they were directly included in that template's markup language.
+The Clause type in OpenLaw is equivalent to an embedded template. It can be used to insert pre-formed clauses, such as commonly used legal provisions (boilerplate)—whether simple or complex—into existing templates. The clause to be embedded in a template is technically a saved template itself and can include variables. When the clause is embedded in a template, those variables will render as part of the agreement text and have their own form fields as if they were directly included in that template's markup language.
 
 For example, assuming you have created a new template called `Choice of Law and Venue Clause` with the following content:
 
@@ -1034,7 +1034,7 @@ The template Choice of Law and Venue Clause could not be found on the server
 
 :::
 
-The example markup language above will render the Draft view below. Note how the variables included in the embedded clause (the `Choice of Law and Venue Clause` template) are included as form fields in the `Simple Advisor Agreement` template.
+The example markup above will render the Draft view below. Note how the variables included in the embedded clause (the `Choice of Law and Venue Clause` template) are included as form fields in the `Simple Advisor Agreement` template.
 
 [IMAGE TO BE INCLUDED]
 
