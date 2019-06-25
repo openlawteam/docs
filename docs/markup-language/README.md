@@ -995,33 +995,70 @@ weekly wages is **$[[Amount of Income Tax Withheld]]**.
 
 ## Clauses
 
-The `Clause` type in OpenLaw is equivalent to an embedded template. It is used to insert commonly used legal logic (boilerplate) - whether simple or complex - into existing templates.
+The Clause type in OpenLaw is equivalent to an embedded template. It can be used to insert pre-formed clauses, such as commonly used legal provisions (boilerplate)—whether simple or complex—into existing templates. The clause to be embedded in a template is technically a saved template itself and can include variables. When the clause is embedded in a template, those variables would render as part of the agreement text and have their own form fields as if they were directly included in that template's markup language.
 
-For example, assuming you have created a new template called tester, you could reference it in a second template as below:
-
-```
-[[var]]
-[[var 2]]
-[[clause:Clause(name: "tester"; parameters: sub var -> var)]]
-```
-
-Note that since a clause is a type of template, you must create the `tester` template separately before you do the above, or else you will receive the below error:
+For example, assuming you have created a new template called `Choice of Law and Venue Clause` with the following content:
 
 ```
-The template tester could not be found on the server
+**Choice of Law and Venue.** The parties agree that this Agreement is to be
+governed by and construed under the law of the State of [[State of Governing Law]]
+without regard to its conflicts of law provisions. The parties further agree
+that all disputes shall be resolved exclusively in state or federal court in
+[[County of Venue]], [[State of Venue]].
 ```
 
-You can reference the same clause in multiple templates with different parameters. For example, the reference to `tester` clause below will also compile:
+You can import it in any other template by referencing a named variable of `Clause` type with the title of the saved template you wish to import. For example:
 
 ```
-<%
-        [[My Variable:Text]]
-        [[Other one:Number]]
-%>
-        
-        [[My Variable]] - [[Other one]]
-        [[_:Clause("tester")]]
+\centered **Simple Advisor Agreement**
+
+This Advisor Agreement is entered into between [[Company Name]] ("Corporation")
+and [[Advisor Name]] ("Advisor") as of [[Effective Date: Date]] ("Effective Date").
+Company and Advisor agree as follows:
+
+^**Services.** Advisor agrees to consult with and advise Company from time to time,
+at Company's request (the "Services").
+
+^[[Choice of Law Insert: Clause("Choice of Law and Venue Clause")]]
+
+^**Termination.** Either party may terminate this Agreement at any time, for any
+reason, by giving the other notice.
 ```
+
+::: warning
+Note that since a Clause is a type of template, you must save that template separately before you try to embed it in another template, or else you will receive an error similar to below:
+
+```
+The template Choice of Law and Venue Clause could not be found on the server
+```
+
+:::
+
+The example markup language above will render the Draft view below. Note how the variables included in the embedded clause (the `Choice of Law and Venue Clause` template) are included as form fields in the `Simple Advisor Agreement` template.
+
+[IMAGE TO BE INCLUDED]
+
+### Naming a Clause Type Variable
+
+When embedding a Clause type, you can name the variable as in the example above (`Choice of Law Insert`). Naming the Clause type variable may be useful if you intend to embed the clause more than once in the same template.
+
+For example, if you have already defined the clause in the template with `[[Choice of Law Insert: Clause("Choice of Law and Venue Clause")]]` you can render the clause again in the template by just referencing `[[Choice of Law Insert]]`.
+
+A named Clause type variable can also be useful when rendering the clause as part of a [conditional](#conditionals-and-decision-branches). For example:
+
+```
+{{Name of Conditional "Do you want to render the clause" => [[Choice of Law Insert]]}}
+```
+
+You can also name a Clause type variable as `_` when it does not need to be defined and you can make the variable name anonymous. This naming convention may be useful if you intend to embed the clause only once in the other template. For example:
+
+```
+[[_: Clause("Choice of Law and Venue Clause")]]
+```
+
+::: warning
+Two or more Clause type variables using the name `_` will not cause an error. However, never use an anonymous variable for [input variables](#variables) such as Text, Number, or Address because this will result in an error.
+:::
 
 ## Identity and Signatures
 
