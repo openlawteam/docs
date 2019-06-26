@@ -8,7 +8,7 @@ meta:
 
 The OpenLaw protocol relies on a markup language to transform natural language agreements into machine-readable objects with relevant variables and logic defined within a given document (what we call a "template"). Templates can be grouped together into "deals," making it possible for parties to create and manage entire transactions on a blockchain.
 
-If you're new to OpenLaw, please see the [Beginner’s Guide](/beginners-guide/) for help with using some of the more basic markup language features to create a First Draft. If you're ready to go further, this complete guide offers more information on how to use all the features of our powerful markup language to create dynamic, blockchain-enabled legal agreements.
+If you're new to OpenLaw, please see the [Beginner's Guide](/beginners-guide/) for help with using some of the more basic markup language features to create a First Draft. If you're ready to go further, this complete guide offers more information on how to use all the features of our powerful markup language to create dynamic, blockchain-enabled legal agreements.
 
 ## Variables
 
