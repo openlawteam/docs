@@ -145,13 +145,35 @@ variables={variables}
 
 In addition to the required parameters, we offer support for the following additional parameters.
 
-### sections
+### inputProps
 
-If you have organized the template variables into custom sections (overriding how they are organized in the template source itself), you may pass these as a parameter for the form to use.
+Pass your own props to the underlying `input`, `select`, `textarea` components.
+
+- **Pass to all** `'*': { ... }`: This will spread props to _all_ underlying user input components. If specific OpenLaw element types are present, they will override any identical props spread in from `*`.
+- **Pass to type** `Address: { ... }`: This will spread props to specific _types_ of underlying user input components. If the wildcard (`*`) key is present, it will spread in its props, but not override any of the type's props.
+
+**Available keys:**
+
+- `*`
+- `Address`
+- `Choice`
+- `Date`
+- `Identity`
+- `Image`
+- `LargeText`
+- `Number`
+- `Text`
+- `YesNo`
 
 ```
-sections: Array<any>
+inputProps: {
+ [string]: any
+} => {[string]: any}
 ```
+
+::: warning
+Currently, you cannot provide your own `onChange`. A workaround is to utilize the `onChangeFunction` you pass into `<OpenLawForm />`.
+:::
 
 ### renderSections
 
@@ -162,6 +184,14 @@ renderSections: ({
  children: React.Node,
  section: string,
 }) => React.Node
+```
+
+### sections
+
+If you have organized the template variables into custom sections (overriding how they are organized in the template source itself), you may pass these as a parameter for the form to use.
+
+```
+sections: Array<any>
 ```
 
 ### sectionTransform
