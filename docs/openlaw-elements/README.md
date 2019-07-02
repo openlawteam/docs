@@ -166,9 +166,7 @@ Pass your own props to the underlying `input`, `select`, `textarea` components.
 - `YesNo`
 
 ```
-inputProps: {
- [string]: any
-} => {[string]: any}
+inputProps: {[string]: {[string]: any}}
 ```
 
 ::: warning
