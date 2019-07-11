@@ -1036,29 +1036,21 @@ The template Choice of Law and Venue Clause could not be found on the server
 
 The example markup above will render the Draft view below. Note how the variables included in the embedded clause (the `Choice of Law and Venue Clause` template) are included as form fields in the `Simple Advisor Agreement` template.
 
-[IMAGE TO BE INCLUDED]
+<center>
+  <img src="./img/clause-type.png" alt="Embedded Clause" />
+</center>
 
-### Naming a Clause Type Variable
+### Defining a Clause Type Variable
 
-When embedding a Clause type, you can name the variable as in the example above (`Choice of Law Insert`). Naming the Clause type variable may be useful if you intend to embed the clause more than once in the same template.
+When embedding a Clause type, you must give the variable a name as in the example above (`Choice of Law Insert`). Each clause embedded in a template should be defined with a name unique from any other variable defined in the template.
 
-For example, if you have already defined the clause in the template with `[[Choice of Law Insert: Clause("Choice of Law and Venue Clause")]]` you can render the clause again in the template by just referencing `[[Choice of Law Insert]]`.
+The name of the variable can be useful to embed the clause more than once in the same template. For example, if you have already defined the clause in the template with `[[Choice of Law Insert: Clause("Choice of Law and Venue Clause")]]` you can render the same clause again in the template by just referencing `[[Choice of Law Insert]]`.
 
 A named Clause type variable can also be useful when rendering the clause as part of a [conditional](#conditionals-and-decision-branches). For example:
 
 ```
 {{Name of Conditional "Do you want to render the clause" => [[Choice of Law Insert]]}}
 ```
-
-You can also name a Clause type variable as `_` when it does not need to be defined and you can make the variable name anonymous. This naming convention may be useful if you intend to embed the clause only once in the other template. For example:
-
-```
-[[_: Clause("Choice of Law and Venue Clause")]]
-```
-
-::: warning
-Two or more Clause type variables using the name `_` will not cause an error. However, never use an anonymous variable for [input variables](#variables) such as Text, Number, or Address because this will result in an error.
-:::
 
 ## Identity and Signatures
 
