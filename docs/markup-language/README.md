@@ -340,37 +340,6 @@ If either value is not defined at the time it is to be rendered in the draft or 
 
 The OLInfo type will be populated with additional sub-fields in the future.
 
-### EthereumEventFilter
-
-The EthereumEventFilter type is used to register an event listener that responds to events generated from a particular Ethereum contract. A conditional expression may be used to filter out unwanted events and select only events of interest. The first event that is matched by this filter may then be referenced in the agreement or used in other expressions by referencing the filter variable.
-
-The conditional filter may use any of the event fields that are defined in the ABI provided in the filter definition as well as other variables in the agreement.
-
-A simple example of listening for filtering events of an Ethereum contract is below:
-
-```
-[[Employer Ethereum Address:EthAddress]]
-[[Signature Event: EthereumEventFilter(
-  contract address: "0x531E0957391dAbF46f8a9609d799fFD067bDbbC0";
-  interface: [{"constant":false,"inputs":[{"name":"value","type":"uint256"}, {"name":"owner","type":"address"}],"name":"OpenlawSignatureEvent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
-  event type name: "OpenlawSignatureEvent";
-  conditional filter: this.owner = Employer Ethereum Address)]]
-
-This event value is: {{Signature Event.value}}
-```
-
-#### EthereumEventFilter properties
-
-Each EthereumEventFilter type has properties you can use in your template. It will be resolved only once you get an event and only for the first event received.
-
-`received` - Returns true if an event has been received, false otherwise.
-
-`executionDate` - Returns the date when the event has been triggered (block timestamp). It doesn't resolve if no event has been triggered.
-
-`tx` - Returns the transaction hash where the event has been triggered. It doesn't resolve if no event has been triggered.
-
-`event` - This represents the event object, from which you can access any event property. It doesn't resolve if no event has been triggered. For example, if you have an event `MyEvent(address owner)`, you will be able to access it and return the address set in the event like this: `[[Event Filter Name.event.owner]]`.
-
 ## Formatting
 
 ### Bold
@@ -1793,3 +1762,34 @@ The EthereumCall type gives you access to some properties you can use in an agre
 `executionDate` - Returns DateTime of when the call has been triggered. It doesn't resolve if the call hasn't executed yet.
 
 `tx` - Returns the Ethereum transaction hash of the call. It doesn't resolve if the call hasn't executed yet.
+
+### EthereumEventFilter
+
+The EthereumEventFilter type is used to register an event listener that responds to events generated from a particular Ethereum contract. A conditional expression may be used to filter out unwanted events and select only events of interest. The first event that is matched by this filter may then be referenced in the agreement or used in other expressions by referencing the filter variable.
+
+The conditional filter may use any of the event fields that are defined in the ABI provided in the filter definition as well as other variables in the agreement.
+
+A simple example of listening for filtering events of an Ethereum contract is below:
+
+```
+[[Employer Ethereum Address:EthAddress]]
+[[Signature Event: EthereumEventFilter(
+  contract address: "0x531E0957391dAbF46f8a9609d799fFD067bDbbC0";
+  interface: [{"constant":false,"inputs":[{"name":"value","type":"uint256"}, {"name":"owner","type":"address"}],"name":"OpenlawSignatureEvent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
+  event type name: "OpenlawSignatureEvent";
+  conditional filter: this.owner = Employer Ethereum Address)]]
+
+This event value is: {{Signature Event.value}}
+```
+
+#### EthereumEventFilter properties
+
+Each EthereumEventFilter type has properties you can use in your template. It will be resolved only once you get an event and only for the first event received.
+
+`received` - Returns true if an event has been received, false otherwise.
+
+`executionDate` - Returns the date when the event has been triggered (block timestamp). It doesn't resolve if no event has been triggered.
+
+`tx` - Returns the transaction hash where the event has been triggered. It doesn't resolve if no event has been triggered.
+
+`event` - This represents the event object, from which you can access any event property. It doesn't resolve if no event has been triggered. For example, if you have an event `MyEvent(address owner)`, you will be able to access it and return the address set in the event like this: `[[Event Filter Name.event.owner]]`.
