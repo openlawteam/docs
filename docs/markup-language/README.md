@@ -1013,7 +1013,7 @@ The example markup above will render the Draft view below. Note how the variable
 
 When embedding a Clause type, you must give the variable a name as in the example above (`Choice of Law Insert`). Each clause embedded in a template should be defined with a name unique from any other variable defined in the template.
 
-The name of the variable can be useful to embed the clause more than once in the same template. For example, if you have already defined the clause in the template with `[[Choice of Law Insert: Clause("Choice of Law and Venue Clause")]]` you can render the same clause again in the template by just referencing `[[Choice of Law Insert]]`.
+The name of the variable can be useful to embed the clause more than once in the same template. For example, if you have already defined the clause in the template with `[[Choice of Law Insert: Clause("Choice of Law and Venue Clause")]]`, you can render the same clause again in the template by just referencing `[[Choice of Law Insert]]`.
 
 A named Clause type variable can also be useful when rendering the clause as part of a [conditional](#conditionals-and-decision-branches). For example:
 
