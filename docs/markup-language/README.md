@@ -340,6 +340,58 @@ If either value is not defined at the time it is to be rendered in the draft or 
 
 The OLInfo type will be populated with additional sub-fields in the future.
 
+### External Signature
+
+The ExternalSignature type lets you define a new signature method which uses an external service registered in Openlaw platform through Integrator's API.
+The following is an example of the syntax to define and use an eletronic signature using DocuSign external service:
+
+```
+[[Signatory: ExternalSignature(serviceName:"DocuSign")]]
+```
+
+### External Call
+
+The ExternalCall type allows you to define custom calls that should be triggered from Openlaw VM to an external service.
+In the following example we define an external call to Coin Market Cap service to get an exchange rate of BTC in USD for a certain amount.
+
+Considering the Coin Market Cap is an external service registered into Openlaw Integrator's API and it has the following interface:
+```
+[[Input: Structure(fromCurrency:Text;toCurrency:Text;amount:Number)]]
+[[Output: Structure(currency:Text; price:Number; lastUpdate:DateTime)]]
+```
+
+We can define the call as follows:
+```
+<%
+[[amount: Number]]
+[[startingAt:DateTime]]
+
+[[externalCall:ExternalCall(
+serviceName: "Coin Market Cap";
+parameters: 
+	fromCurrency -> "BTC",
+	toCurrency -> "USD",
+	amount -> amount;
+startDate: startingAt)]]
+%>
+
+{{ externalCall.status = 'success' =>
+    [[externalCall.result.currency]]
+    [[externalCall.result.price]]
+    [[externalCall.result.lastUpdate]]
+}}
+
+```
+
+::: warning
+The `externalCall.status` returns the current status of the call which can be `pending`, `failed`, `success`.
+Besides that, the external call allows you to read the result of the call by accessing the property `externalCall.result`
+which provides access to the attributes declared as Output in interface. 
+It is important to mention that the output results are not printed out in the contract, but stored as events in Openlaw VM so
+they can be used for further calls and computations.
+:::
+
+
 ## Formatting
 
 ### Bold
