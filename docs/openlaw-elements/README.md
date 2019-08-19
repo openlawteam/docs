@@ -13,7 +13,7 @@ meta:
 - Node (and npm)
 - React
 - OpenLaw's [APIClient](/api-client/) and [Openlaw Object](/openlaw-object/)
-  - [Github Page](https://github.com/openlawteam/openlaw-client)
+  - [Github page](https://github.com/openlawteam/openlaw-client)
   - [npm package](https://www.npmjs.com/package/openlaw)
 
 ## Installation
@@ -152,7 +152,7 @@ onChangeFunction={(
 
 ### openLaw
 
-This should be the Openlaw Object imported from our JavaScript client tools. You can get information on how to install the library at its [github page](https://github.com/openlawteam/openlaw-client) or find more info on its usage at the [Openlaw Object](/openlaw-object/) section here in the docs.
+This should be the `Openlaw` Object imported from our JavaScript client tools. You can get information on how to install the library at its [GitHub page](https://github.com/openlawteam/openlaw-client) or find more info on its usage at the [Openlaw Object](/openlaw-object/) section here in the docs.
 
 ```
 openLaw={Openlaw}
@@ -205,7 +205,7 @@ inputProps: {[Type | '*']: {[string]: any}}
 
 ### onValidate callback
 
-The `onValidate` prop is a callback that allows a user to "hook into" the validation process of our fields. The parameter provdied to `onValidate` is an object of validation data which tells you the current status of the field you're editing or moving away from.
+The `onValidate` prop is a callback that allows a user to "hook into" the validation process of our fields. The parameter provided to `onValidate` is an object of validation data which tells you the current status of the field you're editing or moving away from.
 
 - Custom validation data can be returned from the function which currently has the ability to customize or hide an error message (empty string) via `{ errorMessage: String }`.
 - It's up to you how you want to organize your custom validation within the function (e.g. smaller functions, `switch/case`, `if/else`, etc.).
@@ -215,7 +215,7 @@ The `onValidate` prop is a callback that allows a user to "hook into" the valida
 Below is a representation of the `onValidate` callback parameter. As necessary, we will iterate in future releases on this object to improve error handling for parent components.
 
 ```
-ValidationObject {
+validationObject: {
   elementName: string,
   elementType: "Address"
     | "Choice"
