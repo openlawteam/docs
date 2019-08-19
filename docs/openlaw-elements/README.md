@@ -38,30 +38,37 @@ Below is a sample on how you might quickly setup a rendered form for an OpenLaw 
 To see a more in-depth example check out our [example app](https://github.com/openlawteam/openlaw-elements/#running-the-example-app).
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { APIClient, Openlaw } from 'openlaw';
-import OpenLawForm from 'openlaw-elements';
-import 'openlaw-elements/dist/openlaw-elements.min.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { APIClient, Openlaw } from "openlaw";
+import OpenLawForm from "openlaw-elements";
+import "openlaw-elements/dist/openlaw-elements.min.css";
 
 // OpenLaw APIClient: https://docs.openlaw.io/api-client/#authentication
 //  - used to fetch geo data in our `Address` field type
 //  - run against your own private OpenLaw instance: 'https://[YOUR.INSTANCE.URL]';
-const apiClient = new APIClient('https://app.openlaw.io');
+const apiClient = new APIClient("https://app.openlaw.io");
 // see tip below about authentication
-apiClient.login('[YOUR_OPENLAW_EMAIL]', '[YOUR_OPENLAW_PASSWORD]');
+apiClient.login("[YOUR_OPENLAW_EMAIL]", "[YOUR_OPENLAW_PASSWORD]");
 
-const { compiledTemplate } = Openlaw.compileTemplate('**Name**: [[First Name]] [[Last Name]]');
-const { executionResult, errorMessage } = Openlaw.execute(compiledTemplate, {}, {}, {});
+const { compiledTemplate } = Openlaw.compileTemplate(
+  "**Name**: [[First Name]] [[Last Name]]"
+);
+const { executionResult, errorMessage } = Openlaw.execute(
+  compiledTemplate,
+  {},
+  {},
+  {}
+);
 const variables = Openlaw.getExecutedVariables(executionResult, {});
 const parameters = {};
 
 if (errorMessage) {
-  console.error('Openlaw Execution Error:', errorMessage);
+  console.error("Openlaw Execution Error:", errorMessage);
 }
 
 const onChange = (key, value, validationData) =>
-  console.log('KEY:', key, 'VALUE:', value, 'VALIDATION:', validationData);
+  console.log("KEY:", key, "VALUE:", value, "VALIDATION:", validationData);
 
 const App = () => (
   <OpenLawForm
@@ -74,7 +81,7 @@ const App = () => (
   />
 );
 
-ReactDOM.render(<App />, document.getElementById('your-id-here'));
+ReactDOM.render(<App />, document.getElementById("your-id-here"));
 ```
 
 ## Required Props
@@ -198,11 +205,12 @@ inputProps: {[Type | '*']: {[string]: any}}
 
 ### onValidate callback
 
-The `onValidate` prop is a callback that allows a user to "hook into" the validation process of our fields. The parameter provdied to `onValidate` is an object of validation data which tells you the current status of the field you're editing or moving away from. 
-* Custom validation data can be returned from the function which currently has the ability to customize or hide an error message (empty string) via `{ errorMessage: String }`.
-* It's up to you how you want to organize your custom validation within the function (e.g. smaller functions, `switch/case`, `if/else`, etc.).
-* You can hook into the callback with your app's external validation functions as necessary.
-* Error message timing can be altered within `onValidate` by detecting the `eventType`, and returning a message accordingly. For example, showing a special error on the `change` event of the `Image` type, instead of on `blur`.
+The `onValidate` prop is a callback that allows a user to "hook into" the validation process of our fields. The parameter provdied to `onValidate` is an object of validation data which tells you the current status of the field you're editing or moving away from.
+
+- Custom validation data can be returned from the function which currently has the ability to customize or hide an error message (empty string) via `{ errorMessage: String }`.
+- It's up to you how you want to organize your custom validation within the function (e.g. smaller functions, `switch/case`, `if/else`, etc.).
+- You can hook into the callback with your app's external validation functions as necessary.
+- Error message timing can be altered within `onValidate` by detecting the `eventType`, and returning a message accordingly. For example, showing a special error on the `change` event of the `Image` type, instead of on `blur`.
 
 Below is a representation of the `onValidate` callback parameter. As necessary, we will iterate in future releases on this object to improve error handling for parent components.
 
@@ -232,21 +240,22 @@ ValidationObject {
 ```
 
 **Example usage of onValidate**
+
 ```js
-const validate = (validationData) => {
+const validate = validationData => {
   const { elementName, elementType, isError, value } = validationData;
 
   if (isError) {
     callSomeOtherFunction(validationData);
   }
 
-  if (elementName === 'Who-Is-Cool' && value !== 'OpenLaw is cool') {
-    return { errorMessage: 'Um, excuse me...' };
+  if (elementName === "Who-Is-Cool" && value !== "OpenLaw is cool") {
+    return { errorMessage: "Um, excuse me..." };
   }
 
-  if (isError && elementType === 'Number') {
+  if (isError && elementType === "Number") {
     // don't show error
-    return { errorMessage: '' };
+    return { errorMessage: "" };
   }
 };
 ```
@@ -295,13 +304,14 @@ unsectionedTitle: "My Unsectioned Title"
 ```
 
 ## Error Messages
-* Error messages are shown when an OpenLaw input fails to validate as per the rules in OpenLaw Core (e.g. data type, format, etc.).
-* A simple error message is displayed beneath the field.
-* The error message will contain a formatted field type and a generic error, which should be self-explanatory for most users.
-* When an error message can provide more info as to why it failed it does so. For example, async operations within the `Address` type.
-* Validation generally happens on `blur` or `change` with some exceptions in types such as `Address` and `Image` for example where the events aren't as cut-and-dry.
-* By default our internal error messages are shown beneath the field on the `blur` event, so as not to pelt the user with repetitive errors on every keystroke.
-* Errors will continue to improve as OpenLaw Core eventually may move toward standardized error objects delivered to OpenLaw Client then onto OpenLaw Elements!
+
+- Error messages are shown when an OpenLaw input fails to validate as per the rules in OpenLaw Core (e.g. data type, format, etc.).
+- A simple error message is displayed beneath the field.
+- The error message will contain a formatted field type and a generic error, which should be self-explanatory for most users.
+- When an error message can provide more info as to why it failed it does so. For example, async operations within the `Address` type.
+- Validation generally happens on `blur` or `change` with some exceptions in types such as `Address` and `Image` for example where the events aren't as cut-and-dry.
+- By default our internal error messages are shown beneath the field on the `blur` event, so as not to pelt the user with repetitive errors on every keystroke.
+- Errors will continue to improve as OpenLaw Core eventually may move toward standardized error objects delivered to OpenLaw Client then onto OpenLaw Elements!
 
 ## Default Styles
 
