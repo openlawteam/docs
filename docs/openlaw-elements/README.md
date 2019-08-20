@@ -97,7 +97,7 @@ apiClient={APIClient}
 ::: tip
 **Tips for authenticating safely to OpenLaw in your client app**
 
-So your OpenLaw credentials aren't stored in a repository, you can authenticate by using a separate Node server (e.g. Express), environment variables, and run the CommonJS build of OpenLaw Elements. Be sure to pass the `OPENLAW_JWT` on to the client.
+So your OpenLaw credentials aren't stored in a repository, you can authenticate by using a separate Node server (e.g. Express), environment variables, and run the CommonJS build of the [`openlaw`](https://www.npmjs.com/package/openlaw) package. Be sure to pass the `OPENLAW_JWT` on to the client.
 Alternatively, you can create a login page for your client app. See more about auth at the [APIClient authentication docs](/api-client/#authentication).
 :::
 
