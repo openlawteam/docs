@@ -352,33 +352,33 @@ The following is an example of the syntax to define and use an [eletronic signat
 ### External Call
 
 The ExternalCall type allows you to define custom calls that should be triggered from OpenLaw VM to an external service.
-In the following example we define an external call to Coin Market Cap service to get an exchange rate of BTC in USD for a certain amount.
+In the following example we define an external call variable.
 
-Considering the Coin Market Cap is an external service registered into OpenLaw Integrators API and it has the following interface:
+Considering the an [external service]() registered into [OpenLaw Integrators API]() which has the following interface:
 ```
-[[Input: Structure(fromCurrency:Text;toCurrency:Text;amount:Number)]]
-[[Output: Structure(currency:Text; price:Number; lastUpdate:DateTime)]]
+[[Input: Structure(param1:Text;param2:Text)]]
+[[Output: Structure(value1:Text;value2:Text;valueN:Text)]]
 ```
 
 We can define the call as follows:
 ```
 <%
-[[amount: Number]]
-[[startingAt:DateTime]]
+[[a: Text]]
+[[b: Text]]
+[[startingAt: DateTime]]
 
 [[externalCall:ExternalCall(
-serviceName: "Coin Market Cap";
+serviceName: "MyServiceName";
 parameters: 
-	fromCurrency -> "BTC",
-	toCurrency -> "USD",
-	amount -> amount;
+	param1 -> a,
+	toCurrency -> b;
 startDate: startingAt)]]
 %>
 
 {{ externalCall.status = 'success' =>
-    [[externalCall.result.currency]]
-    [[externalCall.result.price]]
-    [[externalCall.result.lastUpdate]]
+    [[externalCall.result.value1]]
+    [[externalCall.result.value2]]
+    [[externalCall.result.valueN]]
 }}
 
 ```
