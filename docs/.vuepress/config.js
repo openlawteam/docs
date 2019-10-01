@@ -37,7 +37,7 @@ module.exports = {
         children: ["/token-forge/"]
       },
       {
-        title: "Integration Framework",
+        title: "Integrate with OpenLaw",
         collapsable: false,
         children: ["/integration-framework/"]
       },
