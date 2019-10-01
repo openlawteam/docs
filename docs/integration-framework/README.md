@@ -30,11 +30,11 @@ Integration Framework currently supports two types of integration:
 2. Computation
    - Any service that executes a computation based on the [Markup Interface](#markup-interface), i.e: Fetch BTC-USD exchange from [Coin Market Cap](https://coinmarketcap.com/api/documentation/v1/#operation/getV1ToolsPriceconversion)
 
-## Build, integrate and use an External Service
+### Build, integrate and use an External Service
 
 ![integration_framework_flow](https://user-images.githubusercontent.com/708579/65990764-8f15a880-e462-11e9-86f1-d2a6f5191c93.png)
 
-### Building
+## Building
 
 #### Server Definition
 
@@ -251,7 +251,7 @@ class ExternalServiceImpl @Inject()(priceConverterService: PriceConverterService
 }
 ```
 
-### Integrating
+## Integrating
 
 #### Private Instance
 
@@ -267,7 +267,7 @@ please [request one](#/private-self-hosted-instances/#private-instances) and sta
 - X.509 public certificate
 - Screenshots?
 
-### Using
+## Using
 
 #### External Call
 
@@ -287,8 +287,8 @@ please [request one](#/private-self-hosted-instances/#private-instances) and sta
 - Calls: Error vs Success
 - Signature verification
 
-### Known Issues?
+## Known Issues?
 
-### Next Steps?
+## Next Steps?
 
-### Frequently Asked Questions?
+## Frequently Asked Questions?
