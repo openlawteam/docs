@@ -37,6 +37,11 @@ module.exports = {
         children: ["/token-forge/"]
       },
       {
+        title: "Integration Framework",
+        collapsable: false,
+        children: ["/integration-framework/"]
+      },
+      {
         title: "Relayer",
         collapsable: false,
         children: ["/relayer/"]

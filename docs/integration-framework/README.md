@@ -17,7 +17,7 @@ The main goal with the Integration Framework is to solve a problem that we often
 and make sure the data matches the [OpenLaw Markup Language](/markup-language) and was provided by trusted service, so it can be used in the OpenLaw agreements.
 
 In order to integrate any external service with OpenLaw Integration Framework one must provide a service implementation that
-matches the specification defined in [ExternalService]() proto. The server definition is based on [Protocol Buffer](https://developers.google.com/protocol-buffers) which
+matches the specification defined in the [External Service Proto](#external-service-proto). The server definition is based on [Protocol Buffer](https://developers.google.com/protocol-buffers) which
 allows code generation in several different languages.
 
 With the implementation in place, one just needs to implement the business logic and make sure to sign the data
@@ -43,11 +43,11 @@ Integration Framework currently supports two types of integration:
 > special generated source code to easily write and read your structured data to and from a variety of data streams and
 > using a variety of languages.
 
-- https://developers.google.com/protocol-buffers
+- [https://developers.google.com/protocol-buffers](https://developers.google.com/protocol-buffers)
 
-**External Service Proto**
+##### External Service Proto
 
-```proto
+```protobuf
 syntax = "proto3";
 
 package integration.framework.openlaw;
@@ -255,7 +255,8 @@ class ExternalServiceImpl @Inject()(priceConverterService: PriceConverterService
 
 #### Private Instance
 
-- Request your private instance at X
+You can integrate to your private instance any external service you may need. If you still don't have a private instance,
+please [request one](#/private-self-hosted-instances/#private-instances) and start the [External Service Registration](#external-service-registration) process.
 
 #### External Service Registration
 
@@ -290,4 +291,4 @@ class ExternalServiceImpl @Inject()(priceConverterService: PriceConverterService
 
 ### Next Steps?
 
-### Questions?
+### Frequently Asked Questions?
