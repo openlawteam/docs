@@ -355,12 +355,14 @@ The ExternalCall type allows you to define custom calls that should be triggered
 In the following example we define an external call variable.
 
 Considering the an [external service]() registered into [OpenLaw Integrators API]() which has the following interface:
+
 ```
 [[Input: Structure(param1:Text;param2:Text)]]
 [[Output: Structure(value1:Text;value2:Text;valueN:Text)]]
 ```
 
 We can define the call as follows:
+
 ```
 <%
 [[a: Text]]
@@ -369,7 +371,7 @@ We can define the call as follows:
 
 [[externalCall:ExternalCall(
 serviceName: "MyServiceName";
-parameters: 
+parameters:
 	param1 -> a,
 	toCurrency -> b;
 startDate: startingAt)]]
@@ -386,11 +388,10 @@ startDate: startingAt)]]
 ::: warning
 The `externalCall.status` returns the current status of the call which can be `pending`, `failed`, `success`.
 Besides that, the external call allows you to read the result of the call by accessing the property `externalCall.result`
-which provides access to the attributes declared as Output in interface. 
+which provides access to the attributes declared as Output in interface.
 It is important to mention that the output results are not printed out in the contract, but stored as events in Openlaw VM so
 they can be used for further calls and computations.
 :::
-
 
 ## Formatting
 
