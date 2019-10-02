@@ -1126,7 +1126,7 @@ By deploying this option, the final executed version of an agreement (and the wo
 
 ### External Signatures
 
-You can use third-party signature services from OpenLaw agreements by declaring a new variable type. 
+You can use third-party signature services from OpenLaw agreements by declaring a new variable type.
 Checkout the [External Signature Call example](#external-signature) for more details.
 
 ## Groupings
