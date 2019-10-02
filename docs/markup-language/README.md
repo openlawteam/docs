@@ -342,7 +342,7 @@ The OLInfo type will be populated with additional sub-fields in the future.
 
 ### External Signature
 
-The ExternalSignature type lets you define a new signature method which uses an external service registered in OpenLaw platform through Integrators API.
+The ExternalSignature type lets you define a new signature method which uses an external service registered in OpenLaw platform through Integration Framework.
 The following is an example of the syntax to define and use an [eletronic signature via DocuSign](https://www.docusign.com/products/electronic-signature) external service:
 
 ```
@@ -354,7 +354,7 @@ The following is an example of the syntax to define and use an [eletronic signat
 The ExternalCall type allows you to define custom calls that should be triggered from OpenLaw VM to an external service.
 In the following example we define an external call variable.
 
-Considering the an [external service]() registered into [OpenLaw Integrators API]() which has the following interface:
+Considering the an [external service](/integration-framework/#external-service-proto) registered into [OpenLaw Integration Framework](/integration-framework) which has the following interface:
 
 ```
 [[Input: Structure(param1:Text;param2:Text)]]
@@ -1123,6 +1123,11 @@ Title: [[PartyB Signatory Title]]}}
 ```
 
 By deploying this option, the final executed version of an agreement (and the word version) will be embedded with an electronic signature from each signatory. In other words, "/s" plus the name of the signatory associated with the OpenLaw account.
+
+### External Signatures
+
+You can use third-party signature services from OpenLaw agreements by declaring a new variable type. 
+Checkout the [External Signature Call example](#external-signature) for more details.
 
 ## Groupings
 
