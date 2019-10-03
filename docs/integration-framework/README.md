@@ -8,26 +8,26 @@ meta:
 
 ## Overview
 
-Oracles are well known solution to pull data from external sources into smart contracts, with that idea in mind OpenLaw created the
+Oracles are a well known solution to pull data from external sources into smart contracts. With that idea in mind, OpenLaw created the
 Integration Framework to fetch data from third-party systems into OpenLaw agreements. The framework is Blockchain and service agnostic
-and all that data pulled from the integrated services (any system that is plugged to the Integration Framework) is validated by
+and all that data pulled from the integrated services (any system that is plugged into the Integration Framework) is validated by
 [OpenLaw VM](https://github.com/openlawteam/openlaw-core) using Elliptic Curve Digital Signature Algorithm [(ECDSA)](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm).
 
-The main goal with the Integration Framework is to solve a problem that we often face when we want to securely exchange data between different services
-and make sure the data matches the [OpenLaw Markup Language](/markup-language) and was provided by trusted service, so it can be used in the OpenLaw agreements.
+The main goal with the Integration Framework is to solve a problem that we often face when we want to securely exchange data between different services.
+We want to make sure the data matches the [OpenLaw Markup Language](/markup-language) and was provided by a trusted service, so it can be used in the OpenLaw agreements.
 
-In order to integrate any external service with OpenLaw Integration Framework one must provide a service implementation that
+In order to integrate any external service with the Integration Framework, one must provide a service implementation that
 matches the specification defined in the [External Service Proto](#external-service-proto). The server definition is based on [Protocol Buffer](https://developers.google.com/protocol-buffers) which
 allows code generation in several different languages.
 
 With the implementation in place, one just needs to implement the business logic and make sure to sign the data
 that will be provided to OpenLaw in the responses.
 
-Integration Framework currently supports two types of integration:
+The Integration Framework currently supports two types of integration:
 
 **1.** Signature
 
-- Any service that provide an [e-Signature](https://en.wikipedia.org/wiki/Electronic_signature) solution, so it can be used to sign OpenLaw agreements, i.e: [DocuSign](https://medium.com/@OpenLawOfficial/introducing-openlaws-integration-framework-making-it-easy-to-integrate-third-party-services-into-f28eb779856b)
+- Any service that provides an [e-Signature](https://en.wikipedia.org/wiki/Electronic_signature) solution, so it can be used to sign OpenLaw agreements, i.e: [DocuSign](https://medium.com/@OpenLawOfficial/introducing-openlaws-integration-framework-making-it-easy-to-integrate-third-party-services-into-f28eb779856b)
 
 **2.** Computation (Common)
 
@@ -56,23 +56,27 @@ syntax = "proto3";
 package integration.framework.openlaw;
 
 // ExternalService definition parsed by the Protoc Compiler. It must be extended by the server implementation
-// so it can responds to gRPC requests from OpenLaw Integration Framework.
+// so it can respond to gRPC requests from the Integration Framework.
 service ExternalService {
 
     // Gets the Ethereum Public Address from the service which is
     // used to verify events sent from the service to OpenLaw VM.
     rpc GetEthereumAddress (Empty) returns (EthereumAddressResponse) { }
 
-    // Gets the server Markup Interface definition which is used in a OpenLaw Agreement with ExternalCall or ExternalSignature variable types.
+    // Gets the server Markup Interface definition which is used in an OpenLaw
+    // Agreement with ExternalCall or ExternalSignature variable types.
     // The expected Markup Interface definition must follow the standard:
     //  - [[Input:Structure(inputField1: <Type>; inputField2: <Type>; inputFieldN: <Type>)]] [[Output:Structure(outputField1: <Type>; outputField2: <Type>; outputFieldN: <Type>)]]
     //  - <Type> - can be replaced by: Text, Number and Date.
-    // Basic Markup Interface for the Coin Market Cap service can be defined as a String of value:
+    // Basic Markup Interface for the Coin Market Cap service can be defined as
+    // a String of value:
     //  - "[[Input:Structure(fromCurrency: Text; toCurrency: Text; amount: Number)]] [[Output:Structure(currency: Text; price: Number; lastUpdate: Text)]]"
-    // The standard Markup Interface for any e-Signature service is defined by the following String value:
+    // The standard Markup Interface for any e-Signature service is defined by
+    // the following String value:
     //  - "[[Input:Structure(signerEmail: Text; contractContentBase64: Text; contractTitle: Text)]] [[Output:Structure(signerEmail: Text; signature: Text; recordLink: Text)]]"
-    // Any e-Signature service must use the exact same Markup Interface as described above,
-    // otherwise the e-Signature will not be validated by the OpenLaw VM.
+    // Any e-Signature service must use the exact same Markup Interface as
+    // described above, otherwise the e-Signature will not be validated by the
+    // OpenLaw VM.
     rpc GetMarkupInterface (Empty) returns (MarkupInterfaceResponse) { }
 
     // Executes the request from OpenLaw Integrator Framework
@@ -158,10 +162,10 @@ message Empty {}
 
 ##### Identity
 
-OpenLaw Integration Framework identifies external services by their Public Ethereum Address, the reason for that is that every response returned
-by the external service must be [signed](#data-authenticity) using Elliptic Curve Digital Signature Algorithm [(ECDSA)](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm).
+The Integration Framework identifies external services by their Public Ethereum Address. The reason for that is that every response returned
+by the external service must be [signed](#data-authenticity) using Elliptic Curve Digital Signature Algorithm [(ECDSA)](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
 so OpenLaw VM can verify if the response was provided by the expected server implementation. In addition to that, it gives us the ability to spin up an audit process
-in which all requests and responses are stored in Ethereum Blockchain, so anyone is able to verify the communication between OpenLaw and external services.
+in which all requests and responses are stored in the Ethereum Blockchain, so anyone is able to verify the communication between OpenLaw and external services.
 
 ##### Markup Interface
 
@@ -172,7 +176,7 @@ A Markup Interface defines two [Structures](/markup-language/#structure):
 1. Input - a set of fields and values that are passed to the external service in the gRPC request.
 2. Output - a set of fields and values that are returned from the external service in the gRPC response.
 
-It is important to mention that **any** e-Signature service must provide the standard Markup Interface for e-signatures as defined bellow:
+It is important to mention that **any** e-Signature service must provide the standard Markup Interface for e-signatures as defined below:
 
 ```
 [[Input:Structure(signerEmail: Text; contractContentBase64: Text; contractTitle: Text)]] [[Output:Structure(signerEmail: Text; signature: Text; recordLink: Text)]]"
@@ -180,16 +184,16 @@ It is important to mention that **any** e-Signature service must provide the sta
 
 The fields defined for the `Input` structure are provided by OpenLaw, and the fields defined for the `Output` structure are required and must be provided
 in the response of the external service. Please check the [e-Signature Response](#e-signature-responses) for more details about the required fields.
-For any other type of responses that are not e-signatures the fields may change, but the response still needs to be signed
-as explained in [Computation Response](#computation-responses).
+For any other type of responses that are not e-signatures, the fields may change, but the response still needs to be signed
+as explained in [Computation Responses](#computation-responses).
 
 ##### Data Authenticity
 
-In Ethereum Blockchain system there is a private and a public key. These keys are generated when you create a new blockchain “account”.
+In Ethereum Blockchain systems there is a private and a public key. These keys are generated when you create a new blockchain "account".
 When you create a new external service to integrate with OpenLaw, it is required that you provide an Ethereum Account, so it can be used
 to sign data and expose the public keys for signature verification.
 
-Any response generated by the [External Service](#external-service-proto) must be signed. At moment we have two signature methods, one
+Any response generated by the [External Service](#external-service-proto) must be signed. At the moment, we have two signature methods, one
 for [Computation responses](#computation-responses) and another for [e-Signature responses](#e-signature-responses).
 
 OpenLaw VM implements the signature verification and each response provided to the OpenLaw platform is verified using
@@ -203,8 +207,11 @@ for a given currency:
 
 ```scala
 
-val request = ??? //gRPC message sent by Integration Framework requesting the exchange rate. See proto ExternalService.ExecuteRequest for more info
-val response = ??? //HTTP response returned by the CoinMktCap API with the exchange rate
+// gRPC message sent by Integration Framework requesting the exchange rate. See
+// proto ExternalService.ExecuteRequest for more info
+val request = ???
+// HTTP response returned by the CoinMktCap API with the exchange rate
+val response = ???
 
 private def sign(callerId: String, actionId: String, output: String): String = {
     def sha256(data: String): Array[Byte] =
@@ -217,17 +224,17 @@ private def sign(callerId: String, actionId: String, output: String): String = {
     serviceEthereumAccount.getAccount.sign(dataToSign).toData.toString
 }
 
-//The fields of the json object must match the MarkupInterface Output structure fields
+// The fields of the json object must match the MarkupInterface Output structure fields
 val output = Json.obj(
   "currency" -> response.currency,
   "price" -> response.price,
   "lastUpdate" -> response.lastUpdated)
 
-//Signing the calledId, actionId and json output in string format
+// Signing the calledId, actionId and json output in string format
 val outputSignature = sign(request.callerId, request.actionId, output.toString)
 
-//gRPC message returned to Integration Framework
-//1. Successful response: all fields are required, otherwise the response will fail
+// gRPC message returned to Integration Framework
+// 1. Successful response: all fields are required, otherwise the response will fail
 ExecuteResponse()
       .withActionId(request.actionId)
       .withRequestId(request.requestId)
@@ -238,8 +245,8 @@ ExecuteResponse()
       .withStatus(Status.SUCCESS)
       .withMessage("Conversion executed with success")
 
-//If the computation failed for some reason, you can return a failure instead
-//2. Failed response: the output and outputSignature are not mandatory for failed responses
+// If the computation failed for some reason, you can return a failure instead
+// 2. Failed response: the output and outputSignature are not mandatory for failed responses
 ExecuteResponse()
       .withActionId(request.actionId)
       .withRequestId(request.requestId)
@@ -257,19 +264,22 @@ the document was properly signed:
 
 ```scala
 
-val request = ??? //gRPC message sent by Integration Framework requesting the e-Signature. See proto ExternalService.ExecuteRequest for more info
-val response = ??? //HTTP response returned by the DocuSign API with the e-Signature
+// gRPC message sent by Integration Framework requesting the e-Signature. See
+// proto ExternalService.ExecuteRequest for more info
+val request = ???
+// HTTP response returned by the DocuSign API with the e-Signature
+val response = ???
 
 private def sign(email: String, callerId: String): EthereumSignature = {
     val dataToSign = SignatureOutput.prepareDataToSign(Email(email).getOrThrow(), ContractId(callerId), ServerCryptoService)
     EthereumSignature(serviceEthereumAccount.sign(EthData.of(dataToSign.data)).toString).getOrThrow()
 }
 
-//Signing the calledId, actionId and json output in string format
+// Signing the calledId, actionId and json output in string format
 val signature = sign(request.signerEmail, request.callerId)
 
-//gRPC message returned to Integration Framework
-//1. Successful response: all fields are required, otherwise the response will fail
+// gRPC message returned to Integration Framework
+// 1. Successful response: all fields are required, otherwise the response will fail
 val signatureOutput = s"{\"signerEmail\":\"test@openlaw.io\",\"signature\":\"${signature.toString}\",\"recordLink\":\"https://demo.docusign.com/signed/document\"}"
 ExecuteResponse()
       .withActionId(request.actionId)
@@ -280,10 +290,10 @@ ExecuteResponse()
       .withStatus(Status.SUCCESS)
       .withMessage("Signature executed with success")
 
-//If the computation failed for some reason, you can return a failure instead
-//2. Failed response: the output and outputSignature are not mandatory for failed responses
-//When there is no valid signature you can provide empty values for signature and recordLink fields
-//Make sure the json string has no spaces
+// If the computation failed for some reason, you can return a failure instead
+// 2. Failed response: the output and outputSignature are not mandatory for failed responses
+// When there is no valid signature you can provide empty values for signature and recordLink fields
+// Make sure the json string has no spaces
 val emptySignatureOutput = "{\"signerEmail\":\"test@openlaw.io\",\"signature\":\"\",\"recordLink\":\"\"}"
 ExecuteResponse()
       .withActionId(request.actionId)
@@ -297,11 +307,11 @@ ExecuteResponse()
 
 ##### Secured Connection
 
-gRPC is designed to work with a variety of [authentication mechanisms](https://grpc.io/docs/guides/auth/), with that in mind we have enabled TLS connections between
-external services and OpenLaw Integration Framework. All the data exchanged between the client and the server are encrypted.
-Mutual authentication is disabled for now and just need to provide your external service [X.509 public key](https://en.wikipedia.org/wiki/X.509)
+gRPC is designed to work with a variety of [authentication mechanisms](https://grpc.io/docs/guides/auth/). With that in mind, we have enabled TLS connections between
+external services and the Integration Framework. All the data exchanged between the client and the server are encrypted.
+Mutual authentication is disabled for now and you just need to provide your external service [X.509 public key](https://en.wikipedia.org/wiki/X.509)
 during the registration process, so the connection gets validated and your service gets registered.
-Under the hood the Integration Framework uses OpenSSL as TLS provider and TLSv1.1, TLSv1.2 and TLSv1.3 protocols are enabled.
+Under the hood, the Integration Framework uses OpenSSL as TLS provider and TLSv1.1, TLSv1.2 and TLSv1.3 protocols are enabled.
 You can generate a test certificate using the following command:
 
 ```bash
@@ -310,7 +320,7 @@ openssl req -x509 -newkey rsa:4096 -keyout server-private-key.pem -out server-pu
 
 ```
 
-Now that you have a sample private and public keys generated and considering you have service written in Scala,
+Now that you have sample private and public keys generated and considering you have a service written in Scala,
 here is an example of how you can create a gRPC server with TLS authentication enabled:
 
 ```scala
@@ -330,7 +340,7 @@ val server = NettyServerBuilder
 ```
 
 Make sure you have set the OpenSSL as SSL provider and enabled all 3 TLS protocol versions.
-With that in place, your service is secured and all the connections started by the OpenLaw Integration Framework will be encrypted.
+With that in place, your service is secured and all the connections started by the Integration Framework will be encrypted.
 
 ##### Computation Service Implementation
 
@@ -344,12 +354,13 @@ import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 /**
-* ExternalServiceImpl extends the ExternalService trait generated by the Protoc Compiler. This is the server implementation
-* that responds to gRPC requests from OpenLaw Integration Framework.
+* ExternalServiceImpl extends the ExternalService trait generated by the Protoc
+* Compiler. This is the server implementation that responds to gRPC requests
+* from the Integration Framework.
 *
 * @param priceConverterService - The service implementation which hits the Coin Market Cap API to get the exchange rates.
 * @param configService - The configuration service which provide access to server properties and environment variables.
-* @param identityService - The service which provides the Ethereum account of to get the Public Ethereum Address as service identity.
+* @param identityService - The service which provides the Ethereum account to get the Public Ethereum Address as service identity.
 * @param ec - Scala execution context.
 */
 @Singleton
@@ -359,28 +370,35 @@ class ExternalServiceImpl @Inject()(priceConverterService: PriceConverterService
   extends ExternalService {
 
   /**
-    * Gets the Ethereum Public Address from the service which is used to verify events sent from the service to OpenLaw VM.
+    * Gets the Ethereum Public Address from the service which is used to verify
+    * events sent from the service to OpenLaw VM.
     */
   override def getEthereumAddress(request: Empty): Future[EthereumAddressResponse] =
     Future.successful(EthereumAddressResponse().withAddress(identityService.getAccount.getAddress.withLeading0x))
 
 
   /**
-    * Gets the server Markup Interface definition which is used in a OpenLaw Agreement with ExternalCall or ExternalSignature variable types.
+    * Gets the server Markup Interface definition which is used in a OpenLaw
+    * Agreement with ExternalCall or ExternalSignature variable types.
     * The expected Markup Interface definition must follow the standard:
     *  - [[Input:Structure(inputField1: <Type>; inputField2: <Type>; inputFieldN: <Type>)]] [[Output:Structure(outputField1: <Type>; outputField2: <Type>; outputFieldN: <Type>)]]
     *  - <Type> - can be replaced by: Text, Number and Date.
-    * A basic Markup Interface for the Coin Market Cap service can be defined as a String of value:
+    * A basic Markup Interface for the Coin Market Cap service can be defined as
+    * a String of value:
     *  - "[[Input:Structure(fromCurrency: Text; toCurrency: Text; amount: Number)]] [[Output:Structure(currency: Text; price: Number; lastUpdate: Text)]]"
-    * The standard Markup Interface for any e-Signature service is defined by the following String value:
+    * The standard Markup Interface for any e-Signature service is defined by the
+    * following String value:
     *  - "[[Input:Structure(signerEmail: Text; contractContentBase64: Text; contractTitle: Text)]] [[Output:Structure(signerEmail: Text; signature: Text; recordLink: Text)]]"
-    * Any e-Signature service must use the exact same Markup Interface as described above, otherwise the e-Signature will not be validated by the OpenLaw VM.
+    * Any e-Signature service must use the exact same Markup Interface as
+    * described above, otherwise the e-Signature will not be validated by the
+    * OpenLaw VM.
     */
   override def getMarkupInterface(request: Empty): Future[MarkupInterfaceResponse] =
     Future.successful(MarkupInterfaceResponse().withDefinition(configService.getMarkupInterface))
 
   /**
-    * Executes the request from OpenLaw Integration Framework and waits for the External Service response.
+    * Executes the request from the Integration Framework and waits for the
+    * External Service response.
     */
   override def execute(request: ExecuteRequest): Future[ExecuteResponse] =
     priceConverterService.convert(request)
@@ -393,7 +411,7 @@ class ExternalServiceImpl @Inject()(priceConverterService: PriceConverterService
 #### Private Instance
 
 You can integrate to your private instance any external service you may need. If you still don't have a private instance,
-please [request one](#/private-self-hosted-instances/#private-instances) and start the [External Service Registration](#external-service-registration) process.
+please [request one](/private-self-hosted-instances/#private-instances) and start the [External Service Registration](#external-service-registration) process.
 
 #### External Service Registration
 
@@ -408,13 +426,13 @@ The following form should be rendered:
 - **Name**
   - case-sensitive unique name and it will be used from your agreements to call the registered service.
 - **Type**
-  - type of the external service (Common = Computation or Signature).
+  - type of external service: `Common` (used for Computation) or `Signature`.
 - **Version**
   - version of your external service.
 - **Ethereum Public Address**
   - public ethereum address generated for your service which must be unique.
 - **Secured endpoint**
-  - grpc endpoint with one of the TLS protocols enabled: v1.1, v1.2, v1.3.
+  - gRPC endpoint with one of the TLS protocols enabled: v1.1, v1.2, v1.3.
 - **X.509 public certificate**
   - public X.509 certificate generated for TLS communication.
 
@@ -422,7 +440,7 @@ The following form should be rendered:
 
 #### External Call
 
-In order to use your integrated service from OpenLaw agreements you need to declare a new variable type
+In order to use your integrated service from OpenLaw agreements, you need to declare a new variable type
 called [ExternalCall](/markup-language/#external-call).
 
 Here is an example of a call to the Coin Market Cap integrated service:
@@ -463,11 +481,9 @@ Sign it
 
 You can access the response values by calling `<externalCallVariable>.result.fieldName`.
 
-[Coin Market Cap Call - Sample template](https://develop.dev.openlaw.io/template/External%20Call%20Sample%20-%20Coin%20Market%20Cap)
-
 #### External Signature
 
-If you want to use your integrated service for e-Signatures from OpenLaw agreements you need to declare a another
+If you want to use your integrated service for e-Signatures from OpenLaw agreements, you need to declare another
 variable type called [ExternalSignature](/markup-language/#external-signature).
 
 Here is an example of a call to the DocuSign integrated service:
@@ -478,8 +494,6 @@ This is a test agreement that can be signed using DocuSign e-signature.
 [[Signatory: ExternalSignature(serviceName:"DocuSign")]]
 ```
 
-[DocuSign Call - Sample template](https://develop.dev.openlaw.io/template/DocuSign%20Signature%20Example)
-
 ## Next Steps
 
-- Create a pseudocode for the signature function so it can be implemented in any language
+- Create a pseudocode for the signature function so it can be implemented in any language.
