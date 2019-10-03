@@ -297,7 +297,7 @@ ExecuteResponse()
 
 ##### Secured Connection
 
-gRPC is designed to work with a variety of authentication mechanisms, with that in mind we have enabled TLS connections between
+gRPC is designed to work with a variety of [authentication mechanisms](https://grpc.io/docs/guides/auth/), with that in mind we have enabled TLS connections between
 external services and OpenLaw Integration Framework. All the data exchanged between the client and the server are encrypted.
 Mutual authentication is disabled for now and just need to provide your external service [X.509 public key](https://en.wikipedia.org/wiki/X.509)
 during the registration process, so the connection gets validated and your service gets registered.
@@ -306,9 +306,31 @@ You can generate a test certificate using the following command:
 
 ```bash
 
-openssl req -x509 -newkey rsa:4096 -keyout your-private-key.pem -out your-public-key-cert.pem -days 365 -nodes -subj '/CN=<your-service-public-domain>'
+openssl req -x509 -newkey rsa:4096 -keyout server-private-key.pem -out server-public-key-cert.pem -days 365 -nodes -subj '/CN=<your-service-public-domain>'
 
 ```
+
+Now that you have a sample private and public keys generated and considering you have service written in Scala,
+here is an example of how you can create a gRPC server with TLS authentication enabled:
+
+```scala
+
+val server = NettyServerBuilder
+      .forPort(config.getServerPort)
+      .addService(ExternalServiceGrpc.bindService(serviceImpl, ExecutionContext.global))
+      .sslContext(GrpcSslContexts
+        .configure(SslContextBuilder.forServer(config.getServerPublicKey, config.getServerPrivateKey))
+        .sslProvider(SslProvider.OPENSSL)
+        .protocols("TLSv1.1", "TLSv1.2", "TLSv1.3")
+        .build())
+      .build()
+
+    server.start()
+    server.awaitTermination()
+```
+
+Make sure you have set the OpenSSL as SSL provider and enabled all 3 TLS protocol versions.
+With that in place, your service is secured and all the connections started by the OpenLaw Integration Framework will be encrypted.
 
 ##### Computation Service Implementation
 
