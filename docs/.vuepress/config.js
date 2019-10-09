@@ -37,6 +37,11 @@ module.exports = {
         children: ["/token-forge/"]
       },
       {
+        title: "Integrate with OpenLaw",
+        collapsable: false,
+        children: ["/integration-framework/"]
+      },
+      {
         title: "Relayer",
         collapsable: false,
         children: ["/relayer/"]

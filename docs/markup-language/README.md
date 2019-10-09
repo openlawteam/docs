@@ -340,6 +340,59 @@ If either value is not defined at the time it is to be rendered in the draft or 
 
 The OLInfo type will be populated with additional sub-fields in the future.
 
+### External Signature
+
+The ExternalSignature type lets you define a new signature method which uses an external service registered in the OpenLaw platform through the Integration Framework.
+The following is an example of the syntax to define and use an [eletronic signature via DocuSign](https://www.docusign.com/products/electronic-signature) external service:
+
+```
+[[Signatory: ExternalSignature(serviceName:"DocuSign")]]
+```
+
+### External Call
+
+The ExternalCall type allows you to define custom calls that should be triggered from OpenLaw VM to an external service.
+In the following example we define an external call variable.
+
+Considering an [external service](/integration-framework/#external-service-proto) registered into the [OpenLaw Integration Framework](/integration-framework) which has the following interface:
+
+```
+[[Input: Structure(param1:Text;param2:Text)]]
+[[Output: Structure(value1:Text;value2:Text;valueN:Text)]]
+```
+
+We can define the call as follows:
+
+```
+<%
+[[a: Text]]
+[[b: Text]]
+[[startingAt: DateTime]]
+
+[[externalCall:ExternalCall(
+serviceName: "MyServiceName";
+parameters:
+	param1 -> a,
+	toCurrency -> b;
+startDate: startingAt)]]
+%>
+
+{{ externalCall.status = 'success' =>
+    [[externalCall.result.value1]]
+    [[externalCall.result.value2]]
+    [[externalCall.result.valueN]]
+}}
+
+```
+
+::: warning
+The `externalCall.status` returns the current status of the call which can be `pending`, `failed`, `success`.
+Besides that, the external call allows you to read the result of the call by accessing the property `externalCall.result`
+which provides access to the attributes declared as Output in interface.
+It is important to mention that the output results are not printed out in the contract, but stored as events in Openlaw VM so
+they can be used for further calls and computations.
+:::
+
 ## Formatting
 
 ### Bold
@@ -1070,6 +1123,11 @@ Title: [[PartyB Signatory Title]]}}
 ```
 
 By deploying this option, the final executed version of an agreement (and the word version) will be embedded with an electronic signature from each signatory. In other words, "/s" plus the name of the signatory associated with the OpenLaw account.
+
+### External Signatures
+
+You can use third-party signature services from OpenLaw agreements by declaring a new variable type.
+Checkout the [External Signature Call example](#external-signature) for more details.
 
 ## Groupings
 
