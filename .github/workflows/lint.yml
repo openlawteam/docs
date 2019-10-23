@@ -1,0 +1,14 @@
+on: push
+name: Linters
+
+jobs:
+  lint-formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      # don't bother setting node version, unless it starts to matter.
+      # - uses: actions/setup-node@v1
+      #   with:
+      #     node-version: "10.x"
+      - run: npm ci
+      - run: npm test
