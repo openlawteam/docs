@@ -203,6 +203,46 @@ Pass your own props to the underlying `input`, `select`, `textarea`, and in some
 inputProps: {[Type | '*']: {[string]: any}}
 ```
 
+### inputExtraTextMap
+
+If you want to provide additional, descriptive text for specific [Input types](/markup-language/#variables), [Collections](/markup-language/#collection) and [Structures](/markup-language/#structure) from an [OpenLaw Template](/beginners-guide/#creating-a-first-draft) this prop will help. Providing extra text can be useful for help text, instructions, or possibly informative tooltips.
+
+If you know the variable names of your Input types, Collections or Structures you may create a mapping to descriptive text strings. These strings will appear after the Input type, Collection or Structure.
+
+::: warning
+Since you'll need to know the variable names from a specific OpenLaw template this prop may not be immediately useful for some applications where the template content may not be known.
+
+It is technically possible with our OpenLaw API to get the list of all [variable names](/openlaw-object/#getvariables) and then store a mapping of text for them, for example. Though this would of course need to be maintained somehow.
+
+As we continue to improve the OpenLaw Markup Language, support may eventually land for "descriptive text". Feel free to [submit a request](https://github.com/openlawteam/openlaw-core) (or comment on an existing one)!
+:::
+
+#### Usage
+
+```js
+inputExtraTextMap={{
+  // Input variable
+  'Contestant Eth Address': 'Your ethereum address is a long address.',
+  // Collection (note the " *")
+  'List of Things *': 'This is a list of your most treasured things.',
+  // Structure (same as Input variable)
+  'A Structured Item': 'This item has got some structure to it!'
+}}
+```
+
+- <u>Collections</u>: If you would like to add the same description to every item in a Collection, you will need to use the Collection variable name followed by `*` (e.g. `{ "Collection Name *": "Cool text!" }`). If the Collection is of a Structure type and, for example, you want distinct text for each item, then follow the usage for Structures instead.
+- <u>Structures</u>: Structure variables are handled the same as an Input variable name.
+
+#### Type
+
+```
+inputExtraTextMap: {[string]: string}
+```
+
+#### Styling
+
+There is a className available (`.openlaw-el-field__extra-text`) so you may change the positioning or appearance as necessary.
+
 ### onValidate callback
 
 The `onValidate` prop is a callback that allows a user to "hook into" the validation process of our fields. The parameter provided to `onValidate` is an object of validation data which tells you the current status of the field you're editing or moving away from.
