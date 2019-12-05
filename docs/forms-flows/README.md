@@ -64,6 +64,8 @@ The URL must begin with either `https://` or `http://`.
 
 A definition and organization of the variables included in the agreement template. Regardless of how the variables are organized in the agreement template, the variables can be independently defined in a Flow template to customize how they are grouped and in what order they appear in the rendered form. Each form section has a **title**, **description (optional)**, and a listing of **variables**.
 
+Each **variable** can also be listed with an optional description as shown below for two variables under the `Employee Information` section. The extra text can be useful to provide instructions or more details related to a particular input field and will be rendered along side the field in the form.
+
 ```
 ==
 title: Effective Date
@@ -83,9 +85,9 @@ Company Signatory Position
 title: Employee Information
 description: Information about the employee
 variables:
-Employee First Name,
+Employee First Name: "Provide your legal first name. You may also put any other preferred names in parentheses.",
 Employee Last Name,
-Employee Address,
+Employee Address: "Provide your official mailing address here.",
 Employee Position,
 Position of Supervisor,
 Payment Start Date,
@@ -254,9 +256,9 @@ Company Signatory Position
 title: Employee Information
 description: Information about the employee
 variables:
-Employee First Name,
+Employee First Name: "Provide your legal first name. You may also put any other preferred names in parentheses.",
 Employee Last Name,
-Employee Address,
+Employee Address: "Provide your official mailing address here.",
 Employee Position,
 Position of Supervisor,
 Payment Start Date,
@@ -386,9 +388,9 @@ Company Signatory Position
 title: Employee Information
 description: Information about the employee
 variables:
-Employee First Name,
+Employee First Name: "Provide your legal first name. You may also put any other preferred names in parentheses.",
 Employee Last Name,
-Employee Address,
+Employee Address: "Provide your official mailing address here.",
 Employee Position,
 Position of Supervisor,
 Payment Start Date,
