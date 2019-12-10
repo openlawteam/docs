@@ -91,7 +91,7 @@ You can find more information about how to use the OpenLawForm import in our [Op
 
 ## Contributing to OpenLaw
 
-We're always looking for ways to improve these open source libraries and would love to hear your feedback and ideas. If you would like to report any bugs or suggest enhancements to these OpenLaw projects, check out the Contributing Guidelines for each. There you'll find information on how best to connect with us including joining our [OpenLaw Community Slack Team](https://join.slack.com/t/openlaw-community/shared_invite/enQtMzY1MTA2ODY3ODg5LTc0ZGQ4OTEwMDEyMGUxMzJmMDVmNzM1ODRmNTdkNDIyNDkyOGU0NmRkMmRlMmY3ZTMwYzNlOTFiMzUwZjJkOTk).
+We're always looking for ways to improve these open source libraries and would love to hear your feedback and ideas. If you would like to report any bugs or suggest enhancements to these OpenLaw projects, check out the Contributing Guidelines for each. There you'll find information on how best to connect with us including joining our [OpenLaw Community Slack Team](https://join.slack.com/t/openlaw-community/shared_invite/enQtMzY1MTA2ODY3ODg5LTg5NjA2ZjAzMjY3YzI0NTU2NmU3ZmU5ZGQ0NjE3YjdkNjRjZGJlNjFjNjg1NzZiM2Q3YjZhNGEzYzEwYTBiMjU).
 
 Contributing Guidelines:
 
