@@ -84,7 +84,7 @@ libraryDependencies += "org.openlaw" %% "openlaw-core" % "<last version>"
 If you are using React as part of your project, you can use our [openlaw-elements npm package](https://www.npmjs.com/package/openlaw-elements) to dynamically render the form fields for the variables in an OpenLaw template.
 
 ```sh
-npm install --save openlaw-elements@beta
+npm install --save openlaw-elements
 ```
 
 You can find more information about how to use the OpenLawForm import in our [OpenLaw Elements](/openlaw-elements/) guide.
