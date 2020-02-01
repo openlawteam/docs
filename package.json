@@ -13,6 +13,6 @@
   "license": "CC-BY-4.0",
   "devDependencies": {
     "prettier": "^1.19.1",
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.3.0"
   }
 }
