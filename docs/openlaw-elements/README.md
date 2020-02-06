@@ -226,7 +226,10 @@ inputExtraTextMap={{
   // Collection (note the " *")
   'List of Things *': 'This is a list of your most treasured things.',
   // Structure (same as Input variable)
-  'A Structured Item': 'This item has got some structure to it!'
+  'A Structured Item': 'This item has got some structure to it!',
+
+  // Want to use JSX instead of a string?
+  'Another Variable': () => <a href="https://app.openlaw.io">OpenLaw App</a>
 }}
 ```
 
@@ -236,7 +239,7 @@ inputExtraTextMap={{
 #### Type
 
 ```
-inputExtraTextMap: {[string]: string}
+inputExtraTextMap: {[string]: string | () => ReactElement}
 ```
 
 #### Styling
