@@ -18,14 +18,14 @@ For POST requests, any parameters not included as a segment in the path should b
 In order to use the APIClient method calls, a class instance will first need to be instantiated with the root URL of an OpenLaw instance. For example:
 
 ```js
-apiClient = new APIClient("https://app.openlaw.io");
+apiClient = new APIClient("https://lib.openlaw.io/api/v1/default");
 ```
 
 Including just the root URL as shown above will be sufficient in most cases. But in cases where basic authentication has been enabled as further protection _in addition_ to [logging into an OpenLaw instance](#authentication), you can include the appropriate user credentials:
 
 ```js
 apiClient = new APIClient({
-  root: "https://openlaw-instance-with-basic-auth.openlaw.io",
+  root: "https://openlaw-instance-with-basic-auth.openlaw.io/api/v1/default",
   auth: {
     username: "<username>",
     password: "<password>"
