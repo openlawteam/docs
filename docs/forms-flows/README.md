@@ -20,7 +20,7 @@ An agreement template is a great way to define a contract and the actions that s
 
 Similar to agreement templates created with our [markup language](/markup-language/), a Flow template has special syntax to create a form view and workflow for an existing agreement template.
 
-A Flow consists of the following elements (with examples of each element for a Flow that is linked to a variation of the Employee Offer Letter template that can be found at https://app.openlaw.io):
+A Flow consists of the following elements (with examples of each element for a Flow that is linked to a variation of the Employee Offer Letter template that can be found at https://lib.openlaw.io/web/default):
 
 #### Title
 
@@ -466,7 +466,7 @@ If you would like to allow unregistered users to view and fill out the form (wit
 
 ## Viewing and Using a Workflow
 
-To see the list of Flows that you have access to, click on "Forms & Flows" in the nav menu. Check out some examples of created Flows at https://app.openlaw.io/flows.
+To see the list of Flows that you have access to, click on "Forms & Flows" in the nav menu. Check out some examples of created Flows at https://lib.openlaw.io/web/default/flows.
 
 <center>
   <img src="./img/flows-nav.png" alt="Forms & Flows" />
