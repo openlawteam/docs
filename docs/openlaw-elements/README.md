@@ -47,7 +47,7 @@ import "openlaw-elements/dist/openlaw-elements.min.css";
 // OpenLaw APIClient: https://docs.openlaw.io/api-client/#authentication
 //  - used to fetch geo data in our `Address` field type
 //  - run against your own private OpenLaw instance: 'https://[YOUR.INSTANCE.URL]';
-const apiClient = new APIClient("https://app.openlaw.io");
+const apiClient = new APIClient("https://lib.openlaw.io/api/v1/default");
 // see tip below about authentication
 apiClient.login("[YOUR_OPENLAW_EMAIL]", "[YOUR_OPENLAW_PASSWORD]");
 
@@ -229,7 +229,7 @@ inputExtraTextMap={{
   'A Structured Item': 'This item has got some structure to it!',
 
   // Want to use JSX instead of a string?
-  'Another Variable': () => <a href="https://app.openlaw.io">OpenLaw App</a>
+  'Another Variable': () => <a href="https://lib.openlaw.io/web/default">OpenLaw App</a>
 }}
 ```
 
