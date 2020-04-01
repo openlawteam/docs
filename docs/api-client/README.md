@@ -28,8 +28,8 @@ apiClient = new APIClient({
   root: "https://openlaw-instance-with-basic-auth.openlaw.io/api/v1/default",
   auth: {
     username: "<username>",
-    password: "<password>"
-  }
+    password: "<password>",
+  },
 });
 ```
 
@@ -565,7 +565,7 @@ const params = {
   title: "Advisor Agreement",
   parameters: {},
   paragraphs: {},
-  templates: {}
+  templates: {},
 };
 apiClient.downloadAsDocx(params);
 ```
@@ -607,7 +607,7 @@ const params = {
   title: "Advisor Agreement",
   parameters: {},
   paragraphs: {},
-  templates: {}
+  templates: {},
 };
 apiClient.downloadAsPdf(params);
 ```
@@ -700,13 +700,13 @@ const params = {
     "Company Signatory Email":
       '{"id":{"id":"8f26427b-0853-469b-a4f1-132190b7373e"},"email":"openlawuser+1@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+1@gmail.com"}]}',
     "Advisor Email":
-      '{"id":{"id":"38e0eb6b-0d52-4fd8-a77d-19686fd3843a"},"email":"openlawuser+2@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+2@gmail.com"}]}'
+      '{"id":{"id":"38e0eb6b-0d52-4fd8-a77d-19686fd3843a"},"email":"openlawuser+2@gmail.com","identifiers":[{"identityProviderId":"openlaw","identifier":"openlawuser+2@gmail.com"}]}',
   },
   overriddenParagraphs: {},
   agreements: {},
   readonlyEmails: [],
   editEmails: [],
-  draftId: ""
+  draftId: "",
 };
 apiClient.uploadDraft(params);
 ```
@@ -1058,10 +1058,10 @@ const params = {
     "Advisor Address":
       '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}',
     "Company Address":
-      '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}'
+      '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}',
   },
   paragraphs: {},
-  templates: {}
+  templates: {},
 };
 apiClient.downloadAsDocx(params);
 ```
@@ -1114,10 +1114,10 @@ const params = {
     "Advisor Address":
       '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}',
     "Company Address":
-      '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}'
+      '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}',
   },
   paragraphs: {},
-  templates: {}
+  templates: {},
 };
 apiClient.downloadAsPdf(params);
 ```
@@ -1243,13 +1243,13 @@ const params = {
     "Advisor Address":
       '{"placeId":"EiI5ODcgTWFpbiBTdHJlZXQsIE5ldyBZb3JrLCBOWSwgVVNB","streetName":"Main Street","streetNumber":"987","city":"Brooklyn","state":"New York","country":"United States","zipCode":"11201","formattedAddress":"987 Main St, Brooklyn, NY 11201, USA"}',
     "Company Address":
-      '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}'
+      '{"placeId":"ChIJWbGLkg9gwokR76ZxzYbdnpM","streetName":"Main Street","streetNumber":"123","city":"Queens","state":"New York","country":"United States","zipCode":"11354","formattedAddress":"123 Main St, Flushing, NY 11354, USA"}',
   },
   overriddenParagraphs: {},
   agreements: {},
   readonlyEmails: [],
   editEmails: [],
-  draftId: "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a"
+  draftId: "8fecc55da4598a062b90b0837e7badb1c649af720ca6c1d65f9524edfffd240a",
 };
 apiClient.uploadContract(params);
 ```

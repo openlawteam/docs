@@ -285,7 +285,7 @@ validationObject: {
 **Example usage of onValidate**
 
 ```js
-const validate = validationData => {
+const validate = (validationData) => {
   const { elementName, elementType, isError, value } = validationData;
 
   if (isError) {
