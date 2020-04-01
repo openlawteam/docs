@@ -186,7 +186,7 @@ const executionResult = Openlaw.execute(
   params
 );
 const templatesForExecution = {
-  [executionResult.missingTemplateName]: compiledTemplate.compiledTemplate
+  [executionResult.missingTemplateName]: compiledTemplate.compiledTemplate,
 };
 Openlaw.resumeExecution(executionResult.executionResult, templatesForExecution);
 ```
@@ -1246,7 +1246,7 @@ const address = {
   state: "New York",
   streetName: "Main Street",
   streetNumber: "123",
-  zipCode: "11354"
+  zipCode: "11354",
 };
 Openlaw.createAddress(address);
 ```
@@ -1332,7 +1332,7 @@ const address = {
   state: "New York",
   streetName: "Main Street",
   streetNumber: "123",
-  zipCode: "11354"
+  zipCode: "11354",
 };
 Openlaw.getFormattedAddress(address);
 ```
