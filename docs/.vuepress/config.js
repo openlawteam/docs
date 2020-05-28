@@ -14,7 +14,7 @@ module.exports = {
       {
         title: "Develop with OpenLaw",
         collapsable: false,
-        children: ["/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/openlaw-elements/", "/self-hosted-instances/"]
+        children: ["/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/openlaw-elements/"]
       },
       {
         title: "First Draft",
