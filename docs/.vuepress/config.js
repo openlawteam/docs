@@ -9,12 +9,12 @@ module.exports = {
       {
         title: "Overview of OpenLaw",
         collapsable: false,
-        children: ["/", "/private-self-hosted-instances/"]
+        children: ["/"]
       },
       {
         title: "Develop with OpenLaw",
         collapsable: false,
-        children: ["/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/openlaw-elements/"]
+        children: ["/getting-started-overview/", "/openlaw-core/", "/openlaw-object/", "/api-client/", "/openlaw-elements/", "/self-hosted-instances/"]
       },
       {
         title: "First Draft",

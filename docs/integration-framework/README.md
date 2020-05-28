@@ -408,14 +408,9 @@ class ExternalServiceImpl @Inject()(priceConverterService: PriceConverterService
 
 ## Integrating
 
-#### Private Instance
-
-You can integrate to your private instance any external service you may need. If you still don't have a private instance,
-please [request one](/private-self-hosted-instances/#private-instances) and start the [External Service Registration](#external-service-registration) process.
-
 #### External Service Registration
 
-You can register your external service into your private instance by accessing:
+You can register your external service into an OpenLaw instance by accessing:
 
 - **Menu -> Admin Tools -> Integrator Registration**
 
