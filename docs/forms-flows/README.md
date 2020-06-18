@@ -1,7 +1,7 @@
 ---
 meta:
   - name: description
-    content: With OpenLaw's Forms & Flows, you can take any legal agreement and turn it into a questionnaire or simple form. Entire workflows can be created to manage the life cycle of a commercial agreement.
+    content: With OpenLaw's Forms & Flows, you can take any legal agreement (or set of agreements) and turn it into a questionnaire, pull data from any source and manage legal wotkflows with reporting and notifications. Entire workflows can be created to manage the life cycle of a commercial agreement.
 ---
 
 # Forms & Flows Overview
@@ -16,31 +16,178 @@ Commercial relationships no longer need to be complex. Generate agreements, send
 
 An agreement template is a great way to define a contract and the actions that should come with it. But sometimes you need an extra layer to define the workflow that happens before the contract is created. This is the main purpose of the Flow. To define how to create contract(s) and what steps need to happen to get there.
 
+### Flow state and expressions in Flow definition
+In the flow definition, you can either use constants (string, numbers, booleans) or variables. The flow state is being built based on its definition and it can be used anywhere you can use an expression. That is:
+- in agreement definition properties
+- in action definition properties
+- in agreement conditional
+- in flow conditional
+
+The flow state is structured as follows:
+
+#### flow - the flow execution state
+Each flow execution has the following properties:
+- state (Text): the current flow execution state (init, form edit, form done etc ....)
+- creationDate (DateTime): when the flow execution has been created
+- url (Text): the full URL to go back to the flow execution 
+
+#### actions
+Each action  is either accessible with it's direct name or from within a variable "actions"
+
+so if an action is called "send email", you can access it by either using "send email" or "actions.send email". 
+If, for any reason, "send email" might be ambiguous (if a variable in the form), then you can only access it through "actions.send email"
+
+If the action returns a value and the value name is unique, you will be able to access it directly. So if for example you have an action to get the price of BTC, you will be able to get it by using "price of BTC" instead of "oracle action.price of BTC"
+
+#### template parameters
+Same as with actions, each parameter is accessible with its name directly or "parameters.{parameter name}".
+Like with actions, if the parameter name clashes, then the parameter is only accessible by "parameters.{parameter name}"
+
 ### Flow Template
 
 Similar to agreement templates created with our [markup language](/markup-language/), a Flow template has special syntax to create a form view and workflow for an existing agreement template.
 
-A Flow consists of the following elements (with examples of each element for a Flow that is linked to a variation of the Employee Offer Letter template that can be found at https://lib.openlaw.io/web/default):
-
-#### Title
-
-A unique title to identify the Flow, similar to an agreement template title.
+Here is an example of a Flow. We describe each part below.
 
 ```
-Employment Agreement Form & Flow
+roles: support, customer service
+
+actors:
+- hello@openlaw.io: support
+- info@openlaw.io: customer service
+templates: 
+==== my template ====
+some content [[First Name]] [[Last Name]]
+========
+
+agreements:
+default
+- my template (
+  dropbox: "OpenLaw-Shared" / "sub folder" / "my template - " + First Name + " " + Last Name)
+
+forms:
+general description for the questionnaire
+
+==
+title: Your Information
+description: Fill in your name here please.
+variables:
+First Name,
+Last Name
+==
+
+actions:
+- send form completed notification: Email(
+  subject: "Publicity Release Completed";
+  content: "A publicity release for [[First Name]] [[Last Name]] has been sent.  It's available in the shared Dropbox folder.";
+  to: "aaron@openlaw.io")
+
+when the flow starts
+- move to "form edit"
+
+when flow.state = "form done"
+- do "send form completed notification"
+- move to "signature"
 ```
 
-#### Template
+#### Roles (optional)
 
-A Flow is linked to an already existing agreement template on the same OpenLaw instance where the Flow is created. As further explained below, the Flow can define how the agreement template variables are organized to present a unique form view to the end user. The Flow can also define `Edit` actions regarding who can fill out the form and populate the agreement variables.
+List of identifiers that can be assigned to users. This is useful when you need to do retrieve a list of emails based on a role (email action)
 
 ```
-Employee Offer Letter
+admin, HR, legal, employee
 ```
 
-#### Description (optional)
+#### Actors (optional)
 
-An optional description can be included to give the end user information about the form and workflow, such as the purpose or instructions.
+The users who can interact with the Flow execution. Each actor is identified by an email address and has assigned roles that have been defined in the Flow template.
+
+```
+- company@example.com: admin, HR, legal
+- employee@example.com: employee
+```
+
+#### Templates
+
+A Flow can embed templates that will be used to create drafts and contracts. The templates used in a Flow can be internal (embedded) or external (already existing). The logic is that the Flow will always look first at its internal templates and if it's not there, it will look at the external ones. 
+
+##### Format
+templates are separated by their titles that are encapsulated in at least 4 '=' on each side.
+Once all the templates have been defined, at least 8 '=' has to be used
+
+```
+templates:
+==== template 1 ====
+this is
+some content
+
+here
+==== template 2 ====
+another 
+temlate
+for you [[name:Text]]
+
+========
+```
+
+#### Agreements
+It is now time to define which agreements need to be part of the flow. 
+An agreement can be added by default or use a conditional to determine whether it should be added or not
+
+```
+agreements:
+default
+- my template
+
+when First Name = "David"
+- template 2(
+  dropbox: "path" / "to" / "draft"
+  creator: "info@openlaw.io"
+  )
+```
+
+**default** means that the agreement based on each template in the list below will be created no matter what
+**when {conditional}** means that the agreement based on each template in the list below will be created if the conditional is true
+
+##### agreement definition
+each line represents an agreement. Its configuration works as follows:
+{template name | "template name"}(
+storage name: path;
+creator: email expression
+)
+
+where storage name is any storage implemented in Openlaw (dropbox, onedrive etc ...) and creator is the user that will be assigned as the creator of the contract
+
+
+#### Form
+
+Here is an overview of a form definition
+```
+forms:
+general description for the questionnaire
+
+==
+title: Your Information
+description: Fill in your name here please.
+variables:
+First Name,
+Last Name
+==
+```
+or without the general description
+```
+forms:
+==
+title: Your Information
+description: Fill in your name here please.
+variables:
+First Name,
+Last Name
+==
+```
+
+
+The optional description can be included to give the end user information about the form and workflow, such as the purpose or instructions.
 
 ```
 Fill out the form below to generate the Employee Offer Letter.
@@ -60,7 +207,7 @@ You can include line breaks as shown in the example above to display paragraphs.
 The URL must begin with either `https://` or `http://`.
 :::
 
-#### Form Sections
+##### Form Sections
 
 A definition and organization of the variables included in the agreement template. Regardless of how the variables are organized in the agreement template, the variables can be independently defined in a Flow template to customize how they are grouped and in what order they appear in the rendered form. Each form section has a **title**, **description (optional)**, and a listing of **variables**.
 
@@ -127,404 +274,145 @@ The optional **description** for each form section can include line breaks to di
 The URL must begin with either `https://` or `http://`.
 :::
 
-#### Roles (optional)
-
-List of identifiers that can be assigned to users. Access to actions in a Flow (described below) are given to certain roles.
-
-```
-admin, HR, legal, employee
-```
-
-#### Actors (optional)
-
-The users who can interact with the Flow execution. Each actor is identified by an email address and has assigned roles that have been defined in the Flow template.
-
-```
-- company@example.com: admin, HR, legal
-- employee@example.com: employee
-```
-
 #### Action
+            
+1. **Email** editing the parameters (filling out the form fields)
+2. **UpdateVariables** automatically update a variable in the form 
+3. **GSheets** write data into a google sheets document
+4. **Excel** write data into an Excel file
+5. **Integration** Do an integration call (polling external data, call 3rd party service etc ...)
+6. **Flow** start a sub flow
 
-An action is something you can do to a Flow execution. This currently includes:
+The format for each action is
 
-1. editing the parameters (filling out the form fields)
-2. attaching a file (useful to include a supporting document to the form and generated agreement)
-3. providing a required approval in the workflow process
-4. sending an email related to the workflow
-5. creating a contract that is sent out for signature
+`- Action Name: Action Type(action configuration)`
 
-Each action is defined with a name, type (e.g., `Edit`, `Attach`, `Approval`, `Email`, `Contract`), the roles/actors permitted to take the action, and other required information depending on the type.
-
+For example:
 ```
-- complete employee portion: Edit(
-  roles: employee;
-  forms: Employee Information, Employee Signature)
-
-- complete company portion: Edit(
-  roles: admin, HR;
-  forms: Effective Date, Company Information, Other Agreements, Company Signature)
-
-- supporting document: Attach(
-  roles: employee;
-  type: *;
-  description: "Upload your resume in Word or PDF format.")
-
-- company review: Approval(roles: HR, legal)
-
 - send completed form: Email(
   subject: "Employee Offer Letter Form completed";
   body: "The Employee Offer Letter form has been completed and ready for review.";
-  to: admin, HR, legal, employee)
+  to: "admin", "HR", "legal", "employee", "some@other.email", email from form)
 
-- send request to revise: Email(
-  subject: "Employee Offer Letter Form rejected";
-  body: "The Employee Offer Letter form needs to be updated.";
-  to: admin, HR, legal, employee)
-
-- send approval confirmation: Email(
-  subject: "Employee Offer Letter Form approved";
-  body: "The Employee Offer Letter form has been approved and the contract has been sent.";
-  to: admin, HR, legal, employee)
-
-- send contract: Contract(creator: company@example.com)
 ```
 
 #### Action Rules / Flow Graph
 
-The set of rules that define when an action is triggered. Includes references to the actions that have been defined in the Flow template.
+The set of rules that define when an action is triggered.
 
 ```
 when the flow starts then
-- requires "complete employee portion"
+- move to "form edit"
 
-when "complete employee portion" is done then
-- requires "supporting document"
-
-when "supporting document" is done then
-- requires "complete company portion"
-
-when "complete company portion" is done then
-- do "send completed form"
-- requires "company review"
-
-when "company review" is rejected then
-- reset "complete employee portion"
-- reset "supporting document"
-- reset "complete company portion"
-- reset "company review"
-- do "send request to revise"
-- requires "complete employee portion"
-
-when "company review" is approved then
+when flow.state = "form done" then
 - do "send approval confirmation"
-- do "send contract"
+- move to "signature"
 ```
 
-### Full Flow Template Example
+#### Action Types
+There are different types of actions that can be defined. Like in the Openlaw Template language, the type can have a constructor to set some properties
 
-The examples above can be combined to create a full Flow template in the editor.
+#####  Email
+The action "Email" is used to send an email. 
+
+###### Properties
+**subject** is the subject of the email. It can be any string expressions (no formatting)
+**body** is the body of the email. This can be any string and will be parsed for formatting (like any Openlaw template). The text has direct access to the flow execution state
+**to** is the list of emails to send the email to. The list can be either an email or a role name. If you use a role name, every actor's email linked to the role will be added to the list
+
+###### Example
+```
+- send email: Email(
+  subject: "[[Company Name]]'s notification";
+  content: """
+  This email is for [[Company Name]] and is **very** important
+
+  Best regards
+  """;
+  to: "role 1", "info@email.com", signatory email)
+```
+
+##### Integration
+The integration action is useful when you want to either trigger an exteral system or if you want to get information from an external source.
+
+###### Properties
+
+**service** Is the name of the service that needs to be called (it needs to be part of the integrated services)
+**params**       
+
+###### Example
+```
+- get btc usd exchange rate: Integration(
+  service: "Chainlink";
+  params: from -> "BTC", to -> "USD", network -> "Rinkeby")
 
 ```
-roles: admin, HR, legal, employee
 
-actors:
-- company@example.com: admin, HR, legal
-- employee@example.com: employee
+##### UpdateVariables
+The UpdateVariables action set parameters of the agreement. 
 
-template: Employee Offer Letter
+###### Properties
+**params** Is the mapping of parameters. 
 
-forms:
-Fill out the form below to generate the Employee Offer Letter.
+###### Example
+```
+- update btc usd price: UpdateVariables(
+  params: 
+    Bitcoin Price in USD -> get btc usd exchange rate.result.price)
+```
 
-We'll get you through this in a matter of minutes and send off a completed document to your HR representative who will provide you more information for the hiring process.
-==
-title: Effective Date
-description: The date on which the agreement will take effect
-variables:
-Effective Date
-==
-title: Company Information
-description: Information about the Company and HR representative
-variables:
-Company Name,
-Company Address,
-Company Signatory First Name,
-Company Signatory Last Name,
-Company Signatory Position
-==
-title: Employee Information
-description: Information about the employee
-variables:
-Employee First Name: "Provide your legal first name. You may also put any other preferred names in parentheses.",
-Employee Last Name,
-Employee Address: "Provide your official mailing address here.",
-Employee Position,
-Position of Supervisor,
-Payment Start Date,
-Payment End Date,
-Salary in Ether,
-Recipient Address,
-Employee Responsibilities,
-Days of Vacation
-==
-title: Other Agreements
-description: Supporting documents for employment
-variables:
-Additional Agreements,
-Confidentiality Agreement,
-Dispute Resolution,
-Governing Law
-==
-title: Employee Signature
-description: Email address for Employee signatory
-variables:
-Employee Signatory Email
-==
-title: Company Signature
-description: Email address for Company signatory
-variables:
-Company Signatory Email
-==
+##### Excel
+This action is a way to do reporting in an excel file.
+It uses a store service to save and edit the Excel file. 
 
-actions:
-- complete employee portion: Edit(
-  roles: employee;
-  forms: Employee Information, Employee Signature)
+###### Properties
+**fileName** the file path 
+**service** the service to use (for example dropbox)
+**values** the list of values to write to the excel file
+**column** from which column to start appending (optional, by default "A")
 
-- complete company portion: Edit(
-  roles: admin, HR;
-  forms: Effective Date, Company Information, Other Agreements, Company Signature)
+```
+- append to spreadsheet: GSheets(
+  filename: "save" / "the file" / "here"
+  service: "dropbox";
+  values: Effective Date, Company Signatory Email, Advisor Email, Advisor Address, No Services, Number of Shares, Years Vesting, Vesting Period) 
 
-- supporting document: Attach(
-  roles: employee;
-  type: *;
-  description: "Upload your resume in Word or PDF format.")
+```
 
-- company review: Approval(roles: HR, legal)
+##### GSheets
+This action let's you report information from the flow to a Google sheet.
+For each execution, it appends all the values definied in the sheet (add to the last row)
 
-- send completed form: Email(
-  subject: "Employee Offer Letter Form completed";
-  body: "The Employee Offer Letter form has been completed and ready for review.";
-  to: admin, HR, legal, employee)
+###### Properties
+**id** the google sheet id
+**values** list of values to append
+**sheet**  the sheet name to write in
+**column** from which column to start appending the values (optional, by default "A")
 
-- send request to revise: Email(
-  subject: "Employee Offer Letter Form rejected";
-  body: "The Employee Offer Letter form needs to be updated.";
-  to: admin, HR, legal, employee)
+###### Example
+```
+- append to spreadsheet: GSheets(
+  id: "1GsDUkJKU6WCOc32zVeXSdfLXxkBRR5M4C6Cl5pbyP8g";
+  sheet: "Test GSheets Flow Action";
+  values: Effective Date, Company Signatory Email, Advisor Email, Advisor Address, No Services, Number of Shares, Years Vesting, Vesting Period) 
 
-- send approval confirmation: Email(
-  subject: "Employee Offer Letter Form approved";
-  body: "The Employee Offer Letter form has been approved and the contract has been sent.";
-  to: admin, HR, legal, employee)
+```
 
-- send contract: Contract(creator: company@example.com)
+###### Properties
+**id** the google sheet id
+**values** list of values to append
+**sheet**  the sheet name to write in
+**column** from which column to start appending the values (optional, by default "A")
 
-when the flow starts then
-- requires "complete employee portion"
+###### Example
+```
+- append to spreadsheet: GSheets(
+  id: "1GsDUkJKU6WCOc32zVeXSdfLXxkBRR5M4C6Cl5pbyP8g";
+  sheet: "Test GSheets Flow Action";
+  values: Effective Date, Company Signatory Email, Advisor Email, Advisor Address, No Services, Number of Shares, Years Vesting, Vesting Period) 
 
-when "complete employee portion" is done then
-- requires "supporting document"
-
-when "supporting document" is done then
-- requires "complete company portion"
-
-when "complete company portion" is done then
-- do "send completed form"
-- requires "company review"
-
-when "company review" is rejected then
-- reset "complete employee portion"
-- reset "supporting document"
-- reset "complete company portion"
-- reset "company review"
-- do "send request to revise"
-- requires "complete employee portion"
-
-when "company review" is approved then
-- do "send approval confirmation"
-- do "send contract"
 ```
 
 ### Flow Execution
 
 When a user starts a Flow, a new execution gets created. An execution is linked to its Flow template by a flowId and version. Each Flow execution also has a state. This is where all the information such as the agreement variable inputs and the execution state of the Flow are stored.
-
-### Forms Template
-
-If you don't really have a need for the actions and executions of a fully defined workflow, you still can use the "forms" feature to turn any agreement template into a customizable questionnaire or simple form.
-
-A forms template is a stripped down version of a Flow template with the following implicit default values:
-
-- one actor which is the user who starts the Flow
-- one `Edit` action for all the form sections which is assigned to the only actor
-
-### Forms Template Example
-
-Below is an example of how a forms template can be defined and saved in the editor. Note that the optional **roles**, **actors**, **actions**, and **flow graph** sections have been omitted.
-
-```
-template: Employee Offer Letter
-
-forms:
-Fill out the form below to generate the Employee Offer Letter.
-
-We'll get you through this in a matter of minutes and send off a completed document to your HR representative who will provide you more information for the hiring process.
-==
-title: Effective Date
-description: The date on which the agreement will take effect
-variables:
-Effective Date
-==
-title: Company Information
-description: Information about the Company and HR representative
-variables:
-Company Name,
-Company Address,
-Company Signatory First Name,
-Company Signatory Last Name,
-Company Signatory Position
-==
-title: Employee Information
-description: Information about the employee
-variables:
-Employee First Name: "Provide your legal first name. You may also put any other preferred names in parentheses.",
-Employee Last Name,
-Employee Address: "Provide your official mailing address here.",
-Employee Position,
-Position of Supervisor,
-Payment Start Date,
-Payment End Date,
-Salary in Ether,
-Recipient Address,
-Employee Responsibilities,
-Days of Vacation
-==
-title: Other Agreements
-description: Supporting documents for employment
-variables:
-Additional Agreements,
-Confidentiality Agreement,
-Dispute Resolution,
-Governing Law
-==
-title: Employee Signature
-description: Email address for Employee signatory
-variables:
-Employee Signatory Email
-==
-title: Company Signature
-description: Email address for Company signatory
-variables:
-Company Signatory Email
-==
-```
-
-## Creating a Form & Flow
-
-To create a new Flow (with its form view) in an OpenLaw instance, click on "Create a New Flow" in the nav menu.
-
-<center>
-  <img src="./img/new-flow-nav.png" alt="New Flow" />
-</center>
-
-To make things easier, we have created a populate modal that breaks down all the required and optional information for you to enter to create a new Flow.
-
-<center>
-  <img src="./img/populate-flow.png" alt="Populate Flow" />
-</center>
-
-::: tip
-If your Flow is linked to an agreement template that already has [variable groupings](/markup-language/#groupings), you can click on the blue button next to the "Form Sections" label to start with those defined sections.
-
-<center>
-  <img src="./img/groupings-button.png" alt="Groupings Button" />
-</center>
-:::
-
-After you have submitted the required information in the modal, the Flow syntax will be populated in the editor where you can make further edits before saving and then clicking on the "Back" button to view the created form.
-
-<center>
-  <img src="./img/flow-editor.png" alt="Flow Editor" />
-</center>
-
-## Setting Access Permissions
-
-The Flow creator can set the access permissions for who can view and edit the Form & Flow by first clicking on the "Access" button at the top of the Flow editor.
-
-<center>
-  <img src="./img/access-button.png" alt="Access Button" />
-</center>
-
-In the access permissions modal, you can specify other users to have edit and view access to your created Form & Flow. You can also choose to make edit and/or view permissions available to all registered users.
-
-If you would like to allow unregistered users to view and fill out the form (without edit access), you can generate a shareable link. Anyone who has access to that link can click on it to open the form.
-
-<center>
-  <img src="./img/access-permissions.png" alt="Access Permissions" />
-</center>
-
-## Viewing and Using a Workflow
-
-To see the list of Flows that you have access to, click on "Forms & Flows" in the nav menu. Check out some examples of created Flows at https://lib.openlaw.io/web/default/flows.
-
-<center>
-  <img src="./img/flows-nav.png" alt="Forms & Flows" />
-</center>
-
-After you open a Flow, you'll see its list of defined actions in a panel that highlights the current and completed actions. The main workflow panel will display the current action.
-
-<center>
-  <img src="./img/form-1.png" alt="Form First Page" />
-</center>
-
-Filling out a form is straightforward and similar to how you would fill out the fields for an agreement template. The main panel has a top header bar that includes a button to save your inputs and a progress bar that comes into view when the form page requires scrolling down.
-
-As you input information into the form fields, the progress bar will automatically update to let you know how far along you are in completing the form sections included in the current `Edit` action. In the case of a forms template where no actions have been defined, the progress bar shows the progress made on the entire form.
-
-<center>
-  <img src="./img/form-2.png" alt="Form Second Page" />
-</center>
-
-After you have completed all of the form fields and have reached the last form section, you will see the option at the bottom to "Submit" the form.
-
-<center>
-  <img src="./img/form-3.png" alt="Form Last Page" />
-</center>
-
-In an `Attach` action, the user is prompted to select and submit a file to attach it to the workflow.
-
-<center>
-  <img src="./img/attach-file.png" alt="Attach File" />
-</center>
-
-In the case where a user is not authorized for the current action, the user is notified of which party needs to complete the pending action.
-
-<center>
-  <img src="./img/awaiting-action.png" alt="Awaiting Action" />
-</center>
-
-In an `Approval` action, the user can preview the contract that will be generated with the form inputs.
-
-<center>
-  <img src="./img/approval-1.png" alt="Approval Contract" />
-</center>
-
-The reviewer can also see any files that have been attached and review all the completed form sections. The reviewer has permission to change any of the form inputs before approving or rejecting the form.
-
-<center>
-  <img src="./img/approval-2.png" alt="Approval Form" />
-</center>
-
-The reviewer can then click on either the "Approve" or "Reject" button at the bottom of the page to open a modal where optional comments can be submitted before confirming the selection.
-
-<center>
-  <img src="./img/approval-3.png" alt="Approval Approve/Reject Buttons" />
-  <img src="./img/approval-4.png" alt="Approval Comment Modal" />
-</center>
-
-If all the actions in the workflow have been completed and a `Contract` action has been triggered, the main panel will indicate that the contract is in process and provide a link to view the contract and sign it. In addition, the "Actions" dropdown button in the top header bar includes options to download Word/PDF files of the generated agreement.
-
-<center>
-  <img src="./img/contract-sent.png" alt="Contract Sent" />
-</center>
