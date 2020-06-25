@@ -135,12 +135,8 @@ The Image type is used to embed a graphic image as a header or in the body of a 
 You can define a default value for an Image variable by including a valid URL that resolves to a GIF, PNG, JPG, BMP, or TIFF image as a parameter when defining the variable. For example, `[[Variable: Image("http://www.example.com/header_image.png")]]`. In the case of a default value, the remote image will already be embedded in the template but the interface to edit the image will be disabled.
 
 #### Link
-You can also define links in your document. Links can be either constant (markdown constant) or variables
 
-`[[link to my website:Link(label:'homepage';url:'https://openlaw.io')]]` will create a variable of type Link that you can render normally. The constructor let's you define default values.
-
-**Label** is the label or the link
-**url** is the actual URL
+The Link type is used to insert a hyperlink in the agreement text. To create a Link variable, add `: Link` after the variable name and include a `label` and `url`: `[[Variable: Link(label: "OpenLaw"; url: "https://openlaw.io")]]`. The `label` is the actual text for the hyperlink that will be rendered in the agreement. You can insert the same link elsewhere in the agreement by just referencing the variable name: `[[Variable]]`.
 
 #### YesNo
 
@@ -161,6 +157,8 @@ no type indicator or `: Text` - indicates that a variable is text
 `: Image` - generates a clickable interface to upload and edit an image
 
 `: LargeText` - indicates that a variable is large text (corresponding to a text box where longer input is accepted)
+
+`: Link(label: "<label>"; url: "<url>")` - generates a hyperlink
 
 `: Number` - indicates that a variable is a number
 
@@ -351,27 +349,15 @@ The OLInfo type will be populated with additional sub-fields in the future.
 ### External Signature
 
 The ExternalSignature type lets you define a new signature method which uses an external service registered in the OpenLaw platform through the Integration Framework.
-The following is an example of the syntax to define and use an [eletronic signature via DocuSign](https://www.docusign.com/products/electronic-signature) external service:
+The following is an example of the syntax to define and use an [electronic signature via DocuSign](https://www.docusign.com/products/electronic-signature) external service:
 
 ```
 [[Signatory: ExternalSignature(serviceName:"DocuSign")]]
 ```
 
 ### Ethereum Call
-As part of our integration with Ethereum, it is possible to define Ethereum calls. 
-You can do it by simply define a variable that will represent your ethereum call.
 
-#### Properties
-**contract** the address of the contract to interact with. (Etheureum address)
-**interface** ABI for the contract (JSON)
-**function** which function to call in the contract (Text)
-**arguments** passing arguments for the function (list of values) 
-**startDate** when to call the function for the first time (Date) (optional, default to now)
-**endDate** until when to call the function (Date) (optional, default to never )
-**repeatEvery** how often should we call the function (Period) (optional, default to only once)
-**from** fomr which account to send the transaction (Ethereum address, optional)
-**value** how much ETH to send with the transaction (Number, optional)
-
+The EthereumCall type allows you to integrate your agreement with smart contract code running on the Ethereum blockchain. Common use cases include defining the terms of a transaction in the agreement and then automating the transfer of assets (including digital payment) upon execution of the contract. See the [Smart Contracts section](#smart-contracts) for details and examples of how to set up an Ethereum Call in your template.
 
 ### External Call
 
@@ -396,8 +382,8 @@ We can define the call as follows:
 [[externalCall:ExternalCall(
 serviceName: "MyServiceName";
 parameters:
-	param1 -> a,
-	toCurrency -> b;
+  param1 -> a,
+  toCurrency -> b;
 startDate: startingAt)]]
 %>
 
@@ -416,20 +402,6 @@ which provides access to the attributes declared as Output in interface.
 It is important to mention that the output results are not printed out in the contract, but stored as events in Openlaw VM so
 they can be used for further calls and computations.
 :::
-
-### inline expressions
-in addition to defining variables, types and aliases, you can also inline expression in [[]] 
-
-So if you want to print an expression in the template, you can do it simply like this:
-
-```
-<%
-[[price: Number]]
-[[discount: Number]]
-%>
-
-the price with a discount of [[discount]] is [[price - (price * (discount / 100))]]
-```
 
 ## Formatting
 
@@ -1051,6 +1023,21 @@ but withhold at higher Single rate'?" => Married, but higher Single rate}}.
 
 The amount of federal income tax that must be withheld from the Employee's
 weekly wages is **$[[Amount of Income Tax Withheld]]**.
+```
+
+### Inline Calculations
+
+In addition to using aliases for calculations, you can use shorthand inline expressions. This may be ideal for simpler calculations. As with the case of calculating with aliases, a variables must be defined _before_ being used in an expression to calculate a value.
+
+```
+<%
+
+[[price: Number]]
+[[discount: Number]]
+
+%>
+
+The price with a discount of [[discount]]% is $[[price - (price * (discount / 100))]].
 ```
 
 ## Clauses
@@ -1750,7 +1737,7 @@ and then separately called:
 
 ### Selecting the Contract Level Ethereum Network
 
-As an option for embedding a smart contract to execute as part of an agreement, you can select the Ethereum network used for the smart contract executions by specifying the `network` with `"Ropsten"`, `"Kovan"`, or `"Rinkeby"` as shown below. Support for `"Mainnet"` will be integrated soon.
+As an option for embedding a smart contract to execute as part of an agreement, you can select the Ethereum network used for the smart contract executions by specifying the `network` with `"Mainnet"`, `"Ropsten"`, `"Kovan"`, or `"Rinkeby"` as shown below.
 
 ```
 [[Pay Vendor:EthereumCall(
@@ -1790,16 +1777,39 @@ function:"makePayment";
 arguments:Recipient Ethereum Address,Payment in Wei;
 startDate:Payment Start Date;
 endDate:Payment End Date;
-value: 1000000;
+value: 1000000000000000000;
 repeatEvery:"1 minute")]]
 ```
 
 If you include the `from` property with a valid Ethereum address, the default OpenLaw account won't initiate the call. Instead, the OpenLaw smart contract execution process will expect a transaction hash. Like when you sign with MetaMask, an API call will be made to register the transaction hash that has been added to the chain so OpenLaw can know what is going on with the call.
 
+If the smart contract function being called is "payable" and expects to receive funds, the Ethereum call definition should also include a `value` property with the amount in wei to be sent as part of the transaction.
 
-### EthereumCall Properties
+### Summary of EthereumCall Definition Properties
 
-The EthereumCall type gives you access to some properties you can use in an agreement template. Those properties are only resolved once the first call is completed (and works only on the first call for now).
+`contract` - Ethereum address of the smart contract
+
+`interface` - ABI for the smart contract in JSON format
+
+`function` - specific function to execute in smart contract
+
+`arguments` - list of values sent to the function
+
+`startDate` - when the function should be executed for the first time (_optional_ - default is to execute immediately after the contract has been electronically signed by all parties)
+
+`repeatEvery` - how often the function should be executed (_optional_ - default is to execute only once)
+
+`endDate` - for a function that is executed periodically, when the function should be executed for the last time (_optional_ - default is no end date/time)
+
+`network` - the Ethereum network used for the smart contract execution (_optional_ - see above for more details on [selecting a network](#selecting-the-contract-level-ethereum-network))
+
+`from` - Ethereum address of user that will initiate the function call (for use in a [delegated call](#delegating-the-call))
+
+`value` - Amount in wei sent as part of executing a payable smart contract function (for use in a [delegated call](#delegating-the-call))
+
+### EthereumCall Usage Properties
+
+The EthereumCall type also gives you access to some properties you can use in an agreement template. Those properties are only resolved once the first call is completed (and works only on the first call for now).
 
 `isSuccessful` - Returns true if the call has been successful, false otherwise.
 
@@ -1807,7 +1817,7 @@ The EthereumCall type gives you access to some properties you can use in an agre
 
 `executionDate` - Returns DateTime of when the call has been triggered. It doesn't resolve if the call hasn't executed yet.
 
-`tx` - Returns the Ethereum transaction hash of the call. It doesn't resolve if the call hasn't executed yet. 
+`tx` - Returns the Ethereum transaction hash of the call. It doesn't resolve if the call hasn't executed yet.
 
 ### EthereumEventFilter
 
