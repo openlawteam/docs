@@ -134,6 +134,10 @@ The Image type is used to embed a graphic image as a header or in the body of a 
 
 You can define a default value for an Image variable by including a valid URL that resolves to a GIF, PNG, JPG, BMP, or TIFF image as a parameter when defining the variable. For example, `[[Variable: Image("http://www.example.com/header_image.png")]]`. In the case of a default value, the remote image will already be embedded in the template but the interface to edit the image will be disabled.
 
+#### Link
+
+The Link type is used to insert a hyperlink in the agreement text. To create a Link variable, add `: Link` after the variable name and include a `label` and `url`: `[[Variable: Link(label: "OpenLaw"; url: "https://openlaw.io")]]`. The `label` is the actual text for the hyperlink that will be rendered in the agreement. You can insert the same link elsewhere in the agreement by just referencing the variable name: `[[Variable]]`.
+
 #### YesNo
 
 The YesNo type is typically used together with "conditional" logic embedded into a template. It creates a binary "yes" or "no" question with radio button inputs. The value of the input can be used to output text, variables, smart contract calls, and/or trigger a conditional elsewhere in the agreement as explained below in [Conditionals and Decision Branches](#conditionals-and-decision-branches). To create a YesNo variable, add `: YesNo` after a variable name followed by the language in quotes that serves as a prompt for the user. For example, `[[Variable: YesNo "Have you included the required prompt?"]]`.
@@ -153,6 +157,8 @@ no type indicator or `: Text` - indicates that a variable is text
 `: Image` - generates a clickable interface to upload and edit an image
 
 `: LargeText` - indicates that a variable is large text (corresponding to a text box where longer input is accepted)
+
+`: Link(label: "<label>"; url: "<url>")` - generates a hyperlink
 
 `: Number` - indicates that a variable is a number
 
@@ -343,11 +349,15 @@ The OLInfo type will be populated with additional sub-fields in the future.
 ### External Signature
 
 The ExternalSignature type lets you define a new signature method which uses an external service registered in the OpenLaw platform through the Integration Framework.
-The following is an example of the syntax to define and use an [eletronic signature via DocuSign](https://www.docusign.com/products/electronic-signature) external service:
+The following is an example of the syntax to define and use an [electronic signature via DocuSign](https://www.docusign.com/products/electronic-signature) external service:
 
 ```
 [[Signatory: ExternalSignature(serviceName:"DocuSign")]]
 ```
+
+### Ethereum Call
+
+The EthereumCall type allows you to integrate your agreement with smart contract code running on the Ethereum blockchain. Common use cases include defining the terms of a transaction in the agreement and then automating the transfer of assets (including digital payment) upon execution of the contract. See the [Smart Contracts section](#smart-contracts) for details and examples of how to set up an Ethereum Call in your template.
 
 ### External Call
 
@@ -372,8 +382,8 @@ We can define the call as follows:
 [[externalCall:ExternalCall(
 serviceName: "MyServiceName";
 parameters:
-	param1 -> a,
-	toCurrency -> b;
+  param1 -> a,
+  toCurrency -> b;
 startDate: startingAt)]]
 %>
 
@@ -1013,6 +1023,21 @@ but withhold at higher Single rate'?" => Married, but higher Single rate}}.
 
 The amount of federal income tax that must be withheld from the Employee's
 weekly wages is **$[[Amount of Income Tax Withheld]]**.
+```
+
+### Inline Calculations
+
+In addition to using aliases for calculations, you can use shorthand inline expressions. This may be ideal for simpler calculations. As with the case of calculating with aliases, a variables must be defined _before_ being used in an expression to calculate a value.
+
+```
+<%
+
+[[price: Number]]
+[[discount: Number]]
+
+%>
+
+The price with a discount of [[discount]]% is $[[price - (price * (discount / 100))]].
 ```
 
 ## Clauses
@@ -1712,7 +1737,7 @@ and then separately called:
 
 ### Selecting the Contract Level Ethereum Network
 
-As an option for embedding a smart contract to execute as part of an agreement, you can select the Ethereum network used for the smart contract executions by specifying the `network` with `"Ropsten"`, `"Kovan"`, or `"Rinkeby"` as shown below. Support for `"Mainnet"` will be integrated soon.
+As an option for embedding a smart contract to execute as part of an agreement, you can select the Ethereum network used for the smart contract executions by specifying the `network` with `"Mainnet"`, `"Ropsten"`, `"Kovan"`, or `"Rinkeby"` as shown below.
 
 ```
 [[Pay Vendor:EthereumCall(
@@ -1752,66 +1777,39 @@ function:"makePayment";
 arguments:Recipient Ethereum Address,Payment in Wei;
 startDate:Payment Start Date;
 endDate:Payment End Date;
+value: 1000000000000000000;
 repeatEvery:"1 minute")]]
 ```
 
 If you include the `from` property with a valid Ethereum address, the default OpenLaw account won't initiate the call. Instead, the OpenLaw smart contract execution process will expect a transaction hash. Like when you sign with MetaMask, an API call will be made to register the transaction hash that has been added to the chain so OpenLaw can know what is going on with the call.
 
-### ERC-712 Integration
+If the smart contract function being called is "payable" and expects to receive funds, the Ethereum call definition should also include a `value` property with the amount in wei to be sent as part of the transaction.
 
-Sometimes you want OpenLaw to handle the smart contract call but you still want to keep the security of each user having its own key. If this is the case, you can use ERC-712 to implement meta-transactions.
+### Summary of EthereumCall Definition Properties
 
-ERC-712 is a standard for signing structured data. This is very useful when you want to pass data and make it easy for the person signing to review the data. For more information, you can read the specification [here](http://eips.ethereum.org/EIPS/eip-712).
+`contract` - Ethereum address of the smart contract
 
-#### How is ERC-712 used?
+`interface` - ABI for the smart contract in JSON format
 
-The idea is to validate a smart contract call by signing its parameters. If you specify the properties `from` and `Signature parameter` in the EthereumCall, the call will expect an ERC-712 signature to be provided before being able to do the call.
+`function` - specific function to execute in smart contract
 
-An ERC-712 implementation needs two things:
+`arguments` - list of values sent to the function
 
-- **A type definition**. This is generated by taking all the parameters from the function minus the signature parameter.
-- **A type name**. This is generated by taking the function name, capitalizing the first character, and adding "Call" at the end. For example, `makePayment` becomes `MakePaymentCall`.
+`startDate` - when the function should be executed for the first time (_optional_ - default is to execute immediately after the contract has been electronically signed by all parties)
 
-The domain is defined as follows (important to prepare the hash function in your smart contract):
+`repeatEvery` - how often the function should be executed (_optional_ - default is to execute only once)
 
-```
-name: 'OpenLaw' // Name of the domain
-version: '2' // Version identifier for this domain
-chainId: 4 // EIP-155 Chain id associated with this domain (4 for Rinkeby)
-verifyingContract: '0x1C56346CD2A2Bf3202F771f50d3D14a367B48070' // Address of smart contract associated with this domain
-salt: '0x10c9ae80dfd02ab6c80d11e5db1ca058b347eb26d86fa832cb1fbb68964323e7' // Random string to differentiate domain
-```
+`endDate` - for a function that is executed periodically, when the function should be executed for the last time (_optional_ - default is no end date/time)
 
-Once you've signed the data and registered it to the Ethereum call, OpenLaw will do the call for you. The call will be prepared as follows:
+`network` - the Ethereum network used for the smart contract execution (_optional_ - see above for more details on [selecting a network](#selecting-the-contract-level-ethereum-network))
 
-- All the parameters (except signature) will be passed based on the definition.
-- ERC-712 signature will be passed to "signature" parameter.
+`from` - Ethereum address of user that will initiate the function call (for use in a [delegated call](#delegating-the-call))
 
-For example:
+`value` - Amount in wei sent as part of executing a payable smart contract function (for use in a [delegated call](#delegating-the-call))
 
-```
-[[Pay Vendor:EthereumCall(
-contract:"0xe532d1d1147ab40d0a245283f4457c733b5e3d41";
-interface:[{"name":"makePayment", "type":"function","inputs":
-[{"name":"RecipientAddress", "type":"address"},{"name":"signature", "type":"bytes"},
-{"type":"uint","name":"PaymentInWei"}],"outputs": []}];
-network:"Rinkeby";
-from:"0xe65849d1147ab40d0a245283f4457c733b5e3d41";
-Signature parameter: "signature";
-function:"makePayment";
-arguments:Recipient Ethereum Address,Payment in Wei;
-startDate:Payment Start Date;
-endDate:Payment End Date;
-repeatEvery:"1 minute")]]
-```
+### EthereumCall Usage Properties
 
-::: warning
-The ERC-712 implementation doesn't protect you from replay attacks out of the box. You will need to take that into account when you develop your smart contract. However, the fact that it doesn't restrict replay attacks is useful if you need to do recurring calls because you can re-use the same signature for every call. In that case, you should consider implementing some kind of limit within the smart contract to make sure you can limit the number of times it's being run.
-:::
-
-### EthereumCall Properties
-
-The EthereumCall type gives you access to some properties you can use in an agreement template. Those properties are only resolved once the first call is completed (and works only on the first call for now).
+The EthereumCall type also gives you access to some properties you can use in an agreement template. Those properties are only resolved once the first call is completed (and works only on the first call for now).
 
 `isSuccessful` - Returns true if the call has been successful, false otherwise.
 
