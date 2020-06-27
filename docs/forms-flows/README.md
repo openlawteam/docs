@@ -1,12 +1,12 @@
 ---
 meta:
   - name: description
-    content: With OpenLaw's Forms & Flows, you can take any legal agreement (or set of agreements) and turn it into a questionnaire, pull data from any source and manage legal wotkflows with reporting and notifications. Entire workflows can be created to manage the life cycle of a commercial agreement.
+    content: With OpenLaw's Forms & Flows, you can take any legal agreement (or set of agreements) and turn it into a questionnaire, import data from any source, and manage reporting and notifications. Entire workflows can be created to manage the life cycle of a commercial agreement.
 ---
 
 # Forms & Flows Overview
 
-The life cycle of commercial arrangements is complex, often requiring multiple people's input and approval to kick things off and different phases of performance. During the process, agreements take too long to prepare, get stuck with "legal" and worse—their valuable data is not plugged into other systems for more productive use.
+The life cycle of commercial arrangements is complex, often requiring multiple people's input and approval to kick things off and different phases of performance. During the process, agreements take too long to prepare, get stuck with "legal" and worse&mdash;their valuable data is not plugged into other systems for more productive use.
 
 With OpenLaw's Forms & Flows, you can take any legal agreement and turn it into a questionnaire or simple form in a couple of clicks. Multiple people can fill out the form and entire workflows can be created to manage the life cycle of a commercial agreement.
 
@@ -14,187 +14,225 @@ Commercial relationships no longer need to be complex. Generate agreements, send
 
 ## Technical Overview
 
-An agreement template is a great way to define a contract and the actions that should come with it. But sometimes you need an extra layer to define the workflow that happens before the contract is created. This is the main purpose of the Flow. To define how to create contract(s) and what steps need to happen to get there.
+An agreement template is a great way to define a contract and the actions that should come with it. But sometimes you need an extra layer to define the workflow that happens before the contract is created. This is the main purpose of the Flow&mdash;to define how to create a contract and what steps need to happen to get there.
 
-### Flow state and expressions in Flow definition
-In the flow definition, you can either use constants (string, numbers, booleans) or variables. The flow state is being built based on its definition and it can be used anywhere you can use an expression. That is:
-- in agreement definition properties
-- in action definition properties
-- in agreement conditional
-- in flow conditional
+### Flow State and Flow Definition
 
-The flow state is structured as follows:
+When a user starts a Flow, a new execution gets created. An execution is linked to its Flow template by a flowId and version. Each Flow execution also has a state. This is where all the information such as the agreement variable inputs and the execution state of the Flow are stored.
 
-#### flow - the flow execution state
-Each flow execution has the following properties:
-- state (Text): the current flow execution state (init, form edit, form done etc ....)
-- creationDate (DateTime): when the flow execution has been created
-- url (Text): the full URL to go back to the flow execution 
+In the Flow definition, you can either use constants (string, numbers, booleans) or variables. The Flow state is built based on its definition and it can be used anywhere in the definition that accepts an expression. This includes in:
 
-#### actions
-Each action  is either accessible with it's direct name or from within a variable "actions"
+- agreement definition properties
+- action definition properties
+- agreement conditionals
+- Flow conditionals
 
-so if an action is called "send email", you can access it by either using "send email" or "actions.send email". 
-If, for any reason, "send email" might be ambiguous (if a variable in the form), then you can only access it through "actions.send email"
+The Flow state is structured as follows:
 
-If the action returns a value and the value name is unique, you will be able to access it directly. So if for example you have an action to get the price of BTC, you will be able to get it by using "price of BTC" instead of "oracle action.price of BTC"
+#### Flow Execution State
 
-#### template parameters
-Same as with actions, each parameter is accessible with its name directly or "parameters.{parameter name}".
-Like with actions, if the parameter name clashes, then the parameter is only accessible by "parameters.{parameter name}"
+Each Flow execution has the following properties:
 
-### Flow Template
+**`state`** (Text) - the current Flow execution state (`init`, `form edit`, `form done`, `first draft`, `negotiation`, `signature`, `wait for signature`, `post signature`, `completed`, `stopped`)
 
-Similar to agreement templates created with our [markup language](/markup-language/), a Flow template has special syntax to create a form view and workflow for an existing agreement template.
+**`creationDate`** (DateTime) - when the Flow execution was created
 
-Here is an example of a Flow. We describe each part below.
+**`url`** (Text) - the full URL to access the Flow execution
+
+**`urlWithAccessToken`** - the full URL with access token included as a query parameter to access the Flow execution (this allows access without having to log in as an OpenLaw user)
+
+As discussed in several examples below for [creating a Flow](#create-a-flow), these Flow execution state properties can be conveniently used to include their values in email notifications and data exported to external spreadsheets.
+
+#### Flow Actions
+
+Each action is either accessible with its direct name or from within a variable `actions`.
+
+If an [Email action](#email) is named `send email`, you can access it by either using `send email` or `actions.send email`.
+If, for any reason, `send email` shares the same name for any other variable that is defined in the Flow template (e.g., a variable in an agreement generated by the Flow), then you can only access it through `actions.send email`.
+
+If the action returns a value and the value name is unique, you will be able to access it directly. For example, if you have an [Integration action](#integration) to get the price of BTC, you will be able to get the result by using `price of BTC` instead of `oracle action.price of BTC`.
+
+#### Template Parameters
+
+Similar to using actions in the Flow definition, each agreement parameter (variable) can be referenced by its name directly or `parameters.parameter name`. Like with actions, if the parameter shares the same name as any other variable used in the Flow definition (e.g., the name of a Flow action), then the parameter is only accessible by `parameters.parameter name`.
+
+For example, a variable named `Company Name` can be used as either just `Company Name` or `parameters.Company Name`. But if any Flow action is also named `Company Name`, then the parameter must be used as `parameters.Company Name`.
+
+## Create a Flow
+
+Similar to agreement templates created with our [markup language](/markup-language/), a Flow template has special syntax to create a form view and workflow for generating one or more agreements.
+
+A Flow consists of the following elements:
+
+### Title
+
+A unique title to identify the Flow, similar to an agreement template title.
 
 ```
-roles: support, customer service
+Advisor Agreement Flow
+```
 
+_Note that the Flow title is not included in the [full example below](#full-flow-template-example). It has its own input field when creating a new Flow in the editor._
+
+### Roles (optional)
+
+List of identifiers that can be assigned to users. This is useful when you need to retrieve a list of emails based on a role (e.g., for use in an [Email action](#email) as described below).
+
+```
+roles: HR, legal, advisor
+```
+
+### Actors (optional)
+
+Each actor is identified by an email address and has assigned roles that have been defined in the Flow template.
+
+```
 actors:
-- hello@openlaw.io: support
-- info@openlaw.io: customer service
-templates: 
-==== my template ====
-some content [[First Name]] [[Last Name]]
-========
-
-agreements:
-default
-- my template (
-  dropbox: "OpenLaw-Shared" / "sub folder" / "my template - " + First Name + " " + Last Name)
-
-forms:
-general description for the questionnaire
-
-==
-title: Your Information
-description: Fill in your name here please.
-variables:
-First Name,
-Last Name
-==
-
-actions:
-- send form completed notification: Email(
-  subject: "Publicity Release Completed";
-  content: "A publicity release for [[First Name]] [[Last Name]] has been sent.  It's available in the shared Dropbox folder.";
-  to: "aaron@openlaw.io")
-
-when the flow starts
-- move to "form edit"
-
-when flow.state = "form done"
-- do "send form completed notification"
-- move to "signature"
+- hr@example.com: HR
+- legal@example.com: legal
+- advisor@example.com: advisor
 ```
 
-#### Roles (optional)
+### Templates
 
-List of identifiers that can be assigned to users. This is useful when you need to do retrieve a list of emails based on a role (email action)
+A Flow is linked to agreement templates that will be used to create drafts and contracts. The agreement templates used in a Flow can be embedded directly in the Flow definition or referenced externally as an already existing template on the same OpenLaw instance where the Flow is created. With respect to reading content and values from its templates, a Flow will look first at its embedded templates before checking any external templates.
 
-```
-admin, HR, legal, employee
-```
-
-#### Actors (optional)
-
-The users who can interact with the Flow execution. Each actor is identified by an email address and has assigned roles that have been defined in the Flow template.
-
-```
-- company@example.com: admin, HR, legal
-- employee@example.com: employee
-```
-
-#### Templates
-
-A Flow can embed templates that will be used to create drafts and contracts. The templates used in a Flow can be internal (embedded) or external (already existing). The logic is that the Flow will always look first at its internal templates and if it's not there, it will look at the external ones. 
-
-##### Format
-templates are separated by their titles that are encapsulated in at least 4 '=' on each side.
-Once all the templates have been defined, at least 8 '=' has to be used
+Embedded templates are separated by their titles that are enclosed by at least 4 `=` on each side.
+After the last template has been defined, at least 8 `=` are used to separate the `templates:` section from the remaining sections defined in the Flow.
 
 ```
 templates:
-==== template 1 ====
-this is
-some content
+==== Advisor Agreement ====
+<%
+==Effective Date Information==
+[[Effective Date: Date]]
 
-here
-==== template 2 ====
-another 
-temlate
-for you [[name:Text]]
+==Company Information==
+[[Company Name]]
+[[Company Address: Address]]
+[[Company Signatory Name]]
+[[Company Signatory Email: Identity]]
+
+==Advisor Information==
+[[Advisor Name]]
+[[Advisor Email: Identity]]
+[[Advisor Address: Address]]
+
+==Services==
+[[No Services: YesNo]]
+[[Noncompete Field]]
+
+==Compensation==
+[[Number of Shares: Number]]
+[[Years Vesting: Number]]
+[[Vesting Period: Text(options: "monthly", "quarterly", "yearly")]]
+
+[[@Unit of Vesting = Number of Shares / (Years Vesting * 12)]]
+%>
+
+\centered**ADVISOR AGREEMENT**
+
+This Advisor Agreement is entered into between [[Company Name]] ("Corporation")
+and [[Advisor Name]] ("Advisor") as of [[Effective Date]] ("Effective Date").
+Company and Advisor agree as follows:
+
+^**Services**. Advisor agrees to consult with and advise Company from time to time,
+at Company's request (the "Services"). {{No Services "Do you want to limit the
+advisor's services?" While this Agreement is is effect, Advisor will not provide
+services to any company active in the field of [[Noncompete Field "What field
+should the advisor not participate in?"]].}}
+
+^**Consideration**. As the only consideration due Advisor for Services, subject to
+approval by the Company's Board of Directors (the "Board"), the Company anticipates
+granting you [[Number of Shares]] shares of the Company's common stock (the "Grant").
+The anticipated Grant will be governed by the terms and conditions of Advisor's
+grant agreement, and will include a [[Years Vesting]] year vesting schedule, under
+which the shares shall vest in a series of [[Unit of Vesting | rounding(1)]]
+successive equal [[Vesting Period]] installments measured from the Effective Date,
+subject to Advisor's continuous service under this Agreement as of each such date.
+Advisor shall also be entitled to reimbursement for reasonable, documented expenses
+for which Advisor receives prior approval from Company.
+
+...
+
+\centered *[signature page follows]*
+
+\pagebreak
+
+
+\right-three-quarters **COMPANY:**
+
+\right-three-quarters [[Company Signatory Email: Identity | Signature]]
+\right-three-quarters ___________________
+\right-three-quarters Name:  [[Company Signatory Name]]
+\right-three-quarters Address:  [[Company Address]]
+
+
+\right-three-quarters **ADVISOR:**
+
+\right-three-quarters [[Advisor Email: Identity | Signature]]
+\right-three-quarters ___________________
+\right-three-quarters Name [[Advisor Name]]
+\right-three-quarters Address: [[Advisor Address]]
+
+==== Second Template ====
+Content of next template would go here...
 
 ========
+
 ```
 
-#### Agreements
-It is now time to define which agreements need to be part of the flow. 
-An agreement can be added by default or use a conditional to determine whether it should be added or not
+::: tip
+If you want to use an existing external template in the Flow, don't reference its title here in the `templates:` section. Instead, you can just list the template in the `agreements:` section as explained below.
+:::
+
+### Agreements
+
+Definition of which agreements should be created upon submission of the form inputs in the workflow. By default, a Flow will create an agreement for every template defined in the Flow. It is also possible to condition the creation of an agreement depending on the input value of one or more of the template variables.
+
+In the example below, an agreement will be created from the `Advisor Agreement` template by default. An agreement for the `Second Template` will get generated only if the input value of the variable `Number of Shares` is greater than 100. Any [boolean expression with the markup language](/markup-language/#reasoning-with-conditionals) can be used with the variables of the defined templates to condition the creation of an agreement.
 
 ```
 agreements:
 default
-- my template
+- Advisor Agreement (
+  filename: "My Shared Folder" / Company Name / "Advisor Agreement - " + Advisor Name;
+  store: "dropbox")
 
-when First Name = "David"
-- template 2(
-  dropbox: "path" / "to" / "draft"
-  creator: "info@openlaw.io"
-  )
+when Number of Shares > 100
+- Second Template
 ```
 
-**default** means that the agreement based on each template in the list below will be created no matter what
-**when {conditional}** means that the agreement based on each template in the list below will be created if the conditional is true
+#### Storage
 
-##### agreement definition
-each line represents an agreement. Its configuration works as follows:
-{template name | "template name"}(
-storage name: path;
-creator: email expression
-)
+When an agreement is created in a Flow, there is an option to have it automatically stored to an external document management system. In the example above, the `Advisor Agreement` template will have an agreement created and a word version of the agreement will automatically be saved to the defined Dropbox folder.
 
-where storage name is any storage implemented in Openlaw (dropbox, onedrive etc ...) and creator is the user that will be assigned as the creator of the contract
+The `filename:` property sets the path to where the file should be saved. The path can be defined by a combination of string constants and variables from the templates.
 
+In the example, if the user going through the workflow submits the following values for these variables: `Company Name`: **Fake Co.** and `Advisor Name`: **John Doe**, the file will be saved to this Dropbox folder: `My Shared Folder/Fake Co./Advisory Agreement - John Doe`.
 
-#### Form
+The `store:` property sets which storage system should be used. Currently, an OpenLaw instance can be configured with Dropbox and Microsoft OneDrive.
 
-Here is an overview of a form definition
-```
-forms:
-general description for the questionnaire
+### Form
 
-==
-title: Your Information
-description: Fill in your name here please.
-variables:
-First Name,
-Last Name
-==
-```
-or without the general description
+Definition of how the agreement template variables are organized to present a unique form view to the end user.
+
+#### Description (optional)
+
+An optional description can be included to give the end user information about the form and workflow, such as the purpose or instructions.
+
 ```
 forms:
-==
-title: Your Information
-description: Fill in your name here please.
-variables:
-First Name,
-Last Name
-==
-```
+Below is a workflow to create and execute an Advisor Agreement.  Advisor Agreeements
+are often used by a startup and other projects to build a network around them.
+Advisors agree to provide advice, or other services to the project, and in exchange
+are often provided stock or other forms of compensation for their services.
 
-
-The optional description can be included to give the end user information about the form and workflow, such as the purpose or instructions.
-
-```
-Fill out the form below to generate the Employee Offer Letter.
-
-We'll get you through this in a matter of minutes and send off a completed
-document to your HR representative who will provide you more information for the
-hiring process.
+Projects seeking to engage with an advisor should make sure to protect any intellectual
+property that is shared or created in conjunction with an advisor and also protect
+any confidential information that the company may share with the advisor. There are
+several examples of advisors allegedly using information shared by one company for
+another purpose.
 ```
 
 ::: tip
@@ -207,60 +245,50 @@ You can include line breaks as shown in the example above to display paragraphs.
 The URL must begin with either `https://` or `http://`.
 :::
 
-##### Form Sections
+If you do not want to include a general description for the form, then the beginning of this part of the Flow definition will simply be this:
+
+```
+forms:
+```
+
+#### Form Sections
 
 A definition and organization of the variables included in the agreement template. Regardless of how the variables are organized in the agreement template, the variables can be independently defined in a Flow template to customize how they are grouped and in what order they appear in the rendered form. Each form section has a **title**, **description (optional)**, and a listing of **variables**.
 
-Each **variable** can also be listed with an optional description as shown below for two variables under the `Employee Information` section. The extra text can be useful to provide instructions or more details related to a particular input field and will be rendered along side the field in the form.
+Each **variable** can also be listed with an optional description after the variable name as shown below for several variables (e.g., `Number of Shares: "How many shares will the advisor receive?"`). The extra text can be useful to provide instructions or more details related to a particular input field and will be rendered along side the field in the form.
 
 ```
 ==
 title: Effective Date
-description: The date on which the agreement will take effect
 variables:
-Effective Date
+Effective Date: "Enter the date of the agreement"
 ==
 title: Company Information
-description: Information about the Company and HR representative
+description: Below enter some basic information about the company securing an advisor.
 variables:
 Company Name,
 Company Address,
-Company Signatory First Name,
-Company Signatory Last Name,
-Company Signatory Position
+Company Signatory Name,
+Company Signatory Email: "This is the party that should sign the agreement"
 ==
-title: Employee Information
-description: Information about the employee
+title: Advisor Information
+description: Enter some basic information about the advisor.
 variables:
-Employee First Name: "Provide your legal first name. You may also put any other preferred names in parentheses.",
-Employee Last Name,
-Employee Address: "Provide your official mailing address here.",
-Employee Position,
-Position of Supervisor,
-Payment Start Date,
-Payment End Date,
-Salary in Ether,
-Recipient Address,
-Employee Responsibilities,
-Days of Vacation
+Advisor Name,
+Advisor Email,
+Advisor Address
 ==
-title: Other Agreements
-description: Supporting documents for employment
+title: Non-Compete
 variables:
-Additional Agreements,
-Confidentiality Agreement,
-Dispute Resolution,
-Governing Law
+No Services: "Do you want the ability of the advisor to work with others in the space?",
+Noncompete Field
 ==
-title: Employee Signature
-description: Email address for Employee signatory
+title: Number of Shares
+description: Advisors are usually paid a small amount of the Company's stock as part of the agreement. The amount ranged from 0.25% to 2% based on the importance of the advisor.
 variables:
-Employee Signatory Email
-==
-title: Company Signature
-description: Email address for Company signatory
-variables:
-Company Signatory Email
+Number of Shares: "How many shares will the advisor receive?",
+Years Vesting: "Usually advisor's stock will vest over a two year period",
+Vesting Period: "The shares usually vest monthly."
 ==
 ```
 
@@ -274,145 +302,271 @@ The optional **description** for each form section can include line breaks to di
 The URL must begin with either `https://` or `http://`.
 :::
 
-#### Action
-            
-1. **Email** editing the parameters (filling out the form fields)
-2. **UpdateVariables** automatically update a variable in the form 
-3. **GSheets** write data into a google sheets document
-4. **Excel** write data into an Excel file
-5. **Integration** Do an integration call (polling external data, call 3rd party service etc ...)
-6. **Flow** start a sub flow
+### Actions
 
-The format for each action is
+Actions expand the utility of a Flow beyond just having a user fill out a questionnaire to generate and store an agreement. There are different action types that are useful to integrate notifications and importing/exporting data with a Flow. Each action is defined with a name, type, and configuration properties.
 
-`- Action Name: Action Type(action configuration)`
+The Actions section begins with `actions:` and lists each action definition in the following format:
 
-For example:
-```
-- send completed form: Email(
-  subject: "Employee Offer Letter Form completed";
-  body: "The Employee Offer Letter form has been completed and ready for review.";
-  to: "admin", "HR", "legal", "employee", "some@other.email", email from form)
+`- Name: Type(configuration properties)`.
+
+Each action is described below.
+
+#### Email
+
+The Email type action configures and sends an email.
 
 ```
+- send form completed notification: Email(
+  subject: "[[Company Name]]'s Advisor Agreement for [[Advisor Name]] is Ready for Review";
+  content: "An advisor agreement for [[Company Name]] is ready for your review. **It's available in the shared Dropbox folder.**";
+  to: "HR", "legal", "jane.smith@example.com", Company Signatory Email)
+```
 
-#### Action Rules / Flow Graph
+`subject:` - Along with string text, the subject line of the email can include variable expressions that will render the inputted values for those variables.
 
-The set of rules that define when an action is triggered.
+In the example above, if the user going through the workflow submits the following values for these variables: `Company Name`: **Fake Co.** and `Advisor Name`: **John Doe**, the subject line will be `Fake Co.'s Advisor Agreement for John Doe is Ready for Review`.
+
+`content:` - The content (body) of the email can include string text and variable expressions as well. The content accepts OpenLaw markup language formatting such as the bold tags in the example: `**It's available in the shared Dropbox folder.**`. [Flow execution state](#flow-execution-state) properties can also be included in the content (e.g., `flow.creationDate` will render the date/time of when the Flow execution was created).
+
+`to:` - The email recipients can be listed as (1) a role name (e.g., `"HR"`, `"legal"`), which is linked to emails as explained above in [Actors](#actors-optional); (2) a string email (e.g., `"jane.smith@example.com"`); or (3) a variable expression of a Text type or Identity type defined in one of the Flow's agreement templates.
+
+In the example above, if the `Company Signatory Email` variable is provided an input of **mary.davis@example.com**, the email will be sent to hr@example.com, legal@example.com, jane.smith@example.com, and mary.davis@example.com.
+
+#### Integration
+
+The Integration type action is useful when you want to either trigger an external system or if you want to get information from an external source such as a blockchain oracle. See [Integration Framework](/integration-framework/) for more details on how integrated services work.
+
+```
+- get btc usd exchange rate: Integration(
+  service: "Chainlink";
+  params: from -> "BTC", to -> "USD", network -> "Rinkeby")
+```
+
+`service:` - The name of the integrated service that is triggered in the workflow (the service needs to already be registered as an integrated service with the OpenLaw instance).
+
+`params:` - The specific parameters required by the integrated service. In the example above, the "Chainlink" service is an oracle on the Ethereum "Rinkeby" network that gives the conversion rate from Bitcoin to U.S. dollars.
+
+#### UpdateVariables
+
+The UpdateVariables type action is used to programmatically set the value for a variable defined in one or more of the agreement templates linked to a Flow. This is useful when combined with the Integration type action to import a value from an external data source and then set that value for an agreement variable.
+
+```
+- update btc usd price: UpdateVariables(
+  params:
+    Bitcoin Price in USD -> get btc usd exchange rate.result.price)
+```
+
+`params:` - The name of the variable paired with the set value.
+
+#### GSheets
+
+The GSheets type action exports data from the Flow to an existing Google Sheet.
+
+```
+- record submission: GSheets(
+  id: "1l1tKFxHtCPDoz9tf9GnM74t66Q5Me7MaIhSJvG-eM_p";
+  sheet: "Advisor Agreement Data";
+  values: "New entry", Company Name, Company Signatory Name, Advisor Name, Number of Shares, flow.creationDate)
+```
+
+`id:` - The Google Sheet ID, which is part of the shareable link for the file.
+
+`sheet:` - The name of the sheet in the workspace. This property is optional. If omitted, the action will default to the first sheet in the workspace.
+
+`values:` - The values that will be appended to the last row in the sheet in the order they are listed. Each value can be listed as (1) text wrapped in quotes (e.g., `"New entry"`) (2) a variable defined in one of the Flow's agreement templates (e.g., `Company Name`); or (3) a [Flow execution state](#flow-execution-state) property (e.g., `flow.creationDate`).
+
+In the example above, if the `Company Name` variable is provided an input of **Fake Co.**, the second column in the newly appended row will be "Fake Co.". The last column in the newly appended row will show the Flow execution creation date/time formatted as YYYY-MM-DDThh:mm:ss.sTZD.
+
+### Action Rules / Flow Graph
+
+The set of rules that define how the [Flow execution state](#flow-execution-state) should progress and when an action is triggered during the workflow. Any actions referenced here need to have been defined as an action in the Flow template.
 
 ```
 when the flow starts then
 - move to "form edit"
 
-when flow.state = "form done" then
-- do "send approval confirmation"
+when flow.state = "form done"
+- do "send form completed notification"
+- move to "first draft"
+
+when flow.state = "first draft"
+- do "record submission"
 - move to "signature"
 ```
 
-#### Action Types
-There are different types of actions that can be defined. Like in the Openlaw Template language, the type can have a constructor to set some properties
+In the example above:
 
-#####  Email
-The action "Email" is used to send an email. 
+1. the Flow execution starts and is waiting on the form to be submitted (`"form edit"`);
 
-###### Properties
-**subject** is the subject of the email. It can be any string expressions (no formatting)
-**body** is the body of the email. This can be any string and will be parsed for formatting (like any Openlaw template). The text has direct access to the flow execution state
-**to** is the list of emails to send the email to. The list can be either an email or a role name. If you use a role name, every actor's email linked to the role will be added to the list
+2. when the form is done (`"form done"`), (a) the email notification is sent (`"send form completed notification"`) and (b) the agreements in the Flow are generated and the drafts are stored to Dropbox (`"first draft"`); and
 
-###### Example
-```
-- send email: Email(
-  subject: "[[Company Name]]'s notification";
-  content: """
-  This email is for [[Company Name]] and is **very** important
+3. after the draft is created (`"first draft"`), (a) the data values listed in the GSheets action are exported to the selected Google Sheet (`"record submission"`) and (b) contracts are created for each of the Flow's generated agreements (`"signature"`).
 
-  Best regards
-  """;
-  to: "role 1", "info@email.com", signatory email)
-```
+## Full Flow Template Example
 
-##### Integration
-The integration action is useful when you want to either trigger an exteral system or if you want to get information from an external source.
-
-###### Properties
-
-**service** Is the name of the service that needs to be called (it needs to be part of the integrated services)
-**params**       
-
-###### Example
-```
-- get btc usd exchange rate: Integration(
-  service: "Chainlink";
-  params: from -> "BTC", to -> "USD", network -> "Rinkeby")
+The examples above can be combined to create a full Flow template in the editor.
 
 ```
+roles: HR, legal, advisor
 
-##### UpdateVariables
-The UpdateVariables action set parameters of the agreement. 
+actors:
+- hr@example.com: HR
+- legal@example.com: legal
+- advisor@example.com: advisor
 
-###### Properties
-**params** Is the mapping of parameters. 
+templates:
+==== Advisor Agreement ====
+<%
+==Effective Date Information==
+[[Effective Date: Date]]
 
-###### Example
+==Company Information==
+[[Company Name]]
+[[Company Address: Address]]
+[[Company Signatory Name]]
+[[Company Signatory Email: Identity]]
+
+==Advisor Information==
+[[Advisor Name]]
+[[Advisor Email: Identity]]
+[[Advisor Address: Address]]
+
+==Services==
+[[No Services: YesNo]]
+[[Noncompete Field]]
+
+==Compensation==
+[[Number of Shares: Number]]
+[[Years Vesting: Number]]
+[[Vesting Period: Text(options: "monthly", "quarterly", "yearly")]]
+
+[[@Unit of Vesting = Number of Shares / (Years Vesting * 12)]]
+%>
+
+\centered**ADVISOR AGREEMENT**
+
+This Advisor Agreement is entered into between [[Company Name]] ("Corporation")
+and [[Advisor Name]] ("Advisor") as of [[Effective Date]] ("Effective Date").
+Company and Advisor agree as follows:
+
+^**Services**. Advisor agrees to consult with and advise Company from time to time,
+at Company's request (the "Services"). {{No Services "Do you want to limit the
+advisor's services?" While this Agreement is is effect, Advisor will not provide
+services to any company active in the field of [[Noncompete Field "What field
+should the advisor not participate in?"]].}}
+
+^**Consideration**. As the only consideration due Advisor for Services, subject to
+approval by the Company's Board of Directors (the "Board"), the Company anticipates
+granting you [[Number of Shares]] shares of the Company's common stock (the "Grant").
+The anticipated Grant will be governed by the terms and conditions of Advisor's
+grant agreement, and will include a [[Years Vesting]] year vesting schedule, under
+which the shares shall vest in a series of [[Unit of Vesting | rounding(1)]]
+successive equal [[Vesting Period]] installments measured from the Effective Date,
+subject to Advisor's continuous service under this Agreement as of each such date.
+Advisor shall also be entitled to reimbursement for reasonable, documented expenses
+for which Advisor receives prior approval from Company.
+
+...
+
+\centered *[signature page follows]*
+
+\pagebreak
+
+
+\right-three-quarters **COMPANY:**
+
+\right-three-quarters [[Company Signatory Email: Identity | Signature]]
+\right-three-quarters ___________________
+\right-three-quarters Name:  [[Company Signatory Name]]
+\right-three-quarters Address:  [[Company Address]]
+
+
+\right-three-quarters **ADVISOR:**
+
+\right-three-quarters [[Advisor Email: Identity | Signature]]
+\right-three-quarters ___________________
+\right-three-quarters Name [[Advisor Name]]
+\right-three-quarters Address: [[Advisor Address]]
+
+==== Second Template ====
+Content of next template would go here...
+
+========
+
+agreements:
+default
+- Advisor Agreement (
+  filename: "My Shared Folder" / Company Name / "Advisor Agreement - " + Advisor Name;
+  store: "dropbox")
+
+when Number of Shares > 100
+- Second Template
+
+forms:
+Below is a workflow to create and execute an Advisor Agreement. Advisor Agreeements
+are often used by a startup and other projects to build a network around them.
+Advisors agree to provide advice, or other services to the project, and in exchange
+are often provided stock or other forms of compensation for their services.
+
+Projects seeking to engage with an advisor should make sure to protect any intellectual
+property that is shared or created in conjunction with an advisor and also protect
+any confidential information that the company may share with the advisor. There are
+several examples of advisors allegedly using information shared by one company for
+another purpose.
+==
+title: Effective Date
+variables:
+Effective Date: "Enter the date of the agreement"
+==
+title: Company Information
+description: Below enter some basic information about the company securing an advisor.
+variables:
+Company Name,
+Company Address,
+Company Signatory Name,
+Company Signatory Email: "This is the party that should sign the agreement"
+==
+title: Advisor Information
+description: Enter some basic information about the advisor.
+variables:
+Advisor Name,
+Advisor Email,
+Advisor Address
+==
+title: Non-Compete
+variables:
+No Services: "Do you want the ability of the advisor to work with others in the space?",
+Noncompete Field
+==
+title: Number of Shares
+description: Advisors are usually paid a small amount of the Company's stock as part of the agreement. The amount ranged from 0.25% to 2% based on the importance of the advisor.
+variables:
+Number of Shares: "How many shares will the advisor receive?",
+Years Vesting: "Usually advisor's stock will vest over a two year period",
+Vesting Period: "The shares usually vest monthly."
+==
+
+actions:
+- send form completed notification: Email(
+  subject: "[[Company Name]]'s Advisor Agreement for [[Advisor Name]] is Ready for Review";
+  content: "An advisor agreement for [[Company Name]] is ready for your review. **It's available in the shared Dropbox folder.**";
+  to: "HR", "legal", "jane.smith@example.com", Company Signatory Email)
+
+- record submission: GSheets(
+  id: "1l1tKFxHtCPDoz9tf9GnM74t66Q5Me7MaIhSJvG-eM_p";
+  sheet: "Advisor Agreement Data";
+  values: "New entry", Company Name, Company Signatory Name, Advisor Name, Number of Shares, flow.creationDate)
+
+when the flow starts then
+- move to "form edit"
+
+when flow.state = "form done"
+- do "send form completed notification"
+- move to "first draft"
+
+when flow.state = "first draft"
+- do "record submission"
+- move to "signature"
+
 ```
-- update btc usd price: UpdateVariables(
-  params: 
-    Bitcoin Price in USD -> get btc usd exchange rate.result.price)
-```
-
-##### Excel
-This action is a way to do reporting in an excel file.
-It uses a store service to save and edit the Excel file. 
-
-###### Properties
-**fileName** the file path 
-**service** the service to use (for example dropbox)
-**values** the list of values to write to the excel file
-**column** from which column to start appending (optional, by default "A")
-
-```
-- append to spreadsheet: GSheets(
-  filename: "save" / "the file" / "here"
-  service: "dropbox";
-  values: Effective Date, Company Signatory Email, Advisor Email, Advisor Address, No Services, Number of Shares, Years Vesting, Vesting Period) 
-
-```
-
-##### GSheets
-This action let's you report information from the flow to a Google sheet.
-For each execution, it appends all the values definied in the sheet (add to the last row)
-
-###### Properties
-**id** the google sheet id
-**values** list of values to append
-**sheet**  the sheet name to write in
-**column** from which column to start appending the values (optional, by default "A")
-
-###### Example
-```
-- append to spreadsheet: GSheets(
-  id: "1GsDUkJKU6WCOc32zVeXSdfLXxkBRR5M4C6Cl5pbyP8g";
-  sheet: "Test GSheets Flow Action";
-  values: Effective Date, Company Signatory Email, Advisor Email, Advisor Address, No Services, Number of Shares, Years Vesting, Vesting Period) 
-
-```
-
-###### Properties
-**id** the google sheet id
-**values** list of values to append
-**sheet**  the sheet name to write in
-**column** from which column to start appending the values (optional, by default "A")
-
-###### Example
-```
-- append to spreadsheet: GSheets(
-  id: "1GsDUkJKU6WCOc32zVeXSdfLXxkBRR5M4C6Cl5pbyP8g";
-  sheet: "Test GSheets Flow Action";
-  values: Effective Date, Company Signatory Email, Advisor Email, Advisor Address, No Services, Number of Shares, Years Vesting, Vesting Period) 
-
-```
-
-### Flow Execution
-
-When a user starts a Flow, a new execution gets created. An execution is linked to its Flow template by a flowId and version. Each Flow execution also has a state. This is where all the information such as the agreement variable inputs and the execution state of the Flow are stored.
