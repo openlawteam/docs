@@ -367,7 +367,8 @@ The GSheets type action exports data from the Flow to an existing Google Sheet.
 - record submission: GSheets(
   id: "1l1tKFxHtCPDoz9tf9GnM74t66Q5Me7MaIhSJvG-eM_p";
   sheet: "Advisor Agreement Data";
-  values: "New entry", Company Name, Company Signatory Name, Advisor Name, Number of Shares, flow.creationDate)
+  values: "New entry", Company Name, Company Signatory Name, Advisor Name, Number of Shares, flow.creationDate;
+  column: "A")
 ```
 
 `id:` - The Google Sheet ID, which is part of the shareable link for the file.
@@ -375,6 +376,32 @@ The GSheets type action exports data from the Flow to an existing Google Sheet.
 `sheet:` - The name of the sheet in the workspace. This property is optional. If omitted, the action will default to the first sheet in the workspace.
 
 `values:` - The values that will be appended to the last row in the sheet in the order they are listed. Each value can be listed as (1) text wrapped in quotes (e.g., `"New entry"`) (2) a variable defined in one of the Flow's agreement templates (e.g., `Company Name`); or (3) a [Flow execution state](#flow-execution-state) property (e.g., `flow.creationDate`).
+
+`column:` - The column to start appending the values. This property is optional. If omitted, the values will start in column "A".
+
+In the example above, if the `Company Name` variable is provided an input of **Fake Co.**, the second column in the newly appended row will be "Fake Co.". The last column in the newly appended row will show the Flow execution creation date/time formatted as YYYY-MM-DDThh:mm:ss.sTZD.
+
+#### Excel
+
+The Excel type action exports data from the Flow to an Excel file. The file is automatically created and saved to an external document management system. If the file already exists at the specified path, the action will edit the existing file.
+
+```
+- record submission: Excel(
+  filename: "My Shared Folder" / Company Name / "Advisor Agreement - " + Advisor Name + " - Data";
+  service: "dropbox";
+  values: "New entry", Company Name, Company Signatory Name, Advisor Name, Number of Shares, flow.creationDate;
+  column: "A")
+```
+
+`filename:` - The path to where the Excel file should be saved. The path can be defined by a combination of string constants and variables from the templates.
+
+In the example above, if the user going through the workflow submits the following values for these variables: `Company Name`: **Fake Co.** and `Advisor Name`: **John Doe**, the file will be saved to this Dropbox folder: `My Shared Folder/Fake Co./Advisory Agreement - John Doe - Data`.
+
+`service:` The storage system used to save the Excel file. Currently, an OpenLaw instance can be configured with Dropbox and Microsoft OneDrive.
+
+`values:` - The values that will be appended to the last row in the sheet in the order they are listed. Each value can be listed as (1) text wrapped in quotes (e.g., `"New entry"`) (2) a variable defined in one of the Flow's agreement templates (e.g., `Company Name`); or (3) a [Flow execution state](#flow-execution-state) property (e.g., `flow.creationDate`).
+
+`column:` - The column to start appending the values. This property is optional. If omitted, the values will start in column "A".
 
 In the example above, if the `Company Name` variable is provided an input of **Fake Co.**, the second column in the newly appended row will be "Fake Co.". The last column in the newly appended row will show the Flow execution creation date/time formatted as YYYY-MM-DDThh:mm:ss.sTZD.
 
