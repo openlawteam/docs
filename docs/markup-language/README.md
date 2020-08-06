@@ -1835,7 +1835,7 @@ A simple example of listening for filtering events of an Ethereum contract is be
   event type name: "OpenlawSignatureEvent";
   conditional filter: this.owner = Employer Ethereum Address)]]
 
-This event value is: {{Signature Event.value}}
+This event value is: [[Signature Event.value]]
 ```
 
 #### EthereumEventFilter properties
