@@ -1,5 +1,8 @@
 # OpenLaw Docs
 
+![Linters status](https://github.com/openlawteam/docs/workflows/Linters/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/228179d9-845f-44bc-823d-dde5ef017782/deploy-status)](https://app.netlify.com/sites/openlaw-docs/deploys)
+
 ## Editing
 
 ### File structure
