@@ -410,7 +410,7 @@ In the example above, if the `Company Name` variable is provided an input of **F
 The set of rules that define how the [Flow execution state](#flow-execution-state) should progress and when an action is triggered during the workflow. Any actions referenced here need to have been defined as an action in the Flow template.
 
 ```
-when the flow starts then
+when the flow starts
 - move to "form edit"
 
 when flow.state = "form done"
@@ -585,7 +585,7 @@ actions:
   sheet: "Advisor Agreement Data";
   values: "New entry", Company Name, Company Signatory Name, Advisor Name, Number of Shares, flow.creationDate)
 
-when the flow starts then
+when the flow starts
 - move to "form edit"
 
 when flow.state = "form done"
