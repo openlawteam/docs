@@ -325,24 +325,30 @@ When defining any of these specialized types, the name cannot be the same as any
 
 The OLInfo type is used for making general information available to the user within a template, which might be difficult to fetch any other way.
 
-Currently, the OLInfo type has two fields: `id` and `profileAddress`.
+Currently, the OLInfo type has three fields:
 
-`id` pulls the contract ID for the contract linked with a particular iteration of a template, while `profileAddress` pulls the Ethereum Address associated with the user's profile. (You can set this default Ethereum address by selecting "Link MetaMask Account" from the user profile page).
+`id` - References the contract ID for the contract linked with a particular iteration of a template.
+
+`profileAddress` - References the Ethereum Address associated with the user's profile. (You can set this default Ethereum address by selecting "Link MetaMask Account" from the user profile page).
+
+`now` - References the current date.
 
 Take the example below. Assuming that a) there is a corresponding contract ID `575b1b0e36825f01f3637be141e13a00b96c062fc236c10bac383f8851652550` and b) the user has linked the Ethereum address `0xA51086a07AE92Ae8c29E7CD34421c16fd666595c` to the profile, inputting the below:
 
 ```
 [[info: OLInfo]]
-The contract ID is [[info.id]]. Your address is [[info.profileAddress]].
+The contract ID is [[info.id]].
+Your address is [[info.profileAddress]] as of [[Current Date: Date(info.now)]].
 ```
 
 should output:
 
 ```
-The contract ID is 575b1b0e36825f01f3637be141e13a00b96c062fc236c10bac383f8851652550. Your address is 0xA51086a07AE92Ae8c29E7CD34421c16fd666595c.
+The contract ID is 575b1b0e36825f01f3637be141e13a00b96c062fc236c10bac383f8851652550.
+Your address is 0xA51086a07AE92Ae8c29E7CD34421c16fd666595c as of September 24, 2020.
 ```
 
-If either value is not defined at the time it is to be rendered in the draft or contract, a default value will be filled in.
+If either of the `id` or `profileAddress` values is not defined at the time it is to be rendered in the draft or contract, a default value will be filled in.
 
 The OLInfo type will be populated with additional sub-fields in the future.
 
