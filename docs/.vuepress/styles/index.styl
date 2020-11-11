@@ -6,6 +6,14 @@
 #app
   font-family: "Space Mono", monospace
 
+// hide outbound link icon (there is a bug where the icon is followed by an
+// extra space)
+.page
+  a
+    & > span
+      display: none;
+
+
 .navbar
   background-color: #000000
   color: #ffffff
